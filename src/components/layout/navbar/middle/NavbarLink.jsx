@@ -1,11 +1,10 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Button } from '@mui/material';
+import React from "react";
+import { Link } from "react-router-dom";
 
-export default function NavbarLink({ to, children }) {
+export default function NavBarLink({ to, sx, children }) {
     return (
-        <Link to={to} style={{ textDecoration: 'none' }}>
-            <Button color="inherit">{children}</Button>
+        <Link to={to} style={{ textDecoration: "none", color: "#fff", ...sx }}>
+            {children}
         </Link>
     );
 }
