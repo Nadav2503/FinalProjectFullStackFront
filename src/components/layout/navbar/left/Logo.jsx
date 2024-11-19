@@ -1,5 +1,5 @@
 import React from 'react';
-import { IconButton } from '@mui/material';
+import { Avatar, IconButton } from '@mui/material';
 
 export default function Logo() {
     return (

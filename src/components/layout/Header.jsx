@@ -1,8 +1,8 @@
 import React from 'react';
 import { AppBar, Toolbar } from '@mui/material';
-import LeftHeader from './left/LeftHeader';
-import MiddleHeader from './middle/MiddleHeader';
-import RightHeader from './right/RightHeader';
+import LeftHeader from './navbar/left/LeftHeader';
+import MiddleHeader from './navbar/middle/MiddleHeader';
+import RightHeader from './navbar/right/RightHeader';
 
 export default function Header() {
     return (
