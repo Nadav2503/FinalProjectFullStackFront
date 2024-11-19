@@ -1,19 +1,19 @@
 import React from 'react';
-import { IconButton, Box, TextField, InputAdornment } from '@mui/material';
+import { IconButton, Box, TextField, InputAdornment, useTheme } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
 
 export default function Search({ isOpen, toggleSearch }) {
+    const theme = useTheme();
+
     return (
         <Box sx={{ display: 'flex', alignItems: 'center', width: '100%' }}>
-            {/* Always Visible Search Icon */}
             {!isOpen && (
                 <IconButton onClick={toggleSearch} color="inherit">
                     <SearchIcon />
                 </IconButton>
             )}
 
-            {/* Search Bar with Close Button */}
             {isOpen && (
                 <TextField
                     variant="outlined"
@@ -24,15 +24,16 @@ export default function Search({ isOpen, toggleSearch }) {
                         maxWidth: '100%',
                         marginLeft: '8px',
                         borderRadius: 2,
+                        backgroundColor: theme.palette.background.paper,
                         '& .MuiOutlinedInput-root': {
                             '& fieldset': {
-                                borderColor: '#ccc',
+                                borderColor: theme.palette.divider,
                             },
                             '&:hover fieldset': {
-                                borderColor: '#3f51b5',
+                                borderColor: theme.palette.primary.main,
                             },
                             '&.Mui-focused fieldset': {
-                                borderColor: '#3f51b5',
+                                borderColor: theme.palette.primary.main,
                             },
                         },
                     }}
