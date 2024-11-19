@@ -10,7 +10,18 @@ export default function CompanyName() {
     };
 
     return (
-        <Typography variant="h6" color="inherit" onClick={handleCompanyNameClick} sx={{ cursor: 'pointer' }}>
+        <Typography
+            variant="h6"
+            color="inherit"
+            onClick={handleCompanyNameClick}
+            sx={{
+                cursor: 'pointer',
+                // Hide company name on mobile (<600px)
+                '@media (max-width: 600px)': {
+                    display: 'none',
+                },
+            }}
+        >
             Virtual Zoo
         </Typography>
     );
