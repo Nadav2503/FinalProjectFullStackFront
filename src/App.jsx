@@ -1,12 +1,14 @@
-import About from "./pages/aboutPage"
-import React from 'react';
-import Layout from './components/layout/Layout';
-import Home from './pages/HomePage';
+import React from "react";
+import { BrowserRouter } from "react-router-dom";
+import Layout from "./components/layout/Layout";
+import Router from "./routers/Router";
 
 export default function App() {
   return (
-    <Layout>
-      <Home />
-    </Layout>
+    <BrowserRouter>
+      <Layout>
+        <Router />
+      </Layout>
+    </BrowserRouter>
   );
 }

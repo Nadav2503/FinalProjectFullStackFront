@@ -1,5 +1,6 @@
 import React from 'react';
 import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 export default function Navbar() {
     return (
@@ -9,13 +10,19 @@ export default function Navbar() {
                     Virtual Zoo
                 </Typography>
                 <Box>
-                    <Button color="inherit" sx={{ marginRight: 2 }}>
-                        Home
-                    </Button>
-                    <Button color="inherit" sx={{ marginRight: 2 }}>
-                        About
-                    </Button>
-                    <Button color="inherit">Contact</Button>
+                    <Link to="/" style={{ textDecoration: 'none' }}>
+                        <Button color="inherit" sx={{ marginRight: 2 }}>
+                            Home
+                        </Button>
+                    </Link>
+                    <Link to="/about" style={{ textDecoration: 'none' }}>
+                        <Button color="inherit" sx={{ marginRight: 2 }}>
+                            About
+                        </Button>
+                    </Link>
+                    <Link to="*" style={{ textDecoration: 'none' }}>
+                        <Button color="inherit">Contact</Button>
+                    </Link>
                 </Box>
             </Toolbar>
         </AppBar>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, Typography, Button } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 export default function Error() {
     return (
@@ -21,13 +22,15 @@ export default function Error() {
             <Typography variant="h5" sx={{ mb: 4 }}>
                 Oops! The page you're looking for doesn't exist.
             </Typography>
-            <Button
-                variant="contained"
-                color="primary"
-                sx={{ padding: '10px 20px', fontSize: '1.2rem' }}
-            >
-                Go Back
-            </Button>
+            <Link to="/" style={{ textDecoration: 'none' }}>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    sx={{ padding: '10px 20px', fontSize: '1.2rem' }}
+                >
+                    Go Back to Home
+                </Button>
+            </Link>
         </Box>
     );
 }
