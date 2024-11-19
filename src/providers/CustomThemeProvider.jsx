@@ -1,4 +1,5 @@
 import React, { createContext, useState, useCallback, useContext } from 'react';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 const ThemeContext = createContext();
 
@@ -41,7 +42,14 @@ export default function CustomThemeProvider({ children }) {
                 }),
         },
     });
-    return (<></>);
+
+    return (
+        <ThemeProvider theme={theme}>
+            <ThemeContext.Provider value={{ isDark, toggleDarkMode }}>
+                {children}
+            </ThemeContext.Provider>
+        </ThemeProvider>
+    );
 }
 
 export const useTheme = () => {
