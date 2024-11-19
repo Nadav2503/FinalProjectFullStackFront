@@ -11,7 +11,7 @@ export default function AvatarMenu({ anchorEl, onClose }) {
             onClose={onClose}
         >
             {/* Centering Menu Items */}
-            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', gap: 2 }}>
                 <NavBarItem label="Profile" onClick={onClose} />
                 <NavBarItem label="Login" onClick={onClose} />
                 <NavBarItem label="Signup" onClick={onClose} />
