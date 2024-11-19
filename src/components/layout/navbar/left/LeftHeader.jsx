@@ -4,9 +4,11 @@ import CompanyName from './CompanyName';
 
 export default function LeftHeader() {
     return (
-        <div style={{ display: 'flex', alignItems: 'center' }}>
+        <div style={{ display: 'flex', alignItems: 'center', flex: 1, minWidth: 0 }}>
             <Logo />
-            <CompanyName />
+            <div style={{ flexShrink: 1, minWidth: 0, overflow: 'hidden' }}>
+                <CompanyName />
+            </div>
         </div>
     );
 }
