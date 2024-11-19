@@ -3,7 +3,7 @@ import { Button, Container, Typography } from '@mui/material';
 import { LocalOffer, Map } from '@mui/icons-material';  // Corrected import
 import '../styles/HomePage.css';
 
-export default function HomePage() {
+export default function Home() {
     return (
         <div className="home-page">
             <Container

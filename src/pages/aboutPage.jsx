@@ -35,7 +35,13 @@ export default function AboutPage() {
                     marginBottom: 4,
                 }}
             >
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. In, iusto amet, expedita temporibus nam quis ab repellendus error perspiciatis, consequuntur sed? Voluptate, consequuntur saepe magni odio sint sapiente rerum voluptates.
+                Welcome to the Virtual Zoo! Our zoo brings you closer to the
+                animal kingdom, allowing you to explore different exhibits,
+                learn about wildlife, and experience the beauty of nature right
+                from the comfort of your home. We are dedicated to providing an
+                immersive and educational experience for all ages. Join us on an
+                exciting journey to discover animals, their habitats, and the
+                importance of conservation.
             </Typography>
 
             <Typography
@@ -45,7 +51,8 @@ export default function AboutPage() {
                     color: '#777',
                 }}
             >
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. A magnam maiores, praesentium in eum facere, nesciunt, accusantium adipisci sapiente at voluptates consequuntur earum eligendi sint illo ratione! Voluptatibus, at aliquid.
+                Experience the wonders of the animal kingdom without leaving your
+                home. We hope you enjoy your visit to the Virtual Zoo!
             </Typography>
         </Container>
     );
