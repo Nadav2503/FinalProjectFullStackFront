@@ -1,8 +1,10 @@
 import React from "react";
 import NavBarLink from "./NavbarLink";
-import { Button, Typography, Box } from "@mui/material";
+import { Button, Typography, useTheme } from "@mui/material";
 
 export default function NavBarItem({ to, sx, label }) {
+    const theme = useTheme();
+
     return (
         <NavBarLink to={to} sx={{ display: 'inline-block', ...sx }}>
             <Button
@@ -11,11 +13,11 @@ export default function NavBarItem({ to, sx, label }) {
                     textTransform: 'none',
                     padding: '8px 16px',
                     borderRadius: '8px',
-                    border: '1px solid', // Default border (transparent to avoid background clashes)
-                    marginRight: 2, // Add spacing between items
+                    border: `1px solid transparent`, // Default border
+                    marginRight: 2,
                     '&:hover': {
-                        backgroundColor: 'rgba(255, 255, 255, 0.1)', // Adds hover background
-                        border: '1px solid #fff', // Add border on hover
+                        backgroundColor: theme.palette.action.hover, // Theme-based hover background
+                        borderColor: theme.palette.text.primary,    // Theme-based border
                     },
                 }}
             >
