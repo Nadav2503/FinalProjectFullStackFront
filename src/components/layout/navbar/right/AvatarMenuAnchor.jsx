@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu } from '@mui/material';
+import { Menu, MenuItem } from '@mui/material';
 
 export default function AvatarMenuAnchor({ anchorEl, onClose }) {
     return (
@@ -8,6 +8,10 @@ export default function AvatarMenuAnchor({ anchorEl, onClose }) {
             open={Boolean(anchorEl)}
             onClose={onClose}
         >
+            <MenuItem onClick={onClose}>Profile</MenuItem>
+            <MenuItem onClick={onClose}>Login</MenuItem>
+            <MenuItem onClick={onClose}>Signup</MenuItem>
+            <MenuItem onClick={onClose}>Logout</MenuItem>
         </Menu>
     );
 }
