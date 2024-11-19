@@ -14,6 +14,7 @@ export default function Footer() {
             }}
         >
             <Typography variant="body2">
+                © {new Date().getFullYear()} Virtual Zoo. All rights reserved.
             </Typography>
         </Box>
     );
