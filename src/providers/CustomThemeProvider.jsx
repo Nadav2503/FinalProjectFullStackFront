@@ -1,4 +1,6 @@
-import { useCallback, useState } from "react";
+import React, { createContext, useState, useCallback, useContext } from 'react';
+
+const ThemeContext = createContext();
 
 export default function CustomThemeProvider({ children }) {
     const [isDark, setIsDark] = useState(false);
@@ -8,3 +10,11 @@ export default function CustomThemeProvider({ children }) {
     }, []);
     return (<></>);
 }
+
+export const useTheme = () => {
+    const context = useContext(ThemeContext);
+    if (!context) {
+        throw new Error('useTheme must be used within CustomThemeProvider');
+    }
+    return context;
+};
