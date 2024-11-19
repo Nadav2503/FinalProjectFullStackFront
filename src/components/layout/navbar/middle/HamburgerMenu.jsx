@@ -1,24 +1,33 @@
 import React from 'react';
-import { IconButton, Drawer, List, ListItem } from '@mui/material';
+import { IconButton, Drawer, List, ListItem, useTheme } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import NavBarItem from './NavbarItem'; // Import the reusable NavBarItem component
+import NavBarItem from './NavbarItem';
 
 export default function HamburgerMenu({ isOpen, toggleHamburgerMenu }) {
+    const theme = useTheme();
+
     const toggleDrawer = () => {
         toggleHamburgerMenu();
     };
 
     return (
         <>
-            {/* Hamburger Menu Icon */}
             <IconButton onClick={toggleDrawer} color="inherit">
                 <MenuIcon />
             </IconButton>
 
-            {/* Drawer for Navigation */}
-            <Drawer anchor="left" open={isOpen} onClose={toggleDrawer}>
+            <Drawer
+                anchor="left"
+                open={isOpen}
+                onClose={toggleDrawer}
+                PaperProps={{
+                    sx: {
+                        backgroundColor: theme.palette.background.paper, // Theme-based background
+                        color: theme.palette.text.primary,              // Theme-based text color
+                    },
+                }}
+            >
                 <List>
-                    {/* Navigation Links */}
                     <ListItem onClick={toggleDrawer}>
                         <NavBarItem to="/" label="Home" />
                     </ListItem>
