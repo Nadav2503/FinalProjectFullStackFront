@@ -1,5 +1,6 @@
 import React from 'react';
-import { Menu, MenuItem, Divider } from '@mui/material';
+import { Menu, Divider, Box } from '@mui/material';
+import AvatarMenuItem from './AvatarMenuItem.jsx';  // Importing new component
 import SwitchMode from './SwitchMode';
 
 export default function AvatarMenu({ anchorEl, onClose }) {
@@ -8,17 +9,31 @@ export default function AvatarMenu({ anchorEl, onClose }) {
             anchorEl={anchorEl}
             open={Boolean(anchorEl)}
             onClose={onClose}
+            sx={{
+                display: 'flex',
+                justifyContent: 'center', // Center content horizontally
+            }}
         >
-            <MenuItem onClick={onClose}>Profile</MenuItem>
-            <MenuItem onClick={onClose}>Login</MenuItem>
-            <MenuItem onClick={onClose}>Signup</MenuItem>
-            <MenuItem onClick={onClose}>Logout</MenuItem>
+            {/* Avatar should be centered in the menu */}
+            <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%', mt: 3 }}>
+                <Avatar alt="User Avatar" src="/images/avatar.png" sx={{ width: 56, height: 56 }} />
+            </Box>
 
-            <Divider sx={{ my: 1 }} />
+            {/* Centering Menu Items */}
+            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
+                <AvatarMenuItem label="Profile" onClick={onClose} />
+                <AvatarMenuItem label="Login" onClick={onClose} />
+                <AvatarMenuItem label="Signup" onClick={onClose} />
+                <AvatarMenuItem label="Logout" onClick={onClose} />
 
-            <MenuItem onClick={onClose}>
-                <SwitchMode />
-            </MenuItem>
+                <Divider sx={{ my: 1 }} />
+
+                <MenuItem onClick={onClose}>
+                    <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+                        <SwitchMode />
+                    </Box>
+                </MenuItem>
+            </Box>
         </Menu>
     );
 }
