@@ -1,12 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { IconButton, Drawer, List, ListItem, ListItemText } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 
-export default function HamburgerMenu() {
-    const [open, setOpen] = useState(false);
-
+export default function HamburgerMenu({ isOpen, toggleHamburgerMenu }) {
     const toggleDrawer = () => {
-        setOpen(!open);
+        toggleHamburgerMenu();
     };
 
     return (
@@ -14,7 +12,7 @@ export default function HamburgerMenu() {
             <IconButton onClick={toggleDrawer} color="inherit">
                 <MenuIcon />
             </IconButton>
-            <Drawer anchor="left" open={open} onClose={toggleDrawer}>
+            <Drawer anchor="left" open={isOpen} onClose={toggleDrawer}>
                 <List>
                     <ListItem button onClick={toggleDrawer}>
                         <ListItemText primary="Home" />
