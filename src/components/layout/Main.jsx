@@ -8,7 +8,7 @@ export default function Main({ children }) {
             sx={{
                 flexGrow: 1,
                 padding: '2rem',
-                minHeight: 'calc(100vh - 64px - 48px)', // Adjust for header and footer heights
+                minHeight: 'calc(100vh - 64px - 48px)',
                 backgroundColor: 'background.default',
                 color: 'text.primary',
             }}
