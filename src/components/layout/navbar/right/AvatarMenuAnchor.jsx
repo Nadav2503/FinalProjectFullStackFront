@@ -1,5 +1,6 @@
 import React from 'react';
-import { Menu, MenuItem } from '@mui/material';
+import { Menu, MenuItem, Divider } from '@mui/material';
+import SwitchMode from './SwitchMode';
 
 export default function AvatarMenu({ anchorEl, onClose }) {
     return (
@@ -12,6 +13,12 @@ export default function AvatarMenu({ anchorEl, onClose }) {
             <MenuItem onClick={onClose}>Login</MenuItem>
             <MenuItem onClick={onClose}>Signup</MenuItem>
             <MenuItem onClick={onClose}>Logout</MenuItem>
+
+            <Divider sx={{ my: 1 }} />
+
+            <MenuItem onClick={onClose}>
+                <SwitchMode />
+            </MenuItem>
         </Menu>
     );
 }
