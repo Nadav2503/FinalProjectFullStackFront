@@ -1,10 +1,16 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom"; // Use useNavigate for programmatic navigation
 
 export default function NavBarLink({ to, sx, children }) {
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        navigate(to); // Programmatically navigate to the 'to' route
+    };
+
     return (
-        <Link to={to} style={{ textDecoration: "none", color: "#fff", ...sx }}>
+        <div onClick={handleClick} style={{ cursor: 'pointer', ...sx }}>
             {children}
-        </Link>
+        </div>
     );
 }

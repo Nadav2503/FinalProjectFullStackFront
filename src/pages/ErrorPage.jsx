@@ -1,8 +1,14 @@
 import React from 'react';
 import { Box, Typography, Button } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function Error() {
+    const navigate = useNavigate();
+
+    const handleGoBack = () => {
+        navigate('/'); // Programmatically navigate to the home page
+    };
+
     return (
         <Box
             sx={{
@@ -22,15 +28,14 @@ export default function Error() {
             <Typography variant="h5" sx={{ mb: 4 }}>
                 Oops! The page you're looking for doesn't exist.
             </Typography>
-            <Link to="/" style={{ textDecoration: 'none' }}>
-                <Button
-                    variant="contained"
-                    color="primary"
-                    sx={{ padding: '10px 20px', fontSize: '1.2rem' }}
-                >
-                    Go Back to Home
-                </Button>
-            </Link>
+            <Button
+                variant="contained"
+                color="primary"
+                sx={{ padding: '10px 20px', fontSize: '1.2rem' }}
+                onClick={handleGoBack}
+            >
+                Go Back to Home
+            </Button>
         </Box>
     );
 }
