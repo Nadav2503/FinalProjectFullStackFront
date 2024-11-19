@@ -1,0 +1,7 @@
+/* Home page background image */
+.home-page {
+    background-image: url('https://your-image-url.com/zoo-image.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+}

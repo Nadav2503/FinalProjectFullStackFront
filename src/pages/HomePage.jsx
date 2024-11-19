@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button, Container, Typography } from '@mui/material';
+import '../styles/HomePage.css';
 
 export default function HomePage() {
     return (
