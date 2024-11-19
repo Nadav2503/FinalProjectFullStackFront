@@ -9,13 +9,18 @@ export default function AvatarMenu({ anchorEl, onClose }) {
             anchorEl={anchorEl}
             open={Boolean(anchorEl)}
             onClose={onClose}
+            PaperProps={{
+                sx: {
+                    padding: 2,
+                    backgroundColor: 'background.paper',
+                },
+            }}
         >
-            {/* Centering Menu Items */}
-            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', gap: 2 }}>
-                <NavBarItem label="Profile" onClick={onClose} />
-                <NavBarItem label="Login" onClick={onClose} />
-                <NavBarItem label="Signup" onClick={onClose} />
-                <NavBarItem label="Logout" onClick={onClose} />
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+                <NavBarItem label="Profile" variant="vertical" onClick={onClose} />
+                <NavBarItem label="Login" variant="vertical" onClick={onClose} />
+                <NavBarItem label="Signup" variant="vertical" onClick={onClose} />
+                <NavBarItem label="Logout" variant="vertical" onClick={onClose} />
 
                 <MenuItem onClick={onClose}>
                     <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
