@@ -1,7 +1,7 @@
 import React from 'react';
 import { Menu, MenuItem } from '@mui/material';
 
-export default function AvatarMenuAnchor({ anchorEl, onClose }) {
+export default function AvatarMenu({ anchorEl, onClose }) {
     return (
         <Menu
             anchorEl={anchorEl}
