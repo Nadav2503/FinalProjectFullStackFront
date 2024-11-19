@@ -1,24 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Box } from '@mui/material';
 import AvatarProfileImage from './Avatar';
-import AvatarMenu from './AvatarMenuAnchor';
+import AvatarMenu from './AvatarMenuAnchor';  // Updated to use the AvatarMenu
+import useAnchor from '../useAnchor';
+
 
 export default function RightHeader() {
-    const [anchorEl, setAnchorEl] = useState(null);
-
-    const handleAvatarClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-
-    const handleMenuClose = () => {
-        setAnchorEl(null);
-    };
+    const { anchorEl, handleAnchorClick, handleAnchorClose } = useAnchor();
 
     return (
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <AvatarProfileImage onClick={handleAvatarClick} />
+        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
+            {/* Avatar centered outside the menu */}
+            <AvatarProfileImage onClick={handleAnchorClick} />
 
-            <AvatarMenu anchorEl={anchorEl} onClose={handleMenuClose} />
+            {/* Avatar Menu */}
+            <AvatarMenu anchorEl={anchorEl} onClose={handleAnchorClose} />
         </Box>
     );
 }

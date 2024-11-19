@@ -6,12 +6,10 @@ import RightHeader from './navbar/right/RightHeader';
 
 export default function Header() {
     return (
-        <AppBar position="static" color="primary">
+        <AppBar position="static" color="primary" elevation={10}>
             <Toolbar sx={{ display: 'flex', justifyContent: 'space-evenly' }}>
                 <LeftHeader />
-
                 <MiddleHeader />
-
                 <RightHeader />
             </Toolbar>
         </AppBar>

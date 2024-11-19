@@ -14,7 +14,7 @@ export default function Logo() {
             <Avatar
                 src="/images/zooLogo.png"
                 alt="Zoo logo"
-                sx={{ width: 40, height: 40, borderRadius: '50%' }} // Adjust size if necessary
+                sx={{ width: 100, height: 40, borderRadius: '50%' }} // Adjust size if necessary
             />
         </IconButton>
     );
