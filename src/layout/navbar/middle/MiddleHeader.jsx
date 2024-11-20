@@ -41,7 +41,7 @@ export default function MiddleHeader() {
     };
 
     return (
-        <div style={{ display: 'flex', alignItems: 'center', flex: 1, justifyContent: 'center', margin: '15px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', flex: 1, justifyContent: 'center', marginTop: "15px", marginBottom: "15px" }}>
             {isCompact ? (
                 <>
                     {/* Show HamburgerMenu when search is not open */}

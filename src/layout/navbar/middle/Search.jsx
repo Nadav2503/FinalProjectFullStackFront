@@ -22,9 +22,9 @@ export default function Search({ isOpen, toggleSearch }) {
                     size="small"
                     placeholder="Search..."
                     sx={{
+                        position: 'relative', // To position the close icon inside the input field
                         flex: 1,
                         maxWidth: '100%',
-                        marginLeft: '8px',
                         borderRadius: 2,
                         backgroundColor: theme.palette.background.paper, // Set background color from theme
                         '& .MuiOutlinedInput-root': {
@@ -42,8 +42,16 @@ export default function Search({ isOpen, toggleSearch }) {
                     InputProps={{
                         endAdornment: (
                             <InputAdornment position="end">
-                                {/* Icon button to close the search bar */}
-                                <IconButton onClick={toggleSearch}>
+                                {/* Icon button to close the search bar, positioned top-right and resized */}
+                                <IconButton
+                                    onClick={toggleSearch}
+                                    sx={{
+                                        position: 'absolute',
+                                        right: 2, // Place it 8px from the right
+                                        bottom: 2,   // Place it 8px from the top
+                                        fontSize: '18px', // Adjust the size of the icon
+                                    }}
+                                >
                                     <CloseIcon />
                                 </IconButton>
                             </InputAdornment>
