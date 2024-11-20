@@ -1,17 +1,17 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'; // Importing useNavigate hook for programmatic navigation
 
 export default function NavBarLink({ to, sx, children }) {
-    const navigate = useNavigate(); // Router hook for navigation.
+    const navigate = useNavigate(); // Accessing the navigation function from react-router-dom
 
-    // Navigate to the specified route on click.
+    // Function to navigate to the provided route when clicked
     const handleClick = () => {
-        navigate(to);
+        navigate(to); // Programmatically navigate to the target route (to)
     };
 
     return (
         <div onClick={handleClick} style={{ cursor: 'pointer', ...sx }}>
-            {children} {/* Render children elements (e.g., buttons or text). */}
+            {children} {/* Render the children elements (could be buttons, text, etc.) */}
         </div>
     );
 }
