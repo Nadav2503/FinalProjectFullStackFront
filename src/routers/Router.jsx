@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import ROUTES from "./routerModel";
 
 import Home from "../pages/HomePage";
-import About from "../pages/aboutPage";
+import About from "../pages/AboutPage";
 import Error from "../pages/ErrorPage";
 
 export default function Router() {
