@@ -1,3 +1,4 @@
+import { Box } from '@mui/material';
 import React from 'react';
 import { useNavigate } from 'react-router-dom'; // Importing useNavigate hook for programmatic navigation
 
@@ -10,8 +11,8 @@ export default function NavBarLink({ to, sx, children }) {
     };
 
     return (
-        <div onClick={handleClick} style={{ cursor: 'pointer', ...sx }}>
+        <Box onClick={handleClick} style={{ cursor: 'pointer', ...sx }}>
             {children} {/* Render the children elements (could be buttons, text, etc.) */}
-        </div>
+        </Box>
     );
 }
