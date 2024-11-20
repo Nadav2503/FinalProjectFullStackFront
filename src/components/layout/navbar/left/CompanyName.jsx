@@ -11,11 +11,11 @@ export default function CompanyName() {
 
     return (
         <Typography
-            variant="h6"
-            color="inherit"
-            onClick={handleCompanyNameClick}
+            variant="h6" // Styling for the company name (header size)
+            color="inherit" // Inherits the color from the parent theme
+            onClick={handleCompanyNameClick} // Click handler to navigate to home
             sx={{
-                cursor: 'pointer',
+                cursor: 'pointer', // Makes the text look clickable
                 // Hide company name on mobile (<600px)
                 '@media (max-width: 600px)': {
                     display: 'none',
