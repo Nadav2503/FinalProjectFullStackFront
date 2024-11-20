@@ -1,12 +1,13 @@
 import React from 'react';
 import Typography from '@mui/material/Typography';
-import { useNavigate } from 'react-router-dom'; // Use useNavigate for programmatic navigation
+import { useNavigate } from 'react-router-dom'; // For programmatic navigation
 
 export default function CompanyName() {
     const navigate = useNavigate();
 
+    // Handle company name click event to navigate to the home page
     const handleCompanyNameClick = () => {
-        navigate('/'); // Navigate to the home page when clicked
+        navigate('/'); // Navigate to the home page
     };
 
     return (
@@ -16,9 +17,9 @@ export default function CompanyName() {
             onClick={handleCompanyNameClick} // Click handler to navigate to home
             sx={{
                 cursor: 'pointer', // Makes the text look clickable
-                // Hide company name on mobile (<600px)
-                '@media (max-width: 600px)': {
-                    display: 'none',
+                // Responsive: Hide company name on small screens (<600px) for better layout
+                [theme.breakpoints.down('sm')]: {
+                    display: 'none', // Hide company name on small screens like mobile
                 },
             }}
         >
