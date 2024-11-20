@@ -1,6 +1,7 @@
 import React from "react";
 import { TextField, Grid } from "@mui/material";
 import { useTheme } from "@mui/material/styles";  // To access the theme
+import { makeFirstLetterCapital } from "./algoMethods";
 
 const Input = ({
     variant = "outlined",
@@ -21,6 +22,18 @@ const Input = ({
     return (
         <Grid item xs={12} {...rest}>
             <TextField
+                variant={variant}
+                label={makeFirstLetterCapital(label)}
+                type={type}
+                id={name}
+                name={name}
+                value={data[name] ? data[name] : ""}
+                required={required}
+                helperText={error}
+                error={Boolean(error)}
+                onChange={onChange}
+                fullWidth
+                autoComplete="off"
             />
         </Grid>
     );
