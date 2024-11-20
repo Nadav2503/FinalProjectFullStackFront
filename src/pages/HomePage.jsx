@@ -9,24 +9,24 @@ import Loader from '../components/general/Loader';
 import Error from '../components/general/Error';
 
 export default function Home() {
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    // const [loading, setLoading] = useState(true);
+    // const [error, setError] = useState(null);
     const theme = useTheme(); // Access the theme for consistent styling
 
-    // Simulate data fetching
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setLoading(false);
-            // Uncomment the next line to simulate an error
-            // setError('Failed to load data');
-        }, 2000);
+    // // Simulate data fetching
+    // useEffect(() => {
+    //     const timer = setTimeout(() => {
+    //         setLoading(false);
+    //         // Uncomment the next line to simulate an error
+    //         // setError('Failed to load data');
+    //     }, 2000);
 
-        return () => clearTimeout(timer);
-    }, []);
+    //     return () => clearTimeout(timer);
+    // }, []);
 
-    // Conditional rendering for loading and error states
-    if (loading) return <Loader />;
-    if (error) return <Error errorMessage={error} />;
+    // // Conditional rendering for loading and error states
+    // if (loading) return <Loader />;
+    // if (error) return <Error errorMessage={error} />;
 
     return (
         <Box
