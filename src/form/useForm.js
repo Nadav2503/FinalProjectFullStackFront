@@ -45,6 +45,11 @@ export default function useForm(initialForm, schema, handleSubmit) {
         setErrors({});
     }, [initialForm]);
 
+    const onSubmit = useCallback(() => {
+        if (validateForm()) {
+            handleSubmit(data);
+        }
+    }, [data, validateForm, handleSubmit]);
 
     return {
         data,
@@ -53,5 +58,6 @@ export default function useForm(initialForm, schema, handleSubmit) {
         handleChange,
         handleReset,
         validateForm,
+        onSubmit,
     };
 }
