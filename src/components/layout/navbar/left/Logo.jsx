@@ -12,9 +12,13 @@ export default function Logo() {
     return (
         <IconButton edge="start" color="inherit" aria-label="logo" sx={{ mr: 2 }} onClick={handleLogoClick}>
             <Avatar
-                src="/images/zooLogo.png"
-                alt="Zoo logo"
-                sx={{ width: 100, height: 40, borderRadius: '50%' }} // Adjust size if necessary
+                src="/images/zooLogo.png" // Source for the zoo logo image
+                alt="Zoo logo" // Accessible alternative text for screen readers
+                sx={{
+                    width: 100, // Set width of the logo
+                    height: 40, // Set height of the logo
+                    borderRadius: '50%', // Make the logo circular
+                }}
             />
         </IconButton>
     );
