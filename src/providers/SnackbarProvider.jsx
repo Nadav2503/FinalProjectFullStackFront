@@ -1,9 +1,10 @@
 import React, { createContext, useContext, useState, useCallback } from "react";
+import { Alert, Snackbar, useTheme } from "@mui/material";
 
 const SnackbarContext = createContext();
 
 export default function SnackbarProvider({ children }) {
-
+    const theme = useTheme(); // Access the theme for color and mode.
     const [isSnackOpen, setOpenSnack] = useState(false);
     const [snackColor, setSnackColor] = useState("success"); // 'success', 'error', 'warning', 'info'
     const [snackVariant, setSnackVariant] = useState("filled"); // 'filled' or 'outlined'
@@ -23,7 +24,34 @@ export default function SnackbarProvider({ children }) {
 
     return (
         <>
-
+            <SnackbarContext.Provider value={setSnack}>
+                {children}
+            </SnackbarContext.Provider>
+            <Snackbar
+                anchorOrigin={{ vertical: "top", horizontal: "right" }}
+                open={isSnackOpen}
+                onClose={() => setOpenSnack(false)}
+                autoHideDuration={snackDuration}
+            >
+                <Alert
+                    severity={snackColor}
+                    variant={snackVariant}
+                    sx={{
+                        backgroundColor:
+                            snackVariant === "filled"
+                                ? theme.palette[snackColor]?.main || snackColor
+                                : "transparent",
+                        color:
+                            snackVariant === "filled"
+                                ? theme.palette[snackColor]?.contrastText ||
+                                theme.palette.text.primary
+                                : theme.palette[snackColor]?.main || snackColor,
+                        border: snackVariant === "outlined" ? `1px solid ${theme.palette[snackColor]?.main || snackColor}` : "none",
+                    }}
+                >
+                    {snackMessage}
+                </Alert>
+            </Snackbar>
         </>
     );
 }
