@@ -4,17 +4,17 @@ import { useNavigate } from "react-router-dom"; // Hook for navigation
 import CustomButton from "../general/CustomButton"; // Custom button component for form actions
 
 const Form = ({
-    title = "",
-    onSubmit,
-    onCancel,
-    validateForm = () => true,
-    children,
-    spacing = 2,
-    submitLabel = "Submit",
-    cancelLabel = "Cancel",
-    isSubmitting = false,
-    cancelPath = "/",
-    styles = {},
+    title = "", // The title of the form, default is an empty string
+    onSubmit, // Callback function to handle form submission
+    onCancel, // Callback function to handle form cancellation
+    validateForm = () => true, // Validation function for the form, defaults to always returning true (no validation)
+    children, // The form fields and other components passed as children to be rendered inside the form
+    spacing = 2, // Spacing between form fields, default is 2 (based on MUI's Grid spacing system)
+    submitLabel = "Submit", // The label text for the submit button, default is "Submit"
+    cancelLabel = "Cancel", // The label text for the cancel button, default is "Cancel"
+    isSubmitting = false, // Boolean to indicate if the form is in a submitting state, used to disable the submit button during submission
+    cancelPath = "/", // Path to navigate to when the cancel button is clicked, default is the home path "/"
+    styles = {}, // Custom styles to be applied to the form component (overrides default styles)
 }) => {
     const navigate = useNavigate(); // Hook for navigating to the cancel path
 
