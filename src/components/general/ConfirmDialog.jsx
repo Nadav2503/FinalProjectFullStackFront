@@ -1,5 +1,6 @@
 import React from 'react';
-import { Dialog, DialogActions, DialogContent, DialogTitle, Button } from '@mui/material';
+import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
+import CustomButton from './CustomButton';
 
 export default function ConfirmDialog({ open, onClose, onConfirm, title, message }) {
     return (
@@ -9,12 +10,12 @@ export default function ConfirmDialog({ open, onClose, onConfirm, title, message
                 <Typography variant="body1">{message}</Typography>
             </DialogContent>
             <DialogActions>
-                <Button onClick={onClose} color="secondary">
+                <CustomButton onClick={onClose} color="secondary">
                     Cancel
-                </Button>
-                <Button onClick={onConfirm} color="primary">
+                </CustomButton>
+                <CustomButton onClick={onConfirm} color="primary">
                     Confirm
-                </Button>
+                </CustomButton>
             </DialogActions>
         </Dialog>
     );
