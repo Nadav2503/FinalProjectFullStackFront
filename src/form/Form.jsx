@@ -59,6 +59,11 @@ const Form = ({
 
             {/* Form Actions */}
             <Grid
+                container
+                spacing={2}
+                mt={4}
+                justifyContent="center"
+                alignItems="center"
             >
                 <Grid item xs={12} sm={6}>
                     <CustomButton
