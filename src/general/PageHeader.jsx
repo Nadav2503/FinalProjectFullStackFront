@@ -22,7 +22,7 @@ export default function PageHeader({ title, subtitle }) {
                 variant="h2"
                 component="h1"
                 sx={{
-                    color: theme.palette.primary.main, // Use primary color from the theme
+                    color: theme.palette.text.main, // Use primary color from the theme
                     fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' }, // Responsive font size
                 }}
             >

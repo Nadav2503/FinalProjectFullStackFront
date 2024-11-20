@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container, Typography } from '@mui/material';
+import PageHeader from '../general/PageHeader'; // Import PageHeader component
 
 // AboutPage component that provides information about the Virtual Zoo.
 export default function About() {
@@ -12,30 +13,23 @@ export default function About() {
                 justifyContent: 'center', // Centers content vertically within the container.
                 alignItems: 'center', // Centers content horizontally.
                 textAlign: 'center', // Centers text within the container.
-                padding: '2rem', // Adds padding around the content.
+                padding: { xs: '1rem', sm: '2rem' }, // Adjust padding for responsiveness.
             }}
         >
-            {/* Main heading for the About page */}
-            <Typography
-                variant="h3"
-                component="h1"
-                sx={{
-                    marginBottom: 2,
-                    fontSize: '2rem', // Large font for emphasis.
-                    fontWeight: 'bold', // Bold text for the title.
-                }}
-            >
-                About the Virtual Zoo
-            </Typography>
+            {/* PageHeader component for title section */}
+            <PageHeader
+                title="About the Virtual Zoo"
+                subtitle="Learn more about the Virtual Zoo, its exhibits, and the mission."
+            />
 
-            {/* Description of the Virtual Zoo */}
+            {/* Main content of the About page */}
             <Typography
                 variant="body1"
                 sx={{
-                    fontSize: '1.2rem',
+                    fontSize: { xs: '1rem', sm: '1.2rem' }, // Responsive font size
                     lineHeight: 1.6, // Improves readability with proper line spacing.
                     maxWidth: '800px', // Limits the width of the text for better layout.
-                    marginBottom: 4,
+                    marginBottom: 4, // Space below the first paragraph
                 }}
             >
                 Welcome to the Virtual Zoo! Our zoo brings you closer to the
@@ -51,7 +45,7 @@ export default function About() {
             <Typography
                 variant="body2"
                 sx={{
-                    fontSize: '1rem',
+                    fontSize: { xs: '0.9rem', sm: '1rem' }, // Adjust font size for smaller screens
                     color: '#777', // Subtle text color for less emphasis.
                 }}
             >
