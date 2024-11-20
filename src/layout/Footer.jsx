@@ -32,7 +32,12 @@ export default function Footer() {
             >
                 {/* Instagram */}
                 <IconButton
-
+                    component="a"
+                    href="https://www.instagram.com/yourhandle" //placeholder
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Instagram"
+                    sx={{ color: theme.palette.text.primary }}
                 >
                     <Instagram />
                 </IconButton>
