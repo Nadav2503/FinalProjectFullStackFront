@@ -42,6 +42,11 @@ const Form = ({
             {/* Form Title */}
             {title && (
                 <Typography
+                    variant="h4"
+                    component="h1"
+                    align="center"
+                    mb={3}
+                    sx={{ fontWeight: "bold" }}
                 >
                     {title}
                 </Typography>
