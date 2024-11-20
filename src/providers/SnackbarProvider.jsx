@@ -9,6 +9,17 @@ export default function SnackbarProvider({ children }) {
     const [snackMessage, setSnackMessage] = useState("");
     const [snackDuration, setSnackDuration] = useState(2500); // Default timing in ms
 
+    const setSnack = useCallback(
+        (color, message, duration = 2500, variant = "filled") => {
+            setOpenSnack(true);
+            setSnackColor(color);
+            setSnackVariant(variant);
+            setSnackMessage(message);
+            setSnackDuration(duration);
+        },
+        []
+    );
+
     return (
         <>
 
