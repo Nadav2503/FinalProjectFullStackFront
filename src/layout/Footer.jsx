@@ -39,7 +39,12 @@ export default function Footer() {
 
                 {/* LinkedIn */}
                 <IconButton
-
+                    component="a"
+                    href="https://www.linkedin.com/in/yourprofile" //placeholder
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="LinkedIn"
+                    sx={{ color: theme.palette.text.primary }}
                 >
                     <LinkedIn />
                 </IconButton>
