@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useCallback } from "react";
 
+const SnackbarContext = createContext();
 
 export default function SnackbarProvider({ children }) {
 
