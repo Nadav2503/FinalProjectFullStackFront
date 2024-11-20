@@ -3,14 +3,6 @@ import { Menu, Box, MenuItem } from '@mui/material';
 import SwitchMode from './SwitchMode'; // Theme toggle switch component
 import NavBarItem from '../middle/NavbarItem'; // Reusable navigation item component
 
-/**
- * AvatarMenu Component:
- * Displays a dropdown menu anchored to an avatar button.
- * Provides navigation options and a theme toggle switch.
- *
- * @param {object} anchorEl - The element the menu is anchored to.
- * @param {function} onClose - Callback to close the menu.
- */
 export default function AvatarMenu({ anchorEl, onClose }) {
     return (
         <Menu

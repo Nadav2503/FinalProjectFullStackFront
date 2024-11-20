@@ -4,11 +4,6 @@ import AvatarProfileImage from './Avatar'; // Component to display the avatar
 import AvatarMenu from './AvatarMenuAnchor'; // Component for the dropdown menu
 import useAnchor from '../useAnchor'; // Custom hook for managing anchor state
 
-/**
- * RightHeader Component:
- * Displays a user avatar that toggles a dropdown menu when clicked.
- * Uses a custom hook to manage the state of the menu anchor.
- */
 export default function RightHeader() {
     // Destructured state and handlers from the custom hook
     const { anchorEl, handleAnchorClick, handleAnchorClose } = useAnchor();

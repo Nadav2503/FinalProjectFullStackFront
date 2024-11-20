@@ -1,13 +1,6 @@
 import React from 'react';
 import { IconButton, Avatar } from '@mui/material';
 
-/**
- * AvatarProfileImage Component:
- * Displays a user's avatar wrapped in a clickable IconButton.
- * Clicking triggers the provided onClick handler.
- *
- * @param {function} onClick - Callback function to handle click events.
- */
 export default function AvatarProfileImage({ onClick }) {
     return (
         <IconButton

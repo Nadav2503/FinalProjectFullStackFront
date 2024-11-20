@@ -3,11 +3,6 @@ import { IconButton, Box, useTheme } from '@mui/material';
 import { Brightness4, Brightness7 } from '@mui/icons-material';
 import { useTheme as useCustomTheme } from '../../../providers/CustomThemeProvider'; // Rename for clarity
 
-/**
- * SwitchMode Component:
- * A toggle button to switch between light and dark themes with visual effects
- * that adapt based on the current theme.
- */
 export default function SwitchMode() {
   const { isDark, toggleDarkMode } = useCustomTheme(); // Theme state and toggle function from custom provider
   const theme = useTheme(); // Access Material UI's theme for consistent styling
