@@ -14,7 +14,7 @@ export default function Layout({ children }) {
                 minHeight: '100vh', // Ensures the layout takes up the full viewport height
             }}
         >
-            {/* Navbar: sticky to the top */}
+            {/* Navbar displayed at the top of the page */}
             <Box
                 sx={{
                     position: 'sticky',
@@ -26,7 +26,7 @@ export default function Layout({ children }) {
                 <Navbar />
             </Box>
 
-            {/* Main content area: takes up remaining space */}
+            {/* Main content area where children components are rendered */}
             <Box
                 sx={{
                     flexGrow: 1, // Allows it to expand and take up available space
@@ -36,7 +36,7 @@ export default function Layout({ children }) {
                 <Main>{children}</Main>
             </Box>
 
-            {/* Footer: sticky to the bottom */}
+            {/* Footer displayed at the bottom of the page */}
             <Box
                 sx={{
                     position: 'sticky',
