@@ -67,12 +67,21 @@ const Form = ({
             >
                 <Grid item xs={12} sm={6}>
                     <CustomButton
+                        variant="outlined"
+                        color="error"
+                        fullWidth
+                        onClick={onCancel || (() => navigate(cancelPath))}
                     >
                         {cancelLabel}
                     </CustomButton>
                 </Grid>
                 <Grid item xs={12} sm={6}>
                     <CustomButton
+                        type="submit"
+                        variant="contained"
+                        color="primary"
+                        fullWidth
+                        disabled={isSubmitting || !validateForm()}
                     >
                         {submitLabel}
                     </CustomButton>
