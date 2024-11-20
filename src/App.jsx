@@ -1,9 +1,9 @@
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
-import Layout from "./components/layout/Layout"; // Application layout component.
 import Router from "./routers/Router"; // Main routing component.
 import CustomThemeProvider from "./providers/CustomThemeProvider"; // Theme management provider.
 import SnackbarProvider from "./providers/SnackbarProvider";
+import Layout from "./layout/Layout";
 
 // Main application entry point.
 export default function App() {

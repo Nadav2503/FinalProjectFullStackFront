@@ -1,7 +1,7 @@
 import React from 'react';
 import { IconButton, Box, useTheme } from '@mui/material';
 import { Brightness4, Brightness7 } from '@mui/icons-material';
-import { useTheme as useCustomTheme } from '../../../../providers/CustomThemeProvider'; // Rename here for clarity
+import { useTheme as useCustomTheme } from '../../../providers/CustomThemeProvider'; // Rename here for clarity
 
 // Toggles between dark and light modes.
 export default function SwitchMode() {

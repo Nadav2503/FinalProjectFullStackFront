@@ -2,9 +2,9 @@ import React from 'react';
 import { Box, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
-import PageHeader from '../components/general/PageHeader'; // Import PageHeader
+import PageHeader from '../general/PageHeader'; // Import PageHeader
 import ErrorImage from '/images/robot.png'; // Example error image path
-import CustomButton from '../components/general/CustomButton';
+import CustomButton from '../general/CustomButton';
 
 export default function Error() {
     const navigate = useNavigate(); // Hook for programmatic navigation.

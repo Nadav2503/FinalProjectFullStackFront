@@ -3,10 +3,10 @@ import { Box, Container, Typography, Stack } from '@mui/material';
 import { LocalOffer, Map } from '@mui/icons-material';
 import { useTheme } from '@mui/material/styles';
 import Logo from '/images/zooLogo.png';
-import PageHeader from '../components/general/PageHeader';
-import CustomButton from '../components/general/CustomButton';
-import Loader from '../components/general/Loader';
-import Error from '../components/general/Error';
+import PageHeader from '../general/PageHeader';
+import CustomButton from '../general/CustomButton';
+import Loader from '../general/Loader';
+import Error from '../general/Error';
 
 export default function Home() {
     // const [loading, setLoading] = useState(true);
