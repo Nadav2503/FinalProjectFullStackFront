@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import Navbar from './Navbar';
-import HamburgerMenu from './HamburgerMenu';
-import Search from './Search';
+import Navbar from './Navbar'; // Full Navbar component for larger screens
+import HamburgerMenu from './HamburgerMenu'; // Hamburger menu for compact screens
+import Search from './Search'; // Search bar component
 
 export default function MiddleHeader() {
     // State to check if the screen is compact (mobile or tablet).
