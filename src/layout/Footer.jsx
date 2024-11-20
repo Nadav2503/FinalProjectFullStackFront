@@ -61,7 +61,10 @@ export default function Footer() {
 
                 {/* Email */}
                 <IconButton
-
+                    component="a"
+                    href="mailto:your.email@example.com" //placeholder
+                    aria-label="Email"
+                    sx={{ color: theme.palette.text.primary }}
                 >
                     <Email />
                 </IconButton>
