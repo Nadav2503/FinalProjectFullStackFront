@@ -40,6 +40,10 @@ export default function useForm(initialForm, schema, handleSubmit) {
         return true;
     }, [schema, data]);
 
+    const handleReset = useCallback(() => {
+        setData(initialForm);
+        setErrors({});
+    }, [initialForm]);
 
 
     return {
@@ -47,7 +51,7 @@ export default function useForm(initialForm, schema, handleSubmit) {
         errors,
         setData,
         handleChange,
+        handleReset,
         validateForm,
-        onSubmit,
     };
 }
