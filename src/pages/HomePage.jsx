@@ -1,103 +1,79 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Box, Container, Typography, Stack } from '@mui/material';
 import { LocalOffer, Map } from '@mui/icons-material';
 import { useTheme } from '@mui/material/styles';
 import Logo from '/images/zooLogo.png';
-import PageHeader from '../general/PageHeader';
 import CustomButton from '../general/CustomButton';
-import Loader from '../general/Loader';
-import Error from '../general/Error';
 
 export default function Home() {
-    // const [loading, setLoading] = useState(true);
-    // const [error, setError] = useState(null);
-    const theme = useTheme(); // Access the theme for consistent styling
-
-    // // Simulate data fetching
-    // useEffect(() => {
-    //     const timer = setTimeout(() => {
-    //         setLoading(false);
-    //         // Uncomment the next line to simulate an error
-    //         // setError('Failed to load data');
-    //     }, 2000);
-
-    //     return () => clearTimeout(timer);
-    // }, []);
-
-    // // Conditional rendering for loading and error states
-    // if (loading) return <Loader />;
-    // if (error) return <Error errorMessage={error} />;
+    // Access the theme to apply consistent styling based on light or dark mode
+    const theme = useTheme();
 
     return (
         <Box
             sx={{
-                background: theme.palette.mode === 'dark' ? '#1F4529' : '#C2FFC7',
-                minHeight: '100vh',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                padding: 4,
+                background: theme.palette.mode === 'dark' ? '#1F4529' : '#C2FFC7', // Set background color based on the theme mode
+                minHeight: '100vh', // Ensure the box takes up the full height of the screen
+                display: 'flex', // Use flexbox layout for centering the content
+                flexDirection: 'column', // Stack elements vertically
+                alignItems: 'center', // Center elements horizontally
+                padding: 4, // Add padding to the box
             }}
         >
             {/* Logo Section */}
             <Box sx={{ textAlign: 'center', marginBottom: 5 }}>
                 <img
-                    src={Logo}
-                    alt="Virtual Zoo Logo"
+                    src={Logo} // Image source for the logo
+                    alt="Virtual Zoo Logo" // Alt text for the image
                     style={{
-                        width: '250px',
-                        marginBottom: '30px',
+                        width: '250px', // Set the logo width
+                        marginBottom: '30px', // Add space below the logo
                     }}
                 />
             </Box>
 
-            {/* Page Title with Arch Effect */}
+            {/* Title Section */}
             <Typography
-                variant="h2"
+                variant="h1" // Use h1 for the title
                 sx={{
-                    color: theme.palette.text.primary,
-                    fontWeight: 'bold',
-                    fontSize: '3rem',
-                    textAlign: 'center',
-                    textTransform: 'uppercase',
-                    marginBottom: 3,
-                    transform: 'scaleX(1.1) translateY(-10px)',
-                    textShadow: `3px 3px 6px ${theme.palette.mode === 'dark' ? '#000' : '#aaa'}`,
-                    letterSpacing: 2,
+                    color: theme.palette.text.primary, // Set title color based on the theme
+                    fontWeight: 'bold', // Make the title bold
+                    fontSize: { xs: '2.5rem', sm: '3rem' }, // Set font size for responsiveness
+                    textAlign: 'center', // Center the title horizontally
+                    marginBottom: 3, // Add space below the title
+                    textShadow: `3px 3px 6px ${theme.palette.mode === 'dark' ? '#000' : '#aaa'}`, // Add text shadow for better visibility in different modes
                 }}
             >
                 Welcome to the Virtual Zoo
             </Typography>
 
-            <PageHeader
-                title=""
-                subtitle="Explore animals, exhibits, and much more!"
-            />
-
-            {/* Buttons for Actions */}
+            {/* Action Buttons Section */}
             <Stack
-                direction="row"
-                spacing={3}
+                direction={{ xs: 'column', sm: 'row' }} // Stack buttons vertically on small screens and horizontally on larger ones
+                spacing={3} // Set spacing between buttons
                 sx={{
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    flexWrap: 'wrap',
-                    marginTop: 4,
+                    justifyContent: 'center', // Center buttons horizontally
+                    alignItems: 'center', // Center buttons vertically
+                    flexWrap: 'wrap', // Allow buttons to wrap on smaller screens
+                    marginTop: 4, // Add space above the buttons
                 }}
             >
+                {/* Button for buying tickets */}
                 <CustomButton
-                    color="primary"
-                    size="large"
-                    onClick={() => console.log('Buying Ticket')}
-                    startIcon={<LocalOffer />}
+                    color="primary" // Primary button color
+                    size="large" // Set the button size to large
+                    startIcon={<LocalOffer />} // Add an icon to the button
+                    sx={{ width: '200px' }} // Fixed width for the button to maintain alignment
                 >
                     Buy Ticket
                 </CustomButton>
+
+                {/* Button for entering the zoo */}
                 <CustomButton
-                    color="secondary"
-                    size="large"
-                    onClick={() => console.log('Entering Zoo')}
-                    startIcon={<Map />}
+                    color="secondary" // Secondary button color
+                    size="large" // Set the button size to large
+                    startIcon={<Map />} // Add an icon to the button
+                    sx={{ width: '200px' }} // Fixed width for the button to maintain alignment
                 >
                     Enter Zoo
                 </CustomButton>
@@ -106,20 +82,20 @@ export default function Home() {
             {/* Description Section */}
             <Container maxWidth="md" sx={{ textAlign: 'center', marginTop: 5 }}>
                 <Typography
-                    variant="h4"
+                    variant="h4" // Use h4 for the subtitle
                     sx={{
-                        color: theme.palette.text.primary,
-                        fontWeight: 500,
-                        marginBottom: 3,
+                        color: theme.palette.text.primary, // Set text color based on theme
+                        fontWeight: 500, // Use semi-bold for the subtitle
+                        marginBottom: 3, // Add space below the subtitle
                     }}
                 >
                     Discover the wonders of the animal kingdom from your home!
                 </Typography>
                 <Typography
-                    variant="body1"
+                    variant="body1" // Use body1 for the description
                     sx={{
-                        color: theme.palette.text.secondary,
-                        lineHeight: 1.6,
+                        color: theme.palette.text.secondary, // Set text color based on theme
+                        lineHeight: 1.6, // Increase line height for better readability
                     }}
                 >
                     Experience the zoo like never before with interactive exhibits, animal facts,
