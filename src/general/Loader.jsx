@@ -10,8 +10,11 @@ export default function Loader() {
             alignItems: 'center', // Center the spinner vertically
             height: '100vh' // Full viewport height to center vertically
         }}>
-            {/* CircularProgress: MUI's spinner component. */}
-            <CircularProgress size={60} color="primary" />
+            {/* CircularProgress: MUI's spinner component with responsive size */}
+            <CircularProgress
+                size={{ xs: 40, sm: 50, md: 60 }} // Responsive size (40px on extra small, 50px on small, 60px on medium and up)
+                color="primary"
+            />
         </Box>
     );
 }
