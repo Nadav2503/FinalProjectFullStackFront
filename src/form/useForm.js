@@ -14,12 +14,31 @@ export default function useForm(initialForm, schema, handleSubmit) {
         [schema]
     );
 
+    const handleChange = useCallback(
+        (e) => {
+            let value = e.target.value;
+            let name = e.target.name;
+            const errorMessage = validateProperty(name, value);
+            if (errorMessage) {
+                setErrors((prev) => ({ ...prev, [name]: errorMessage }));
+            } else {
+                setErrors((prev) => {
+                    let obj = { ...prev };
+                    delete obj[name];
+                    return obj;
+                });
+            }
+            setData((prev) => ({ ...prev, [name]: value }));
+        },
+        [validateProperty]
+    );
+
 
 
     return {
         data,
         errors,
         setData,
-
+        handleChange,
     };
 }
