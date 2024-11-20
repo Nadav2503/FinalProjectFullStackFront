@@ -11,7 +11,7 @@ export default function Layout({ children }) {
             sx={{
                 display: 'flex',
                 flexDirection: 'column',
-                minHeight: '100vh', // Ensures the layout takes up the full viewport height
+                minHeight: '85vh', // Ensures the layout takes up the 85% viewport height
             }}
         >
             {/* Navbar displayed at the top of the page */}
