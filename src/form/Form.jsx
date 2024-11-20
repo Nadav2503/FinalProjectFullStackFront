@@ -1,11 +1,23 @@
 import React from "react";
 import { Box, Grid, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import CustomButton from "../general/CustomButton";
 
 
-const Form = (
-) => {
-
+const Form = ({
+    title = "",
+    onSubmit,
+    onCancel,
+    validateForm = () => true,
+    children,
+    spacing = 2,
+    submitLabel = "Submit",
+    cancelLabel = "Cancel",
+    isSubmitting = false,
+    cancelPath = "/",
+    styles = {},
+}) => {
+    const navigate = useNavigate();
 
     return (
         <Box
