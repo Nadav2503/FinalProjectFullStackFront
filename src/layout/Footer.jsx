@@ -23,7 +23,12 @@ export default function Footer() {
 
             {/* Social Media Links */}
             <Box
-
+                sx={{
+                    display: 'flex', // Arrange items horizontally
+                    justifyContent: 'center', // Center align items
+                    gap: '1rem', // Space between items
+                    marginTop: '0.5rem', // Add spacing above social links
+                }}
             >
                 {/* Instagram */}
                 <IconButton
