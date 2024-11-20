@@ -21,6 +21,23 @@ const Form = ({
 
     return (
         <Box
+            component="form"
+            sx={{
+                mt: 2,
+                p: { xs: 2, sm: 4 },
+                borderRadius: 2,
+                boxShadow: 3,
+                backgroundColor: "background.paper",
+                ...styles,
+            }}
+            onSubmit={(e) => {
+                e.preventDefault();
+                if (validateForm()) {
+                    onSubmit();
+                }
+            }}
+            autoComplete="off"
+            noValidate
         >
             {/* Form Title */}
             {title && (
