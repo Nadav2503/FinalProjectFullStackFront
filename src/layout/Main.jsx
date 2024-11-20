@@ -6,11 +6,11 @@ export default function Main({ children }) {
         <Box
             component="main"
             sx={{
-                flexGrow: 1,
-                padding: '2rem',
-                minHeight: 'calc(100vh - 64px - 48px)', // Adjusts for header and footer height.
-                backgroundColor: 'background.default', // Dynamic background based on the theme
-                color: 'text.primary', // Text color from theme
+                height: '100%', // Inherits height from the parent (85vh)
+                padding: '2rem', // Standard padding for content
+                backgroundColor: 'background.default', // Dynamic theme-based background
+                color: 'text.primary', // Theme-based text color
+                overflow: 'auto', // Scrollable if content overflows
             }}
         >
             {children}
