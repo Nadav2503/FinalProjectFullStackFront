@@ -15,7 +15,10 @@ import SnackbarProvider from "./providers/SnackbarProvider";
 
 // Importing Layout component which wraps the app with common UI elements (header, footer, etc.)
 import Layout from "./layout/Layout";
-;
+
+//import reset setting
+import './styles/Global.css'
+
 // Main application entry point.
 export default function App() {
   return (
