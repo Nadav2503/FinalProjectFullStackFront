@@ -13,7 +13,7 @@ export default function Error({ errorMessage }) {
                 <Grid item xs={12} md={4}>
                     <img
                         width="100%"
-                        src="/images/error-image.png"
+                        src="/images/robot.png"
                         alt="Error Illustration"
                     />
                 </Grid>

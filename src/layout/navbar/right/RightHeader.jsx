@@ -15,7 +15,6 @@ export default function RightHeader() {
                 alignItems: 'center',
                 justifyContent: 'center',
                 position: 'relative',
-                width: { xs: '100%', sm: 'auto' }, // Full width on small screens
             }}
         >
             {/* Avatar button - toggles the dropdown menu */}
