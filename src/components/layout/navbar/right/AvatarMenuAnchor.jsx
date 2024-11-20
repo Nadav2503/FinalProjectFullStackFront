@@ -3,14 +3,13 @@ import { Menu, Box, MenuItem } from '@mui/material';
 import SwitchMode from './SwitchMode';
 import NavBarItem from '../middle/NavbarItem';
 
-// Menu component tied to the avatar, showing user-specific actions like login, logout, etc.
 export default function AvatarMenu({ anchorEl, onClose }) {
     return (
         // Menu displays items when the anchor element is provided.
         <Menu
-            anchorEl={anchorEl} // Element to which the menu is anchored.
-            open={Boolean(anchorEl)} // Open when anchorEl is truthy.
-            onClose={onClose} // Close handler for the menu.
+            anchorEl={anchorEl}
+            open={Boolean(anchorEl)}
+            onClose={onClose}
             PaperProps={{
                 sx: {
                     padding: 2, // Adds padding around the menu.

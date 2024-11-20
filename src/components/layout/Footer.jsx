@@ -1,16 +1,18 @@
 import React from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, useTheme } from '@mui/material';
 
 export default function Footer() {
+    const theme = useTheme();
+
     return (
         <Box
             component="footer"
             sx={{
-                backgroundColor: 'primary.main', // Footer's background color from the theme.
-                color: 'text.primary', // Text color based on the theme.
-                textAlign: 'center', // Centers the content horizontally.
-                padding: '1rem', // Adds padding inside the footer.
-                marginTop: 'auto', // Ensures the footer stays at the bottom of the page.
+                backgroundColor: theme.palette.primary.main, // Footer's background from theme
+                color: theme.palette.text.primary, // Footer text color
+                textAlign: 'center',
+                padding: '1rem',
+                marginTop: 'auto',
             }}
         >
             <Typography variant="body2">
