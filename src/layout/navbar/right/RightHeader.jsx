@@ -1,20 +1,32 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import AvatarProfileImage from './Avatar';
-import AvatarMenu from './AvatarMenuAnchor';
-import useAnchor from '../useAnchor';
+import AvatarProfileImage from './Avatar'; // Component to display the avatar
+import AvatarMenu from './AvatarMenuAnchor'; // Component for the dropdown menu
+import useAnchor from '../useAnchor'; // Custom hook for managing anchor state
 
-// Header section displaying the avatar and the associated menu.
+/**
+ * RightHeader Component:
+ * Displays a user avatar that toggles a dropdown menu when clicked.
+ * Uses a custom hook to manage the state of the menu anchor.
+ */
 export default function RightHeader() {
-    // Custom hook for managing anchor element state.
+    // Destructured state and handlers from the custom hook
     const { anchorEl, handleAnchorClick, handleAnchorClose } = useAnchor();
 
     return (
-        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
-            {/* Avatar icon button triggers the menu */}
+        <Box
+            sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                position: 'relative',
+                width: { xs: '100%', sm: 'auto' }, // Full width on small screens
+            }}
+        >
+            {/* Avatar button - toggles the dropdown menu */}
             <AvatarProfileImage onClick={handleAnchorClick} />
 
-            {/* Dropdown menu anchored to the avatar */}
+            {/* Dropdown menu - anchored to the avatar */}
             <AvatarMenu anchorEl={anchorEl} onClose={handleAnchorClose} />
         </Box>
     );
