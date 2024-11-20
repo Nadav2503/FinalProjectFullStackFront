@@ -11,8 +11,6 @@ export default function Navbar() {
                 justifyContent: 'center', // Centers the navbar content horizontally
                 alignItems: 'center', // Centers the items vertically
                 width: '100%', // Ensures navbar spans the full width of the screen
-                padding: '10px', // Optional padding for better spacing
-                boxSizing: 'border-box', // Ensures padding doesn't affect width
             }}
         >
             {/* Container for the individual navigation items */}
@@ -20,9 +18,6 @@ export default function Navbar() {
                 sx={{
                     display: 'flex', // Use flexbox for aligning nav items horizontally
                     alignItems: 'center', // Align nav items vertically
-                    gap: 2, // Adds space between nav items
-                    flexWrap: 'wrap', // Allows the items to wrap for smaller screens
-                    justifyContent: 'center', // Ensures items are centered on smaller screens
                 }}
             >
                 {/* Individual navigation items */}

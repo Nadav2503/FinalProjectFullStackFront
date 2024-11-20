@@ -25,6 +25,7 @@ export default function Search({ isOpen, toggleSearch }) {
                         position: 'relative', // To position the close icon inside the input field
                         flex: 1,
                         maxWidth: '100%',
+                        margin: "5px",
                         borderRadius: 2,
                         backgroundColor: theme.palette.background.paper, // Set background color from theme
                         '& .MuiOutlinedInput-root': {
