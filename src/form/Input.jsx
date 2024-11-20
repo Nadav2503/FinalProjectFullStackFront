@@ -34,6 +34,32 @@ const Input = ({
                 onChange={onChange}
                 fullWidth
                 autoComplete="off"
+                sx={{
+                    '& .MuiInputBase-root': {
+                        borderColor: inputBorderColor,
+                        color: inputTextColor,
+                    },
+                    '& .MuiFormLabel-root': {
+                        color: labelColor, // Default label color
+                    },
+                    '& .MuiInputBase-input': {
+                        color: inputTextColor,
+                    },
+                    '& .MuiOutlinedInput-root': {
+                        '& fieldset': {
+                            borderColor: inputBorderColor,
+                        },
+                        '&:hover fieldset': {
+                            borderColor: theme.palette.mode === "dark" ? "#9EDF9C" : "#3D5300",  // Adjust hover color
+                        },
+                        '&.Mui-focused fieldset': {
+                            borderColor: theme.palette.mode === "dark" ? "#9EDF9C" : "#3D5300", // Focus border color
+                        },
+                    },
+                    '& .MuiFormLabel-root.Mui-focused': {
+                        color: theme.palette.mode === "dark" ? "#9EDF9C" : "#3D5300", // Focused label color
+                    },
+                }}
             />
         </Grid>
     );
