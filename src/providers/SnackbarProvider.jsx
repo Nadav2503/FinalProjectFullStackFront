@@ -26,3 +26,10 @@ export default function SnackbarProvider({ children }) {
         </>
     );
 }
+
+// Hook to use the Snackbar
+export const useSnack = () => {
+    const context = useContext(SnackbarContext);
+    if (!context) throw Error("useSnack must be used within a SnackbarProvider");
+    return context;
+};
