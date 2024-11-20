@@ -4,44 +4,52 @@ import HamburgerMenu from './HamburgerMenu';
 import Search from './Search';
 
 export default function MiddleHeader() {
-    const [isCompact, setIsCompact] = useState(false); // To check if it's mobile/tablet
-    const [isSearchOpen, setIsSearchOpen] = useState(false); // To check if search bar is open
-    const [isHamburgerOpen, setIsHamburgerOpen] = useState(false); // To track the hamburger menu state
+    // State to check if the screen is compact (mobile or tablet).
+    const [isCompact, setIsCompact] = useState(false);
 
+    // State to track whether the search bar is open.
+    const [isSearchOpen, setIsSearchOpen] = useState(false);
+
+    // State to track whether the hamburger menu is open.
+    const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
+
+    // Detect screen size and adjust layout accordingly.
     useEffect(() => {
         const handleResize = () => {
-            setIsCompact(window.innerWidth <= 960); // You can tweak this as needed
+            setIsCompact(window.innerWidth <= 960); // Compact layout for screens ≤ 960px.
         };
 
-        window.addEventListener('resize', handleResize);
-        handleResize(); // Initial check
+        window.addEventListener('resize', handleResize); // Add resize listener.
+        handleResize(); // Initial layout check.
 
         return () => {
-            window.removeEventListener('resize', handleResize);
+            window.removeEventListener('resize', handleResize); // Clean up listener.
         };
     }, []);
 
+    // Toggle the visibility of the search bar.
     const toggleSearch = () => {
         setIsSearchOpen(!isSearchOpen);
         if (!isSearchOpen) {
-            setIsHamburgerOpen(false); // Close hamburger when opening search
+            setIsHamburgerOpen(false); // Ensure hamburger is closed when search is open.
         }
     };
 
+    // Toggle the visibility of the hamburger menu.
     const toggleHamburgerMenu = () => {
         setIsHamburgerOpen(!isHamburgerOpen);
     };
 
     return (
-        <div style={{ display: 'flex', alignItems: 'center', flex: 1, justifyContent: 'center', margin: "15px" }}>
+        <div style={{ display: 'flex', alignItems: 'center', flex: 1, justifyContent: 'center', margin: '15px' }}>
             {isCompact ? (
                 <>
-                    {/* Show HamburgerMenu only when search is not open */}
+                    {/* Show HamburgerMenu when search is not open */}
                     {!isSearchOpen && (
                         <HamburgerMenu isOpen={isHamburgerOpen} toggleHamburgerMenu={toggleHamburgerMenu} />
                     )}
 
-                    {/* Search Bar */}
+                    {/* Search bar for compact layout */}
                     <Search isOpen={isSearchOpen} toggleSearch={toggleSearch} />
                 </>
             ) : (
@@ -49,7 +57,7 @@ export default function MiddleHeader() {
                     {/* Full Navbar for larger screens */}
                     <Navbar />
 
-                    {/* Search Bar for larger screens */}
+                    {/* Search bar for larger screens */}
                     <Search isOpen={isSearchOpen} toggleSearch={toggleSearch} />
                 </>
             )}
