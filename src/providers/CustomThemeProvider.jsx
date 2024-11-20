@@ -19,25 +19,25 @@ export default function CustomThemeProvider({ children }) {
             mode: isDark ? 'dark' : 'light', // Sets mode dynamically.
             ...(isDark
                 ? {
-                    primary: { main: '#90caf9' }, // Colors for dark mode.
+                    primary: { main: '#3D5300' }, // Deep olive green for dark mode
                     background: {
-                        default: '#121212',
-                        paper: '#424242',
+                        default: '#1F4529', // Dark green background
+                        paper: '#47663B', // Dark green paper background
                     },
                     text: {
-                        primary: '#ffffff',
-                        secondary: '#b0bec5',
+                        primary: '#E8ECD7', // Light beige text for readability
+                        secondary: '#B0BEC5', // Softer secondary text
                     },
                 }
                 : {
-                    primary: { main: '#1976d2' }, // Colors for light mode.
+                    primary: { main: '#FFE31A' }, // Bright yellow for light mode
                     background: {
-                        default: '#f5f5f5',
-                        paper: '#ffffff',
+                        default: '#C2FFC7', // Pale green background
+                        paper: '#EED3B1', // Soft yellowish paper
                     },
                     text: {
-                        primary: '#000000',
-                        secondary: '#555555',
+                        primary: '#62825D', // Muted green text for contrast
+                        secondary: '#616161', // Lighter text for secondary elements
                     },
                 }),
         },
