@@ -1,14 +1,12 @@
 import React from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { useTheme } from '@mui/material/styles';
-import PageHeader from '../general/PageHeader'; // Import PageHeader
-import ErrorImage from '/images/robot.png'; // Example error image path
-import CustomButton from '../general/CustomButton';
+import PageHeader from '../general/PageHeader'; // Import PageHeader for the title and subtitle
+import Error from '../general/Error'; // Import Error component for the error message
+import CustomButton from '../general/CustomButton'; // Import the CustomButton for navigation
 
-export default function Error() {
+export default function ErrorPage() {
     const navigate = useNavigate(); // Hook for programmatic navigation.
-    const theme = useTheme(); // Access the current theme (light/dark mode).
 
     // Function to navigate back to the Home page.
     const handleGoBack = () => {
@@ -18,56 +16,36 @@ export default function Error() {
     return (
         <Box
             sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
-                height: '100vh',
-                textAlign: 'center',
-                backgroundColor: 'background.default',
-                color: 'text.primary',
-                padding: 4,
+                display: 'flex', // Flexbox layout for centering content
+                flexDirection: 'column', // Stack content vertically
+                justifyContent: 'center', // Center content vertically
+                alignItems: 'center', // Center content horizontally
+                height: '100vh', // Full viewport height
+                textAlign: 'center', // Center text
+                backgroundColor: 'background.default', // Set background color based on theme
+                color: 'text.primary', // Set text color based on theme
+                padding: 4, // Padding around the content
             }}
         >
-            {/* Page Header */}
+            {/* PageHeader component to display error title and subtitle */}
             <PageHeader
-                title="Error 404"
-                subtitle="Oops! The page you're looking for doesn't exist."
+                title="Error 404" // Main error title
+                subtitle="Oops! The page you're looking for doesn't exist." // Subtitle providing more context
             />
 
-            {/* Error Image */}
-            <Box
-                component="img"
-                src={ErrorImage}
-                alt="Error Illustration"
-                sx={{
-                    width: '300px',
-                    height: 'auto',
-                    mb: 4,
-                    backgroundColor:
-                        theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'transparent',
-                    padding: theme.palette.mode === 'dark' ? '10px' : '0',
-                    borderRadius: '10px',
-                    boxShadow: theme.palette.mode === 'dark' ? '0px 4px 10px rgba(0, 0, 0, 0.7)' : 'none',
-                }}
-            />
-
-            {/* Large heading for the error code */}
-            <Typography variant="h1" sx={{ fontSize: '6rem', fontWeight: 'bold', mb: 2 }}>
-                something went wrong
-            </Typography>
-
-            {/* Subheading describing the error */}
-            <Typography variant="h5" sx={{ mb: 4 }}>
-                Sorry, we couldn’t find the page you were looking for.
-            </Typography>
+            {/* Use the Error component for the error illustration and message */}
+            <Error /> {/* This component now handles both error display and image */}
 
             {/* Button to redirect to the homepage */}
             <CustomButton
                 variant="contained"
                 color="primary"
-                sx={{ padding: '10px 20px', fontSize: '1.2rem' }}
-                onClick={handleGoBack}
+                sx={{
+                    padding: '10px 20px',
+                    fontSize: { xs: '1rem', sm: '1.2rem' }, // Responsive font size for button
+                    borderRadius: 2, // Rounded button edges
+                }}
+                onClick={handleGoBack} // OnClick will navigate to the home page
             >
                 Go Back to Home
             </CustomButton>
