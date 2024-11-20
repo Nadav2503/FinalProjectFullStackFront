@@ -1,7 +1,6 @@
 import React from 'react';
 import Typography from '@mui/material/Typography';
 import { useNavigate } from 'react-router-dom'; // Use useNavigate for programmatic navigation
-import '../../../../styles/leftNavigation/CompanyName.css'; // Import the CSS file
 
 export default function CompanyName() {
     const navigate = useNavigate();
@@ -15,7 +14,13 @@ export default function CompanyName() {
             variant="h6" // Styling for the company name (header size)
             color="inherit" // Inherits the color from the parent theme
             onClick={handleCompanyNameClick} // Click handler to navigate to home
-            className="company-name" // Apply the CSS class
+            sx={{
+                cursor: 'pointer', // Makes the text look clickable
+                // Hide company name on mobile (<600px)
+                '@media (max-width: 600px)': {
+                    display: 'none',
+                },
+            }}
         >
             Virtual Zoo
         </Typography>
