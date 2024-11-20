@@ -1,6 +1,7 @@
 import React from 'react';
 import { Avatar, IconButton } from '@mui/material';
 import { useNavigate } from 'react-router-dom'; // Use useNavigate for programmatic navigation
+import '../../../../styles/leftNavigation/Logo.css'; // Import CSS file for styling
 
 export default function Logo() {
     const navigate = useNavigate();
@@ -14,11 +15,7 @@ export default function Logo() {
             <Avatar
                 src="/images/zooLogo.png" // Source for the zoo logo image
                 alt="Zoo logo" // Accessible alternative text for screen readers
-                sx={{
-                    width: 100, // Set width of the logo
-                    height: 40, // Set height of the logo
-                    borderRadius: '50%', // Make the logo circular
-                }}
+                className="logo-avatar" // Apply CSS class for styling
             />
         </IconButton>
     );

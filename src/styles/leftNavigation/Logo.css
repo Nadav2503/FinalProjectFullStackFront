@@ -1,0 +1,9 @@
+/* Styling for the Logo component */
+.logo-avatar {
+    width: 100px;
+    /* Set width of the logo */
+    height: 40px;
+    /* Set height of the logo */
+    border-radius: 50%;
+    /* Make the logo circular */
+}

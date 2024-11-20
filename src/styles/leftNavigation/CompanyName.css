@@ -1,0 +1,11 @@
+.company-name {
+    cursor: pointer;
+    /*Makes the text look clickable */
+}
+
+@media (max-width: 600px) {
+    .company-name {
+        display: none;
+        /* Hide company name on mobile */
+    }
+}
