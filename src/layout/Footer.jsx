@@ -51,7 +51,10 @@ export default function Footer() {
 
                 {/* Phone */}
                 <IconButton
-
+                    component="a"
+                    href="tel:+1234567890" //placeholder
+                    aria-label="Phone"
+                    sx={{ color: theme.palette.text.primary }}
                 >
                     <Phone />
                 </IconButton>
