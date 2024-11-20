@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Container, Typography, Stack } from '@mui/material';
-import { LocalOffer, Map } from '@mui/icons-material';
+import { LocalOffer, Map, Pets, Public } from '@mui/icons-material'; // Added additional icons
 import { useTheme } from '@mui/material/styles';
 import Logo from '/images/zooLogo.png';
 import CustomButton from '../general/CustomButton';
@@ -21,7 +21,8 @@ export default function Home() {
             }}
         >
             {/* Logo Section */}
-            <Box sx={{ textAlign: 'center', marginBottom: 5 }}>
+            <Box sx={{ textAlign: 'center', marginBottom: 2 }}>
+                {/* Icon above the logo */}
                 <img
                     src={Logo} // Image source for the logo
                     alt="Virtual Zoo Logo" // Alt text for the image
@@ -33,6 +34,7 @@ export default function Home() {
             </Box>
 
             {/* Title Section */}
+            <Pets sx={{ fontSize: '3rem' }} /> {/* Paw print icon below the logo */}
             <Typography
                 variant="h1" // Use h1 for the title
                 sx={{
@@ -42,9 +44,18 @@ export default function Home() {
                     textAlign: 'center', // Center the title horizontally
                     marginBottom: 3, // Add space below the title
                     textShadow: `3px 3px 6px ${theme.palette.mode === 'dark' ? '#000' : '#aaa'}`, // Add text shadow for better visibility in different modes
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
                 }}
             >
+                {/* Left icon */}
+                <Public sx={{ marginRight: '8px', fontSize: '2rem' }} /> {/* Globe print icon on the left */}
+
                 Welcome to the Virtual Zoo
+
+                {/* Right icon */}
+                <Public sx={{ marginLeft: '8px', fontSize: '2rem' }} /> {/* Globe icon on the right */}
             </Typography>
 
             {/* Action Buttons Section */}
