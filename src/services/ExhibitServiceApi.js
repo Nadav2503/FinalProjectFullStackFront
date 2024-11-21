@@ -48,3 +48,11 @@ export const deleteExhibit = async (id) => {
     }
 };
 
+export const updateAnimalsInExhibit = async (id, animals) => {
+    try {
+        const { data } = await axios.patch(`${API_URL}/${id}/animals`, animals);
+        return data;
+    } catch (error) {
+        throw new Error(error.message);
+    }
+};
