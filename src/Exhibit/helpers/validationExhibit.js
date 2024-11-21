@@ -22,7 +22,9 @@ export const validateExhibit = (exhibit) => {
         errors.location = 'Location must be a valid geographic location.';
     }
 
-
+    if (!['open', 'closed', 'under maintenance'].includes(exhibit.status)) {
+        errors.status = 'Status must be "open", "closed", or "under maintenance".';
+    }
 
     return errors;
 };
