@@ -1,8 +1,10 @@
-
 import React from 'react';
-import { Box, Button } from '@mui/material';
+import { Box, Button, useMediaQuery } from '@mui/material';
 
 export default function CardActionBar({ actions }) {
+    // Media query hook for responsiveness (small screens)
+    const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
+
     return (
         <Box
             className="card-actions"
