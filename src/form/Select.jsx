@@ -1,7 +1,6 @@
 import React from "react";
-import { Select, MenuItem, FormControl, InputLabel, Grid } from "@mui/material"; // MUI components for select and grid
+import { Select, MenuItem, FormControl, Grid } from "@mui/material"; // MUI components for select and grid
 import { useTheme } from "@mui/material/styles";  // To access the theme
-// import { makeFirstLetterCapital } from "./algoMethods"; // Utility function for capitalizing the first letter
 
 const SelectField = ({
     name, // Name of the input field
@@ -23,7 +22,6 @@ const SelectField = ({
     return (
         <Grid item xs={12} sm={6} {...rest}> {/* Grid item for responsiveness */}
             <FormControl fullWidth required={required} error={Boolean(error)}>
-                {/* <InputLabel>{makeFirstLetterCapital(label)}</InputLabel> */}
                 <Select
                     id={name} // Set the select field's ID
                     name={name} // Name attribute for the select field
