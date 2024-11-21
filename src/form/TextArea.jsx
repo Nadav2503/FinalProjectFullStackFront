@@ -1,5 +1,6 @@
 import React from "react";
 import { TextField, Grid } from "@mui/material"; // MUI components for text field and grid layout
+import { useTheme } from "@mui/material/styles";  // To access the theme
 import { makeFirstLetterCapital } from "./algoMethods"; // Utility function for capitalizing the first letter
 
 const TextArea = ({
@@ -13,6 +14,12 @@ const TextArea = ({
     rows = 4, // Default rows for textarea
     ...rest // Additional props to spread into the Grid item
 }) => {
+    const theme = useTheme(); // Access the current theme (light or dark)
+
+    // Dynamic styling based on theme mode (light or dark)
+    const inputBorderColor = theme.palette.mode === "dark" ? "#B0BEC5" : "#47663B";
+    const inputTextColor = theme.palette.mode === "dark" ? "#E8ECD7" : "#62825D";
+    const labelColor = theme.palette.mode === "dark" ? "#E8ECD7" : "#62825D";
 
     return (
         <Grid item xs={12} sm={6} {...rest}> {/* Grid item for responsiveness */}
@@ -30,7 +37,32 @@ const TextArea = ({
                 autoComplete="off" // Disable auto-completion
                 rows={rows} // Set the number of rows for the textarea
                 multiline // Make the input a multiline textarea
-
+                sx={{
+                    '& .MuiInputBase-root': {
+                        borderColor: inputBorderColor, // Set the input border color
+                        color: inputTextColor, // Set the text color inside the input
+                    },
+                    '& .MuiFormLabel-root': {
+                        color: labelColor, // Set the label color
+                    },
+                    '& .MuiInputBase-input': {
+                        color: inputTextColor, // Set the input text color
+                    },
+                    '& .MuiOutlinedInput-root': {
+                        '& fieldset': {
+                            borderColor: inputBorderColor, // Border color for the fieldset
+                        },
+                        '&:hover fieldset': {
+                            borderColor: theme.palette.mode === "dark" ? "#9EDF9C" : "#3D5300", // Hover effect border color
+                        },
+                        '&.Mui-focused fieldset': {
+                            borderColor: theme.palette.mode === "dark" ? "#9EDF9C" : "#3D5300", // Focused border color
+                        },
+                    },
+                    '& .MuiFormLabel-root.Mui-focused': {
+                        color: theme.palette.mode === "dark" ? "#9EDF9C" : "#3D5300", // Focused label color
+                    },
+                }}
             />
         </Grid>
     );
