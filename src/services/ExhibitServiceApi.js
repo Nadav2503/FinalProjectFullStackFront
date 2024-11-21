@@ -11,3 +11,13 @@ export const getExhibits = async () => {
         throw new Error(error.message);
     }
 };
+
+export const getExhibitById = async (id) => {
+    try {
+        const { data } = await axios.get(`${API_URL}/${id}`);
+        return data;
+    } catch (error) {
+        throw new Error(error.message);
+    }
+};
+
