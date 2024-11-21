@@ -1,8 +1,7 @@
 import React from 'react';
-import { Box, Button, useMediaQuery } from '@mui/material';
+import { Box, IconButton, useMediaQuery } from '@mui/material';
 
 export default function CardActionBar({ actions }) {
-    // Media query hook for responsiveness (small screens)
     const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
 
     return (
@@ -10,26 +9,25 @@ export default function CardActionBar({ actions }) {
             className="card-actions"
             sx={{
                 display: 'flex',
-                flexDirection: isSmallScreen ? 'column' : 'row', // Stack buttons vertically on small screens
+                flexDirection: isSmallScreen ? 'column' : 'row', // Stack icons vertically on small screens
                 justifyContent: 'space-between',
-                gap: 1, // Adds spacing between buttons
-                padding: 2, // Padding for spacing
+                gap: 1,
+                padding: 2,
                 width: '100%',
             }}
         >
             {actions.map((action, index) => (
-                <Button
+                <IconButton
                     key={index}
                     onClick={action.onClick}
-                    variant="contained" // Ensures consistent button styling
-                    color="primary" // Uses primary color from MUI theme
+                    color={action.active ? 'primary' : 'default'} // Optional: Customize color based on active state
                     sx={{
                         width: isSmallScreen ? '100%' : 'auto', // Full width on small screens
                         textAlign: 'center', // Centers the button text
                     }}
                 >
-                    {action.label}
-                </Button>
+                    {action.icon} {/* Render the icon passed in the action */}
+                </IconButton>
             ))}
         </Box>
     );
