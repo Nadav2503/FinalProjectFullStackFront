@@ -1,18 +1,15 @@
 import React from 'react';
 import { CardActionArea } from '@mui/material';
 import Card from '../../../general/card/Card';
-import ExhibitCardHeader from './ExhibitCArdHeader';
+import ExhibitCardHeader from './ExhibitCardHeader';
 import ExhibitCardBody from './ExhibitCardBody';
-import ExhibitCardActionBar from './ExhibitActionBar';
+import ExhibitCardActionBar from './ExhibitCardActionBar';
 
 export default function ExhibitCard({
     exhibit,
     handleDelete,
     handleEditExhibit,
-    handleFavorite,
-    isFavorite,
 }) {
-
     return (
         <Card sx={{ maxWidth: 400, margin: 'auto', boxShadow: 3, borderRadius: 2 }}>
             <CardActionArea>
@@ -29,8 +26,6 @@ export default function ExhibitCard({
                 exhibitId={exhibit._id}
                 handleDelete={handleDelete}
                 handleEditExhibit={handleEditExhibit}
-                handleFavorite={handleFavorite}
-                isFavorite={isFavorite}
             />
         </Card>
     );
