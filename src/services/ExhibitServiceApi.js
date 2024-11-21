@@ -21,3 +21,11 @@ export const getExhibitById = async (id) => {
     }
 };
 
+export const createExhibit = async (exhibit) => {
+    try {
+        const { data } = await axios.post(API_URL, exhibit);
+        return data;
+    } catch (error) {
+        throw new Error(error.message);
+    }
+};
