@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { updateAnimalsInExhibit } from '../../services/ExhibitServiceApi';
+import { updateAnimalsInExhibit } from '../services/exhibitApiService'; // Service to update animals in the exhibit
 import { useSnack } from '../../providers/SnackbarProvider';
 
 export default function useUpdateAnimalsInExhibit() {
@@ -7,23 +7,24 @@ export default function useUpdateAnimalsInExhibit() {
     const [error, setError] = useState(null);
     const setSnack = useSnack();
 
-    const handleUpdateAnimals = useCallback(async (id, animalId, action) => {
+    const handleUpdateAnimals = useCallback(async (id, animalId) => {
         setIsLoading(true);
         setError(null);
 
-        const animalAction = action === 'approve' ? { animalId } : { animalId: null };
-
         try {
-            const data = await updateAnimalsInExhibit(id, animalAction);
-            if (action === 'approve') {
-                setSnack('success', 'Animal added to the exhibit!');
+            const data = await updateAnimalsInExhibit(id, { animalId });
+
+            const animalAdded = data.animals.includes(animalId);
+            if (animalAdded) {
+                setSnack('success', 'Animal successfully added to the exhibit!');
             } else {
-                setSnack('success', 'Animal removed from the exhibit!');
+                setSnack('success', 'Animal successfully removed from the exhibit!');
             }
-            return data;
+
+            return data; // Return the updated exhibit
         } catch (err) {
             setError(err.message);
-            setSnack('error', `Failed to update animal in exhibit`);
+            setSnack('error', 'Failed to update exhibit animals.');
         } finally {
             setIsLoading(false);
         }
