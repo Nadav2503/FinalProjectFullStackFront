@@ -1,7 +1,15 @@
 import React from 'react';
-import CardBody from '../../../general/card/CardBody';
 
-export default function ExhibitCardBody() {
+export default function ExhibitCardBody({ description, capacity, location, status }) {
+    const content = (
+        <>
+            <p>Description: {description}</p>
+            <p>Capacity: {capacity}</p>
+            <p>Location: {location}</p>
+            <p>Status: {status}</p>
+        </>
+    );
+
     return (
         <CardBody content={content} />
     );
