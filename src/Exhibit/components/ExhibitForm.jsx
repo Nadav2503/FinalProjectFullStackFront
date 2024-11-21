@@ -33,12 +33,21 @@ const ExhibitForm = ({
                 />
             </Grid>
 
-
+            {/* Location (Select) */}
             <Grid >
                 <TextField
-
+                    label="Location"
+                    name="location"
+                    value={data.location || ""}
+                    onChange={onInputChange}
+                    fullWidth
+                    select
+                    error={Boolean(errors.location)}
+                    helperText={errors.location}
+                    variant="outlined"
+                    required
                 >
-
+                    {/* Location Options */}
                     <MenuItem value="Africa">Africa</MenuItem>
                     <MenuItem value="Asia">Asia</MenuItem>
                     <MenuItem value="Europe">Europe</MenuItem>
