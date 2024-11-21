@@ -29,3 +29,13 @@ export const createExhibit = async (exhibit) => {
         throw new Error(error.message);
     }
 };
+
+export const updateExhibit = async (id, exhibit) => {
+    try {
+        const { data } = await axios.put(`${API_URL}/${id}`, exhibit);
+        return data;
+    } catch (error) {
+        throw new Error(error.message);
+    }
+};
+
