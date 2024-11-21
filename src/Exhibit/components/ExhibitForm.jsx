@@ -7,8 +7,8 @@ import SelectField from "../../form/Select";
 const ExhibitForm = ({
     onSubmit,
     onInputChange,
-    errors,
-    data,
+    errors = {},
+    data = {}, // Provide a default empty object for `data`
 }) => {
     return (
         <Form
