@@ -5,6 +5,8 @@ import { Grid, MenuItem, TextField } from "@mui/material";
 
 const ExhibitForm = ({
     onSubmit,
+    onInputChange,
+    errors,
     data,
 }) => {
     return (
@@ -15,9 +17,16 @@ const ExhibitForm = ({
             styles={{ maxWidth: "800px" }}
             submitLabel={data._id ? "Update Exhibit" : "Create Exhibit"}
         >
+            {/* Name */}
             <Input
-
+                name="name"
+                label="Name"
+                error={errors.name}
+                onChange={onInputChange}
+                data={data}
+                required
             />
+
 
             <Grid >
                 <TextField
@@ -25,10 +34,12 @@ const ExhibitForm = ({
                 />
             </Grid>
 
+
             <Grid >
                 <TextField
 
                 >
+
                     <MenuItem value="Africa">Africa</MenuItem>
                     <MenuItem value="Asia">Asia</MenuItem>
                     <MenuItem value="Europe">Europe</MenuItem>
@@ -38,6 +49,7 @@ const ExhibitForm = ({
                     <MenuItem value="Antarctica">Antarctica</MenuItem>
                 </TextField>
             </Grid>
+
 
             <Grid >
                 <TextField
