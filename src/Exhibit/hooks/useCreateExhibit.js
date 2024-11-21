@@ -1,12 +1,13 @@
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 
 
 export default function useCreateExhibit() {
-
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(null);
 
     const handleCreateExhibit = useCallback(async (exhibitFromClient) => {
 
     }, []);
 
-    return {};
+    return { isLoading, error, handleCreateExhibit };
 }
