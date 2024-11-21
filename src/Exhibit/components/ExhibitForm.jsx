@@ -1,6 +1,7 @@
 import React from "react";
-import Form from "../../forms/components/Form";
-import Input from "../../forms/components/Input";
+import Form from "../../form/Form";
+import Input from "../../form/Input";
+
 import { Grid, MenuItem, TextField } from "@mui/material";
 
 const ExhibitForm = ({
@@ -27,7 +28,7 @@ const ExhibitForm = ({
             />
 
             {/* Description (Textarea) */}
-            <Grid >
+            <Grid item xs={12}>
                 <TextField
                     label="Description"
                     name="description"
@@ -44,7 +45,7 @@ const ExhibitForm = ({
             </Grid>
 
             {/* Location (Select) */}
-            <Grid >
+            <Grid item xs={12} sm={6}>
                 <TextField
                     label="Location"
                     name="location"
@@ -69,7 +70,7 @@ const ExhibitForm = ({
             </Grid>
 
             {/* Status (Select) */}
-            <Grid >
+            <Grid item xs={12} sm={6}>
                 <TextField
                     label="Status"
                     name="status"
