@@ -1,4 +1,5 @@
 import React from 'react';
+import { CardActionArea } from '@mui/material';
 import Card from '../../../general/card/Card';
 import ExhibitCardHeader from './ExhibitCArdHeader';
 import ExhibitCardBody from './ExhibitCardBody';
@@ -12,17 +13,17 @@ export default function ExhibitCard({
     isFavorite,
 }) {
 
-
     return (
-        <Card>
-            <ExhibitCardHeader title={exhibit.name} />
-            <ExhibitCardBody
-                description={exhibit.description}
-                capacity={exhibit.capacity}
-                location={exhibit.location}
-                status={exhibit.status}
-            />
-
+        <Card sx={{ maxWidth: 400, margin: 'auto', boxShadow: 3, borderRadius: 2 }}>
+            <CardActionArea>
+                <ExhibitCardHeader title={exhibit.name} />
+                <ExhibitCardBody
+                    description={exhibit.description}
+                    capacity={exhibit.capacity}
+                    location={exhibit.location}
+                    status={exhibit.status}
+                />
+            </CardActionArea>
 
             <ExhibitCardActionBar
                 exhibitId={exhibit._id}
