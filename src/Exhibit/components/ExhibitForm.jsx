@@ -1,8 +1,8 @@
 import React from "react";
 import Form from "../../form/Form";
 import Input from "../../form/Input";
-
-import { Grid, MenuItem, TextField } from "@mui/material";
+import TextArea from "../../form/TextArea";
+import SelectField from "../../form/Select";
 
 const ExhibitForm = ({
     onSubmit,
@@ -27,69 +27,47 @@ const ExhibitForm = ({
                 data={data}
             />
 
-            {/* Description (Textarea) */}
-            <Grid item xs={12}>
-                <TextField
-                    label="Description"
-                    name="description"
-                    value={data.description || ""}
-                    onChange={onInputChange}
-                    fullWidth
-                    multiline
-                    rows={4} // Set rows for multiline input (you can adjust as needed)
-                    error={Boolean(errors.description)}
-                    helperText={errors.description}
-                    variant="outlined"
-                    required
-                />
-            </Grid>
+            {/* Description (TextArea) */}
+            <TextArea
+                name="description"
+                label="Description"
+                error={errors.description}
+                onChange={onInputChange}
+                data={data}
+                rows={4} // Set rows for multiline input
+            />
 
-            {/* Location (Select) */}
-            <Grid item xs={12} sm={6}>
-                <TextField
-                    label="Location"
-                    name="location"
-                    value={data.location || ""}
-                    onChange={onInputChange}
-                    fullWidth
-                    select
-                    error={Boolean(errors.location)}
-                    helperText={errors.location}
-                    variant="outlined"
-                    required
-                >
-                    {/* Location Options */}
-                    <MenuItem value="Africa">Africa</MenuItem>
-                    <MenuItem value="Asia">Asia</MenuItem>
-                    <MenuItem value="Europe">Europe</MenuItem>
-                    <MenuItem value="North America">North America</MenuItem>
-                    <MenuItem value="South America">South America</MenuItem>
-                    <MenuItem value="Australia">Australia</MenuItem>
-                    <MenuItem value="Antarctica">Antarctica</MenuItem>
-                </TextField>
-            </Grid>
+            {/* Location (SelectField) */}
+            <SelectField
+                name="location"
+                label="Location"
+                error={errors.location}
+                onChange={onInputChange}
+                data={data}
+                options={[
+                    { value: "Africa", label: "Africa" },
+                    { value: "Asia", label: "Asia" },
+                    { value: "Europe", label: "Europe" },
+                    { value: "North America", label: "North America" },
+                    { value: "South America", label: "South America" },
+                    { value: "Australia", label: "Australia" },
+                    { value: "Antarctica", label: "Antarctica" },
+                ]}
+            />
 
-            {/* Status (Select) */}
-            <Grid item xs={12} sm={6}>
-                <TextField
-                    label="Status"
-                    name="status"
-                    value={data.status || "open"} // Default to "open"
-                    onChange={onInputChange}
-                    fullWidth
-                    select
-                    error={Boolean(errors.status)}
-                    helperText={errors.status}
-                    variant="outlined"
-                    required
-                >
-                    {/* Status Options */}
-                    <MenuItem value="open">Open</MenuItem>
-                    <MenuItem value="closed">Closed</MenuItem>
-                    <MenuItem value="under maintenance">Under Maintenance</MenuItem>
-                </TextField>
-            </Grid>
-
+            {/* Status (SelectField) */}
+            <SelectField
+                name="status"
+                label="Status"
+                error={errors.status}
+                onChange={onInputChange}
+                data={data}
+                options={[
+                    { value: "open", label: "Open" },
+                    { value: "closed", label: "Closed" },
+                    { value: "under maintenance", label: "Under Maintenance" },
+                ]}
+            />
         </Form>
     );
 };
