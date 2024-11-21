@@ -2,6 +2,7 @@ import React from 'react';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import CardActionBar from '../../../general/card/CardActionBar';
 
 
 export default function ExhibitCardActionBar({
