@@ -39,3 +39,12 @@ export const updateExhibit = async (id, exhibit) => {
     }
 };
 
+export const deleteExhibit = async (id) => {
+    try {
+        const { data } = await axios.delete(`${API_URL}/${id}`);
+        return data;
+    } catch (error) {
+        throw new Error(error.message);
+    }
+};
+
