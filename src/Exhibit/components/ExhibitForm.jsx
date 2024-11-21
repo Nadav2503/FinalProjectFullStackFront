@@ -24,7 +24,6 @@ const ExhibitForm = ({
                 error={errors.name}
                 onChange={onInputChange}
                 data={data}
-                required
             />
 
 
@@ -50,11 +49,21 @@ const ExhibitForm = ({
                 </TextField>
             </Grid>
 
-
+            {/* Status (Select) */}
             <Grid >
                 <TextField
-
+                    label="Status"
+                    name="status"
+                    value={data.status || "open"} // Default to "open"
+                    onChange={onInputChange}
+                    fullWidth
+                    select
+                    error={Boolean(errors.status)}
+                    helperText={errors.status}
+                    variant="outlined"
+                    required
                 >
+                    {/* Status Options */}
                     <MenuItem value="open">Open</MenuItem>
                     <MenuItem value="closed">Closed</MenuItem>
                     <MenuItem value="under maintenance">Under Maintenance</MenuItem>
