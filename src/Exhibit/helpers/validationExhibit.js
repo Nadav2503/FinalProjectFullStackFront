@@ -9,6 +9,19 @@ export const validateExhibit = (exhibit) => {
         errors.description = 'Description must be between 10 and 1024 characters.';
     }
 
+    const validLocations = [
+        'Africa',
+        'Asia',
+        'Europe',
+        'North America',
+        'South America',
+        'Australia',
+        'Antarctica',
+    ];
+    if (!validLocations.includes(exhibit.location)) {
+        errors.location = 'Location must be a valid geographic location.';
+    }
+
 
 
     return errors;
