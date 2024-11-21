@@ -41,6 +41,9 @@ export default function HamburgerMenu({ isOpen, toggleHamburgerMenu }) {
                     <ListItem onClick={toggleDrawer}>
                         <NavBarItem to="*" label="Error" variant="vertical" />
                     </ListItem>
+                    <ListItem onClick={toggleDrawer}>
+                        <NavBarItem to="/exhibit" label="add exhibit" variant="vertical" />
+                    </ListItem>
                 </List>
             </Drawer>
         </>

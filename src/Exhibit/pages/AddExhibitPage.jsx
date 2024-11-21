@@ -1,5 +1,5 @@
 import React from "react";
-import ExhibitForm from "../exhibit/components/ExhibitForm";;
+import ExhibitForm from "../components/ExhibitForm";
 
 export default function AddExhibitPage() {
 

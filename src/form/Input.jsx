@@ -1,7 +1,7 @@
 import React from "react";
 import { TextField, Grid } from "@mui/material"; // MUI components for input and grid layout
 import { useTheme } from "@mui/material/styles";  // To access the theme
-import { makeFirstLetterCapital } from "./algoMethods"; // Utility function for capitalizing the first letter of a string
+import { makeFirstLetterCapital } from "./algoMethod"; // Utility function for capitalizing the first letter of a string
 
 const Input = ({
     variant = "outlined", // Default variant is outlined
