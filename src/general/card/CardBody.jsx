@@ -1,7 +1,9 @@
 import React from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, useMediaQuery } from '@mui/material';
 
 export default function CardBody({ content }) {
+    // Media query hook for responsiveness (small screens)
+    const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
 
     return (
         <Box
