@@ -26,10 +26,20 @@ const ExhibitForm = ({
                 data={data}
             />
 
-
+            {/* Description (Textarea) */}
             <Grid >
                 <TextField
-
+                    label="Description"
+                    name="description"
+                    value={data.description || ""}
+                    onChange={onInputChange}
+                    fullWidth
+                    multiline
+                    rows={4} // Set rows for multiline input (you can adjust as needed)
+                    error={Boolean(errors.description)}
+                    helperText={errors.description}
+                    variant="outlined"
+                    required
                 />
             </Grid>
 
