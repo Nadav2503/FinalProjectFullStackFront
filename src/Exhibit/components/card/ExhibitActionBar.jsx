@@ -13,16 +13,16 @@ export default function ExhibitCardActionBar({
 }) {
     const actions = [
         {
-
+            onClick: () => handleFavorite(exhibitId),
             icon: <FavoriteIcon color={isFavorite ? 'error' : 'disabled'} />,
             active: isFavorite,
         },
         {
-
+            onClick: () => handleEditExhibit(exhibitId),
             icon: <EditIcon />,
         },
         {
-
+            onClick: () => handleDelete(exhibitId),
             icon: <DeleteIcon />,
         },
     ];
