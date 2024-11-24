@@ -3,13 +3,11 @@ import { CardActionArea } from '@mui/material';
 import Card from '../../../general/card/Card';
 import ExhibitCardHeader from './ExhibitCardHeader';
 import ExhibitCardBody from './ExhibitCardBody';
-import ExhibitCardActionBar from './ExhibitCardActionBar';
+import ExhibitActionBar from './ExhibitActionBar';
 
-export default function ExhibitCard({
-    exhibit,
-    handleDelete,
-    handleEditExhibit,
-}) {
+export default function ExhibitCard({ exhibit, handleDelete, handleEditExhibit }) {
+    console.log('Rendering ExhibitCard for:', exhibit);
+
     return (
         <Card sx={{ maxWidth: 400, margin: 'auto', boxShadow: 3, borderRadius: 2 }}>
             <CardActionArea>
@@ -22,7 +20,7 @@ export default function ExhibitCard({
                 />
             </CardActionArea>
 
-            <ExhibitCardActionBar
+            <ExhibitActionBar
                 exhibitId={exhibit._id}
                 handleDelete={handleDelete}
                 handleEditExhibit={handleEditExhibit}
