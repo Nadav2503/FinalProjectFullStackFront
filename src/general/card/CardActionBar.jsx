@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, IconButton, useMediaQuery } from '@mui/material';
 
-export default function CardActionBar({ actions }) {
+export default function CardActionBar({ actions = [] }) {
     const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
 
     return (
