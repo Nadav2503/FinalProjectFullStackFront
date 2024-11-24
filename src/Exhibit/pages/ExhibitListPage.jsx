@@ -4,8 +4,16 @@ import PageHeader from "../../general/PageHeader";
 import Loader from "../../general/Loader";
 import Error from "../../general/Error";
 import ExhibitFeedback from "../components/ExhibitFeedback";
+import useExhibitData from "../hooks/useExhibitData";
 
 export default function ExhibitListPage() {
+    const { exhibits, isLoading, error, fetchExhibits } = useExhibitData();
+
+    // Fetch the list of exhibits when the page loads
+    useEffect(() => {
+        fetchExhibits();
+    }, [fetchExhibits]);
+
     return (
         <Container>
             {/* Header Section */}
