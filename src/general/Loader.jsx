@@ -12,7 +12,13 @@ export default function Loader() {
         }}>
             {/* CircularProgress: MUI's spinner component with responsive size */}
             <CircularProgress
-                size={{ xs: 40, sm: 50, md: 60 }} // Responsive size (40px on extra small, 50px on small, 60px on medium and up)
+                sx={{
+                    size: {
+                        xs: 40, // Extra small screens
+                        sm: 50, // Small screens
+                        md: 60, // Medium screens
+                    }
+                }}
                 color="primary"
             />
         </Box>
