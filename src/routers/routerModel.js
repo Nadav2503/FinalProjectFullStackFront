@@ -2,7 +2,8 @@
 const ROUTES = {
     ROOT: "/", // Homepage route.
     ABOUT: "/about", // About page route.
-    EXHIBIT: "/exhibit", // About page route.
+    EXHIBITS: "/exhibits", // All exhibits page route.
+    EXHIBIT: "/exhibit", // Specific exhibit page route.
 };
 
 export default ROUTES;
