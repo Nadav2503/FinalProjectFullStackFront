@@ -6,12 +6,11 @@ import ExhibitCardBody from './ExhibitCardBody';
 import ExhibitActionBar from './ExhibitActionBar';
 
 export default function ExhibitCard({ exhibit, handleDelete, handleEditExhibit }) {
-    console.log('Rendering ExhibitCard for:', exhibit);
 
     return (
-        <Card sx={{ maxWidth: 400, margin: 'auto', boxShadow: 3, borderRadius: 2 }}>
+        <Card>
+            < ExhibitCardHeader title={exhibit.name} />
             <CardActionArea>
-                <ExhibitCardHeader title={exhibit.name} />
                 <ExhibitCardBody
                     description={exhibit.description}
                     capacity={exhibit.capacity}
@@ -19,8 +18,7 @@ export default function ExhibitCard({ exhibit, handleDelete, handleEditExhibit }
                     status={exhibit.status}
                 />
             </CardActionArea>
-
-            <ExhibitActionBar
+            < ExhibitActionBar
                 exhibitId={exhibit._id}
                 handleDelete={handleDelete}
                 handleEditExhibit={handleEditExhibit}
