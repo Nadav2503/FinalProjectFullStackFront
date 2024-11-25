@@ -1,10 +1,7 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import CardHeader from './CardHeader';
-import CardBody from './CardBody';
-import CardActionBar from './CardActionBar';
 
-const Card = ({ headerProps, bodyProps, actionsProps }) => {
+const Card = ({ children }) => {
     return (
         <Box
             className="card"
@@ -18,11 +15,10 @@ const Card = ({ headerProps, bodyProps, actionsProps }) => {
                 maxWidth: 400, // Restrict card width on larger screens
                 margin: 'auto', // Centers the card horizontally
                 backgroundColor: 'background.paper', // Uses the theme's background color
-            }}
+            }
+            }
         >
-            <CardHeader {...headerProps} />
-            <CardBody {...bodyProps} />
-            <CardActionBar {...actionsProps} />
+            {children}  {/* Render all the child components (ExhibitCardHeader, ExhibitCardBody, etc.) */}
         </Box>
     );
 };

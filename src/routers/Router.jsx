@@ -5,7 +5,7 @@ import ROUTES from "./routerModel"; // Centralized routing constants.
 import Home from "../pages/HomePage"; // Home page component.
 import About from "../pages/AboutPage"; // About page component.
 import Error from "../pages/ErrorPage"; // 404 Error page component.
-import ExhibitListPage from "../Exhibit/pages/AddExhibitPage";
+import ExhibitListPage from "../Exhibit/pages/ExhibitListPage";
 
 // Main Router component to define application routes.
 export default function Router() {
