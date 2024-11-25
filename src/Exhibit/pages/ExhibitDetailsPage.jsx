@@ -1,12 +1,14 @@
 import React from "react";
 
 import { Box, Typography, Divider, Container } from "@mui/material";
-
+import { Pets as PetsIcon, LocationOn as LocationIcon, CheckCircle as StatusIcon } from "@mui/icons-material";
 import PageHeader from "../../general/PageHeader";
 
 
 export default function ExhibitDetailPage() {
 
+
+    const currentCapacity = exhibit.animals?.length || 0; // Dynamic capacity based on animals array
 
     return (
         <Container>
@@ -29,7 +31,7 @@ export default function ExhibitDetailPage() {
             >
                 {/* Current Capacity with Pet Icon */}
                 <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", mb: 2 }}>
-
+                    <PetsIcon sx={{ marginRight: 1 }} />
                     <Typography variant="h6">
                         Current Animals: {currentCapacity}
                     </Typography>
@@ -42,13 +44,23 @@ export default function ExhibitDetailPage() {
 
                 {/* Location with Icon */}
                 <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", mb: 2 }}>
-
+                    <LocationIcon sx={{ marginRight: 1 }} />
                     <Typography variant="h6">{exhibit.location}</Typography>
                 </Box>
 
                 {/* Status with Icon and updated colors */}
                 <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", mb: 2 }}>
-
+                    <StatusIcon
+                        sx={{
+                            marginRight: 1,
+                            color:
+                                exhibit.status === "open"
+                                    ? "green"
+                                    : exhibit.status === "closed"
+                                        ? "red"
+                                        : "#F09319", // Orange for under maintenance
+                        }}
+                    />
                     <Typography
                         variant="h6"
                         color={
