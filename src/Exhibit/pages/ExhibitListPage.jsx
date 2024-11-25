@@ -1,31 +1,44 @@
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 import { Container } from "@mui/material";
 import PageHeader from "../../general/PageHeader";
-import Loader from "../../general/Loader";
-import Error from "../../general/Error";
 import ExhibitFeedback from "../components/ExhibitFeedback";
 import useExhibitData from "../hooks/useExhibitData";
+import AddNewExhibitButton from "../components/AddExhibitButton";
 
 export default function ExhibitListPage() {
     const { exhibits, isLoading, error, fetchExhibits } = useExhibitData();
 
-    // Fetch the list of exhibits when the page loads
     useEffect(() => {
         fetchExhibits();
     }, [fetchExhibits]);
 
+
+    // Define handleDelete and handleEditExhibit here if you want to keep them in this component
+    const handleDelete = useCallback((id) => {
+        console.log(`Deleting exhibit with id: ${id}`);
+        // Implement your delete logic here
+    }, []);
+
+    const handleEditExhibit = useCallback((id) => {
+        console.log(`Editing exhibit with id: ${id}`);
+        // Implement your edit logic here
+    }, []);
+
     return (
         <Container>
-            {/* Header Section */}
             <PageHeader
                 title="Exhibits at Our Zoo"
-                subtitle="Browse the various exhibits and discover the incredible wildlife that calls our zoo home." />
-            {/* Content Section */}
-            {isLoading && <Loader />} {/* Show Loader while fetching data */}
-            {error && <Error errorMessage={error} />} {/* Show Error if there's an issue */}
-            {!isLoading && !error && (
-                <ExhibitFeedback exhibits={exhibits} isLoading={isLoading} error={error} />
-            )}
+                subtitle="Browse the various exhibits and discover the incredible wildlife that calls our zoo home."
+            />
+
+            <ExhibitFeedback
+                isLoading={isLoading}
+                error={error}
+                exhibits={exhibits}
+                handleDelete={handleDelete}
+                handleEditExhibit={handleEditExhibit}
+            />
+            <AddNewExhibitButton />
         </Container>
     );
 }
