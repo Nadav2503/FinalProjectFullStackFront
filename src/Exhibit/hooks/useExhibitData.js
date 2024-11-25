@@ -11,17 +11,20 @@ export default function useExhibitData() {
     const fetchExhibits = useCallback(async () => {
         setIsLoading(true);
         setError(null);
+
         try {
-            const data = await getExhibits();
-            setExhibits(data);
-            setSnack('success', 'Exhibits fetched successfully!');
+            const data = await getExhibits();  // API call to get exhibits
+
+            setExhibits(data);  // Update state directly without checking length
+
+            setSnack('success', 'Exhibits loaded successfully!');
         } catch (err) {
             setError(err.message);
-            setSnack('error', 'Failed to fetch exhibits');
         } finally {
             setIsLoading(false);
         }
     }, [setSnack]);
+
 
     return { exhibits, error, isLoading, fetchExhibits };
 }
