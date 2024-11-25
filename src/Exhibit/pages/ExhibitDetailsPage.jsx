@@ -1,12 +1,26 @@
-import React from "react";
-
+import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { Box, Typography, Divider, Container } from "@mui/material";
 import { Pets as PetsIcon, LocationOn as LocationIcon, CheckCircle as StatusIcon } from "@mui/icons-material";
 import PageHeader from "../../general/PageHeader";
-
+import Loader from "../../general/Loader";
+import Error from "../../general/Error";
+import useExhibitById from "../hooks/useExhibitDataById";
 
 export default function ExhibitDetailPage() {
+    const { exhibitId } = useParams(); // Get exhibit ID from the URL
+    const { exhibit, error, isLoading, fetchExhibitById } = useExhibitById();
 
+    useEffect(() => {
+        fetchExhibitById(exhibitId); // Fetch exhibit details on component mount
+    }, [exhibitId, fetchExhibitById]);
+
+    if (isLoading) return <Loader />;
+    if (error) {
+        const errorMessage = typeof error === "string" ? error : error.message || "An unknown error occurred.";
+        return <Error errorMessage={errorMessage} />;
+    }
+    if (!exhibit) return <Error errorMessage="Exhibit not found." />;
 
     const currentCapacity = exhibit.animals?.length || 0; // Dynamic capacity based on animals array
 
