@@ -18,10 +18,17 @@ export default function ExhibitDetailPage() {
 
             {/* Exhibit Details Section */}
             <Box
-
+                sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    textAlign: "center",
+                    mt: 4,
+                    mb: 4,
+                }}
             >
                 {/* Current Capacity with Pet Icon */}
-                <Box>
+                <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", mb: 2 }}>
 
                     <Typography variant="h6">
                         Current Animals: {currentCapacity}
@@ -29,37 +36,47 @@ export default function ExhibitDetailPage() {
                 </Box>
 
                 {/* Max Capacity */}
-                <Typography >
+                <Typography variant="h6" color="text.secondary" sx={{ mb: 2 }}>
                     Exhibit Capacity: {exhibit.capacity}
                 </Typography>
 
                 {/* Location with Icon */}
-                <Box >
+                <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", mb: 2 }}>
 
                     <Typography variant="h6">{exhibit.location}</Typography>
                 </Box>
 
                 {/* Status with Icon and updated colors */}
-                <Box >
-
-
+                <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", mb: 2 }}>
 
                     <Typography
-
+                        variant="h6"
+                        color={
+                            exhibit.status === "open"
+                                ? "green"
+                                : exhibit.status === "closed"
+                                    ? "red"
+                                    : "#F09319" // Orange for under maintenance
+                        }
                     >
                         {exhibit.status}
                     </Typography>
                 </Box>
 
                 {/* Divider */}
-                <Divider />
+                <Divider sx={{ my: 2, width: "100%", maxWidth: "600px" }} />
             </Box>
 
             {/* Placeholder for Animals */}
             <Box
-
+                sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    flexWrap: "wrap",
+                    gap: 2,
+                }}
             >
-                <Typography >
+                <Typography variant="body1" color="text.secondary">
                     Animal cards will appear here once implemented.
                 </Typography>
             </Box>
