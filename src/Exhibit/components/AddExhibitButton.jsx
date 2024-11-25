@@ -9,8 +9,8 @@ export default function AddNewExhibitButton({ onAddExhibit }) {
             aria-label="add"
             sx={{
                 position: 'fixed',
-                bottom: 70,
-                right: 16,
+                bottom: 150,
+                right: 20,
             }}
             onClick={onAddExhibit}
         >
