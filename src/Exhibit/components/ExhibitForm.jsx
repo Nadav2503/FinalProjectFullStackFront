@@ -11,18 +11,18 @@ const ExhibitForm = ({
     data = {},
     title,
     submitLabel,
-    validateForm
+    validateForm,
+    isSubmitDisabled // New prop to disable the submit button
 }) => {
-
     return (
         <Form
             onSubmit={onSubmit}
             errors={errors}
-            styles={{ maxWidth: "800px" }
-            }
+            styles={{ maxWidth: "800px" }}
             validateForm={validateForm}
             title={title}
             submitLabel={submitLabel}
+            isSubmitting={isSubmitDisabled} // Use `isSubmitDisabled` here for submit button state
         >
             <Input
                 name="name"
@@ -47,16 +47,15 @@ const ExhibitForm = ({
                 error={errors.location}
                 onChange={onInputChange}
                 data={data}
-                options={
-                    [
-                        { value: "Africa", label: "Africa" },
-                        { value: "Asia", label: "Asia" },
-                        { value: "Europe", label: "Europe" },
-                        { value: "North America", label: "North America" },
-                        { value: "South America", label: "South America" },
-                        { value: "Australia", label: "Australia" },
-                        { value: "Antarctica", label: "Antarctica" },
-                    ]}
+                options={[
+                    { value: "Africa", label: "Africa" },
+                    { value: "Asia", label: "Asia" },
+                    { value: "Europe", label: "Europe" },
+                    { value: "North America", label: "North America" },
+                    { value: "South America", label: "South America" },
+                    { value: "Australia", label: "Australia" },
+                    { value: "Antarctica", label: "Antarctica" },
+                ]}
             />
 
             <SelectField
@@ -65,12 +64,11 @@ const ExhibitForm = ({
                 error={errors.status}
                 onChange={onInputChange}
                 data={data}
-                options={
-                    [
-                        { value: "open", label: "Open" },
-                        { value: "closed", label: "Closed" },
-                        { value: "under maintenance", label: "Under Maintenance" },
-                    ]}
+                options={[
+                    { value: "open", label: "Open" },
+                    { value: "closed", label: "Closed" },
+                    { value: "under maintenance", label: "Under Maintenance" },
+                ]}
             />
 
             <Input

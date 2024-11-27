@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Container } from "@mui/material";
 import ExhibitForm from "../components/ExhibitForm";
@@ -14,6 +14,9 @@ export default function EditExhibitPage() {
     const { exhibit, fetchExhibitById } = useExhibitById(); // Fetch the exhibit data by ID
     const { handleUpdateExhibit } = useUpdateExhibit(); // Hook for handling exhibit updates
 
+    // Track if there are any changes to enable the submit button
+    const [isChanged, setIsChanged] = useState(false);
+
     // Handle form submission
     const handleSubmit = useCallback(
         async (formData) => {
@@ -28,12 +31,21 @@ export default function EditExhibitPage() {
     );
 
     // Initialize form handling
-    const { data, errors, handleChange, validateForm, onSubmit, setData } = useForm(
+    const { data, errors, handleChange, validateForm, setData } = useForm(
         exhibit || {}, // Initialize form with fetched exhibit data (or an empty object if not available)
         exhibitSchema, // Schema to validate the form
         handleSubmit // Form submission handler
     );
 
+    // Compare current form data with the initial data to check if there are any changes
+    useEffect(() => {
+        if (exhibit && data) {
+            const isDataChanged = Object.keys(exhibit).some(
+                (key) => exhibit[key] !== data[key]
+            );
+            setIsChanged(isDataChanged); // Set changes status only after data is fetched
+        }
+    }, [exhibit, data]); // Only run when either exhibit or data changes
 
     // Fetch the exhibit data on mount
     useEffect(() => {
@@ -52,11 +64,12 @@ export default function EditExhibitPage() {
             <ExhibitForm
                 title="Edit Exhibit"
                 submitLabel="Update Exhibit"
-                onSubmit={onSubmit}
+                onSubmit={handleSubmit}
                 validateForm={validateForm}
                 errors={errors}
                 data={data}
                 onInputChange={handleChange}
+                isSubmitDisabled={!isChanged} // Disable submit button if no changes
             />
         </Container>
     );
