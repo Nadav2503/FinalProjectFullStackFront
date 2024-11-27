@@ -2,7 +2,7 @@ import React from 'react';
 import { Fab } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 
-export default function AddNewExhibitButton({ onAddExhibit }) {
+export default function AddNewButton({ onAddExhibit }) {
     return (
         <Fab
             color="primary"

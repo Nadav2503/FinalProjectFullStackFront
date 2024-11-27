@@ -64,6 +64,7 @@ const AnimalForm = ({
                 onChange={onInputChange}
                 data={data}
                 inputProps={{ min: 1 }}
+                onInput={(e) => e.preventDefault()}
             />
 
             {/* Description TextArea */}
