@@ -32,3 +32,13 @@ export const getAnimalById = async (id) => {
         throw new Error(error.message);
     }
 };
+
+// Create a new animal 
+export const createAnimal = async (animal) => {
+    try {
+        const { data } = await axios.post(API_URL, animal);
+        return data;
+    } catch (error) {
+        throw new Error(error.message);
+    }
+};
