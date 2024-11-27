@@ -8,6 +8,7 @@ import useUpdateExhibit from "../hooks/useUpdateExhibit";
 import exhibitSchema from "../model/exhibitSchema";
 import normalizeExhibit from "../helpers/normalizeExhibit";
 import initializeExhibit from "../helpers/initializeExhibit";
+import ROUTES from "../../routers/routerModel";
 
 export default function EditExhibitPage() {
     const { id } = useParams(); // Extract exhibit ID from URL
@@ -20,7 +21,7 @@ export default function EditExhibitPage() {
         async (formData) => {
             try {
                 await handleUpdateExhibit(id, formData); // Update the exhibit using the ID and form data
-                navigate("/exhibits"); // Redirect to the exhibit list after successful update
+                navigate(ROUTES.EXHIBITS); // Redirect to the exhibit list after successful update
             } catch (error) {
                 console.error("Failed to update exhibit:", error);
             }

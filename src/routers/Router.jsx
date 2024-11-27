@@ -28,7 +28,7 @@ export default function Router() {
             <Route path={ROUTES.ADD_EXHIBIT} element={<AddExhibitPage />} />
 
             {/* Route for editing an exhibit */}
-            <Route path={`${ROUTES.EDIT_EXHIBIT}/:exhibitId`} element={<EditExhibitPage />} />
+            <Route path={`${ROUTES.EDIT_EXHIBIT}/:id`} element={<EditExhibitPage />} />
 
             {/* Route for a specific exhibit details page */}
             <Route path={`${ROUTES.EXHIBIT_INFO}/:exhibitId`} element={<ExhibitDetailsPage />} />

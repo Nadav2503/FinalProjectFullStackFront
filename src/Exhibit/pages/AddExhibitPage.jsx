@@ -6,6 +6,7 @@ import useForm from "../../form/useForm";
 import useCreateExhibit from "../hooks/useCreateExhibit";
 import exhibitSchema from "../model/exhibitSchema";
 import { Container } from "@mui/material";
+import ROUTES from "../../routers/routerModel";
 
 export default function AddExhibitPage() {
     const { handleCreateExhibit } = useCreateExhibit();
@@ -14,7 +15,7 @@ export default function AddExhibitPage() {
     const handleSubmit = useCallback(async (formData) => {
         try {
             await handleCreateExhibit(formData);
-            navigate("/exhibits");
+            navigate(ROUTES.EXHIBITS);  // Use ROUTES.EXHIBITS for navigation
         } catch (error) {
             console.error("Failed to create exhibit:", error);
         }
@@ -25,7 +26,6 @@ export default function AddExhibitPage() {
         exhibitSchema,      // Validate using the custom function
         handleSubmit
     );
-
 
     return (
         <Container>

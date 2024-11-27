@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import useDeleteExhibit from "../hooks/useDeleteExhibit"; // Import the custom hook
 import ConfirmDialog from "../../general/ConfirmDialog"; // Import ConfirmDialog
 import useExhibitData from "../hooks/useExhibitData";
+import ROUTES from "../../routers/routerModel";
 
 export default function ExhibitListPage() {
     const { exhibits, isLoading, error, fetchExhibits } = useExhibitData();
@@ -21,7 +22,7 @@ export default function ExhibitListPage() {
     }, [fetchExhibits]);
 
     const handleAddExhibit = () => {
-        navigate("/add-exhibit"); // Navigate to AddExhibitPage
+        navigate(ROUTES.ADD_EXHIBIT); // Navigate to AddExhibitPage
     };
 
     const handleDelete = (id) => {
@@ -44,7 +45,7 @@ export default function ExhibitListPage() {
     };
 
     const handleEditExhibit = (id) => {
-        navigate(`/edit-exhibit/${id}`); // Navigate to EditExhibitPage
+        navigate(`${ROUTES.EDIT_EXHIBIT}/${id}`); // Navigate to EditExhibitPage
     };
 
     return (
