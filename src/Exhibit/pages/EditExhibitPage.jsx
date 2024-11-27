@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Container } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import ExhibitForm from "../components/ExhibitForm";
 import useForm from "../../form/useForm";
 import useExhibitById from "../hooks/useExhibitDataById";
@@ -50,15 +50,23 @@ export default function EditExhibitPage() {
 
     return (
         <Container>
-            <ExhibitForm
-                title="Edit Exhibit"
-                submitLabel="Update Exhibit"
-                onSubmit={onSubmit}
-                validateForm={validateForm}
-                errors={errors}
-                data={data}
-                onInputChange={handleChange}
-            />
+            <Box
+                sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                }}
+            >
+                <ExhibitForm
+                    title="Edit Exhibit"
+                    submitLabel="Update Exhibit"
+                    onSubmit={onSubmit}
+                    validateForm={validateForm}
+                    errors={errors}
+                    data={data}
+                    onInputChange={handleChange}
+                />
+            </Box>
         </Container>
     );
 }
