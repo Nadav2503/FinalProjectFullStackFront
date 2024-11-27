@@ -6,7 +6,7 @@ export default function ExhibitCardBody({ description, capacity, location, statu
     const content = (
         <>
             <Typography variant="body1" > <strong>Description:</strong> {description}</Typography >
-            <Typography variant="body1" > <strong>Capacity: </strong> {capacity}</Typography >
+            <Typography variant="body1" > <strong>Max Capacity: </strong> {capacity}</Typography >
             <Typography variant="body1" > <strong>Location: </strong> {location}</Typography >
             <Typography variant="body1" > <strong>Status: </strong> {status}</Typography >
         </>
