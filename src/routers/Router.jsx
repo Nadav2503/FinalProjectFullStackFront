@@ -10,6 +10,9 @@ import ExhibitListPage from "../Exhibit/pages/ExhibitListPage"; // All exhibits 
 import ExhibitDetailsPage from "../Exhibit/pages/ExhibitDetailsPage"; // Specific exhibit page
 import AddExhibitPage from "../Exhibit/pages/AddExhibitPage"; // Add new exhibit page
 import EditExhibitPage from "../Exhibit/pages/EditExhibitPage"; // Edit an exhibit page
+import AnimalDetailsPage from "../animal/pages/AnimalDetailsPage";
+import EditAnimalPage from "../animal/pages/EditAnimalPage";
+import AddAnimalPage from "../animal/pages/AddAnimalPage";
 
 // Main Router component to define application routes
 export default function Router() {
@@ -26,12 +29,15 @@ export default function Router() {
 
             {/* Route for adding a new exhibit */}
             <Route path={ROUTES.ADD_EXHIBIT} element={<AddExhibitPage />} />
+            <Route path={ROUTES.ADD_ANIMAL} element={<AddAnimalPage />} />
 
             {/* Route for editing an exhibit */}
             <Route path={`${ROUTES.EDIT_EXHIBIT}/:id`} element={<EditExhibitPage />} />
+            <Route path={`${ROUTES.EDIT_ANIMAL}/:id`} element={<EditAnimalPage />} />
 
             {/* Route for a specific exhibit details page */}
             <Route path={`${ROUTES.EXHIBIT_INFO}/:exhibitId`} element={<ExhibitDetailsPage />} />
+            <Route path={`${ROUTES.ANIMAL_INFO}/:animalId`} element={<AnimalDetailsPage />} />
 
             {/* Fallback route for non-existent paths */}
             <Route path={ROUTES.ERROR} element={<Error />} />
