@@ -1,15 +1,44 @@
-import React from 'react'
-import { Container } from '@mui/material';
-import ExhibitForm from '../components/ExhibitForm';
-import useForm from '../../form/useForm';
+import React, { useCallback, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { Container } from "@mui/material";
+import ExhibitForm from "../components/ExhibitForm";
+import useForm from "../../form/useForm";
+import useExhibitById from "../hooks/useExhibitDataById";
+import useUpdateExhibit from "../hooks/useUpdateExhibit";
+import exhibitSchema from "../model/exhibitSchema";
+import normalizeExhibit from "../helpers/normalizeExhibit";
 
 export default function EditExhibitPage() {
+    const { id } = useParams(); // Extract exhibit ID from URL
+    const navigate = useNavigate();
+    const { exhibit, fetchExhibitById } = useExhibitById(); // Fetch the exhibit data by ID
+    const { handleUpdateExhibit } = useUpdateExhibit(); // Hook for handling exhibit updates
+
+    console.log("EditExhibitPage render - ID:", id);
+    console.log("Fetched Exhibit data:", exhibit);
+
+    // Handle form submission
+    const handleSubmit = useCallback(
+        async (formData) => {
+            console.log("Form submitted with data:", formData);
+            try {
+                await handleUpdateExhibit(id, formData); // Update the exhibit using the ID and form data
+                navigate("/exhibits"); // Redirect to the exhibit list after successful update
+            } catch (error) {
+                console.error("Failed to update exhibit:", error);
+            }
+        },
+        [handleUpdateExhibit, id, navigate]
+    );
+
     // Initialize form handling
     const { data, errors, handleChange, validateForm, onSubmit, setData } = useForm(
         exhibit || {}, // Initialize form with fetched exhibit data (or an empty object if not available)
         exhibitSchema, // Schema to validate the form
         handleSubmit // Form submission handler
     );
+
+    console.log("Form data initialized:", data);
 
     // Fetch the exhibit data on mount
     useEffect(() => {
