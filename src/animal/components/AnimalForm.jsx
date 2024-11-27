@@ -13,7 +13,12 @@ const AnimalForm = ({
 }) => {
     return (
         <Form
-
+            onSubmit={onSubmit}
+            errors={errors}
+            styles={{ maxWidth: "800px" }}
+            validateForm={validateForm}
+            title={title}
+            submitLabel={submitLabel}
         >
 
         </Form>
