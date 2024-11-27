@@ -6,6 +6,8 @@ import AnimalBody from './AnimalBody';
 import AnimalActionBar from './AnimalActionBar';
 
 export default function AnimalCard({ animal, handleDelete, handleEditAnimal, handleFavoriteToggle }) {
+    const handleCardClick = () => {
+    };
     return (
         <Card>
             <AnimalHeader title={animal.name} image={animal.image} />
