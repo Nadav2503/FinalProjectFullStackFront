@@ -1,5 +1,6 @@
 import React from "react";
 import Form from "../../form/Form";
+import Input from "../../form/Input";
 
 
 const AnimalForm = ({
@@ -20,6 +21,14 @@ const AnimalForm = ({
             title={title}
             submitLabel={submitLabel}
         >
+            {/* Name Input */}
+            <Input
+                name="name"
+                label="Name"
+                error={errors.name}
+                onChange={onInputChange}
+                data={data}
+            />
 
         </Form>
     );
