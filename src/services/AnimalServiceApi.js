@@ -53,10 +53,20 @@ export const updateAnimal = async (id, animal) => {
     }
 };
 
-// Update endangered status of an animal (Admin only)
+// Update endangered status of an animal 
 export const updateEndangeredStatus = async (id, status) => {
     try {
         const { data } = await axios.patch(`${API_URL}/${id}/endangered`, { status });
+        return data;
+    } catch (error) {
+        throw new Error(error.message);
+    }
+};
+
+// Delete an animal 
+export const deleteAnimal = async (id) => {
+    try {
+        const { data } = await axios.delete(`${API_URL}/${id}`);
         return data;
     } catch (error) {
         throw new Error(error.message);
