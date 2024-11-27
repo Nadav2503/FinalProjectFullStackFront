@@ -3,6 +3,7 @@ import Form from "../../form/Form";
 import Input from "../../form/Input";
 import TextArea from "../../form/TextArea";
 import SelectField from "../../form/Select";
+import Checkbox from "../../form/Checkbox";
 import RadioField from "../../form/Radio";
 
 const AnimalForm = ({
@@ -89,6 +90,14 @@ const AnimalForm = ({
                 ]}
             />
 
+            {/* Endangered Checkbox */}
+            <Checkbox
+                name="isEndangered"
+                label="Is Endangered?"
+                error={errors.isEndangered}
+                onChange={onInputChange}
+                data={data}
+            />
 
         </Form>
     );
