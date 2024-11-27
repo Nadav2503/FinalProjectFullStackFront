@@ -12,3 +12,13 @@ export const getAnimals = async () => {
         throw new Error(error.message);
     }
 };
+
+// Get animals by exhibit ID 
+export const getAnimalsByExhibit = async (exhibitId) => {
+    try {
+        const { data } = await axios.get(`${API_URL}/exhibit/${exhibitId}`);
+        return data;
+    } catch (error) {
+        throw new Error(error.message);
+    }
+};
