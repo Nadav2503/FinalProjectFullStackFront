@@ -1,18 +1,15 @@
 import React from "react";
-import { TextField, Grid } from "@mui/material"; // MUI components for text field and grid layout
+import { TextField, Grid, Typography } from "@mui/material"; // MUI components
 import { useTheme } from "@mui/material/styles";  // To access the theme
-import { makeFirstLetterCapital } from "./algoMethod"; // Utility function for capitalizing the first letter
-
+import { makeFirstLetterCapital } from "./algoMethod"; // Utility function for capitalizing the first letter of a string
 
 const TextArea = ({
-    variant = "outlined", // Default variant is outlined
-    name, // Name of the input field
-    data, // Data object containing the current value of the input
-    label, // Label for the input field
-    required = true, // Set the input as required by default
+    name, // Name of the text area
+    data, // Data object containing the current value of the text area
+    label, // Label for the text area
+    required = true, // Set the text area as required by default
     error, // Error message for validation
-    onChange, // On change handler for the input field
-    rows = 4, // Default rows for textarea
+    onChange, // On change handler for the text area
     ...rest // Additional props to spread into the Grid item
 }) => {
     const theme = useTheme(); // Access the current theme (light or dark)
@@ -24,20 +21,21 @@ const TextArea = ({
 
     return (
         <Grid item xs={12} sm={6} {...rest}> {/* Grid item for responsiveness */}
-            <TextField
-                variant={variant} // Variant of the TextField (outlined)
-                label={makeFirstLetterCapital(label)} // Capitalize the first letter of the label
-                id={name} // Set the input field's ID
-                name={name} // Name attribute for the input field
+            <Typography Typography variant="body2" sx={{ color: labelColor, mb: 1 }
+            }>
+                {makeFirstLetterCapital(label)} {/* Label displayed above the text area */}
+            </Typography>
+            < TextField
+                variant="outlined" // Use the outlined variant for text area
+                name={name} // Name attribute for the text area
                 value={data[name] ? data[name] : ""} // Get the value from data
-                required={required} // Mark the input as required by default
-                helperText={error} // Display error message if any
+                onChange={onChange} // Callback function for handling text changes
+                required={required} // Set the text area as required by default
+                multiline // Make it a multiline text area
+                rows={4} // Default to 4 rows for the text area
+                fullWidth // Make the text area take full width
                 error={Boolean(error)} // Display error state based on the presence of an error
-                onChange={onChange} // Callback function for handling input changes
-                fullWidth // Make the input take the full width of the container
-                autoComplete="off" // Disable auto-completion
-                rows={rows} // Set the number of rows for the textarea
-                multiline // Make the input a multiline textarea
+                helperText={error} // Display error message if any
                 sx={{
                     '& .MuiInputBase-root': {
                         borderColor: inputBorderColor, // Set the input border color
