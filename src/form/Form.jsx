@@ -81,6 +81,7 @@ const Form = ({
                         fullWidth
                         disabled={isSubmitting || !validateForm()}
                         loading={isSubmitting}
+                        onClick={onSubmit}
                     >
                         {submitLabel}
                     </CustomButton>
