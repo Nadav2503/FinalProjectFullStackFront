@@ -1,5 +1,5 @@
 import React from "react";
-import { Select, MenuItem, FormControl, InputLabel, Grid, FormHelperText } from "@mui/material"; // MUI components
+import { Select, MenuItem, FormControl, InputLabel, Grid, FormHelperText, Typography } from "@mui/material"; // MUI components
 import { useTheme } from "@mui/material/styles"; // Access the theme
 
 const SelectField = ({
@@ -20,7 +20,11 @@ const SelectField = ({
 
     return (
         <Grid item xs={12} sm={6} {...rest}> {/* Grid item for responsiveness */}
-            <FormControl
+            <Typography Typography variant="body2" sx={{ color: labelColor, mb: 1 }
+            }>
+                {label} {/* Label displayed above the select dropdown */}
+            </Typography>
+            < FormControl
                 fullWidth
                 required={required}
                 error={Boolean(error)}
@@ -41,32 +45,24 @@ const SelectField = ({
                     },
                 }}
             >
-                <InputLabel
-                    id={`${name}-label`}
-                    shrink={Boolean(data[name]) || Boolean(error)} // Ensure label shrinks when focused or has a value
-                    sx={{
-                        color: labelColor,
-                        '&.Mui-focused': {
-                            color: theme.palette.mode === "dark" ? "#9EDF9C" : "#3D5300", // Focused label color
-                        },
-                    }}
-                >
-                    {label}
-                </InputLabel>
+
                 <Select
                     id={name} // Set the select field's ID
-                    labelId={`${name}-label`} // Associate the InputLabel with the Select
                     name={name} // Name attribute for the select field
                     value={data[name] ? data[name] : ""} // Get the value from data
                     onChange={onChange} // Callback function for handling input changes
                 >
-                    {options.map((option, index) => (
-                        <MenuItem key={index} value={option.value}>
-                            {option.label}
-                        </MenuItem>
-                    ))}
+                    {
+                        options.map((option, index) => (
+                            <MenuItem key={index} value={option.value} >
+                                {option.label}
+                            </MenuItem>
+                        ))
+                    }
                 </Select>
-                {error && <FormHelperText>{error}</FormHelperText>} {/* Display error message if any */}
+                {error && <FormHelperText>
+                    {error}
+                </FormHelperText>} {/ * Display error message if any */}
             </FormControl>
         </Grid>
     );
