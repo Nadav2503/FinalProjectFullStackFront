@@ -99,6 +99,16 @@ const AnimalForm = ({
                 data={data}
             />
 
+            {/* Health Status TextArea */}
+            <TextArea
+                name="healthStatus"
+                label="Health Status"
+                error={errors.healthStatus}
+                onChange={onInputChange}
+                data={data}
+                rows={4}
+            />
+
         </Form>
     );
 };
