@@ -9,6 +9,8 @@ const useGetAnimals = () => {
     const setSnack = useSnack();
 
     const fetchAnimals = useCallback(async () => {
+        setLoading(true);
+        setError(null);
         try {
             const data = await getAnimals();
             setAnimals(data);

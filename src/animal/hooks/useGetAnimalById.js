@@ -9,6 +9,8 @@ const useGetAnimalById = (id) => {
     const setSnack = useSnack();
 
     const fetchAnimalById = useCallback(async () => {
+        setLoading(true);
+        setError(null);
         try {
             const data = await getAnimalById(id);
             setAnimal(data);
@@ -19,7 +21,7 @@ const useGetAnimalById = (id) => {
         } finally {
             setLoading(false);
         }
-    }, []);
+    }, [setSnack]);
 
 
     return { animal, loading, error, fetchAnimalById };
