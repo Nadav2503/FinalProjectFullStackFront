@@ -1,7 +1,7 @@
 import React from "react";
 import Form from "../../form/Form";
 import Input from "../../form/Input";
-
+import RadioField from "../../form/Radio";
 
 const AnimalForm = ({
     onSubmit,
@@ -37,6 +37,19 @@ const AnimalForm = ({
                 error={errors.type}
                 onChange={onInputChange}
                 data={data}
+            />
+
+            {/* Gender RadioField */}
+            <RadioField
+                name="gender"
+                label="Gender"
+                error={errors.gender}
+                onChange={onInputChange}
+                data={data}
+                options={[
+                    { value: "male", label: "Male" },
+                    { value: "female", label: "Female" },
+                ]}
             />
 
 
