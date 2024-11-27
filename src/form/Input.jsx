@@ -1,5 +1,5 @@
 import React from "react";
-import { TextField, Grid } from "@mui/material"; // MUI components for input and grid layout
+import { TextField, Grid, Typography } from "@mui/material"; // MUI components for input and grid layout
 import { useTheme } from "@mui/material/styles";  // To access the theme
 import { makeFirstLetterCapital } from "./algoMethod"; // Utility function for capitalizing the first letter of a string
 
@@ -12,6 +12,7 @@ const Input = ({
     required = true, // Set the input as required by default
     error, // Error message for validation
     onChange, // On change handler for the input field
+    inputProps = {}, // Additional input props
     ...rest // Additional props to spread into the Grid item
 }) => {
     const theme = useTheme(); // Access the current theme (light or dark)
@@ -23,9 +24,12 @@ const Input = ({
 
     return (
         <Grid item xs={12} sm={6} {...rest}> {/* Grid item for responsiveness */}
-            <TextField
+            <Typography Typography variant="body2" sx={{ color: labelColor, mb: 1 }
+            }>
+                {makeFirstLetterCapital(label)} {/* Label displayed above the input */}
+            </Typography>
+            < TextField
                 variant={variant} // Variant of the TextField (outlined)
-                label={makeFirstLetterCapital(label)} // Capitalize the first letter of the label
                 type={type} // Type of input (e.g., text, email, password)
                 id={name} // Set the input field's ID
                 name={name} // Name attribute for the input field
@@ -36,6 +40,7 @@ const Input = ({
                 onChange={onChange} // Callback function for handling input changes
                 fullWidth // Make the input take the full width of the container
                 autoComplete="off" // Disable auto-completion
+                inputProps={inputProps} // Spread input props
                 sx={{
                     '& .MuiInputBase-root': {
                         borderColor: inputBorderColor, // Set the input border color
