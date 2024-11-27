@@ -8,17 +8,24 @@ const ExhibitForm = ({
     onSubmit,
     onInputChange,
     errors = {},
-    data = {}, // Provide a default empty object for `data`
+    data = {},
+    title,
+    submitLabel,
+    validateForm
 }) => {
+    console.log("Rendering ExhibitForm with data:", data);
+    console.log("Current errors:", errors);
+
     return (
         <Form
-            title={data._id ? "Edit Exhibit" : "Create Exhibit"}
             onSubmit={onSubmit}
-            validateForm={() => true}
-            styles={{ maxWidth: "800px" }}
-            submitLabel={data._id ? "Update Exhibit" : "Create Exhibit"}
+            errors={errors}
+            styles={{ maxWidth: "800px" }
+            }
+            validateForm={validateForm}
+            title={title}
+            submitLabel={submitLabel}
         >
-            {/* Name */}
             <Input
                 name="name"
                 label="Name"
@@ -27,46 +34,56 @@ const ExhibitForm = ({
                 data={data}
             />
 
-            {/* Description (TextArea) */}
             <TextArea
                 name="description"
                 label="Description"
                 error={errors.description}
                 onChange={onInputChange}
                 data={data}
-                rows={4} // Set rows for multiline input
+                rows={4}
             />
 
-            {/* Location (SelectField) */}
             <SelectField
                 name="location"
                 label="Location"
                 error={errors.location}
                 onChange={onInputChange}
                 data={data}
-                options={[
-                    { value: "Africa", label: "Africa" },
-                    { value: "Asia", label: "Asia" },
-                    { value: "Europe", label: "Europe" },
-                    { value: "North America", label: "North America" },
-                    { value: "South America", label: "South America" },
-                    { value: "Australia", label: "Australia" },
-                    { value: "Antarctica", label: "Antarctica" },
-                ]}
+                options={
+                    [
+                        { value: "Africa", label: "Africa" },
+                        { value: "Asia", label: "Asia" },
+                        { value: "Europe", label: "Europe" },
+                        { value: "North America", label: "North America" },
+                        { value: "South America", label: "South America" },
+                        { value: "Australia", label: "Australia" },
+                        { value: "Antarctica", label: "Antarctica" },
+                    ]}
             />
 
-            {/* Status (SelectField) */}
             <SelectField
                 name="status"
                 label="Status"
                 error={errors.status}
                 onChange={onInputChange}
                 data={data}
-                options={[
-                    { value: "open", label: "Open" },
-                    { value: "closed", label: "Closed" },
-                    { value: "under maintenance", label: "Under Maintenance" },
-                ]}
+                options={
+                    [
+                        { value: "open", label: "Open" },
+                        { value: "closed", label: "Closed" },
+                        { value: "under maintenance", label: "Under Maintenance" },
+                    ]}
+            />
+
+            <Input
+                name="capacity"
+                label="Maximum Capacity"
+                type="number"
+                error={errors.capacity}
+                onChange={onInputChange}
+                data={data}
+                inputProps={{ min: 0, max: 100 }}
+                onInput={(e) => e.preventDefault()}
             />
         </Form>
     );
