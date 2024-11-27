@@ -26,19 +26,26 @@ export default function useForm(initialForm, schema, handleSubmit) {
             let value = e.target.value;
             let name = e.target.name;
 
-            const errorMessage = validateProperty(name, value);
-
-            if (errorMessage) {
-                setErrors((prev) => ({ ...prev, [name]: errorMessage }));
+            // Handle checkbox
+            if (e.target.type === "checkbox") {
+                value = e.target.checked;
+                setData((prev) => ({ ...prev, [name]: value }));
             } else {
-                setErrors((prev) => {
-                    let obj = { ...prev };
-                    delete obj[name];
-                    return obj;
-                });
-            }
+                // Handle regular inputs
+                const errorMessage = validateProperty(name, value);
 
-            setData((prev) => ({ ...prev, [name]: value }));
+                if (errorMessage) {
+                    setErrors((prev) => ({ ...prev, [name]: errorMessage }));
+                } else {
+                    setErrors((prev) => {
+                        let obj = { ...prev };
+                        delete obj[name];
+                        return obj;
+                    });
+                }
+
+                setData((prev) => ({ ...prev, [name]: value }));
+            }
 
             // Trigger form validation whenever input changes
             validateForm();
