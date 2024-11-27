@@ -2,6 +2,7 @@ import React from "react";
 import Form from "../../form/Form";
 import Input from "../../form/Input";
 import TextArea from "../../form/TextArea";
+import SelectField from "../../form/Select";
 import RadioField from "../../form/Radio";
 
 const AnimalForm = ({
@@ -73,6 +74,21 @@ const AnimalForm = ({
                 data={data}
                 rows={4}
             />
+
+            {/* Diet Select */}
+            <SelectField
+                name="diet"
+                label="Diet"
+                error={errors.diet}
+                onChange={onInputChange}
+                data={data}
+                options={[
+                    { value: "omnivore", label: "Omnivore" },
+                    { value: "carnivore", label: "Carnivore" },
+                    { value: "herbivore", label: "Herbivore" },
+                ]}
+            />
+
 
         </Form>
     );
