@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getAnimals } from "../services/animalService";
+import { getAnimals } from "../../services/AnimalServiceApi";
 
 const useGetAnimals = () => {
     const [animals, setAnimals] = useState([]);
