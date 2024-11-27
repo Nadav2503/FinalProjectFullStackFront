@@ -17,7 +17,6 @@ export default function EditExhibitPage() {
     // Handle form submission
     const handleSubmit = useCallback(
         async (formData) => {
-            console.log("Form submitted with data:", formData);
             try {
                 await handleUpdateExhibit(id, formData); // Update the exhibit using the ID and form data
                 navigate("/exhibits"); // Redirect to the exhibit list after successful update
@@ -35,18 +34,15 @@ export default function EditExhibitPage() {
         handleSubmit // Form submission handler
     );
 
-    console.log("Form data initialized:", data);
 
     // Fetch the exhibit data on mount
     useEffect(() => {
-        console.log("Fetching exhibit data with ID:", id);
         fetchExhibitById(id); // Fetch exhibit data by ID
     }, [id, fetchExhibitById]);
 
     // Once the exhibit is fetched, set the form data
     useEffect(() => {
         if (exhibit) {
-            console.log("Setting exhibit data to form:", exhibit);
             setData(normalizeExhibit(exhibit)); // Normalize data to ensure valid defaults
         }
     }, [exhibit, setData]);
