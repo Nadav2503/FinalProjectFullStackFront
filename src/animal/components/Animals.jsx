@@ -4,7 +4,7 @@ import { Container } from "@mui/material";
 
 export default function Animals() {
     return (
-        <Container >
+        <Container sx={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 1 }}>
             {
 
                 <AnimalCard
