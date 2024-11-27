@@ -2,8 +2,8 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import { CardActionArea } from '@mui/material';
 import Card from '../../../general/card/Card';
-import ExhibitCardHeader from './ExhibitCardHeader';
-import ExhibitCardBody from './ExhibitCardBody';
+import ExhibitHeader from './ExhibitHeader';
+import ExhibitBody from './ExhibitBody';
 import ExhibitActionBar from './ExhibitActionBar';
 import ROUTES from '../../../routers/routerModel';
 
@@ -17,9 +17,9 @@ export default function ExhibitCard({ exhibit, handleDelete, handleEditExhibit }
 
     return (
         <Card>
-            <ExhibitCardHeader title={exhibit.name} />
+            <ExhibitHeader title={exhibit.name} />
             <CardActionArea onClick={handleCardClick}>
-                <ExhibitCardBody
+                <ExhibitBody
                     description={exhibit.description}
                     capacity={exhibit.capacity}
                     location={exhibit.location}

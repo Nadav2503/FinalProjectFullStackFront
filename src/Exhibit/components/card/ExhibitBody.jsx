@@ -2,7 +2,7 @@ import React from 'react';
 import CardBody from '../../../general/card/CardBody';
 import { Typography } from '@mui/material';
 
-export default function ExhibitCardBody({ description, capacity, location, status }) {
+export default function ExhibitBody({ description, capacity, location, status }) {
     const content = (
         <>
             <Typography variant="body1" > <strong>Description:</strong> {description}</Typography >
