@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import useForm from "../../form/useForm";
 import useCreateExhibit from "../hooks/useCreateExhibit";
 import exhibitSchema from "../model/exhibitSchema";
-import { Container } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import ROUTES from "../../routers/routerModel";
 
 export default function AddExhibitPage() {
