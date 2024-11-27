@@ -109,6 +109,15 @@ const AnimalForm = ({
                 rows={4}
             />
 
+            {/* Image URL Input */}
+            <Input
+                name="imageUrl"
+                label="Image URL"
+                error={errors.imageUrl}
+                onChange={onInputChange}
+                data={data}
+            />
+
         </Form>
     );
 };
