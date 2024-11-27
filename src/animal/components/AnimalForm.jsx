@@ -118,6 +118,14 @@ const AnimalForm = ({
                 data={data}
             />
 
+            {/* Image Alt Text Input */}
+            <Input
+                name="imageAlt"
+                label="Image Alt Text"
+                error={errors.imageAlt}
+                onChange={onInputChange}
+                data={data}
+            />
         </Form>
     );
 };
