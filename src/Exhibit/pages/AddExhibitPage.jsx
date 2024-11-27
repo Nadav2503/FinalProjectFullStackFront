@@ -29,15 +29,23 @@ export default function AddExhibitPage() {
 
     return (
         <Container>
-            <ExhibitForm
-                title="Add New Exhibit"
-                submitLabel="Create Exhibit"
-                onSubmit={onSubmit}
-                validateForm={validateForm}
-                errors={errors}
-                data={data}
-                onInputChange={handleChange}
-            />
+            <Box
+                sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                }}
+            >
+                <ExhibitForm
+                    title="Add New Exhibit"
+                    submitLabel="Create Exhibit"
+                    onSubmit={onSubmit}
+                    validateForm={validateForm}
+                    errors={errors}
+                    data={data}
+                    onInputChange={handleChange}
+                />
+            </Box>
         </Container>
     );
 }
