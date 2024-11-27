@@ -30,6 +30,16 @@ const AnimalForm = ({
                 data={data}
             />
 
+            {/* Type Input */}
+            <Input
+                name="type"
+                label="Type"
+                error={errors.type}
+                onChange={onInputChange}
+                data={data}
+            />
+
+
         </Form>
     );
 };
