@@ -1,5 +1,5 @@
 import React from "react";
-import { RadioGroup, FormControlLabel, Radio, Grid } from "@mui/material"; // MUI components for radio buttons and grid
+import { RadioGroup, FormControlLabel, Radio, Grid, Typography } from "@mui/material"; // MUI components for radio buttons and grid
 
 const RadioField = ({
     name, // Name of the input field
@@ -11,22 +11,26 @@ const RadioField = ({
     options = [], // List of options for radio buttons
     ...rest // Additional props to spread into the Grid item
 }) => {
-
     return (
         <Grid item xs={12} sm={6} {...rest}> {/* Grid item for responsiveness */}
-            <RadioGroup
+            <Typography Typography variant="body2" sx={{ color: "text.primary", mb: 1 }
+            }>
+                {label} {/* Label displayed above the radio options */}
+            </Typography>
+            < RadioGroup
                 name={name} // Name attribute for the radio group
                 value={data[name] ? data[name] : ""} // Get the value from data
                 onChange={onChange} // Callback function for handling input changes
             >
-                {options.map((option, index) => (
-                    <FormControlLabel
-                        key={index}
-                        value={option.value}
-                        control={<Radio />}
-                        label={option.label}
-                    />
-                ))}
+                {
+                    options.map((option, index) => (
+                        <FormControlLabel
+                            key={index}
+                            value={option.value}
+                            control={< Radio />}
+                            label={option.label}
+                        />
+                    ))}
             </RadioGroup>
         </Grid>
     );
