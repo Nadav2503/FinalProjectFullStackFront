@@ -8,16 +8,21 @@ export default function useExhibitById() {
     const [error, setError] = useState(null);
     const setSnack = useSnack();
 
+    console.log("useExhibitById hook initialized");
+
     const fetchExhibitById = useCallback(async (id) => {
+        console.log("Fetching exhibit with ID:", id);
         setIsLoading(true);
         setError(null);
         try {
             const data = await getExhibitById(id);
             setExhibit(data);
             setSnack('success', `Exhibit ${id} fetched successfully!`);
+            console.log("Fetched exhibit data:", data);
         } catch (err) {
             setError(err.message);
             setSnack('error', `Failed to fetch exhibit ${id}`);
+            console.error("Fetch error:", err);
         } finally {
             setIsLoading(false);
         }
