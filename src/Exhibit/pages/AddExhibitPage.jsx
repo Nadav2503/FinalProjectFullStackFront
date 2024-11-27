@@ -1,13 +1,25 @@
-import React from "react";
+import React, { useCallback } from "react";
 import ExhibitForm from "../components/ExhibitForm";
 import initializeExhibit from "../helpers/initializeExhibit";
-
+import { useNavigate } from "react-router-dom";
 import useForm from "../../form/useForm";
+import useCreateExhibit from "../hooks/useCreateExhibit";
 import exhibitSchema from "../model/exhibitSchema";
 import { Container } from "@mui/material";
 
 export default function AddExhibitPage() {
+    const { handleCreateExhibit } = useCreateExhibit();
+    const navigate = useNavigate();
 
+    const handleSubmit = useCallback(async (formData) => {
+        console.log("Form Submitted with data:", formData);
+        try {
+            await handleCreateExhibit(formData);
+            navigate("/exhibits");
+        } catch (error) {
+            console.error("Failed to create exhibit:", error);
+        }
+    }, [handleCreateExhibit]);
 
     const { data, errors, handleChange, validateForm, onSubmit } = useForm(
         initializeExhibit,  // Initialize the form with an empty exhibit structure
