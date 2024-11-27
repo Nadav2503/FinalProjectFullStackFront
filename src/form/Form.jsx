@@ -15,7 +15,6 @@ const Form = ({
     isSubmitting = false,
     cancelPath = "/",
     styles = {},
-    isSubmitDisabled = false, // Accept the new prop to disable the button
 }) => {
     const navigate = useNavigate();
 
@@ -74,7 +73,7 @@ const Form = ({
                         variant="contained"
                         color="primary"
                         fullWidth
-                        disabled={isSubmitting || isSubmitDisabled} // Disable button when submitting or no changes
+                        disabled={isSubmitting || !validateForm()}
                         loading={isSubmitting}
                         onClick={onSubmit}
                     >

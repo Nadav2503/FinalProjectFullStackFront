@@ -7,6 +7,7 @@ import useExhibitById from "../hooks/useExhibitDataById";
 import useUpdateExhibit from "../hooks/useUpdateExhibit";
 import exhibitSchema from "../model/exhibitSchema";
 import normalizeExhibit from "../helpers/normalizeExhibit";
+import initializeExhibit from "../helpers/initializeExhibit";
 
 export default function EditExhibitPage() {
     const { id } = useParams(); // Extract exhibit ID from URL
@@ -32,20 +33,10 @@ export default function EditExhibitPage() {
 
     // Initialize form handling
     const { data, errors, handleChange, validateForm, setData } = useForm(
-        exhibit || {}, // Initialize form with fetched exhibit data (or an empty object if not available)
+        exhibit || initializeExhibit, // Initialize form with fetched exhibit data (or an empty object if not available)
         exhibitSchema, // Schema to validate the form
         handleSubmit // Form submission handler
     );
-
-    // Compare current form data with the initial data to check if there are any changes
-    useEffect(() => {
-        if (exhibit && data) {
-            const isDataChanged = Object.keys(exhibit).some(
-                (key) => exhibit[key] !== data[key]
-            );
-            setIsChanged(isDataChanged); // Set changes status only after data is fetched
-        }
-    }, [exhibit, data]); // Only run when either exhibit or data changes
 
     // Fetch the exhibit data on mount
     useEffect(() => {
