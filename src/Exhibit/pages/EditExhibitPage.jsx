@@ -11,6 +11,20 @@ export default function EditExhibitPage() {
         handleSubmit // Form submission handler
     );
 
+    // Fetch the exhibit data on mount
+    useEffect(() => {
+        console.log("Fetching exhibit data with ID:", id);
+        fetchExhibitById(id); // Fetch exhibit data by ID
+    }, [id, fetchExhibitById]);
+
+    // Once the exhibit is fetched, set the form data
+    useEffect(() => {
+        if (exhibit) {
+            console.log("Setting exhibit data to form:", exhibit);
+            setData(normalizeExhibit(exhibit)); // Normalize data to ensure valid defaults
+        }
+    }, [exhibit, setData]);
+
     return (
         <Container>
             <ExhibitForm
