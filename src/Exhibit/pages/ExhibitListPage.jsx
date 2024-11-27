@@ -5,6 +5,7 @@ import ExhibitFeedback from "../components/ExhibitFeedback";
 import AddNewExhibitButton from "../components/AddExhibitButton";
 import { useNavigate } from "react-router-dom";
 import useDeleteExhibit from "../hooks/useDeleteExhibit"; // Import the custom hook
+import ConfirmDialog from "../../general/ConfirmDialog"; // Import ConfirmDialog
 import useExhibitData from "../hooks/useExhibitData";
 
 export default function ExhibitListPage() {
@@ -63,6 +64,14 @@ export default function ExhibitListPage() {
             {/* Add New Exhibit Button */}
             <AddNewExhibitButton onAddExhibit={handleAddExhibit} />
 
+            {/* Confirmation Dialog for Deleting an Exhibit */}
+            <ConfirmDialog
+                open={openConfirmDialog}
+                onClose={handleCancelDelete} // Close dialog on cancel
+                onConfirm={handleConfirmDelete} // Confirm deletion on confirmation
+                title="Delete Exhibit"
+                message="Are you sure you want to delete this exhibit?"
+            />
         </Container>
     );
 }
