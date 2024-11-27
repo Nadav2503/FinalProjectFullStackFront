@@ -9,7 +9,6 @@ const useGetAnimalsByExhibit = () => {
     const setSnack = useSnack();
 
     const fetchAnimalsByExhibit = useCallback(async (exhibitId) => {
-        if (!exhibitId) return;
 
         setLoading(true);
         setError(null);
