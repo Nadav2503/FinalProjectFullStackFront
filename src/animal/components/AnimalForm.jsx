@@ -1,6 +1,7 @@
 import React from "react";
 import Form from "../../form/Form";
 import Input from "../../form/Input";
+import TextArea from "../../form/TextArea";
 import RadioField from "../../form/Radio";
 
 const AnimalForm = ({
@@ -63,6 +64,15 @@ const AnimalForm = ({
                 inputProps={{ min: 1 }}
             />
 
+            {/* Description TextArea */}
+            <TextArea
+                name="description"
+                label="Description"
+                error={errors.description}
+                onChange={onInputChange}
+                data={data}
+                rows={4}
+            />
 
         </Form>
     );
