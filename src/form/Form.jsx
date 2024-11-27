@@ -29,13 +29,7 @@ const Form = ({
                 backgroundColor: "background.paper",
                 ...styles,
             }}
-            onSubmit={(e) => {
-                e.preventDefault();
-
-                if (validateForm()) {
-                    onSubmit();
-                }
-            }}
+            onSubmit={onSubmit}
             autoComplete="off"
             noValidate
         >
