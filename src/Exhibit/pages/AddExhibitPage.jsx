@@ -12,7 +12,6 @@ export default function AddExhibitPage() {
     const navigate = useNavigate();
 
     const handleSubmit = useCallback(async (formData) => {
-        console.log("Form Submitted with data:", formData);
         try {
             await handleCreateExhibit(formData);
             navigate("/exhibits");
@@ -27,7 +26,6 @@ export default function AddExhibitPage() {
         handleSubmit
     );
 
-    console.log("Rendering AddExhibitPage with data:", data);
 
     return (
         <Container>

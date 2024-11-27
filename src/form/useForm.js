@@ -7,36 +7,28 @@ export default function useForm(initialForm, schema, handleSubmit) {
 
     const validateProperty = useCallback(
         (name, value) => {
-            console.log(`Validating property: ${name} with value: ${value}`);
             let joiSchema = Joi.object({ [name]: schema[name] });
             let { error } = joiSchema.validate({ [name]: value });
             const errorMessage = error ? error.details[0].message : null;
-            console.log(`Validation error for ${name}:`, errorMessage);
             return errorMessage;
         },
         [schema]
     );
 
     const validateForm = useCallback(() => {
-        console.log("Validating entire form...");
-        console.log("Validating form with data:", data);
         const joiSchema = Joi.object(schema);
         const { error } = joiSchema.validate(data);
-        const isValid = !error;
-        console.log("Form validation status:", isValid);
-        return isValid; // Returns true if the form is valid, false otherwise
+        return !error; // Returns true if the form is valid, false otherwise
     }, [schema, data]);
 
     const handleChange = useCallback(
         (e) => {
             let value = e.target.value;
             let name = e.target.name;
-            console.log(`Handling change for ${name}: ${value}`);
 
             const errorMessage = validateProperty(name, value);
 
             if (errorMessage) {
-                console.log(`Setting error for ${name}: ${errorMessage}`);
                 setErrors((prev) => ({ ...prev, [name]: errorMessage }));
             } else {
                 setErrors((prev) => {
@@ -55,12 +47,8 @@ export default function useForm(initialForm, schema, handleSubmit) {
     );
 
     const onSubmit = useCallback(() => {
-        console.log("Submit triggered");
         if (validateForm()) {
-            console.log("Form is valid, submitting:", data);
             handleSubmit(data);
-        } else {
-            console.log("Form is invalid, not submitting");
         }
     }, [data, validateForm, handleSubmit]);
 

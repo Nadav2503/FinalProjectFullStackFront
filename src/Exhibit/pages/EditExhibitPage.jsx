@@ -14,9 +14,6 @@ export default function EditExhibitPage() {
     const { exhibit, fetchExhibitById } = useExhibitById(); // Fetch the exhibit data by ID
     const { handleUpdateExhibit } = useUpdateExhibit(); // Hook for handling exhibit updates
 
-    console.log("EditExhibitPage render - ID:", id);
-    console.log("Fetched Exhibit data:", exhibit);
-
     // Handle form submission
     const handleSubmit = useCallback(
         async (formData) => {

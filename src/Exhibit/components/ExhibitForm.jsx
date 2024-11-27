@@ -13,8 +13,6 @@ const ExhibitForm = ({
     submitLabel,
     validateForm
 }) => {
-    console.log("Rendering ExhibitForm with data:", data);
-    console.log("Current errors:", errors);
 
     return (
         <Form
