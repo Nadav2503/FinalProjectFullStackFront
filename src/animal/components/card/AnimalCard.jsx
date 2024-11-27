@@ -1,4 +1,5 @@
 import React from 'react';
+import { CardActionArea } from '@mui/material';
 import Card from '../../../general/card/Card';
 import AnimalHeader from './AnimalHeader';
 import AnimalBody from './AnimalBody';
@@ -8,13 +9,13 @@ export default function AnimalCard({ animal, handleDelete, handleEditAnimal, han
     return (
         <Card>
             <AnimalHeader title={animal.name} image={animal.image} />
-
-            <AnimalBody
-                type={animal.type}
-                gender={animal.gender}
-                age={animal.age}
-            />
-
+            <CardActionArea onClick={handleCardClick}>
+                <AnimalBody
+                    type={animal.type}
+                    gender={animal.gender}
+                    age={animal.age}
+                />
+            </CardActionArea>
             <AnimalActionBar animalId={animal._id} handleDelete={handleDelete} handleEditAnimal={handleEditAnimal} handleFavoriteToggle={handleFavoriteToggle} />
         </Card>
     );
