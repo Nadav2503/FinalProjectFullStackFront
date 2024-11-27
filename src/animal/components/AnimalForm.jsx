@@ -52,6 +52,17 @@ const AnimalForm = ({
                 ]}
             />
 
+            {/* Age Input */}
+            <Input
+                name="age"
+                label="Age"
+                type="number"
+                error={errors.age}
+                onChange={onInputChange}
+                data={data}
+                inputProps={{ min: 1 }}
+            />
+
 
         </Form>
     );
