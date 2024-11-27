@@ -1,9 +1,27 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { getAnimals } from "../services/animalService";
 
 const useGetAnimals = () => {
     const [animals, setAnimals] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    return { loading, error };
+
+    useEffect(() => {
+        const fetchAnimals = async () => {
+            try {
+                const data = await getAnimals();
+                setAnimals(data);
+            } catch (err) {
+                setError(err.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchAnimals();
+    }, []);
+
+    return { animals, loading, error };
 };
+
 export default useGetAnimals;
