@@ -4,9 +4,14 @@ import Card from '../../../general/card/Card';
 import AnimalHeader from './AnimalHeader';
 import AnimalBody from './AnimalBody';
 import AnimalActionBar from './AnimalActionBar';
+import ROUTES from '../../../routers/routerModel';
+import { useNavigate } from 'react-router-dom';
 
 export default function AnimalCard({ animal, handleDelete, handleEditAnimal, handleFavoriteToggle }) {
+    const navigate = useNavigate();
+
     const handleCardClick = () => {
+        navigate(`${ROUTES.ANIMAL_INFO}/${animal._id}`);
     };
     return (
         <Card>
