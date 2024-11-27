@@ -7,25 +7,30 @@ import About from "../pages/AboutPage"; // About page component.
 import Error from "../pages/ErrorPage"; // 404 Error page component.
 import ExhibitListPage from "../Exhibit/pages/ExhibitListPage";
 import ExhibitDetailsPage from "../Exhibit/pages/ExhibitDetailsPage";
+import AddExhibitPage from "../Exhibit/pages/AddExhibitPage";
+import EditExhibitPage from "../Exhibit/pages/EditExhibitPage";
 
 // Main Router component to define application routes.
 export default function Router() {
     return (
         <Routes>
             {/* Route for the homepage */}
-            <Route path={ROUTES.ROOT} element={<Home />} />
+            < Route path={ROUTES.ROOT} element={< Home />} />
 
             {/* Route for the About page */}
-            <Route path={ROUTES.ABOUT} element={<About />} />
+            <Route path={ROUTES.ABOUT} element={< About />} />
 
             {/* Route for the exhibits page */}
-            <Route path={ROUTES.EXHIBITS} element={<ExhibitListPage />} />
+            <Route path={ROUTES.EXHIBITS} element={< ExhibitListPage />} />
+
+            < Route path={ROUTES.ADDEXHIBITS} element={< AddExhibitPage />} />
+            < Route path={ROUTES.EDITEXHIBITS} element={< EditExhibitPage />} />
 
             {/* Route for the exhibit page */}
-            <Route path={ROUTES.EXHIBIT} element={<ExhibitDetailsPage />} />
+            <Route path={ROUTES.EXHIBIT} element={< ExhibitDetailsPage />} />
 
             {/* Fallback route for non-existent paths */}
-            <Route path="*" element={<Error />} />
+            <Route path="*" element={< Error />} />
         </Routes>
     );
 }
