@@ -25,7 +25,7 @@ export default function ExhibitCard({ exhibit, handleDelete, handleEditExhibit }
                     status={exhibit.status}
                 />
             </CardActionArea>
-            < ExhibitActionBar exhibitId={exhibit._id} handleDelete={handleDelete} />
+            < ExhibitActionBar exhibitId={exhibit._id} handleDelete={handleDelete} handleEditExhibit={handleEditExhibit} />
         </Card>
     );
 }

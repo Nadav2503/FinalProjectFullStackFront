@@ -1,68 +1,61 @@
 import React from "react";
-import { Select, MenuItem, FormControl, InputLabel, Grid, FormHelperText, Typography } from "@mui/material"; // MUI components
-import { useTheme } from "@mui/material/styles"; // Access the theme
+import { Select, MenuItem, FormControl, InputLabel, Grid, FormHelperText, Typography } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 
 const SelectField = ({
-    name, // Name of the input field
-    data, // Data object containing the current value of the input
-    label, // Label for the input field
-    required = true, // Set the input as required by default
-    error, // Error message for validation
-    onChange, // On change handler for the input field
-    options = [], // List of options to populate the select dropdown
-    ...rest // Additional props to spread into the Grid item
+    name,
+    data,
+    label,
+    required = true,
+    error,
+    onChange,
+    options = [],
+    ...rest
 }) => {
-    const theme = useTheme(); // Access the current theme (light or dark)
+    const theme = useTheme();
 
-    // Dynamic styling based on theme mode (light or dark)
     const inputBorderColor = theme.palette.mode === "dark" ? "#B0BEC5" : "#47663B";
     const labelColor = theme.palette.mode === "dark" ? "#E8ECD7" : "#62825D";
 
     return (
-        <Grid item xs={12} sm={6} {...rest}> {/* Grid item for responsiveness */}
-            <Typography Typography variant="body2" sx={{ color: labelColor, mb: 1 }
-            }>
-                {label} {/* Label displayed above the select dropdown */}
+        <Grid item xs={12} sm={6} {...rest}>
+            <Typography variant="body2" sx={{ color: labelColor, mb: 1 }}>
+                {label}
             </Typography>
-            < FormControl
+            <FormControl
                 fullWidth
                 required={required}
                 error={Boolean(error)}
                 sx={{
                     '& .MuiFormLabel-root': {
-                        color: labelColor, // Label color
+                        color: labelColor,
                     },
                     '& .MuiOutlinedInput-root': {
                         '& fieldset': {
-                            borderColor: inputBorderColor, // Border color for the fieldset
+                            borderColor: inputBorderColor,
                         },
                         '&:hover fieldset': {
-                            borderColor: theme.palette.mode === "dark" ? "#9EDF9C" : "#3D5300", // Hover effect border color
+                            borderColor: theme.palette.mode === "dark" ? "#9EDF9C" : "#3D5300",
                         },
                         '&.Mui-focused fieldset': {
-                            borderColor: theme.palette.mode === "dark" ? "#9EDF9C" : "#3D5300", // Focused border color
+                            borderColor: theme.palette.mode === "dark" ? "#9EDF9C" : "#3D5300",
                         },
                     },
                 }}
             >
-
                 <Select
-                    id={name} // Set the select field's ID
-                    name={name} // Name attribute for the select field
-                    value={data[name] ? data[name] : ""} // Get the value from data
-                    onChange={onChange} // Callback function for handling input changes
+                    id={name}
+                    name={name}
+                    value={data[name] || ""}
+                    onChange={onChange}
                 >
-                    {
-                        options.map((option, index) => (
-                            <MenuItem key={index} value={option.value} >
-                                {option.label}
-                            </MenuItem>
-                        ))
-                    }
+                    {options.map((option, index) => (
+                        <MenuItem key={index} value={option.value}>
+                            {option.label}
+                        </MenuItem>
+                    ))}
                 </Select>
-                {error && <FormHelperText>
-                    {error}
-                </FormHelperText>} {/ * Display error message if any */}
+                {error && <FormHelperText>{error}</FormHelperText>}
             </FormControl>
         </Grid>
     );

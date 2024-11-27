@@ -31,12 +31,9 @@ const Form = ({
             }}
             onSubmit={(e) => {
                 e.preventDefault();
-                console.log("Form submit triggered");  // Add log here
+
                 if (validateForm()) {
-                    console.log("Form is valid, proceeding with submit");
                     onSubmit();
-                } else {
-                    console.log("Form is invalid, preventing submit");
                 }
             }}
             autoComplete="off"
@@ -54,18 +51,18 @@ const Form = ({
                 </Typography>
             )}
 
-            <Grid container spacing={spacing} >
+            <Grid container spacing={spacing}>
                 {children}
             </Grid>
 
-            < Grid
+            <Grid
                 container
                 spacing={2}
                 mt={4}
                 justifyContent="center"
                 alignItems="center"
             >
-                <Grid item xs={12} sm={6} >
+                <Grid item xs={12} sm={6}>
                     <CustomButton
                         variant="outlined"
                         color="error"
@@ -76,15 +73,14 @@ const Form = ({
                     </CustomButton>
                 </Grid>
 
-                <Grid Grid item xs={12} sm={6} >
+                <Grid item xs={12} sm={6}>
                     <CustomButton
-                        type="submit"  // Use type="submit" to trigger the form submit
+                        type="submit"
                         variant="contained"
                         color="primary"
                         fullWidth
                         disabled={isSubmitting || !validateForm()}
-                        loading={isSubmitting}  // Show loader when submitting
-                        onClick={onSubmit}
+                        loading={isSubmitting}
                     >
                         {submitLabel}
                     </CustomButton>
