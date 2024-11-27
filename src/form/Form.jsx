@@ -1,91 +1,94 @@
 import React from "react";
-import { Box, Grid, Typography } from "@mui/material"; // MUI components for layout
-import { useNavigate } from "react-router-dom"; // Hook for navigation
-import CustomButton from "../general/CustomButton"; // Custom button component for form actions
+import { Box, Grid, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import CustomButton from "../general/CustomButton";
 
 const Form = ({
-    title = "", // The title of the form, default is an empty string
-    onSubmit, // Callback function to handle form submission
-    onCancel, // Callback function to handle form cancellation
-    validateForm = () => true, // Validation function for the form, defaults to always returning true (no validation)
-    children, // The form fields and other components passed as children to be rendered inside the form
-    spacing = 2, // Spacing between form fields, default is 2 (based on MUI's Grid spacing system)
-    submitLabel = "Submit", // The label text for the submit button, default is "Submit"
-    cancelLabel = "Cancel", // The label text for the cancel button, default is "Cancel"
-    isSubmitting = false, // Boolean to indicate if the form is in a submitting state, used to disable the submit button during submission
-    cancelPath = "/", // Path to navigate to when the cancel button is clicked, default is the home path "/"
-    styles = {}, // Custom styles to be applied to the form component (overrides default styles)
+    title = "",
+    onSubmit,
+    onCancel,
+    validateForm,
+    children,
+    spacing = 2,
+    submitLabel = "Submit",
+    cancelLabel = "Cancel",
+    isSubmitting = false,
+    cancelPath = "/",
+    styles = {},
 }) => {
-    const navigate = useNavigate(); // Hook for navigating to the cancel path
+    const navigate = useNavigate();
+
+    console.log("Rendering Form component...");
 
     return (
         <Box
             component="form"
             sx={{
-                mt: 2, // Margin top for spacing
-                p: { xs: 2, sm: 4 }, // Padding for small screens (xs) and larger screens (sm)
-                borderRadius: 2, // Rounded corners
-                boxShadow: 3, // Box shadow for visual separation
-                backgroundColor: "background.paper", // Background color from theme
-                ...styles, // Apply additional custom styles if provided
+                mt: 2,
+                p: { xs: 2, sm: 4 },
+                borderRadius: 2,
+                boxShadow: 3,
+                backgroundColor: "background.paper",
+                ...styles,
             }}
             onSubmit={(e) => {
-                e.preventDefault(); // Prevent default form submission behavior
-                if (validateForm()) { // Validate the form before submitting
-                    onSubmit(); // Call the onSubmit callback
+                e.preventDefault();
+                console.log("Form submit triggered");  // Add log here
+                if (validateForm()) {
+                    console.log("Form is valid, proceeding with submit");
+                    onSubmit();
+                } else {
+                    console.log("Form is invalid, preventing submit");
                 }
             }}
-            autoComplete="off" // Disable browser autocomplete
-            noValidate // Disable native HTML5 validation
+            autoComplete="off"
+            noValidate
         >
-            {/* Form Title */}
             {title && (
                 <Typography
                     variant="h4"
                     component="h1"
                     align="center"
                     mb={3}
-                    sx={{ fontWeight: "bold" }} // Bold title text
+                    sx={{ fontWeight: "bold" }}
                 >
                     {title}
                 </Typography>
             )}
 
-            {/* Form Fields */}
-            <Grid container spacing={spacing}> {/* Use Grid layout for form fields */}
-                {children} {/* Render form fields passed as children */}
+            <Grid container spacing={spacing} >
+                {children}
             </Grid>
 
-            {/* Form Actions (Buttons) */}
-            <Grid
+            < Grid
                 container
                 spacing={2}
-                mt={4} // Margin top for spacing
-                justifyContent="center" // Center align buttons horizontally
-                alignItems="center" // Center align buttons vertically
+                mt={4}
+                justifyContent="center"
+                alignItems="center"
             >
-                {/* Cancel Button */}
-                <Grid item xs={12} sm={6}>
+                <Grid item xs={12} sm={6} >
                     <CustomButton
                         variant="outlined"
                         color="error"
                         fullWidth
-                        onClick={onCancel || (() => navigate(cancelPath))} // Handle cancel click
+                        onClick={onCancel || (() => navigate(cancelPath))}
                     >
-                        {cancelLabel} {/* Button label */}
+                        {cancelLabel}
                     </CustomButton>
                 </Grid>
 
-                {/* Submit Button */}
-                <Grid item xs={12} sm={6}>
+                <Grid Grid item xs={12} sm={6} >
                     <CustomButton
-                        type="submit"
+                        type="submit"  // Use type="submit" to trigger the form submit
                         variant="contained"
                         color="primary"
                         fullWidth
-                        disabled={isSubmitting || !validateForm()} // Disable button if submitting or form is invalid
+                        disabled={isSubmitting || !validateForm()}
+                        loading={isSubmitting}  // Show loader when submitting
+                        onClick={onSubmit}
                     >
-                        {submitLabel} {/* Button label */}
+                        {submitLabel}
                     </CustomButton>
                 </Grid>
             </Grid>
