@@ -1,18 +1,19 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Container } from "@mui/material";
 import PageHeader from "../../general/PageHeader";
 import ExhibitFeedback from "../components/ExhibitFeedback";
-import useExhibitData from "../hooks/useExhibitData";
 import AddNewExhibitButton from "../components/AddExhibitButton";
 import { useNavigate } from "react-router-dom";
 import useDeleteExhibit from "../hooks/useDeleteExhibit"; // Import the custom hook
+import useExhibitData from "../hooks/useExhibitData";
 
 export default function ExhibitListPage() {
     const { exhibits, isLoading, error, fetchExhibits } = useExhibitData();
     const navigate = useNavigate(); // Hook for navigation
 
-    // Use the custom delete hook
     const { handleDeleteExhibit } = useDeleteExhibit();
+    const [openConfirmDialog, setOpenConfirmDialog] = useState(false); // State for the confirmation dialog
+    const [exhibitToDelete, setExhibitToDelete] = useState(null); // State to track which exhibit to delete
 
     useEffect(() => {
         fetchExhibits();
@@ -22,9 +23,23 @@ export default function ExhibitListPage() {
         navigate("/add-exhibit"); // Navigate to AddExhibitPage
     };
 
-    const handleDelete = async (id) => {
-        await handleDeleteExhibit(id); // Use the delete hook's function
-        fetchExhibits(); // Refetch exhibits after deletion (if needed)
+    const handleDelete = (id) => {
+        setExhibitToDelete(id); // Set the exhibit ID to be deleted
+        setOpenConfirmDialog(true); // Show the confirmation dialog
+    };
+
+    const handleConfirmDelete = async () => {
+        if (exhibitToDelete) {
+            await handleDeleteExhibit(exhibitToDelete); // Delete the exhibit
+            fetchExhibits(); // Refetch exhibits after deletion (if needed)
+            setOpenConfirmDialog(false); // Close the dialog
+            setExhibitToDelete(null); // Clear the exhibit ID
+        }
+    };
+
+    const handleCancelDelete = () => {
+        setOpenConfirmDialog(false); // Close the dialog without deleting
+        setExhibitToDelete(null); // Clear the exhibit ID
     };
 
     const handleEditExhibit = (id) => {
@@ -47,6 +62,7 @@ export default function ExhibitListPage() {
             />
             {/* Add New Exhibit Button */}
             <AddNewExhibitButton onAddExhibit={handleAddExhibit} />
+
         </Container>
     );
 }
