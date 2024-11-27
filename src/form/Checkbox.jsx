@@ -11,8 +11,8 @@ const CheckboxField = ({
     ...rest
 }) => {
     return (
-        <Grid {...rest}>
-            <Typography >
+        <Grid item xs={12} sm={6} {...rest}>
+            <Typography variant="body2" sx={{ color: "text.primary", mb: 1 }}>
                 {label}
             </Typography>
             <FormControlLabel
@@ -25,7 +25,7 @@ const CheckboxField = ({
                 }
                 label={label}
             />
-            {error && <Typography >{error}</Typography>}
+            {error && <Typography variant="body2" color="error">{error}</Typography>}
         </Grid>
     );
 };
