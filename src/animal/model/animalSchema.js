@@ -1,5 +1,7 @@
 import Joi from "joi";
 
+const urlRegex = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/
+
 // Animal schema
 const animalSchema = {
     name: Joi.string().min(2).max(256).trim().lowercase().required(), // Name: Required, 2-256 characters, trimmed, lowercase
@@ -10,16 +12,15 @@ const animalSchema = {
     diet: Joi.string().valid('omnivore', 'carnivore', 'herbivore').required(), // Diet: Enum, required
     isEndangered: Joi.boolean().required(), // Boolean field for endangered status
     healthStatus: Joi.string().min(2).max(256).trim().lowercase().required(), // Health Status: Required, 2-256 characters, trimmed, lowercase
-    image: Joi.object({
-        url: Joi.string()
-            .trim()
-            .lowercase()
-            .pattern(
-                /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/
-            )
-            .optional(), // Optional field
-        alt: Joi.string().min(2).max(256).trim().lowercase().optional(), // Optional field
-    }).required(), // Image object remains required
+    imageUrl: Joi.string()
+        .trim()
+        .lowercase()
+        .pattern(urlRegex)
+        .optional()
+        .messages({
+            "string.pattern.base": "Please enter a valid URL (e.g., http://example.com)."
+        }),
+    imageAlt: Joi.string().min(2).max(256).trim().lowercase().optional(),
 };
 
 export default animalSchema;
