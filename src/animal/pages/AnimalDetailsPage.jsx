@@ -100,7 +100,12 @@ export default function AnimalDetailPage() {
                         <Typography variant="h6">{animal.isEndangered ? "Yes" : "No"}</Typography>
                     </Box>
 
-
+                    <Box>
+                        <Typography variant="body1" color="text.secondary">
+                            Health Status:
+                        </Typography>
+                        <Typography variant="h6">{animal.healthStatus}</Typography>
+                    </Box>
                 </Box>
             </Box>
         </Container >
