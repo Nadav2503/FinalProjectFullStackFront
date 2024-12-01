@@ -1,19 +1,20 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Box, Typography, Divider, Container } from "@mui/material";
+import { Box, Typography, Divider, Container, Grid } from "@mui/material";
 import { Pets as PetsIcon, LocationOn as LocationIcon, CheckCircle as StatusIcon } from "@mui/icons-material";
 import PageHeader from "../../general/PageHeader";
 import Loader from "../../general/Loader";
 import Error from "../../general/Error";
 import useExhibitById from "../hooks/useExhibitDataById";
+import useGetAnimalsByExhibit from "../../animal/hooks/useGetAnimalsByExhibit";
+
+
 
 export default function ExhibitDetailPage() {
     const { exhibitId } = useParams(); // Get exhibit ID from the URL
     const { exhibit, error, isLoading, fetchExhibitById } = useExhibitById();
+    const { animals, fetchAnimalsByExhibit } = useGetAnimalsByExhibit(); // Fetch animals for this exhibit
 
-    useEffect(() => {
-        fetchExhibitById(exhibitId); // Fetch exhibit details on component mount
-    }, [exhibitId, fetchExhibitById]);
 
     if (isLoading) return <Loader />;
     if (error) {
@@ -62,7 +63,7 @@ export default function ExhibitDetailPage() {
                     <Typography variant="h6">{exhibit.location}</Typography>
                 </Box>
 
-                {/* Status with Icon and updated colors */}
+                {/* Status with Icon */}
                 <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", mb: 2 }}>
                     <StatusIcon
                         sx={{
@@ -93,19 +94,7 @@ export default function ExhibitDetailPage() {
                 <Divider sx={{ my: 2, width: "100%", maxWidth: "600px" }} />
             </Box>
 
-            {/* Placeholder for Animals */}
-            <Box
-                sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    flexWrap: "wrap",
-                    gap: 2,
-                }}
-            >
-                <Typography variant="body1" color="text.secondary">
-                    Animal cards will appear here once implemented.
-                </Typography>
-            </Box>
+
         </Container>
     );
 }
