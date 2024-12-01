@@ -1,10 +1,15 @@
-import React from 'react'
-import AnimalEditForm from '../components/AnimalEditForm'
-import { Box, Container } from '@mui/material'
-import { useNavigate, useParams } from 'react-router-dom';
-import useGetAnimalById from '../hooks/useGetAnimalById';
-import useUpdateAnimal from '../hooks/useUpdateAnimal';
+import React, { useCallback, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { Box, Container } from "@mui/material";
+import animalSchema from "../model/animalSchema";
+import normalizeAnimal from "../helpers/normalizeAnimal";
 import initializeAnimal from "../helpers/initializeAnimal";
+import ROUTES from "../../routers/routerModel";
+import AnimalEditForm from "../components/AnimalEditForm";
+import useForm from "../../form/useForm";
+import useGetAnimalById from "../hooks/useGetAnimalById";
+import useUpdateAnimal from "../hooks/useUpdateAnimal";
+import mapAnimalToModel from "../helpers/mapAnimalToModel";
 
 export default function EditAnimalPage() {
     const { id } = useParams();
@@ -12,9 +17,22 @@ export default function EditAnimalPage() {
     const { animal, fetchAnimalById } = useGetAnimalById();
     const { handleUpdateAnimal } = useUpdateAnimal();
 
+    // Handle form submission
+    const handleSubmit = useCallback(
+        async (formData) => {
+            try {
+                await handleUpdateAnimal(id, formData);
+                navigate(ROUTES.ANIMALS);
+            } catch (error) {
+                console.error("Failed to update animal:", error);
+            }
+        },
+        [handleUpdateAnimal, id, navigate]
+    );
+
     // Initialize form handling
     const { data, errors, handleChange, validateForm, onSubmit, setData } = useForm(
-        animal || initializeAnimal, // Initialize form with fetched data (or empty object if not available)
+        animal || initializeAnimal,
         animalSchema, // Schema for validation
         handleSubmit // Form submission handler
     );
@@ -24,6 +42,7 @@ export default function EditAnimalPage() {
         fetchAnimalById(id); // Fetch animal data by ID
     }, [id, fetchAnimalById]);
 
+    // Once animal data is fetched, normalize and set form data
     useEffect(() => {
         if (animal) {
             const normalizedData = normalizeAnimal(animal);
@@ -52,5 +71,5 @@ export default function EditAnimalPage() {
                 />
             </Box>
         </Container>
-    )
+    );
 }
