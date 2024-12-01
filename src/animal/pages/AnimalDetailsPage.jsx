@@ -13,7 +13,7 @@ export default function AnimalDetailPage() {
     const { animalId } = useParams(); // Get animal ID from the URL
     const { animal, isLoading, error, fetchAnimalById } = useGetAnimalById(); // Hook to fetch animal data
     const { updateStatus, loading } = useUpdateEndangeredStatus(); // Use update status hook
-    const navigate = useNavigate(); // For navigation
+
     const [endangeredStatus, setEndangeredStatus] = useState(animal?.isEndangered || false);
 
     useEffect(() => {
@@ -45,15 +45,7 @@ export default function AnimalDetailPage() {
 
     return (
         <Container>
-            {/* Back Button */}
-            <Box sx={{ mb: 2 }}>
-                <CustomButton
-                    startIcon={<ArrowBack />}
-                    onClick={() => navigate(-1)} // Go back to the previous page
-                >
-                    Back
-                </CustomButton>
-            </Box>
+
             {/* Page Header */}
             <PageHeader sx={{ textAlign: "center", mb: 4 }}
                 title={animal.name}
