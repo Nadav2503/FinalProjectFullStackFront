@@ -8,7 +8,6 @@ import PageHeader from "../../general/PageHeader";
 import CustomButton from "../../general/CustomButton";
 import { ArrowBack } from "@mui/icons-material";
 
-
 export default function AnimalDetailPage() {
     const { animalId } = useParams(); // Get animal ID from the URL
     const { animal, isLoading, error, fetchAnimalById } = useGetAnimalById(); // Hook to fetch animal data
@@ -64,9 +63,9 @@ export default function AnimalDetailPage() {
                 <Box sx={{ flex: 1, display: "flex", flexDirection: "column", gap: 2 }}>
                     <Box>
                         <Typography variant="body1" color="text.secondary">
-                            Name:
+                            Type:
                         </Typography>
-                        <Typography variant="h6">{animal.name}</Typography>
+                        <Typography variant="h6">{animal.type}</Typography>
                     </Box>
 
                     <Box>
