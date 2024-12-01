@@ -9,12 +9,23 @@ export default function CardHeader({ title, image }) {
             className="card-header"
             sx={{
                 display: 'flex',
-                flexDirection: isSmallScreen ? 'column' : 'row',
+                flexDirection: 'column',
                 alignItems: 'center',
                 padding: 2,
             }
             }
         >
+            <Typography
+                variant="h5"
+                component="h2"
+                sx={{
+                    textAlign: 'center',
+                    color: 'text.primary',
+                    fontWeight: 'bold',
+                }}
+            >
+                {title}
+            </Typography>
             {image && (
                 <Box
                     sx={
@@ -27,24 +38,14 @@ export default function CardHeader({ title, image }) {
                     }
                 >
                     <img
-                        src={image}
-                        alt={title}
+                        src={image.url}
+                        alt={image.alt}
                         className="card-header-image"
                         style={{ width: '100%', objectFit: 'cover' }}
                     />
                 </Box>
             )}
-            <Typography
-                variant="h5"
-                component="h2"
-                sx={{
-                    textAlign: 'center',
-                    color: 'text.primary',
-                    fontWeight: 'bold',
-                }}
-            >
-                {title}
-            </Typography>
+
         </Box>
     );
 }
