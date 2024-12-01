@@ -20,6 +20,21 @@ export default function AnimalDetailPage() {
         fetchAnimalById(animalId); // Pass animalId here
     }, [animalId, fetchAnimalById]);
 
+    useEffect(() => {
+        setEndangeredStatus(animal?.isEndangered || false); // Update state when animal data changes
+    }, [animal]);
+
+    const handleEndangeredToggle = async (event) => {
+        const newStatus = event.target.checked;
+        setEndangeredStatus(newStatus); // Update the local state first
+
+        try {
+            await updateStatus(animalId, newStatus); // Call the API to update the status
+        } catch (err) {
+            // Handle error here if needed (e.g., revert to the previous status)
+            setEndangeredStatus(!newStatus); // Revert if update fails
+        }
+    };
 
     if (isLoading) return <Loader />;
     if (error) {
