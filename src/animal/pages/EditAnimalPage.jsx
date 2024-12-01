@@ -19,6 +19,19 @@ export default function EditAnimalPage() {
         handleSubmit // Form submission handler
     );
 
+    // Fetch the animal data on mount
+    useEffect(() => {
+        fetchAnimalById(id); // Fetch animal data by ID
+    }, [id, fetchAnimalById]);
+
+    useEffect(() => {
+        if (animal) {
+            const normalizedData = normalizeAnimal(animal);
+            const mappedData = mapAnimalToModel(normalizedData);
+            setData(mappedData);
+        }
+    }, [animal, setData]);
+
     return (
         <Container>
             <Box
