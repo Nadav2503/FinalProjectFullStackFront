@@ -16,11 +16,13 @@ import AnimalFeedback from "../../animal/components/AnimalFeedback";
 import ROUTES from "../../routers/routerModel";
 import AddNewButton from "../../general/AddButton";
 import ConfirmDialog from "../../general/ConfirmDialog"; // Import confirmation dialog
+import useUpdateAnimalsInExhibit from "../hooks/useUpdateAnimalsInExhibit";
 
 export default function ExhibitDetailPage() {
     const { exhibitId } = useParams(); // Get exhibit ID from the URL
     const { exhibit, error, isLoading, fetchExhibitById } = useExhibitById();
     const { animals, fetchAnimalsByExhibit } = useGetAnimalsByExhibit(); // Fetch animals for this exhibit
+    const { handleUpdateAnimals } = useUpdateAnimalsInExhibit();
     const { handleDeleteAnimal } = useDeleteAnimal(); // Hook for deleting animals
     const navigate = useNavigate(); // Hook for navigation
 
@@ -47,10 +49,22 @@ export default function ExhibitDetailPage() {
 
     const handleConfirmDelete = async () => {
         if (animalToDelete) {
-            await handleDeleteAnimal(animalToDelete); // Delete the animal
-            fetchAnimalsByExhibit(exhibitId); // Refetch animals
-            setOpenConfirmDialog(false); // Close the dialog
-            setAnimalToDelete(null); // Clear animal ID
+            try {
+                // First, remove the animal from the exhibit
+                await handleUpdateAnimals(exhibitId, animalToDelete);
+
+                // Now, delete the animal
+                await handleDeleteAnimal(animalToDelete);
+
+                // Refetch the animals in the exhibit
+                fetchAnimalsByExhibit(exhibitId);
+
+                // Close the confirm dialog and reset animalToDelete
+                setOpenConfirmDialog(false);
+                setAnimalToDelete(null);
+            } catch (error) {
+                console.error("Error during animal deletion:", error);
+            }
         }
     };
 

@@ -20,9 +20,6 @@ export default function AddAnimalPage() {
     useEffect(() => {
         if (location.state && location.state.exhibitId) {
             setExhibitId(location.state.exhibitId);
-            console.log("Exhibit ID from location state:", location.state.exhibitId);
-        } else {
-            console.log("No exhibitId found in location state.");
         }
     }, [location]);
 
