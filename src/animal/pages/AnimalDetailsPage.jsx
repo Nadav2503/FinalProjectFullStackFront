@@ -14,7 +14,7 @@ export default function AnimalDetailPage() {
     const { animal, isLoading, error, fetchAnimalById } = useGetAnimalById(); // Hook to fetch animal data
     const { updateStatus, loading } = useUpdateEndangeredStatus(); // Use update status hook
     const navigate = useNavigate(); // For navigation
-
+    const [endangeredStatus, setEndangeredStatus] = useState(animal?.isEndangered || false);
 
     useEffect(() => {
         fetchAnimalById(animalId); // Pass animalId here
