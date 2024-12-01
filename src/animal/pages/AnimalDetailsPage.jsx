@@ -84,7 +84,10 @@ export default function AnimalDetailPage() {
                     }}
                 />
 
+                {/* Second Column */}
+                <Box sx={{ flex: 1, display: "flex", flexDirection: "column", gap: 2 }}>
 
+                </Box>
             </Box>
         </Container >
     );
