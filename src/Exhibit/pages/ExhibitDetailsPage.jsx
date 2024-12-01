@@ -15,6 +15,10 @@ export default function ExhibitDetailPage() {
     const { exhibit, error, isLoading, fetchExhibitById } = useExhibitById();
     const { animals, fetchAnimalsByExhibit } = useGetAnimalsByExhibit(); // Fetch animals for this exhibit
 
+    useEffect(() => {
+        fetchExhibitById(exhibitId); // Fetch exhibit details
+        fetchAnimalsByExhibit(exhibitId); // Fetch animals for this exhibit
+    }, [exhibitId, fetchExhibitById, fetchAnimalsByExhibit]);
 
     if (isLoading) return <Loader />;
     if (error) {
