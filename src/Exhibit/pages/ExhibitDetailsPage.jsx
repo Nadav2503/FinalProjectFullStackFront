@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { Box, Typography, Divider, Container, Grid } from "@mui/material";
+import { useNavigate, useParams } from "react-router-dom";
+import { Box, Typography, Divider, Container } from "@mui/material";
 import { Pets as PetsIcon, LocationOn as LocationIcon, CheckCircle as StatusIcon } from "@mui/icons-material";
 import PageHeader from "../../general/PageHeader";
 import Loader from "../../general/Loader";
@@ -8,17 +8,24 @@ import Error from "../../general/Error";
 import useExhibitById from "../hooks/useExhibitDataById";
 import useGetAnimalsByExhibit from "../../animal/hooks/useGetAnimalsByExhibit";
 import AnimalFeedback from "../../animal/components/AnimalFeedback";
+import ROUTES from "../../routers/routerModel";
+import AddNewButton from "../../general/AddButton";
 
 
 export default function ExhibitDetailPage() {
     const { exhibitId } = useParams(); // Get exhibit ID from the URL
     const { exhibit, error, isLoading, fetchExhibitById } = useExhibitById();
     const { animals, fetchAnimalsByExhibit } = useGetAnimalsByExhibit(); // Fetch animals for this exhibit
+    const navigate = useNavigate(); // Hook for navigation
 
     useEffect(() => {
         fetchExhibitById(exhibitId); // Fetch exhibit details
         fetchAnimalsByExhibit(exhibitId); // Fetch animals for this exhibit
     }, [exhibitId, fetchExhibitById, fetchAnimalsByExhibit]);
+
+    const handleAddAnimal = () => {
+        navigate(ROUTES.ADD_ANIMAL); // Navigate to AddExhibitPage
+    };
 
     if (isLoading) return <Loader />;
     if (error) {
@@ -106,6 +113,7 @@ export default function ExhibitDetailPage() {
                 handleDelete={null} // Placeholder for the delete handler
                 handleEditAnimal={null} // Placeholder for the edit handler
             />
+            <AddNewButton onAdd={handleAddAnimal} />
         </Container>
     );
 }

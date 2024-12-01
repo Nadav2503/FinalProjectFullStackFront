@@ -2,7 +2,7 @@ import React from 'react';
 import { Fab } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 
-export default function AddNewButton({ onAddExhibit }) {
+export default function AddNewButton({ onAdd }) {
     return (
         <Fab
             color="primary"
@@ -12,7 +12,7 @@ export default function AddNewButton({ onAddExhibit }) {
                 bottom: 150,
                 right: 20,
             }}
-            onClick={onAddExhibit}
+            onClick={onAdd}
         >
             <AddIcon />
         </Fab>

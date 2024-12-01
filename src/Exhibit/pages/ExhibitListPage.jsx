@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Container } from "@mui/material";
 import PageHeader from "../../general/PageHeader";
 import ExhibitFeedback from "../components/ExhibitFeedback";
-import AddNewExhibitButton from "../../general/AddButton";
+import AddNewButton from "../../general/AddButton";
 import { useNavigate } from "react-router-dom";
 import useDeleteExhibit from "../hooks/useDeleteExhibit"; // Import the custom hook
 import ConfirmDialog from "../../general/ConfirmDialog"; // Import ConfirmDialog
@@ -63,7 +63,7 @@ export default function ExhibitListPage() {
                 handleEditExhibit={handleEditExhibit} // Pass the handleEditExhibit function
             />
             {/* Add New Exhibit Button */}
-            <AddNewExhibitButton onAddExhibit={handleAddExhibit} />
+            <AddNewButton onAdd={handleAddExhibit} />
 
             {/* Confirmation Dialog for Deleting an Exhibit */}
             <ConfirmDialog
