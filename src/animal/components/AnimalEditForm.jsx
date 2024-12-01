@@ -3,10 +3,9 @@ import Form from "../../form/Form";
 import Input from "../../form/Input";
 import TextArea from "../../form/TextArea";
 import SelectField from "../../form/Select";
-import Checkbox from "../../form/Checkbox";
 import RadioField from "../../form/Radio";
 
-const AnimalForm = ({
+const AnimalEditForm = ({
     onSubmit,
     onInputChange,
     errors = {},
@@ -29,15 +28,6 @@ const AnimalForm = ({
                 name="name"
                 label="Name"
                 error={errors.name}
-                onChange={onInputChange}
-                data={data}
-            />
-
-            {/* Type Input */}
-            <Input
-                name="type"
-                label="Type"
-                error={errors.type}
                 onChange={onInputChange}
                 data={data}
             />
@@ -91,15 +81,6 @@ const AnimalForm = ({
                 ]}
             />
 
-            {/* Endangered Checkbox */}
-            <Checkbox
-                name="isEndangered"
-                label="Is Endangered?"
-                error={errors.isEndangered}
-                onChange={onInputChange}
-                data={data}
-            />
-
             {/* Health Status TextArea */}
             <TextArea
                 name="healthStatus"
@@ -131,4 +112,4 @@ const AnimalForm = ({
     );
 };
 
-export default AnimalForm;
+export default AnimalEditForm;

@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import AnimalForm from "../components/AnimalForm";
+import AnimalAddForm from "../components/AnimaAddlForm";
 import initializeAnimal from "../helpers/initializeAnimal";
 import { useNavigate } from "react-router-dom";
 import useForm from "../../form/useForm";
@@ -38,7 +38,7 @@ export default function AddAnimalPage() {
                     alignItems: "center",
                 }}
             >
-                <AnimalForm
+                <AnimalAddForm
                     title="Add New Animal"
                     submitLabel="Create Animal"
                     onSubmit={onSubmit}
