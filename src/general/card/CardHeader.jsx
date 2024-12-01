@@ -11,9 +11,8 @@ export default function CardHeader({ title, image }) {
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
-                padding: 2,
-            }
-            }
+                padding: { xs: 1, sm: 2 }, // Smaller padding on small screens
+            }}
         >
             <Typography
                 variant="h5"
@@ -28,24 +27,27 @@ export default function CardHeader({ title, image }) {
             </Typography>
             {image && (
                 <Box
-                    sx={
-                        {
-                            width: isSmallScreen ? '100%' : '150px',
-                            marginBottom: isSmallScreen ? 2 : 0,
-                            display: 'flex',
-                            justifyContent: 'center',
-                        }
-                    }
+                    sx={{
+                        width: '100%',
+                        maxWidth: 150,
+                        height: 150, // Add fixed height for consistency
+                        overflow: 'hidden',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                    }}
                 >
                     <img
                         src={image.url}
                         alt={image.alt}
-                        className="card-header-image"
-                        style={{ width: '100%', objectFit: 'cover' }}
+                        style={{
+                            maxWidth: '100%',
+                            maxHeight: '100%',
+                            objectFit: 'cover',
+                        }}
                     />
                 </Box>
             )}
-
         </Box>
     );
 }
