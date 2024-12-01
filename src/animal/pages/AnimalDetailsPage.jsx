@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Container, Typography, Box, Divider } from "@mui/material";
-
 import Loader from "../../general/Loader";
 import Error from "../../general/Error";
 import useGetAnimalById from "../hooks/useGetAnimalById";
 import PageHeader from "../../general/PageHeader";
+import CustomButton from "../../general/CustomButton";
+import { ArrowBack } from "@mui/icons-material";
 
 
 export default function AnimalDetailPage() {
@@ -26,6 +27,15 @@ export default function AnimalDetailPage() {
 
     return (
         <Container>
+            {/* Back Button */}
+            <Box sx={{ mb: 2 }}>
+                <CustomButton
+                    startIcon={<ArrowBack />}
+                    onClick={() => navigate(-1)} // Go back to the previous page
+                >
+                    Back
+                </CustomButton>
+            </Box>
             {/* Page Header */}
             <PageHeader sx={{ textAlign: "center", mb: 4 }}
                 title={animal.name}
