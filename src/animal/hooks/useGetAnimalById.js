@@ -2,13 +2,13 @@ import { useState, useCallback } from "react";
 import { getAnimalById } from "../../services/AnimalServiceApi";
 import { useSnack } from "../../providers/SnackbarProvider";
 
-const useGetAnimalById = (id) => {
+const useGetAnimalById = () => {
     const [animal, setAnimal] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const setSnack = useSnack();
 
-    const fetchAnimalById = useCallback(async () => {
+    const fetchAnimalById = useCallback(async (id) => {
         setLoading(true);
         setError(null);
         try {
