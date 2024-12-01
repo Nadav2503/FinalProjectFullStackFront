@@ -93,6 +93,13 @@ export default function AnimalDetailPage() {
                         <Typography variant="h6">{animal.diet}</Typography>
                     </Box>
 
+                    <Box>
+                        <Typography variant="body1" color="text.secondary">
+                            Endangered Status:
+                        </Typography>
+                        <Typography variant="h6">{animal.isEndangered ? "Yes" : "No"}</Typography>
+                    </Box>
+
 
                 </Box>
             </Box>
