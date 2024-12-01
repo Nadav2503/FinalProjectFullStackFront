@@ -37,7 +37,7 @@ export default function ExhibitDetailPage() {
     };
 
     const handleEditAnimal = (id) => {
-        navigate(ROUTES.EDIT_ANIMAL); // Navigate to EditAnimalPage
+        navigate(`${ROUTES.EDIT_ANIMAL}/${id}`); // Navigate to EditAnimalPage
     };
 
     const confirmDeleteAnimal = (id) => {
@@ -139,17 +139,19 @@ export default function ExhibitDetailPage() {
                 animals={animals}
                 handleDelete={confirmDeleteAnimal} // Pass delete handler
                 handleEditAnimal={handleEditAnimal} // Pass edit handler
-                handleFavoriteToggle={null} // Pass favorite toggle handler
+                handleFavoriteToggle={handleAddAnimal} // Placeholder function for add/remove favorite
             />
-            <AddNewButton onAdd={handleAddAnimal} />
 
-            {/* Confirmation Dialog */}
+            {/* Add Animal Button */}
+            <AddNewButton onClick={handleAddAnimal} />
+
+            {/* Confirm Dialog for Deleting an Animal */}
             <ConfirmDialog
                 open={openConfirmDialog}
-                onClose={handleCancelDelete}
                 onConfirm={handleConfirmDelete}
-                title="Delete Animal"
-                message="Are you sure you want to delete this animal?"
+                onCancel={handleCancelDelete}
+                title="Confirm Animal Deletion"
+                content={`Are you sure you want to delete this animal?`}
             />
         </Container>
     );

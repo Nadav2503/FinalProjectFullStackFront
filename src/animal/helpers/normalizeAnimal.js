@@ -1,4 +1,5 @@
 const normalizeAnimal = (animal) => {
+
     return {
         name: animal.name,
         type: animal.type,
@@ -9,8 +10,8 @@ const normalizeAnimal = (animal) => {
         isEndangered: animal.isEndangered,
         healthStatus: animal.healthStatus || "unknown",
         image: {
-            url: animal.imageUrl || "/images/placeholderAnimalPicture.webp",
-            alt: animal.imageAlt || "default animal image",
+            url: animal.image?.url || "/images/placeholderAnimalPicture.webp",
+            alt: animal.image?.alt || "default animal image",
         },
     };
 };
