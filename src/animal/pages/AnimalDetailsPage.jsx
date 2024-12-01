@@ -129,7 +129,9 @@ export default function AnimalDetailPage() {
                         <FormControlLabel
                             control={
                                 <Switch
-
+                                    checked={endangeredStatus}
+                                    onChange={handleEndangeredToggle}
+                                    disabled={loading}
                                 />
                             }
                             label={endangeredStatus ? "Yes" : "No"}
