@@ -59,6 +59,13 @@ export default function AnimalDetailPage() {
                         <Typography variant="h6">{animal.name}</Typography>
                     </Box>
 
+                    <Box>
+                        <Typography variant="body1" color="text.secondary">
+                            Age:
+                        </Typography>
+                        <Typography variant="h6">{animal.age} years</Typography>
+                    </Box>
+
 
                 </Box>
 
