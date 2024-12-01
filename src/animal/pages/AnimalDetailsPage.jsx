@@ -86,6 +86,13 @@ export default function AnimalDetailPage() {
 
                 {/* Second Column */}
                 <Box sx={{ flex: 1, display: "flex", flexDirection: "column", gap: 2 }}>
+                    <Box>
+                        <Typography variant="body1" color="text.secondary">
+                            Diet:
+                        </Typography>
+                        <Typography variant="h6">{animal.diet}</Typography>
+                    </Box>
+
 
                 </Box>
             </Box>
