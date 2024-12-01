@@ -50,6 +50,13 @@ export default function AnimalDetailPage() {
                     gap: 4,
                 }}
             >
+                {/* First Column */}
+                <Box sx={{ flex: 1, display: "flex", flexDirection: "column", gap: 2 }}>
+
+                </Box>
+
+
+
             </Box>
         </Container >
     );
