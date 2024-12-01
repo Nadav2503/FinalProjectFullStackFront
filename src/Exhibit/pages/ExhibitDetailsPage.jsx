@@ -1,22 +1,31 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Box, Typography, Divider, Container } from "@mui/material";
-import { Pets as PetsIcon, LocationOn as LocationIcon, CheckCircle as StatusIcon } from "@mui/icons-material";
+import {
+    Pets as PetsIcon,
+    LocationOn as LocationIcon,
+    CheckCircle as StatusIcon,
+} from "@mui/icons-material";
 import PageHeader from "../../general/PageHeader";
 import Loader from "../../general/Loader";
 import Error from "../../general/Error";
 import useExhibitById from "../hooks/useExhibitDataById";
 import useGetAnimalsByExhibit from "../../animal/hooks/useGetAnimalsByExhibit";
+import useDeleteAnimal from "../../animal/hooks/useDeleteAnimal"; // Import delete hook
 import AnimalFeedback from "../../animal/components/AnimalFeedback";
 import ROUTES from "../../routers/routerModel";
 import AddNewButton from "../../general/AddButton";
-
+import ConfirmDialog from "../../general/ConfirmDialog"; // Import confirmation dialog
 
 export default function ExhibitDetailPage() {
     const { exhibitId } = useParams(); // Get exhibit ID from the URL
     const { exhibit, error, isLoading, fetchExhibitById } = useExhibitById();
     const { animals, fetchAnimalsByExhibit } = useGetAnimalsByExhibit(); // Fetch animals for this exhibit
+    const { handleDeleteAnimal } = useDeleteAnimal(); // Hook for deleting animals
     const navigate = useNavigate(); // Hook for navigation
+
+    const [openConfirmDialog, setOpenConfirmDialog] = useState(false); // State for confirmation dialog
+    const [animalToDelete, setAnimalToDelete] = useState(null); // State to track animal for deletion
 
     useEffect(() => {
         fetchExhibitById(exhibitId); // Fetch exhibit details
@@ -24,8 +33,33 @@ export default function ExhibitDetailPage() {
     }, [exhibitId, fetchExhibitById, fetchAnimalsByExhibit]);
 
     const handleAddAnimal = () => {
-        navigate(ROUTES.ADD_ANIMAL); // Navigate to AddExhibitPage
+        navigate(ROUTES.ADD_ANIMAL); // Navigate to AddAnimalPage for this exhibit
     };
+
+    const handleEditAnimal = (id) => {
+        navigate(ROUTES.EDIT_ANIMAL); // Navigate to EditAnimalPage
+    };
+
+    const confirmDeleteAnimal = (id) => {
+        setAnimalToDelete(id); // Set animal ID for deletion
+        setOpenConfirmDialog(true); // Show confirmation dialog
+    };
+
+    const handleConfirmDelete = async () => {
+        if (animalToDelete) {
+            await handleDeleteAnimal(animalToDelete); // Delete the animal
+            fetchAnimalsByExhibit(exhibitId); // Refetch animals
+            setOpenConfirmDialog(false); // Close the dialog
+            setAnimalToDelete(null); // Clear animal ID
+        }
+    };
+
+    const handleCancelDelete = () => {
+        setOpenConfirmDialog(false); // Close the dialog without deleting
+        setAnimalToDelete(null); // Clear animal ID
+    };
+
+    const currentCapacity = animals?.length || 0; // Dynamic capacity based on animals array
 
     if (isLoading) return <Loader />;
     if (error) {
@@ -34,15 +68,10 @@ export default function ExhibitDetailPage() {
     }
     if (!exhibit) return <Error errorMessage="Exhibit not found." />;
 
-    const currentCapacity = exhibit.animals?.length || 0; // Dynamic capacity based on animals array
-
     return (
         <Container>
             {/* Page Header */}
-            <PageHeader
-                title={exhibit.name}
-                subtitle={exhibit.description}
-            />
+            <PageHeader title={exhibit.name} subtitle={exhibit.description} />
 
             {/* Exhibit Details Section */}
             <Box
@@ -58,9 +87,7 @@ export default function ExhibitDetailPage() {
                 {/* Current Capacity with Pet Icon */}
                 <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", mb: 2 }}>
                     <PetsIcon sx={{ marginRight: 1 }} />
-                    <Typography variant="h6">
-                        Current Animals: {currentCapacity}
-                    </Typography>
+                    <Typography variant="h6">Current Animals: {currentCapacity}</Typography>
                 </Box>
 
                 {/* Max Capacity */}
@@ -107,13 +134,23 @@ export default function ExhibitDetailPage() {
 
             {/* Animal Feedback Component */}
             <AnimalFeedback
-                isLoading={isLoading} // Pass loading state from the hook
-                error={error} // Pass error state from the hook
-                animals={animals} // Pass the list of animals
-                handleDelete={null} // Placeholder for the delete handler
-                handleEditAnimal={null} // Placeholder for the edit handler
+                isLoading={isLoading}
+                error={error}
+                animals={animals}
+                handleDelete={confirmDeleteAnimal} // Pass delete handler
+                handleEditAnimal={handleEditAnimal} // Pass edit handler
+                handleFavoriteToggle={null} // Pass favorite toggle handler
             />
             <AddNewButton onAdd={handleAddAnimal} />
+
+            {/* Confirmation Dialog */}
+            <ConfirmDialog
+                open={openConfirmDialog}
+                onClose={handleCancelDelete}
+                onConfirm={handleConfirmDelete}
+                title="Delete Animal"
+                message="Are you sure you want to delete this animal?"
+            />
         </Container>
     );
 }
