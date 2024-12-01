@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { updateAnimalsInExhibit } from '../services/exhibitApiService'; // Service to update animals in the exhibit
+import { updateAnimalsInExhibit } from '../../services/ExhibitServiceApi';
 import { useSnack } from '../../providers/SnackbarProvider';
 
 export default function useUpdateAnimalsInExhibit() {
