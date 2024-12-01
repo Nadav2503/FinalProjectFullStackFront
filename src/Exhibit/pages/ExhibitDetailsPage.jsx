@@ -33,7 +33,7 @@ export default function ExhibitDetailPage() {
     }, [exhibitId, fetchExhibitById, fetchAnimalsByExhibit]);
 
     const handleAddAnimal = () => {
-        navigate(ROUTES.ADD_ANIMAL); // Navigate to AddAnimalPage for this exhibit
+        navigate(ROUTES.ADD_ANIMAL, { state: { exhibitId: exhibitId } }); // Navigate to AddAnimalPage for this exhibit
     };
 
     const handleEditAnimal = (id) => {
