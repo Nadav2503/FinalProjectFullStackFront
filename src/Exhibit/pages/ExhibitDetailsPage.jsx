@@ -7,7 +7,7 @@ import Loader from "../../general/Loader";
 import Error from "../../general/Error";
 import useExhibitById from "../hooks/useExhibitDataById";
 import useGetAnimalsByExhibit from "../../animal/hooks/useGetAnimalsByExhibit";
-
+import AnimalFeedback from "../../animal/components/AnimalFeedback";
 
 
 export default function ExhibitDetailPage() {
@@ -98,7 +98,14 @@ export default function ExhibitDetailPage() {
                 <Divider sx={{ my: 2, width: "100%", maxWidth: "600px" }} />
             </Box>
 
-
+            {/* Animal Feedback Component */}
+            <AnimalFeedback
+                isLoading={isLoading} // Pass loading state from the hook
+                error={error} // Pass error state from the hook
+                animals={animals} // Pass the list of animals
+                handleDelete={null} // Placeholder for the delete handler
+                handleEditAnimal={null} // Placeholder for the edit handler
+            />
         </Container>
     );
 }
