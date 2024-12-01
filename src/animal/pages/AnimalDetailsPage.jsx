@@ -14,7 +14,6 @@ export default function AnimalDetailPage() {
     const navigate = useNavigate(); // For navigation
 
     useEffect(() => {
-        console.log("Fetching animal details for ID:", animalId); // Debugging log
         fetchAnimalById(animalId); // Pass animalId here
     }, [animalId, fetchAnimalById]);
 
@@ -27,8 +26,6 @@ export default function AnimalDetailPage() {
 
     return (
         <Container>
-
-
             {/* Page Header */}
             <PageHeader sx={{ textAlign: "center", mb: 4 }}
                 title={animal.name}
@@ -43,7 +40,17 @@ export default function AnimalDetailPage() {
                 />
             </Box>
             <Divider sx={{ mt: 2, mb: 4 }} />
-
-        </Container>
+            {/* Animal Details */}
+            <Box
+                sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: 4,
+                }}
+            >
+            </Box>
+        </Container >
     );
 }
