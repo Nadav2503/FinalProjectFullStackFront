@@ -34,6 +34,14 @@ export default function AnimalDetailPage() {
                 title={animal.name}
                 subtitle={animal.description}>
             </PageHeader>
+            {/* Animal Image */}
+            <Box sx={{ textAlign: "center", mt: 4 }}>
+                <img
+                    src={animal.image.url}
+                    alt={`${animal.name}`}
+                    style={{ maxWidth: "100%", height: "auto", borderRadius: 8 }}
+                />
+            </Box>
             <Divider sx={{ mt: 2, mb: 4 }} />
 
         </Container>
