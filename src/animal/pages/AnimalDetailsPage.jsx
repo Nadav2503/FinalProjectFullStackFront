@@ -7,12 +7,12 @@ import useGetAnimalById from "../hooks/useGetAnimalById";
 import PageHeader from "../../general/PageHeader";
 import CustomButton from "../../general/CustomButton";
 import { ArrowBack } from "@mui/icons-material";
-
+import useUpdateEndangeredStatus from "../hooks/useUpdateEndangeredStatus";
 
 export default function AnimalDetailPage() {
     const { animalId } = useParams(); // Get animal ID from the URL
     const { animal, isLoading, error, fetchAnimalById } = useGetAnimalById(); // Hook to fetch animal data
-
+    const { updateStatus, loading } = useUpdateEndangeredStatus(); // Use update status hook
     const navigate = useNavigate(); // For navigation
 
 
