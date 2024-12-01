@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { Container, Typography, Box, Divider } from "@mui/material";
+import { Container, Typography, Box, Divider, Switch, FormControlLabel } from "@mui/material";
 import Loader from "../../general/Loader";
 import Error from "../../general/Error";
 import useGetAnimalById from "../hooks/useGetAnimalById";
@@ -8,14 +8,18 @@ import PageHeader from "../../general/PageHeader";
 import CustomButton from "../../general/CustomButton";
 import { ArrowBack } from "@mui/icons-material";
 
+
 export default function AnimalDetailPage() {
     const { animalId } = useParams(); // Get animal ID from the URL
     const { animal, isLoading, error, fetchAnimalById } = useGetAnimalById(); // Hook to fetch animal data
+
     const navigate = useNavigate(); // For navigation
+
 
     useEffect(() => {
         fetchAnimalById(animalId); // Pass animalId here
     }, [animalId, fetchAnimalById]);
+
 
     if (isLoading) return <Loader />;
     if (error) {
@@ -86,10 +90,10 @@ export default function AnimalDetailPage() {
                 {/* Vertical Divider */}
                 <Divider
                     orientation="vertical"
-                    flexItem // Ensures the divider stretches to match its sibling elements
+                    flexItem
                     sx={{
-                        borderRightWidth: 2, // Optional: Makes the divider slightly thicker
-                        height: "auto", // Fills the vertical space
+                        borderRightWidth: 2,
+                        height: "auto",
                     }}
                 />
 
@@ -102,11 +106,19 @@ export default function AnimalDetailPage() {
                         <Typography variant="h6">{animal.diet}</Typography>
                     </Box>
 
+                    {/* Endangered Status with Toggle */}
                     <Box>
                         <Typography variant="body1" color="text.secondary">
                             Endangered Status:
                         </Typography>
-                        <Typography variant="h6">{animal.isEndangered ? "Yes" : "No"}</Typography>
+                        <FormControlLabel
+                            control={
+                                <Switch
+
+                                />
+                            }
+                            label={endangeredStatus ? "Yes" : "No"}
+                        />
                     </Box>
 
                     <Box>
@@ -117,6 +129,6 @@ export default function AnimalDetailPage() {
                     </Box>
                 </Box>
             </Box>
-        </Container >
+        </Container>
     );
 }
