@@ -74,6 +74,15 @@ export default function AnimalDetailPage() {
                     </Box>
                 </Box>
 
+                {/* Vertical Divider */}
+                <Divider
+                    orientation="vertical"
+                    flexItem // Ensures the divider stretches to match its sibling elements
+                    sx={{
+                        borderRightWidth: 2, // Optional: Makes the divider slightly thicker
+                        height: "auto", // Fills the vertical space
+                    }}
+                />
 
 
             </Box>
