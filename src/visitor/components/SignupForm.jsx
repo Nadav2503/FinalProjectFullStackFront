@@ -103,6 +103,15 @@ const SignupForm = ({
                 data={data}
             />
 
+            {/* Image URL */}
+            <Input
+                name="imageUrl"
+                label="Profile Picture URL"
+                error={errors.imageUrl}
+                onChange={onInputChange}
+                data={data}
+            />
+
         </Form>
     );
 };
