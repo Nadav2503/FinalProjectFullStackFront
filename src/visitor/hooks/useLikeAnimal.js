@@ -1,7 +1,6 @@
 import { useState, useCallback } from 'react';
 import { likeAnimal } from '../../services/VisitorServiceApi';
 import { useSnack } from '../../providers/SnackbarProvider';
-import { getToken } from '../../services/LocalStorageService';
 
 const useLikeAnimal = () => {
     const [loading, setLoading] = useState(false);
@@ -12,11 +11,9 @@ const useLikeAnimal = () => {
         setLoading(true);
         setError(null);
 
-        const token = getToken(); // Get token from localStorage
-
         try {
             // Call API to toggle the like status for the animal
-            await likeAnimal(visitorId, animalId, token); // Pass the token for authentication
+            await likeAnimal(visitorId, animalId); // Pass the token for authentication
 
             // Show success notification after the API call
             setSnack('success', `Animal ${animalId} like status updated!`);
