@@ -14,6 +14,7 @@ import AnimalDetailsPage from "../animal/pages/AnimalDetailsPage";
 import EditAnimalPage from "../animal/pages/EditAnimalPage";
 import AddAnimalPage from "../animal/pages/AddAnimalPage";
 import LoginPage from "../visitor/pages/LoginPage";
+import SignupPage from "../visitor/pages/SignupPage";
 
 // Main Router component to define application routes
 export default function Router() {
@@ -41,6 +42,7 @@ export default function Router() {
             <Route path={`${ROUTES.ANIMAL_INFO}/:animalId`} element={<AnimalDetailsPage />} />
 
             <Route path={ROUTES.LOGIN} element={<LoginPage />} />
+            <Route path={ROUTES.SIGNUP} element={<SignupPage />} />
             {/* Fallback route for non-existent paths */}
             <Route path={ROUTES.ERROR} element={<Error />} />
         </Routes>

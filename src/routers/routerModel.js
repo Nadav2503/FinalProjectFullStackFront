@@ -9,6 +9,7 @@ const ROUTES = {
     EDIT_EXHIBIT: "/edit-exhibit", // Edit exhibit route (without dynamic id here)
     EDIT_ANIMAL: "/edit-animal", // Edit animal route (without dynamic id here)
     LOGIN: "/login",
+    SIGNUP: "/signup",
     ERROR: "*", // Fallback route for non-existent paths
 };
 
