@@ -4,14 +4,14 @@ import useLoginVisitor from "../hooks/useLoginVisitor";
 import useForm from "../../form/useForm";
 import initializeLogin from "../helpers/initialize/initializeLogin";
 import loginSchema from "../model/loginSchema";
-import { Box, Container } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import ROUTES from "../../routers/routerModel";
+import { Box, Container, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom"; // Import useNavigate for navigation
+import ROUTES from "../../routers/routerModel"; // Ensure ROUTES has a SIGNUP path
+import CustomButton from "../../general/CustomButton";
 
 const LoginPage = () => {
     const { handleLogin } = useLoginVisitor();
     const navigate = useNavigate();
-
 
     const handleSubmit = useCallback(
         async (formData) => {
@@ -33,6 +33,10 @@ const LoginPage = () => {
         onSubmit
     } = useForm(initializeLogin, loginSchema, handleSubmit);
 
+    const handleSignUp = () => {
+        navigate(ROUTES.SIGNUP);
+    };
+
     return (
         <Container>
             <Box
@@ -40,6 +44,7 @@ const LoginPage = () => {
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
+                    flexDirection: "column",
                 }}
             >
                 <LoginForm
@@ -51,6 +56,14 @@ const LoginPage = () => {
                     data={data}
                     onInputChange={handleChange}
                 />
+
+                {/* Sign up option */}
+                <Box sx={{ marginTop: 2 }}>
+                    <Typography variant="body1">
+                        Don’t have an account?{" "}
+                        <CustomButton onClick={handleSignUp}>Sign up</CustomButton>
+                    </Typography>
+                </Box>
             </Box>
         </Container>
     );
