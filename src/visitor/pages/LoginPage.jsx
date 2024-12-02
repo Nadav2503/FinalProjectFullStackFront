@@ -17,7 +17,7 @@ const LoginPage = () => {
         async (formData) => {
             try {
                 await handleLogin(formData);
-                navigate(ROUTES.HOME);
+                navigate(ROUTES.ROOT);
             } catch (error) {
                 console.error("Login failed:", error);
             }
