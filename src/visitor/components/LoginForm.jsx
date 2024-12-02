@@ -28,7 +28,14 @@ const LoginForm = ({
                 data={data}
             />
 
-
+            <Input
+                name="password"
+                label="Password"
+                type="password"
+                error={errors.password}
+                onChange={onInputChange}
+                data={data}
+            />
         </Form>
     );
 };
