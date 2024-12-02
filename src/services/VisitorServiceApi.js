@@ -25,15 +25,6 @@ export const getVisitorById = async (id) => {
 
 // Register a new visitor
 export const registerVisitor = async (visitor) => {
-    const requiredFields = ['name.first', 'name.last', 'email', 'password'];
-    for (let field of requiredFields) {
-        const [key, subKey] = field.split('.');
-        const value = subKey ? visitor[key]?.[subKey] : visitor[key];
-        if (!value) {
-            throw new Error(`Missing required field: ${field}`);
-        }
-    }
-
     try {
         const { data } = await axios.post(`${API_URL}/register`, visitor);
         return data;
