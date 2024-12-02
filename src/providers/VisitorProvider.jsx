@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import { getToken, getUser } from '../services/LocalStorageService';
 
 const VisitorContext = createContext();
@@ -20,3 +20,12 @@ export default function VisitorProvider({ children }) {
         <></>
     );
 }
+
+// Custom hook to use visitor context
+export const useCurrentVisitor = () => {
+    const context = useContext(VisitorContext);
+    if (!context) {
+        throw new Error("useCurrentVisitor must be used within VisitorProvider");
+    }
+    return context;
+};
