@@ -1,7 +1,21 @@
-import React from 'react'
+import React from "react";
+import Form from "../../form/Form";
 
-export default function LoginForm() {
+
+const LoginForm = ({
+    onSubmit,
+    onInputChange,
+    errors = {},
+    data = {},
+    title,
+    submitLabel,
+    validateForm
+}) => {
     return (
-        <div>LoginForm</div>
-    )
-}
+        <Form
+        >
+        </Form>
+    );
+};
+
+export default LoginForm;
