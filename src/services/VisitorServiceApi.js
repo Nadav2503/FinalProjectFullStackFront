@@ -42,3 +42,13 @@ export const loginVisitor = async (credentials) => {
         throw new Error(error.message);
     }
 };
+
+// Update a visitor's profile
+export const updateVisitorProfile = async (id, visitor) => {
+    try {
+        const { data } = await axios.put(`${API_URL}/${id}`, visitor);
+        return data;
+    } catch (error) {
+        throw new Error(error.message);
+    }
+};
