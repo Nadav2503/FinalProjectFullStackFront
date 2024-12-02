@@ -1,8 +1,8 @@
 import React from 'react';
+import { Button, Typography, useTheme } from '@mui/material';
 import NavBarLink from './NavbarLink'; // Component that renders the link for navigation
-import { Button, Typography, useTheme } from '@mui/material'; // MUI components for styling and theming
 
-export default function NavBarItem({ to, sx, label, variant = 'horizontal' }) {
+export default function NavBarItem({ to, sx, label, variant = 'horizontal', onClick }) {
     const theme = useTheme(); // Access the current theme for dynamic styling
     const isVertical = variant === 'vertical'; // Check if the item is to be rendered vertically or horizontally
 
@@ -16,16 +16,14 @@ export default function NavBarItem({ to, sx, label, variant = 'horizontal' }) {
     // Add shadow effect for glowing effect
     const boxShadow = theme.palette.mode === 'dark' ? '0 4px 8px rgba(255, 255, 255, 0.1)' : '0 4px 8px rgba(0, 0, 0, 0.2)';
 
+    // Function to handle the click event
+    const handleClick = (event) => {
+        if (onClick) onClick(event); // Execute additional actions passed through the `onClick` prop (e.g., logout)
+        if (to) window.location.href = to; // If a `to` prop is passed, navigate
+    };
+
     return (
-        <NavBarLink
-            to={to}
-            sx={{
-                display: isVertical ? 'block' : 'inline-block', // Block display for vertical, inline for horizontal
-                width: isVertical ? '100%' : 'auto', // Full width for vertical, auto for horizontal
-                textAlign: isVertical ? 'center' : 'left', // Center text for vertical, left for horizontal
-                ...sx, // Spread additional custom styles from parent component
-            }}
-        >
+        <NavBarLink to={to} sx={{ display: isVertical ? 'block' : 'inline-block', width: isVertical ? '100%' : 'auto', textAlign: isVertical ? 'center' : 'left', ...sx }}>
             <Button
                 color="inherit"
                 fullWidth={isVertical} // Full width for vertical layout
@@ -44,8 +42,9 @@ export default function NavBarItem({ to, sx, label, variant = 'horizontal' }) {
                         boxShadow: `0 4px 8px ${hoverBackgroundColor}`, // Glow effect on hover
                     },
                 }}
+                onClick={handleClick} // Attach the click handler here
             >
-                <Typography sx={{ color: theme.palette.text.primary }}>{label}</Typography> {/* Label for the item */}
+                <Typography sx={{ color: theme.palette.text.primary }}>{label}</Typography>
             </Button>
         </NavBarLink>
     );
