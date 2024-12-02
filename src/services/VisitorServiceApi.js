@@ -52,3 +52,13 @@ export const updateVisitorProfile = async (id, visitor) => {
         throw new Error(error.message);
     }
 };
+
+// Delete a visitor (admin only)
+export const deleteVisitor = async (id) => {
+    try {
+        const { data } = await axios.delete(`${API_URL}/${id}`);
+        return data;
+    } catch (error) {
+        throw new Error(error.message);
+    }
+};
