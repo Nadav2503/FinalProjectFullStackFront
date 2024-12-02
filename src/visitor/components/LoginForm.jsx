@@ -20,6 +20,14 @@ const LoginForm = ({
             validateForm={validateForm}
             submitLabel={submitLabel}
         >
+            <Input
+                name="username_or_email"
+                label="Username or Email"
+                error={errors.username_or_email}
+                onChange={onInputChange}
+                data={data}
+            />
+
 
         </Form>
     );
