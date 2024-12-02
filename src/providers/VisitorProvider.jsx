@@ -1,7 +1,15 @@
-import React from 'react'
+import React, { createContext, useState } from 'react';
+import { getToken } from '../services/LocalStorageService';
 
-export default function VisitorProvider() {
+
+const VisitorContext = createContext();
+
+export default function VisitorProvider({ children }) {
+    const [visitor, setVisitor] = useState(null);
+    const [token, setToken] = useState(getToken());
+
+
     return (
-        <div>VisitorProvider</div>
-    )
+        <></>
+    );
 }
