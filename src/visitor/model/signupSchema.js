@@ -5,9 +5,9 @@ const urlRegex = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-
 // Profile schema for visitor details
 const signupSchema = {
     username: Joi.string().min(3).max(30).required(), // Username
-    firstName: Joi.string().min(1).max(256).required(), // First name
-    middleName: Joi.string().min(0).max(256).optional(), // Middle name
-    lastName: Joi.string().min(1).max(256).required(), // Last name
+    first: Joi.string().min(1).max(256).required(), // First name
+    middle: Joi.string().min(0).max(256).optional(), // Middle name
+    last: Joi.string().min(1).max(256).required(), // Last name
     email: Joi.string()
         .pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)
         .required(), // Email
