@@ -3,7 +3,7 @@ import Joi from "joi";
 const urlRegex = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/
 
 // Profile schema for visitor details
-const profileSchema = {
+const signupSchema = {
     username: Joi.string().min(3).max(30).required(), // Username
     firstName: Joi.string().min(1).max(256).required(), // First name
     middleName: Joi.string().min(0).max(256).optional(), // Middle name
@@ -28,4 +28,4 @@ const profileSchema = {
     imageAlt: Joi.string().max(256).optional(), // Image alternative text
 };
 
-export default profileSchema;
+export default signupSchema;
