@@ -31,6 +31,16 @@ const SignupForm = ({
                 data={data}
             />
 
+            {/* First Name */}
+            <Input
+                name="firstName"
+                label="First Name"
+                error={errors.firstName}
+                onChange={onInputChange}
+                data={data}
+            />
+
+
         </Form>
     );
 };
