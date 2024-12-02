@@ -49,6 +49,15 @@ const SignupForm = ({
                 data={data}
             />
 
+            {/* Last Name */}
+            <Input
+                name="lastName"
+                label="Last Name"
+                error={errors.lastName}
+                onChange={onInputChange}
+                data={data}
+            />
+
 
         </Form>
     );
