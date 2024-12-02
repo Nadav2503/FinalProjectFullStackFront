@@ -11,14 +11,12 @@ const SignupForm = ({
     title,
     submitLabel,
     validateForm,
-    isSubmitting,
 }) => {
     return (
         <Form
             title={title}
             errors={errors}
             onSubmit={onSubmit}
-            isSubmitting={isSubmitting}
             validateForm={validateForm}
             submitLabel={submitLabel}
         >

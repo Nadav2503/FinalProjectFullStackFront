@@ -16,7 +16,6 @@ const LoginForm = ({
             title={title}
             errors={errors}
             onSubmit={onSubmit}
-            isSubmitting={isSubmitting}
             validateForm={validateForm}
             submitLabel={submitLabel}
         >
