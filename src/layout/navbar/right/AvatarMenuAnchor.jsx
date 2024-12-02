@@ -2,8 +2,10 @@ import React from 'react';
 import { Menu, Box, MenuItem } from '@mui/material';
 import SwitchMode from './SwitchMode'; // Theme toggle switch component
 import NavBarItem from '../middle/NavbarItem'; // Reusable navigation item component
+import useLogout from '../../../visitor/hooks/useLogout';
 
 export default function AvatarMenu({ anchorEl, onClose }) {
+    const { handleLogout } = useLogout();
     return (
         <Menu
             anchorEl={anchorEl} // Element to anchor the menu
@@ -28,7 +30,7 @@ export default function AvatarMenu({ anchorEl, onClose }) {
                 <NavBarItem label="Profile" variant="vertical" onClick={onClose} />
                 <NavBarItem label="Login" variant="vertical" onClick={onClose} to="/login" />
                 <NavBarItem label="Signup" variant="vertical" onClick={onClose} />
-                <NavBarItem label="Logout" variant="vertical" onClick={onClose} />
+                <NavBarItem label="Logout" variant="vertical" onClick={() => { handleLogout(); onClose(); }} />
 
                 {/* Theme toggle switch centered within a menu item */}
                 <MenuItem onClick={onClose}>
