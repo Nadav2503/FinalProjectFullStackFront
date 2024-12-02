@@ -1,8 +1,8 @@
 const initializeSignup = {
     username: "",
-    firstName: "",
-    middleName: "",
-    lastName: "",
+    first: "",
+    middle: "",
+    last: "",
     email: "",
     password: "",
     membershipTier: "Tier 1 - Explorer",
