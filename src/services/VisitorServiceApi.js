@@ -62,3 +62,13 @@ export const deleteVisitor = async (id) => {
         throw new Error(error.message);
     }
 };
+
+// Like an animal (requires specific visitor tier)
+export const likeAnimal = async (visitorId, animalId) => {
+    try {
+        const { data } = await axios.patch(`${API_URL}/${visitorId}/like/${animalId}`);
+        return data;
+    } catch (error) {
+        throw new Error(error.message);
+    }
+};
