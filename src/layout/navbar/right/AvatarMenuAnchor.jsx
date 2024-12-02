@@ -30,7 +30,7 @@ export default function AvatarMenu({ anchorEl, onClose }) {
                 <NavBarItem label="Profile" variant="vertical" onClick={onClose} />
                 <NavBarItem label="Login" variant="vertical" onClick={onClose} to="/login" />
                 <NavBarItem label="Signup" variant="vertical" onClick={onClose} />
-                <NavBarItem label="Logout" variant="vertical" onClick={() => { handleLogout(); onClose(); }} />
+                <NavBarItem label="Logout" variant="vertical" to="/" onClick={() => { handleLogout(); onClose(); }} />
 
                 {/* Theme toggle switch centered within a menu item */}
                 <MenuItem onClick={onClose}>
