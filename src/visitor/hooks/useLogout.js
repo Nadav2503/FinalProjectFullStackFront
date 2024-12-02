@@ -1,7 +1,13 @@
-import React from 'react'
+import { useCallback } from 'react';
+import { removeToken } from '../../services/LocalStorageService';
 
-export default function useLogout() {
-    return (
-        <div>useLogout</div>
-    )
-}
+const useLogout = () => {
+
+    const handleLogout = useCallback(() => {
+        removeToken();  // Remove the token from localStorage
+    }, []);
+
+    return { handleLogout };
+};
+
+export default useLogout;
