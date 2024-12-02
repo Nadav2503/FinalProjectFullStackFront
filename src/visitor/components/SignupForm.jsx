@@ -93,6 +93,16 @@ const SignupForm = ({
                 ]}
             />
 
+            {/* Phone */}
+            <Input
+                name="phone"
+                label="Phone"
+                type="tel"
+                error={errors.phone}
+                onChange={onInputChange}
+                data={data}
+            />
+
         </Form>
     );
 };
