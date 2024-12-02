@@ -1,8 +1,8 @@
 const mapProfileToModel = (profileData) => {
     return {
-        first: profileData.first,
-        middle: profileData.middle || "", // Default to empty string if middle name is not provided
-        last: profileData.last,
+        first: profileData.name?.first,
+        middle: profileData.name?.middle || "", // Default to empty string if middle name is not provided
+        last: profileData.name?.last,
         username: profileData.username,
         email: profileData.email, // Including email as part of the profile model
         phone: profileData.phone || "", // Default to empty string if phone is not provided
