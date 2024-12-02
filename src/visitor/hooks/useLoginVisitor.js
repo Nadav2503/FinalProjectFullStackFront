@@ -10,13 +10,13 @@ export default function useLoginVisitor() {
     const setSnack = useSnack();
     const { setVisitor, setToken } = useCurrentVisitor();
 
-    const handleLogin = useCallback(async (userLogin) => {
+    const handleLogin = useCallback(async (visitorLogin) => {
         setIsLoading(true);
         setError(null);  // Clear previous error if any
 
         try {
             // Try to login the user and retrieve the visitor data and token
-            const { token, visitorData } = await loginVisitor(userLogin);  // Adjust API call response accordingly
+            const { token, visitorData } = await loginVisitor(visitorLogin);  // Adjust API call response accordingly
 
             // Store token in local storage and set the token in the state
             setTokenInLocalStorage(token);
