@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import LoginForm from "../components/LoginForm";
 import useLoginVisitor from "../hooks/useLoginVisitor";
 import useForm from "../../form/useForm";
@@ -22,7 +22,7 @@ const LoginPage = () => {
                 console.error("Login failed:", error);
             }
         },
-        [handleLogin, navigate]
+        [handleLogin]
     );
 
     const {
