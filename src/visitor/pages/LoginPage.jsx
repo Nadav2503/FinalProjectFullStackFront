@@ -20,7 +20,11 @@ const LoginPage = () => {
     return (
         <Container>
             <Box
-
+                sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                }}
             >
                 <LoginForm
                     title="Login to your account"
