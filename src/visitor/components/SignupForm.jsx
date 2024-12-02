@@ -27,6 +27,7 @@ const SignupForm = ({
                 error={errors.username}
                 onChange={onInputChange}
                 data={data}
+                required={true}  // Set required here
             />
 
             {/* First Name */}
@@ -36,6 +37,7 @@ const SignupForm = ({
                 error={errors.first}
                 onChange={onInputChange}
                 data={data}
+                required={true}  // Set required here
             />
 
             {/* Middle Name */}
@@ -45,6 +47,7 @@ const SignupForm = ({
                 error={errors.middle}
                 onChange={onInputChange}
                 data={data}
+                required={false}  // Set required to false here if not mandatory
             />
 
             {/* Last Name */}
@@ -54,6 +57,7 @@ const SignupForm = ({
                 error={errors.last}
                 onChange={onInputChange}
                 data={data}
+                required={true}  // Set required here
             />
 
             {/* Email */}
@@ -64,6 +68,7 @@ const SignupForm = ({
                 error={errors.email}
                 onChange={onInputChange}
                 data={data}
+                required={true}  // Set required here
             />
 
             {/* Password */}
@@ -74,6 +79,7 @@ const SignupForm = ({
                 error={errors.password}
                 onChange={onInputChange}
                 data={data}
+                required={true}  // Set required here
             />
 
             {/* Membership Tier */}
@@ -89,6 +95,7 @@ const SignupForm = ({
                     { value: "Tier 3 - Jungle King/Queen", label: "Tier 3 - Jungle King/Queen" },
                     { value: "Tier 4 - Safari Leader", label: "Tier 4 - Safari Leader" },
                 ]}
+                required={true}  // Set required here
             />
 
             {/* Phone */}
@@ -99,6 +106,7 @@ const SignupForm = ({
                 error={errors.phone}
                 onChange={onInputChange}
                 data={data}
+                required={false}  // Set required to false here if not mandatory
             />
 
             {/* Image URL */}
@@ -108,6 +116,7 @@ const SignupForm = ({
                 error={errors.imageUrl}
                 onChange={onInputChange}
                 data={data}
+                required={false}  // Set required to false here if not mandatory
             />
 
             {/* Image Alt Text */}
@@ -117,6 +126,7 @@ const SignupForm = ({
                 error={errors.imageAlt}
                 onChange={onInputChange}
                 data={data}
+                required={false}  // Set required to false here if not mandatory
             />
         </Form>
     );

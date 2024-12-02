@@ -19,16 +19,20 @@ const signupSchema = {
         .default("Tier 1 - Explorer"), // Membership tier
     phone: Joi.string()
         .pattern(/^(?:\+972-?5\d{2}-?\d{4}|(?:\+972|0)?50-?\d{7})$/)
+        .allow('')  // Allow empty string for imageUrl
         .optional(), // Phone number
     imageUrl: Joi.string()
         .trim()
         .lowercase()
         .pattern(urlRegex)
         .optional()
+        .allow('')  // Allow empty string for imageUrl
         .messages({
             "string.pattern.base": "Please enter a valid URL (e.g., http://example.com)."
         }),
-    imageAlt: Joi.string().max(256).optional(), // Image alternative text
+    imageAlt: Joi.string().max(256).optional()
+        .allow('')  // Allow empty string for imageUrl, // Image alternative text
+
 };
 
 export default signupSchema;
