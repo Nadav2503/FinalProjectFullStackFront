@@ -24,10 +24,8 @@ export default function useUpdateVisitorProfile() {
             setVisitor(updatedVisitor);
             setSnack('success', 'Profile updated successfully!');  // Show success message
         } catch (err) {
-            // Handle errors during the update process
-            const errorMessage = err.response?.data?.message || err.message || 'Failed to update profile';
-            setError(errorMessage);  // Store error message
-            setSnack('error', errorMessage);  // Show error notification
+            setError(err.message);
+            setSnack('error', 'Failed to update profile');  // Show error notification
         } finally {
             setIsLoading(false);
         }
