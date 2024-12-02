@@ -16,6 +16,7 @@ import SnackbarProvider from "./providers/SnackbarProvider";
 // Importing Layout component which wraps the app with common UI elements (header, footer, etc.)
 import Layout from "./layout/Layout";
 
+import VisitorProvider from "./providers/VisitorProvider";
 //import reset setting
 import './styles/Global.css'
 
@@ -28,11 +29,13 @@ export default function App() {
       <CustomThemeProvider>
         {/* Wrapping the app with SnackbarProvider for handling snackbars */}
         <SnackbarProvider>
-          {/* Wrapping all components with Layout to apply common layout elements */}
-          <Layout>
-            {/* Main Router component that handles navigation and page rendering */}
-            <Router />
-          </Layout>
+          <VisitorProvider>
+            {/* Wrapping all components with Layout to apply common layout elements */}
+            <Layout>
+              {/* Main Router component that handles navigation and page rendering */}
+              <Router />
+            </Layout>
+          </VisitorProvider>
         </SnackbarProvider>
       </CustomThemeProvider>
     </BrowserRouter>
