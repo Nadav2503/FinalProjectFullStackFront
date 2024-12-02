@@ -1,7 +1,7 @@
 const initializeEditProfile = {
-    firstName: "",
-    middleName: "",
-    lastName: "",
+    first: "",
+    middle: "",
+    last: "",
     phone: "",
     imageUrl: "",
     imageAlt: "",
