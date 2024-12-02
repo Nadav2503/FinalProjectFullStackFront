@@ -13,13 +13,8 @@ export default function VisitorProvider({ children }) {
             const userFromLocalStorage = getUser();
             if (userFromLocalStorage) {
                 setVisitor(userFromLocalStorage);
-                setAuthStatus(true); // Set authenticated status to true if the user is valid
-            } else {
-                setAuthStatus(false); // Set to false if user is invalid or token is expired
+                setAuthStatus(true);
             }
-        } else {
-            setVisitor(null); // Clear visitor if there's no token
-            setAuthStatus(false); // Set authenticated status to false
         }
     }, [token]);
 
