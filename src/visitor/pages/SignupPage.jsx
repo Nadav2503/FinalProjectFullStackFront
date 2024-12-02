@@ -1,7 +1,23 @@
-import React from 'react'
+import React from "react";
+import SignupForm from "../components/SignupForm";
 
-export default function SignupPage() {
+import { Box, Container } from "@mui/material";
+
+
+const SignupPage = () => {
+
+
     return (
-        <div>SignupPage</div>
-    )
-}
+        <Container>
+            <Box
+
+            >
+                <SignupForm
+
+                />
+            </Box>
+        </Container>
+    );
+};
+
+export default SignupPage;
