@@ -13,3 +13,12 @@ export const getAllVisitors = async () => {
     }
 };
 
+// Get a visitor by ID
+export const getVisitorById = async (id) => {
+    try {
+        const { data } = await axios.get(`${API_URL}/${id}`);
+        return data;
+    } catch (error) {
+        throw new Error(error.message);
+    }
+};
