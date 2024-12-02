@@ -112,6 +112,14 @@ const SignupForm = ({
                 data={data}
             />
 
+            {/* Image Alt Text */}
+            <Input
+                name="imageAlt"
+                label="Profile Picture Description"
+                error={errors.imageAlt}
+                onChange={onInputChange}
+                data={data}
+            />
         </Form>
     );
 };
