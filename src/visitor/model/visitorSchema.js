@@ -1,5 +1,7 @@
 import Joi from "joi";
 
+const urlRegex = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/
+
 // Profile schema for visitor details
 const profileSchema = {
     username: Joi.string().min(3).max(30).required(), // Username
@@ -15,7 +17,14 @@ const profileSchema = {
     phone: Joi.string()
         .pattern(/^(?:\+972-?5\d{2}-?\d{4}|(?:\+972|0)?50-?\d{7})$/)
         .optional(), // Phone number
-    imageUrl: Joi.string().uri().optional(), // Image URL
+    imageUrl: Joi.string()
+        .trim()
+        .lowercase()
+        .pattern(urlRegex)
+        .optional()
+        .messages({
+            "string.pattern.base": "Please enter a valid URL (e.g., http://example.com)."
+        }),
     imageAlt: Joi.string().max(256).optional(), // Image alternative text
 };
 
