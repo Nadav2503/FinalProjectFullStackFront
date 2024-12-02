@@ -16,3 +16,16 @@ export const removeToken = () => {
 export const getToken = () => {
     return localStorage.getItem(TOKEN);
 }
+
+// Get the decoded user data from the token
+export const getUser = () => {
+    try {
+        const myToken = getToken();
+        if (myToken) {
+            return jwtDecode(myToken); // Decode the token to extract user information
+        }
+        return null; // Return null if no token exists
+    } catch (err) {
+        return null; // If token decoding fails, return null
+    }
+}
