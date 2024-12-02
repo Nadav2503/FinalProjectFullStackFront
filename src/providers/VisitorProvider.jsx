@@ -1,6 +1,8 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { getToken, getUser } from '../services/LocalStorageService';
 
+const VisitorContext = createContext();
+
 export default function VisitorProvider({ children }) {
     const [visitor, setVisitor] = useState(null);
     const [token, setToken] = useState(getToken());
