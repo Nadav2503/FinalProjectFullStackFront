@@ -1,15 +1,17 @@
 import { useState, useCallback } from 'react';
-import { registerVisitor, loginVisitor } from '../../services/VisitorServiceApi';
+import { registerVisitor } from '../../services/VisitorServiceApi';
 import { getUser, setTokenInLocalStorage } from '../../services/LocalStorageService';
 import { useSnack } from '../../providers/SnackbarProvider';
 import { useCurrentVisitor } from '../../providers/VisitorProvider';
 import normalizeProfileForSignup from '../helpers/normalize/normalizeProfileForSignup';
+import useLoginVisitor from './useLoginVisitor';
 
 export default function useSignupVisitor() {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
     const setSnack = useSnack();
     const { setVisitor, setToken } = useCurrentVisitor();
+    const { handleLogin } = useLoginVisitor();
 
     const handleSignup = useCallback(async (visitor) => {
         setIsLoading(true);
@@ -17,27 +19,25 @@ export default function useSignupVisitor() {
 
         try {
             const normalizedVisitor = normalizeProfileForSignup(visitor);
-            await registerVisitor(normalizedVisitor);
-
-            // Now login the user with the credentials (email & password)
-            const credentials = { email: normalizedVisitor.email, password: normalizedVisitor.password };
-            const { token } = await loginVisitor(credentials);
-
-            // Set token in local storage and state
+            const { token } = await registerVisitor(normalizedVisitor);
             setTokenInLocalStorage(token);
             setToken(token);
-
-            // Set visitor data in the context/state
             setVisitor(getUser());
+            const credentials = {
+                username_or_email: normalizedVisitor.email,
+                password: normalizedVisitor.password,
+            };
 
-            setSnack('success', 'Signup and login successful!');
+            await handleLogin(credentials);
+
+            setSnack('success', 'Signup successful!');
         } catch (err) {
             setError(err.message);
-            setSnack('error', "Signup or login failed");
+            setSnack('error', "Signup failed");
         } finally {
             setIsLoading(false);
         }
-    }, [setSnack, setToken, setVisitor]);
+    }, [setSnack, setToken, setVisitor, handleLogin]);
 
     return {
         isLoading,
