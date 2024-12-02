@@ -49,25 +49,6 @@ const SignupForm = ({
                 data={data}
             />
 
-
-
-
-
-            {/* Membership Tier */}
-            <SelectField
-                name="membershipTier"
-                label="Membership Tier"
-                error={errors.membershipTier}
-                onChange={onInputChange}
-                data={data}
-                options={[
-                    { value: "Tier 1 - Explorer", label: "Tier 1 - Explorer" },
-                    { value: "Tier 2 - Lionheart", label: "Tier 2 - Lionheart" },
-                    { value: "Tier 3 - Jungle King/Queen", label: "Tier 3 - Jungle King/Queen" },
-                    { value: "Tier 4 - Safari Leader", label: "Tier 4 - Safari Leader" },
-                ]}
-            />
-
             {/* Phone */}
             <Input
                 name="phone"
