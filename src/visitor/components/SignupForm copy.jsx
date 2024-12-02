@@ -1,7 +1,6 @@
 import React from "react";
 import Form from "../../form/Form";
 import Input from "../../form/Input";
-import SelectField from "../../form/Select";
 
 const SignupForm = ({
     onSubmit,
@@ -22,14 +21,6 @@ const SignupForm = ({
             validateForm={validateForm}
             submitLabel={submitLabel}
         >
-            {/* Username */}
-            <Input
-                name="username"
-                label="Username"
-                error={errors.username}
-                onChange={onInputChange}
-                data={data}
-            />
 
             {/* First Name */}
             <Input
