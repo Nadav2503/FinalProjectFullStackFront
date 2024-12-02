@@ -22,3 +22,14 @@ export const getVisitorById = async (id) => {
         throw new Error(error.message);
     }
 };
+
+// Register a new visitor
+export const registerVisitor = async (visitor) => {
+    try {
+        const { data } = await axios.post(`${API_URL}/register`, visitor);
+        return data;
+    } catch (error) {
+        throw new Error(error.message);
+    }
+};
+
