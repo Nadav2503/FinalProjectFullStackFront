@@ -1,6 +1,6 @@
 import React from "react";
 import Form from "../../form/Form";
-
+import Input from "../../form/Input";
 
 const LoginForm = ({
     onSubmit,
@@ -13,7 +13,14 @@ const LoginForm = ({
 }) => {
     return (
         <Form
+            title={title}
+            errors={errors}
+            onSubmit={onSubmit}
+            isSubmitting={isSubmitting}
+            validateForm={validateForm}
+            submitLabel={submitLabel}
         >
+
         </Form>
     );
 };
