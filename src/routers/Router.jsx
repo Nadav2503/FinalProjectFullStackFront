@@ -13,6 +13,7 @@ import EditExhibitPage from "../Exhibit/pages/EditExhibitPage"; // Edit an exhib
 import AnimalDetailsPage from "../animal/pages/AnimalDetailsPage";
 import EditAnimalPage from "../animal/pages/EditAnimalPage";
 import AddAnimalPage from "../animal/pages/AddAnimalPage";
+import LoginPage from "../visitor/pages/LoginPage";
 
 // Main Router component to define application routes
 export default function Router() {
@@ -39,6 +40,7 @@ export default function Router() {
             <Route path={`${ROUTES.EXHIBIT_INFO}/:exhibitId`} element={<ExhibitDetailsPage />} />
             <Route path={`${ROUTES.ANIMAL_INFO}/:animalId`} element={<AnimalDetailsPage />} />
 
+            <Route path={ROUTES.LOGIN} element={<LoginPage />} />
             {/* Fallback route for non-existent paths */}
             <Route path={ROUTES.ERROR} element={<Error />} />
         </Routes>
