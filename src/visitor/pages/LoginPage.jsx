@@ -23,7 +23,13 @@ const LoginPage = () => {
 
             >
                 <LoginForm
-
+                    title="Login to your account"
+                    submitLabel="Login"
+                    onSubmit={onSubmit}
+                    validateForm={validateForm}
+                    errors={errors}
+                    data={data}
+                    onInputChange={handleChange}
                 />
             </Box>
         </Container>
