@@ -1,7 +1,20 @@
-import React from 'react'
+import React from "react";
+import LoginForm from "../components/LoginForm";
+import { Box, Container } from "@mui/material";
 
-export default function LoginPage() {
+const LoginPage = () => {
+
     return (
-        <div>LoginPage</div>
-    )
-}
+        <Container>
+            <Box
+
+            >
+                <LoginForm
+
+                />
+            </Box>
+        </Container>
+    );
+};
+
+export default LoginPage;
