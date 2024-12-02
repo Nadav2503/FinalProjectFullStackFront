@@ -36,7 +36,11 @@ const SignupPage = () => {
     return (
         <Container>
             <Box
-
+                sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                }}
             >
                 <SignupForm
                     title="Create your account"
