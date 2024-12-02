@@ -14,7 +14,6 @@ export default function useGetAllVisitors() {
 
         try {
             const data = await getAllVisitors();  // API call to get all visitors
-
             setVisitors(data);  // Update state with the fetched visitors
             setSnack('success', 'Visitors loaded successfully!');
         } catch (err) {
