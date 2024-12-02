@@ -29,3 +29,15 @@ export const getUser = () => {
         return null; // If token decoding fails, return null
     }
 }
+
+// Check if the user is authenticated (i.e., if token exists and is valid)
+export const isAuthenticated = () => {
+    const token = getToken();
+    if (!token) {
+        return false;
+    }
+
+    const user = getUser();
+    // You can also add additional checks like token expiration here if necessary
+    return !!user;
+}
