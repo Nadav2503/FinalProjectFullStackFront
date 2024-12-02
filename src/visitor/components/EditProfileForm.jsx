@@ -22,27 +22,27 @@ const EditProfileForm = ({
 
             {/* First Name */}
             <Input
-                name="firstName"
+                name="first"
                 label="First Name"
-                error={errors.firstName}
+                error={errors.first}
                 onChange={onInputChange}
                 data={data}
             />
 
             {/* Middle Name */}
             <Input
-                name="middleName"
+                name="middle"
                 label="Middle Name"
-                error={errors.middleName}
+                error={errors.middle}
                 onChange={onInputChange}
                 data={data}
             />
 
             {/* Last Name */}
             <Input
-                name="lastName"
+                name="last"
                 label="Last Name"
-                error={errors.lastName}
+                error={errors.last}
                 onChange={onInputChange}
                 data={data}
             />
