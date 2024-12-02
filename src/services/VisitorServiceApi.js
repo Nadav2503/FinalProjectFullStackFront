@@ -36,8 +36,9 @@ export const registerVisitor = async (visitor) => {
 // Login a visitor
 export const loginVisitor = async (credentials) => {
     try {
-        const { data } = await axios.post(`${API_URL}/login`, credentials);
-        return data; // Return token or user data depending on your API structure
+        const response = await axios.post(`${API_URL}/login`, credentials);
+        const data = response.data;
+        return data;
     } catch (error) {
         throw new Error(error.message);
     }
