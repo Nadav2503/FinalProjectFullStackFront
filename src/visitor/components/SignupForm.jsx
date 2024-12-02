@@ -58,6 +58,16 @@ const SignupForm = ({
                 data={data}
             />
 
+            {/* Email */}
+            <Input
+                name="email"
+                label="Email"
+                type="email"
+                error={errors.email}
+                onChange={onInputChange}
+                data={data}
+            />
+
 
         </Form>
     );
