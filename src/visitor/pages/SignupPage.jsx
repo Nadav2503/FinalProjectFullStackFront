@@ -39,7 +39,13 @@ const SignupPage = () => {
 
             >
                 <SignupForm
-
+                    title="Create your account"
+                    submitLabel="Sign Up"
+                    onSubmit={onSubmit}
+                    validateForm={validateForm}
+                    errors={errors}
+                    data={data}
+                    onInputChange={handleChange}
                 />
             </Box>
         </Container>
