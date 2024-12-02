@@ -2,7 +2,7 @@ import React from "react";
 import Form from "../../form/Form";
 import Input from "../../form/Input";
 
-const SignupForm = ({
+const EditProfileForm = ({
     onSubmit,
     onInputChange,
     errors = {},
@@ -80,4 +80,4 @@ const SignupForm = ({
     );
 };
 
-export default SignupForm;
+export default EditProfileForm;
