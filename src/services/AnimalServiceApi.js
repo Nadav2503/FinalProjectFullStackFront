@@ -24,10 +24,15 @@ export const getAnimalById = async (id) => {
     }
 };
 
-// Create a new animal 
+
+// Create a new animal (Admin or Tier 4)
 export const createAnimal = async (animal) => {
     try {
-        const { data } = await axios.post(API_URL, animal);
+        const { data } = await axios.post(API_URL, animal, {
+            headers: {
+                "x-auth-token": getToken(),
+            },
+        });
         return data;
     } catch (error) {
         throw new Error(error.message);
