@@ -39,10 +39,14 @@ export const createAnimal = async (animal) => {
     }
 };
 
-// Update an animal
+// Update an animal (Admin only)
 export const updateAnimal = async (id, animal) => {
     try {
-        const { data } = await axios.put(`${API_URL}/${id}`, animal);
+        const { data } = await axios.put(`${API_URL}/${id}`, animal, {
+            headers: {
+                "x-auth-token": getToken(),
+            },
+        });
         return data;
     } catch (error) {
         throw new Error(error.message);
