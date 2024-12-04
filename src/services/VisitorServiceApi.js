@@ -21,7 +21,11 @@ export const getAllVisitors = async () => {
 // Get a visitor by ID
 export const getVisitorById = async (id) => {
     try {
-        const { data } = await axios.get(`${API_URL}/${id}`);
+        const { data } = await axios.get(`${API_URL}/${id}`, {
+            headers: {
+                "x-auth-token": getToken(), // Use the getToken function from your utils
+            },
+        });
         return data;
     } catch (error) {
         throw new Error(error.message);
