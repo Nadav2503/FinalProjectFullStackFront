@@ -60,7 +60,13 @@ export default function AddAnimalPage() {
 
     return (
         <Container>
-            <Box>
+            <Box
+                sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                }}
+            >
                 <AnimalAddForm
                     title="Add New Animal"
                     submitLabel="Create Animal"
