@@ -53,10 +53,14 @@ export const updateAnimal = async (id, animal) => {
     }
 };
 
-// Update endangered status of an animal 
+// Update endangered status of an animal (Admin only)
 export const updateEndangeredStatus = async (id, status) => {
     try {
-        const { data } = await axios.patch(`${API_URL}/${id}/endangered`, { status });
+        const { data } = await axios.patch(`${API_URL}/${id}/endangered`, { status }, {
+            headers: {
+                "x-auth-token": getToken(),
+            },
+        });
         return data;
     } catch (error) {
         throw new Error(error.message);
