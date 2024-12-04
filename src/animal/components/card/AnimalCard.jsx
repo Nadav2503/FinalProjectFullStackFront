@@ -29,7 +29,7 @@ export default function AnimalCard({ animal, handleDelete, handleEditAnimal, han
                 handleDelete={handleDelete}
                 handleEditAnimal={handleEditAnimal}
                 handleFavoriteToggle={handleFavoriteClick}
-
+                isLiked={isLiked}
             />
         </Card>
     );
