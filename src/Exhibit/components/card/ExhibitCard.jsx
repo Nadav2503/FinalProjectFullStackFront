@@ -10,9 +10,8 @@ import ROUTES from '../../../routers/routerModel';
 export default function ExhibitCard({ exhibit, handleDelete, handleEditExhibit }) {
     const navigate = useNavigate(); // Initialize useNavigate hook
 
-    // Navigate to the details page when the card is clicked
     const handleCardClick = () => {
-        navigate(`${ROUTES.EXHIBIT_INFO}/${exhibit._id}`); // Navigate to exhibit details using exhibit._id
+        navigate(`${ROUTES.EXHIBIT_INFO}/${exhibit._id}`);
     };
 
     return (
@@ -26,7 +25,7 @@ export default function ExhibitCard({ exhibit, handleDelete, handleEditExhibit }
                     status={exhibit.status}
                 />
             </CardActionArea>
-            <ExhibitActionBar exhibitId={exhibit._id} handleDelete={handleDelete} handleEditExhibit={handleEditExhibit} />
+            <ExhibitActionBar exhibitId={exhibit._id} handleDelete={(id) => handleDelete(id, exhibit.animals)} handleEditExhibit={handleEditExhibit} />
         </Card>
     );
 }
