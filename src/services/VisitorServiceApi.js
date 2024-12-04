@@ -38,7 +38,6 @@ export const registerVisitor = async (visitor) => {
         const { data } = await axios.post(`${API_URL}/register`, visitor);
         return data;
     } catch (error) {
-        console.error("Error registering visitor:", error);
         throw new Error(error.message);
     }
 };
@@ -57,7 +56,11 @@ export const loginVisitor = async (credentials) => {
 // Update a visitor's profile
 export const updateVisitorProfile = async (id, visitor) => {
     try {
-        const { data } = await axios.put(`${API_URL}/${id}`, visitor);
+        const { data } = await axios.put(`${API_URL}/${id}`, visitor, {
+            headers: {
+                "x-auth-token": getToken(), // Use the getToken function from your utils
+            },
+        });
         return data;
     } catch (error) {
         throw new Error(error.message);
