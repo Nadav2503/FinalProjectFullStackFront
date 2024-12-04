@@ -10,6 +10,7 @@ const ROUTES = {
     EDIT_ANIMAL: "/edit-animal", // Edit animal route (without dynamic id here)
     LOGIN: "/login",
     PROFILE: "/profile",
+    EDIT_PROFILE: "/edit-profile",
     SIGNUP: "/signup",
     ERROR: "*", // Fallback route for non-existent paths
 };

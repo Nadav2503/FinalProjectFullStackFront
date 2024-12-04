@@ -16,6 +16,7 @@ import AddAnimalPage from "../animal/pages/AddAnimalPage";
 import LoginPage from "../visitor/pages/LoginPage";
 import SignupPage from "../visitor/pages/SignupPage";
 import ProfilePage from "../visitor/pages/ProfilePage";
+import EditProfilePage from "../visitor/pages/EditProfilePage";
 
 // Main Router component to define application routes
 export default function Router() {
@@ -27,6 +28,7 @@ export default function Router() {
             {/* Route for the About page */}
             <Route path={ROUTES.ABOUT} element={<About />} />
             <Route path={ROUTES.PROFILE} element={<ProfilePage />} />
+            <Route path={ROUTES.EDIT_PROFILE} element={<EditProfilePage />} />
 
             {/* Route for the exhibits page */}
             <Route path={ROUTES.EXHIBITS} element={<ExhibitListPage />} />
