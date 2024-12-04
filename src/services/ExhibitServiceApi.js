@@ -22,9 +22,14 @@ export const getExhibitById = async (id) => {
     }
 };
 
+// Create a new exhibit (Admin only)
 export const createExhibit = async (exhibit) => {
     try {
-        const { data } = await axios.post(API_URL, exhibit);
+        const { data } = await axios.post(API_URL, exhibit, {
+            headers: {
+                "x-auth-token": getToken(),
+            },
+        });
         return data;
     } catch (error) {
         throw new Error(error.message);
