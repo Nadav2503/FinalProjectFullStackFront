@@ -8,10 +8,12 @@ import useDeleteExhibit from "../hooks/useDeleteExhibit"; // Import the custom h
 import ConfirmDialog from "../../general/ConfirmDialog"; // Import ConfirmDialog
 import useExhibitData from "../hooks/useExhibitData";
 import ROUTES from "../../routers/routerModel";
+import { useSnack } from "../../providers/SnackbarProvider";
 
 export default function ExhibitListPage() {
     const { exhibits, isLoading, error, fetchExhibits } = useExhibitData();
     const navigate = useNavigate(); // Hook for navigation
+    const setSnack = useSnack();
 
     const { handleDeleteExhibit } = useDeleteExhibit();
     const [openConfirmDialog, setOpenConfirmDialog] = useState(false); // State for the confirmation dialog
@@ -25,7 +27,11 @@ export default function ExhibitListPage() {
         navigate(ROUTES.ADD_EXHIBIT); // Navigate to AddExhibitPage
     };
 
-    const handleDelete = (id) => {
+    const handleDelete = (id, animals) => {
+        if (animals && animals.length > 0) {
+            setSnack("error", "Exhibit cannot be deleted because it contains animals.");
+            return;
+        }
         setExhibitToDelete(id); // Set the exhibit ID to be deleted
         setOpenConfirmDialog(true); // Show the confirmation dialog
     };
