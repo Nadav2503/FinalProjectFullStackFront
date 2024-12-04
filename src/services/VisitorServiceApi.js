@@ -70,7 +70,11 @@ export const updateVisitorProfile = async (id, visitor) => {
 // Delete a visitor (admin only)
 export const deleteVisitor = async (id) => {
     try {
-        const { data } = await axios.delete(`${API_URL}/${id}`);
+        const { data } = await axios.delete(`${API_URL}/${id}`, {
+            headers: {
+                "x-auth-token": getToken(), // Use the getToken function from your utils
+            },
+        });
         return data;
     } catch (error) {
         throw new Error(error.message);
