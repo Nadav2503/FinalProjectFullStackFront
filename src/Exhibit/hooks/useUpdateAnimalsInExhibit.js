@@ -1,40 +1,46 @@
-import { useCallback, useState } from "react";
-import { updateAnimalsInExhibit } from "../../services/ExhibitServiceApi";
+import { useState, useCallback } from "react";
+import { getAnimalsByExhibit } from "../../services/AnimalServiceApi";
 import { useSnack } from "../../providers/SnackbarProvider";
+import { useCurrentVisitor } from "../../providers/VisitorProvider";
+import { getVisitorById } from "../../services/VisitorServiceApi";
 
-export default function useUpdateAnimalsInExhibit() {
-    const [isLoading, setIsLoading] = useState(false);
+const useGetAnimalsByExhibit = () => {
+    const [animals, setAnimals] = useState([]);
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const { visitor } = useCurrentVisitor();
     const setSnack = useSnack();
 
-    const handleUpdateAnimals = useCallback(
-        async (id, { addAnimals = [], removeAnimals = [] }) => {
-            setIsLoading(true);
-            setError(null);
+    const fetchAnimalsByExhibit = useCallback(async (exhibitId) => {
+        if (!visitor || !visitor._id) {
+            setError("Visitor ID is missing.");
+            return;
+        }
 
-            try {
-                const data = await updateAnimalsInExhibit(id, {
-                    addAnimals,
-                    removeAnimals,
-                });
-                // Provide feedback based on actions performed
-                if (addAnimals.length > 0) {
-                    setSnack("success", `${addAnimals.length} animals added to the exhibit!`);
-                }
-                if (removeAnimals.length > 0) {
-                    setSnack("success", `${removeAnimals.length} animals removed from the exhibit!`);
-                }
+        setLoading(true);
+        setError(null);
 
-                return data;
-            } catch (err) {
-                setError(err.message);
-                setSnack("error", err.response?.data || "Failed to update exhibit animals.");
-            } finally {
-                setIsLoading(false);
-            }
-        },
-        [setSnack]
-    );
+        try {
+            const fullVisitorData = await getVisitorById(visitor._id);
+            const data = await getAnimalsByExhibit(exhibitId);
+            const updatedAnimals = data.map(animal => ({
+                ...animal,
+                isLiked: fullVisitorData.preferredAnimals.includes(animal._id),
+            }));
 
-    return { isLoading, error, handleUpdateAnimals };
-}
+            setAnimals(updatedAnimals);
+            setSnack('success', `Successfully fetched animals for exhibit ${exhibitId}!`);
+        } catch (err) {
+            setError(err.message);
+            setSnack('error', `Failed to fetch animals: ${err.message}`);
+        } finally {
+            setLoading(false);
+        }
+    }, [visitor, setSnack]);
+
+
+    return { animals, loading, error, fetchAnimalsByExhibit };
+};
+
+export default useGetAnimalsByExhibit;
+

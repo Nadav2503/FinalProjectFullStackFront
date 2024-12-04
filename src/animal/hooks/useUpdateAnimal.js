@@ -13,7 +13,7 @@ const useUpdateAnimal = () => {
         setLoading(true);
         setError(null);
         try {
-            const normalizedAnimal = normalizeAnimal(animalFromClient)
+            const normalizedAnimal = normalizeAnimal(animalFromClient);
             const updatedAnimal = await updateAnimal(id, normalizedAnimal);
             setAnimal(updatedAnimal);
             setSnack('success', `Animal ${id} updated successfully!`);
@@ -23,7 +23,7 @@ const useUpdateAnimal = () => {
         } finally {
             setLoading(false);
         }
-    }, [setSnack, normalizeAnimal]);
+    }, [setSnack]);
 
     return { animal, loading, error, handleUpdateAnimal };
 };
