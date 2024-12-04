@@ -2,13 +2,13 @@ import { useState, useCallback } from 'react';
 import { getVisitorById } from '../../services/VisitorServiceApi';
 import { useSnack } from '../../providers/SnackbarProvider';
 
-export default function useGetUserById() {
-    const [user, setUser] = useState(null);
+export default function useGetVisitorById() {
+    const [visitor, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const setSnack = useSnack();
 
-    const fetchUserById = useCallback(async (id) => {
+    const fetchVisitorById = useCallback(async (id) => {
         setLoading(true);
         setError(null);
         try {
@@ -23,5 +23,5 @@ export default function useGetUserById() {
         }
     }, [setSnack]);
 
-    return { user, loading, error, fetchUserById };
+    return { visitor, loading, error, fetchVisitorById };
 }
