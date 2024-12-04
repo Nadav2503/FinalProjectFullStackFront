@@ -84,7 +84,11 @@ export const deleteVisitor = async (id) => {
 // Like an animal (requires specific visitor tier)
 export const likeAnimal = async (visitorId, animalId) => {
     try {
-        const { data } = await axios.patch(`${API_URL}/${visitorId}/like/${animalId}`);
+        const { data } = await axios.patch(`${API_URL}/${visitorId}/like/${animalId}`, null, {
+            headers: {
+                "x-auth-token": getToken(), // Use the getToken function from your utils
+            },
+        });
         return data;
     } catch (error) {
         throw new Error(error.message);
