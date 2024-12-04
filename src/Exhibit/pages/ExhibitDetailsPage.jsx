@@ -166,8 +166,8 @@ export default function ExhibitDetailPage() {
 
             <ConfirmDialog
                 open={openConfirmDialog}
+                onClose={handleCancelDelete}
                 onConfirm={handleConfirmDelete}
-                onCancel={handleCancelDelete}
                 title="Confirm Animal Deletion"
                 content={`Are you sure you want to delete this animal?`}
             />
