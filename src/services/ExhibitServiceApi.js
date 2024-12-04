@@ -61,7 +61,11 @@ export const deleteExhibit = async (id) => {
 
 export const updateAnimalsInExhibit = async (id, animals) => {
     try {
-        const { data } = await axios.patch(`${API_URL}/${id}/animals`, animals);
+        const { data } = await axios.patch(`${API_URL}/${id}/animals`, animals, {
+            headers: {
+                "x-auth-token": getToken(),
+            },
+        });
         return data;
     } catch (error) {
         throw new Error(error.message);
