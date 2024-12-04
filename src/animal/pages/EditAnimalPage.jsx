@@ -2,7 +2,6 @@ import React, { useCallback, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Box, Container } from "@mui/material";
 import animalSchema from "../model/animalSchema";
-import normalizeAnimal from "../helpers/normalizeAnimal";
 import initializeAnimal from "../helpers/initializeAnimal";
 import ROUTES from "../../routers/routerModel";
 import AnimalEditForm from "../components/AnimalEditForm";
@@ -17,11 +16,10 @@ export default function EditAnimalPage() {
     const { animal, fetchAnimalById } = useGetAnimalById();
     const { handleUpdateAnimal } = useUpdateAnimal();
 
-    // Handle form submission
     const handleSubmit = useCallback(
         async (formData) => {
             try {
-                await handleUpdateAnimal(id, formData);
+                await handleUpdateAnimal(id, formData); // Submit form
                 navigate(ROUTES.ANIMALS);
             } catch (error) {
                 console.error("Failed to update animal:", error);
@@ -37,17 +35,13 @@ export default function EditAnimalPage() {
         handleSubmit // Form submission handler
     );
 
-    // Fetch the animal data on mount
     useEffect(() => {
         fetchAnimalById(id); // Fetch animal data by ID
     }, [id, fetchAnimalById]);
 
-    // Once animal data is fetched, normalize and set form data
     useEffect(() => {
         if (animal) {
-            const normalizedData = normalizeAnimal(animal);
-            const mappedData = mapAnimalToModel(normalizedData);
-            setData(mappedData);
+            setData(mapAnimalToModel(animal)); // Set data in form
         }
     }, [animal, setData]);
 
