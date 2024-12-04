@@ -4,19 +4,25 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import CardActionBar from '../../../general/card/CardActionBar';
 
-export default function AnimalActionBar({ animalId, handleDelete, handleEditAnimal, handleFavoriteToggle }) {
+export default function AnimalActionBar({ animalId, handleDelete, handleEditAnimal, handleFavoriteToggle, isLiked }) {
     const actions = [
         {
-            onClick: () => handleEditAnimal(animalId), // Call handleEditAnimal when the edit icon is clicked
+            onClick: () => handleEditAnimal(animalId),
             icon: <EditIcon />,
         },
         {
-            onClick: () => handleDelete(animalId), // Call handleDelete when the delete icon is clicked
+            onClick: () => handleDelete(animalId),
             icon: <DeleteIcon />,
         },
         {
-            onClick: () => handleFavoriteToggle(animalId), // Call handleFavoriteToggle when the favorite icon is clicked
-            icon: <FavoriteIcon />,
+            onClick: () => handleFavoriteToggle(animalId),
+            icon: (
+                <FavoriteIcon
+                    sx={{
+                        color: isLiked ? 'red' : 'gray',
+                    }}
+                />
+            ),
         },
     ];
 
