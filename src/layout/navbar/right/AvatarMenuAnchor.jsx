@@ -29,7 +29,7 @@ export default function AvatarMenu({ anchorEl, onClose }) {
             >
                 {/* Navigation items with close on click */}
                 <NavBarItem label="Profile" variant="vertical" onClick={onClose} />
-                <NavBarItem label="Edit Profile" variant="vertical" onClick={onClose} />
+                <NavBarItem label="Edit Profile" variant="vertical" to={ROUTES.EDIT_PROFILE} onClick={onClose} />
                 <NavBarItem label="Login" variant="vertical" onClick={onClose} to={ROUTES.LOGIN} />
                 <NavBarItem label="Signup" variant="vertical" onClick={onClose} to={ROUTES.SIGNUP} />
                 <NavBarItem label="Logout" variant="vertical" to={ROUTES.ROOT} onClick={() => { handleLogout(); onClose(); }} />
