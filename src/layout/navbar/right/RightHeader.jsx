@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box } from '@mui/material';
-import AvatarProfileImage from './Avatar'; // Component to display the avatar
-import AvatarMenu from './AvatarMenuAnchor'; // Component for the dropdown menu
-import useAnchor from '../useAnchor'; // Custom hook for managing anchor state
+import AvatarProfileImage from './Avatar';
+import AvatarMenu from './AvatarMenuAnchor';
+import useAnchor from '../useAnchor';
+import { useCurrentVisitor } from '../../../providers/VisitorProvider';
+
 
 export default function RightHeader() {
-    // Destructured state and handlers from the custom hook
     const { anchorEl, handleAnchorClick, handleAnchorClose } = useAnchor();
+    const { visitor } = useCurrentVisitor(); // Access visitor context
+    const [username, setUsername] = useState(null);
 
     return (
         <Box
@@ -15,12 +18,13 @@ export default function RightHeader() {
                 alignItems: 'center',
                 justifyContent: 'center',
                 position: 'relative',
+                gap: 1, // Adds spacing between the avatar and username
             }}
         >
-            {/* Avatar button - toggles the dropdown menu */}
+            {/* Avatar button */}
             <AvatarProfileImage onClick={handleAnchorClick} />
 
-            {/* Dropdown menu - anchored to the avatar */}
+            {/* Dropdown menu */}
             <AvatarMenu anchorEl={anchorEl} onClose={handleAnchorClose} />
         </Box>
     );
