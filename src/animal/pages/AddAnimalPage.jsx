@@ -12,8 +12,8 @@ import useUpdateAnimalsInExhibit from "../../Exhibit/hooks/useUpdateAnimalsInExh
 export default function AddAnimalPage() {
     const location = useLocation();
     const [exhibitId, setExhibitId] = useState(null);
-    const { handleCreateAnimal } = useCreateAnimal();
-    const { handleUpdateAnimals } = useUpdateAnimalsInExhibit(); // Get the hook to update exhibit animals
+    const { handleCreateAnimal, animal } = useCreateAnimal();
+    const { handleUpdateAnimals } = useUpdateAnimalsInExhibit();
     const navigate = useNavigate();
 
     // Extract exhibitId from location state
@@ -23,19 +23,33 @@ export default function AddAnimalPage() {
         }
     }, [location]);
 
+    // Effect to add the created animal to the exhibit
+    useEffect(() => {
+        const addAnimalToExhibit = async () => {
+            if (animal && exhibitId) {
+                try {
+                    await handleUpdateAnimals(exhibitId, {
+                        addAnimals: [animal._id],
+                    });
+                    navigate(ROUTES.animalList);
+                } catch (error) {
+                    console.error("Error adding animal to exhibit:", error);
+                }
+            }
+        };
+
+        addAnimalToExhibit();
+    }, [animal, exhibitId, handleUpdateAnimals, navigate]);
+
     const handleSubmit = useCallback(
         async (formData) => {
             try {
-                await handleCreateAnimal(formData); // Create the animal
-                if (exhibitId) {
-                    await handleUpdateAnimals(exhibitId, animal._id); // Update the animals in the exhibit
-                }
-                navigate(ROUTES.animalList); // Navigate to the animal list page
+                await handleCreateAnimal(formData);
             } catch (error) {
-                console.error("Error in handleSubmit:", error);
+                console.error("Error creating animal:", error);
             }
         },
-        [exhibitId, handleCreateAnimal, handleUpdateAnimals, navigate]
+        [handleCreateAnimal]
     );
 
     const { data, errors, handleChange, validateForm, onSubmit } = useForm(

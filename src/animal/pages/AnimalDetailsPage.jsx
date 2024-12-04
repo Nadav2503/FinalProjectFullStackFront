@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Container, Typography, Box, Divider, Switch, FormControlLabel } from "@mui/material";
 import Loader from "../../general/Loader";
 import Error from "../../general/Error";
 import useGetAnimalById from "../hooks/useGetAnimalById";
 import PageHeader from "../../general/PageHeader";
-import CustomButton from "../../general/CustomButton";
-import { ArrowBack } from "@mui/icons-material";
 import useUpdateEndangeredStatus from "../hooks/useUpdateEndangeredStatus";
 
 export default function AnimalDetailPage() {
