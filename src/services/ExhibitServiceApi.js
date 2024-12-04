@@ -36,9 +36,14 @@ export const createExhibit = async (exhibit) => {
     }
 };
 
+// Update an exhibit (Admin only)
 export const updateExhibit = async (id, exhibit) => {
     try {
-        const { data } = await axios.put(`${API_URL}/${id}`, exhibit);
+        const { data } = await axios.put(`${API_URL}/${id}`, exhibit, {
+            headers: {
+                "x-auth-token": getToken(),
+            },
+        });
         return data;
     } catch (error) {
         throw new Error(error.message);
