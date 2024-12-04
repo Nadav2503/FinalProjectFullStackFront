@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import AvatarProfileImage from './Avatar';
 import AvatarMenu from './AvatarMenuAnchor';
 import useAnchor from '../useAnchor';
@@ -40,6 +40,12 @@ export default function RightHeader() {
             {/* Avatar button */}
             <AvatarProfileImage onClick={handleAnchorClick} />
 
+            {/* Show the username if it has been fetched */}
+            {username && (
+                <Typography variant="body1" color="textPrimary">
+                    {username}
+                </Typography>
+            )}
 
             {/* Dropdown menu */}
             <AvatarMenu anchorEl={anchorEl} onClose={handleAnchorClose} />
