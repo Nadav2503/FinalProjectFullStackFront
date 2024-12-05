@@ -38,7 +38,7 @@ export default function ExhibitDetailPage() {
             fetchExhibitById(exhibitId);
             fetchAnimalsByExhibit(exhibitId);
         }
-    }, [exhibitId, fetchExhibitById, fetchAnimalsByExhibit]);
+    }, [visitor, exhibitId, fetchExhibitById, fetchAnimalsByExhibit]);
 
     const handleAddAnimal = () => {
         navigate(ROUTES.ADD_ANIMAL, { state: { exhibitId: exhibitId } });
