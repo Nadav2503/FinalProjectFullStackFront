@@ -37,6 +37,13 @@ export default function ProfilePage() {
                             <Typography variant="body1" color="textSecondary">{visitor.username}</Typography>
                         </Box>
                     </Box>
+
+                    <Grid container spacing={2}>
+                        <Grid item xs={12} sm={6}>
+                            <Typography variant="body1"><strong>Email:</strong> {visitor.email}</Typography>
+                        </Grid>
+
+                    </Grid>
                 </CardContent>
             </Card></Container>
     )
