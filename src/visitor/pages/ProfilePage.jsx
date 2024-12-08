@@ -63,6 +63,16 @@ export default function ProfilePage() {
                         </CustomButton>
                     </Box>
                 </CardContent>
-            </Card></Container>
+            </Card>
+            {/* Preferred Animals Section */}
+            <Box mt={4}>
+                <Typography variant="h6" mb={2}>
+                    Preferred Animals
+                </Typography>
+
+                {/* Display Animal Cards */}
+                <Container sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 2, alignItems: 'stretch' }}>
+                </Container>
+            </Box></Container>
     )
 }
