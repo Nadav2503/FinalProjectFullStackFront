@@ -52,6 +52,14 @@ export default function ProfilePage() {
                             <Typography variant="body1"><strong>Admin:</strong> {visitor.isAdmin ? "Yes" : "No"}</Typography>
                         </Grid>
                     </Grid>
+
+                    <Box display="flex" justifyContent="flex-end" mt={3}>
+                        <CustomButton
+
+                        >
+                            Edit Profile
+                        </CustomButton>
+                    </Box>
                 </CardContent>
             </Card></Container>
     )
