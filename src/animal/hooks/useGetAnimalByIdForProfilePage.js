@@ -23,7 +23,7 @@ const useGetAnimalByIdForProfilePage = () => {
     }, [setSnack]);
 
 
-    return { animal, loading, error, fetchAnimalByIdForProfilePage };
+    return { loading, error, fetchAnimalByIdForProfilePage };
 };
 
 export default useGetAnimalByIdForProfilePage;

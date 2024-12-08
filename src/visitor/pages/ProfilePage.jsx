@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Typography, Container, Card, CardContent, Avatar, Grid, Box } from "@mui/material";
 import { getUser } from "../../services/LocalStorageService";
 import useGetVisitorById from "../hooks/useVisitorDataById";
@@ -13,7 +13,7 @@ import useGetAnimalByIdForProfilePage from "../../animal/hooks/useGetAnimalByIdF
 export default function ProfilePage() {
     const user = getUser();
     const { visitor, loading, error, fetchVisitorById } = useGetVisitorById();
-    const { fetchAnimalByIdForProfilePage, animal } = useGetAnimalByIdForProfilePage();
+    const { fetchAnimalByIdForProfilePage } = useGetAnimalByIdForProfilePage();
     const [animalsDetails, setAnimalsDetails] = useState([]);
     const { handleLikeAnimal } = useLikeAnimal();
 
@@ -22,6 +22,30 @@ export default function ProfilePage() {
             fetchVisitorById(user._id);
         }
     }, [user, visitor, fetchVisitorById]);
+
+    useEffect(() => {
+        if (visitor && visitor.preferredAnimals) {
+            const fetchAnimals = async () => {
+                try {
+                    const animalDetails = await Promise.all(
+                        visitor.preferredAnimals.map(async (animalId) => {
+                            const animalData = await fetchAnimalByIdForProfilePage(animalId);
+                            return {
+                                ...animalData,
+                                isLiked: visitor.preferredAnimals.includes(animalId),
+                            };
+                        })
+                    );
+                    setAnimalsDetails(animalDetails);
+                } catch (err) {
+                    console.error("Error fetching animal details:", err);
+                }
+            };
+
+            fetchAnimals();
+        }
+    }, [visitor, fetchAnimalByIdForProfilePage]);
+
 
     const handleFavoriteToggle = (animalId) => {
         handleLikeAnimal(animalId);
