@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import { getUser } from "../../services/LocalStorageService";
 import Loader from "../../general/Loader";
 import Error from "../../general/Error";
+import { Container } from "@mui/material";
+import PageHeader from "../../general/PageHeader";
 export default function ProfilePage() {
     const user = getUser();  // Decode the token and get the user data (id, etc.)
     const { visitor, loading, error, fetchVisitorById } = useGetVisitorById();
@@ -17,6 +19,8 @@ export default function ProfilePage() {
     }
     if (!visitor) return <Error errorMessage="Visitor not found." />;
     return (
-        <div>ProfilePage</div>
+        <Container><PageHeader
+
+        /></Container>
     )
 }
