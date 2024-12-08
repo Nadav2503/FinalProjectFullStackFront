@@ -42,6 +42,9 @@ export default function ProfilePage() {
                         <Grid item xs={12} sm={6}>
                             <Typography variant="body1"><strong>Email:</strong> {visitor.email}</Typography>
                         </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <Typography variant="body1"><strong>Phone:</strong> {visitor.phone || "N/A"}</Typography>
+                        </Grid>
 
                     </Grid>
                 </CardContent>
