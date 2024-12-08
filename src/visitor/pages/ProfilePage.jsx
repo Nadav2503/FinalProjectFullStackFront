@@ -32,6 +32,10 @@ export default function ProfilePage() {
                             src={visitor.image?.url || "/images/avatar.png"}
                             sx={{ width: 100, height: 100, mr: 2, borderRadius: '50%' }}
                         />
+                        <Box>
+                            <Typography variant="h5">{`${visitor.name.first} ${visitor.name.middle} ${visitor.name.last}`}</Typography>
+                            <Typography variant="body1" color="textSecondary">{visitor.username}</Typography>
+                        </Box>
                     </Box>
                 </CardContent>
             </Card></Container>
