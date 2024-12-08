@@ -6,15 +6,21 @@ import Loader from "../../general/Loader";
 import PageHeader from "../../general/PageHeader";
 import CustomButton from "../../general/CustomButton";
 import Error from "../../general/Error";
+import AnimalCard from "../../animal/components/card/AnimalCard";
+
 export default function ProfilePage() {
     const user = getUser();  // Decode the token and get the user data (id, etc.)
     const { visitor, loading, error, fetchVisitorById } = useGetVisitorById();
+
     useEffect(() => {
         if (user && !visitor) {
             fetchVisitorById(user._id);
         }
     }, [user, visitor, fetchVisitorById]);
+
+
     if (loading) return <Loader />;
+
     if (error) {
         const errorMessage = typeof error === "string" ? error : error.message || "An unknown error occurred.";
         return <Error errorMessage={errorMessage} />;
@@ -73,8 +79,19 @@ export default function ProfilePage() {
                 </Typography>
 
                 {/* Display Animal Cards */}
-                <Container sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 2, alignItems: 'stretch' }}>
+                <Container sx={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 2, alignItems: "stretch" }}>
+                    {animalsDetails.map((animal) => (
+                        <AnimalCard
+                            key={animal._id}
+                            animal={animal}
+                            handleFavoriteToggle={handleFavoriteToggle}
+                            isLiked={animal.isLiked}
+                            handleDelete={null}
+                            handleEditAnimal={null}
+                        />
+                    ))}
                 </Container>
-            </Box></Container>
+            </Box>
+        </Container>
     )
 }
