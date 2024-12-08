@@ -3,7 +3,6 @@ import { getAnimalById } from "../../services/AnimalServiceApi";
 import { useSnack } from "../../providers/SnackbarProvider";
 
 const useGetAnimalByIdForProfilePage = () => {
-    const [animal, setAnimal] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const setSnack = useSnack();
@@ -13,8 +12,8 @@ const useGetAnimalByIdForProfilePage = () => {
         setError(null);
         try {
             const data = await getAnimalById(id);
-            setAnimal(data);
             setSnack('success', `Animal ${id} fetched successfully!`);
+            return data;
         } catch (err) {
             setError(err.message);
             setSnack('error', `Failed to fetch animal ${id}`);
