@@ -7,16 +7,20 @@ import PageHeader from "../../general/PageHeader";
 import CustomButton from "../../general/CustomButton";
 import Error from "../../general/Error";
 import AnimalCard from "../../animal/components/card/AnimalCard";
+import useLikeAnimal from "../hooks/useLikeAnimal";
+import useGetAnimalByIdForProfilePage from "../../animal/hooks/useGetAnimalByIdForProfilePage";
 
 export default function ProfilePage() {
-    const user = getUser();  // Decode the token and get the user data (id, etc.)
+    const user = getUser();
     const { visitor, loading, error, fetchVisitorById } = useGetVisitorById();
+    const { fetchAnimalByIdForProfilePage, animal } = useGetAnimalByIdForProfilePage();
+    const { handleLikeAnimal } = useLikeAnimal();
 
     useEffect(() => {
         if (user && !visitor) {
             fetchVisitorById(user._id);
         }
-    }, [user, visitor, fetchVisitorById]);
+    }, [visitor, fetchVisitorById]);
 
 
     if (loading) return <Loader />;
@@ -25,7 +29,9 @@ export default function ProfilePage() {
         const errorMessage = typeof error === "string" ? error : error.message || "An unknown error occurred.";
         return <Error errorMessage={errorMessage} />;
     }
+
     if (!visitor) return <Error errorMessage="Visitor not found." />;
+
     return (
         <Container><PageHeader
             title={`Welcome to Your Profile, ${visitor.name.first}!`}
