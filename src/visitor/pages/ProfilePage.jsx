@@ -55,7 +55,9 @@ export default function ProfilePage() {
 
                     <Box display="flex" justifyContent="flex-end" mt={3}>
                         <CustomButton
-
+                            variant="contained"
+                            color="secondary"
+                            onClick={() => window.location.href = "/profile/edit"}
                         >
                             Edit Profile
                         </CustomButton>
