@@ -14,14 +14,23 @@ export default function ProfilePage() {
     const user = getUser();
     const { visitor, loading, error, fetchVisitorById } = useGetVisitorById();
     const { fetchAnimalByIdForProfilePage, animal } = useGetAnimalByIdForProfilePage();
+    const [animalsDetails, setAnimalsDetails] = useState([]);
     const { handleLikeAnimal } = useLikeAnimal();
 
     useEffect(() => {
         if (user && !visitor) {
             fetchVisitorById(user._id);
         }
-    }, [visitor, fetchVisitorById]);
+    }, [user, visitor, fetchVisitorById]);
 
+    const handleFavoriteToggle = (animalId) => {
+        handleLikeAnimal(animalId);
+
+        // Filter out the disliked animal if it's unliked
+        setAnimalsDetails((prevAnimals) => {
+            return prevAnimals.filter((animal) => animal._id !== animalId);  // Remove the animal from the list
+        });
+    };
 
     if (loading) return <Loader />;
 
