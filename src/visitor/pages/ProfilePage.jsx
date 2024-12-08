@@ -1,9 +1,11 @@
 import React, { useEffect } from "react";
+import { Typography, Container, Card, CardContent, Avatar, Grid, Box } from "@mui/material";
 import { getUser } from "../../services/LocalStorageService";
+import useGetVisitorById from "../hooks/useVisitorDataById";
 import Loader from "../../general/Loader";
-import Error from "../../general/Error";
-import { Card, CardContent, Container } from "@mui/material";
 import PageHeader from "../../general/PageHeader";
+import CustomButton from "../../general/CustomButton";
+import Error from "../../general/Error";
 export default function ProfilePage() {
     const user = getUser();  // Decode the token and get the user data (id, etc.)
     const { visitor, loading, error, fetchVisitorById } = useGetVisitorById();
