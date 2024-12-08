@@ -5,26 +5,32 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import CardActionBar from '../../../general/card/CardActionBar';
 
 export default function AnimalActionBar({ animalId, handleDelete, handleEditAnimal, handleFavoriteToggle, isLiked }) {
-    const actions = [
-        {
+    const actions = [];
+
+    if (handleEditAnimal) {
+        actions.push({
             onClick: () => handleEditAnimal(animalId),
             icon: <EditIcon />,
-        },
-        {
+        });
+    }
+
+    if (handleDelete) {
+        actions.push({
             onClick: () => handleDelete(animalId),
             icon: <DeleteIcon />,
-        },
-        {
-            onClick: () => handleFavoriteToggle(animalId),
-            icon: (
-                <FavoriteIcon
-                    sx={{
-                        color: isLiked ? 'red' : 'gray',
-                    }}
-                />
-            ),
-        },
-    ];
+        });
+    }
+
+    actions.push({
+        onClick: () => handleFavoriteToggle(animalId),
+        icon: (
+            <FavoriteIcon
+                sx={{
+                    color: isLiked ? 'red' : 'gray',
+                }}
+            />
+        ),
+    });
 
     return <CardActionBar actions={actions} />;
 }

@@ -21,7 +21,7 @@ const useLikeAnimal = () => {
 
             try {
                 // Directly call the API to toggle the "like" status
-                const updatedVisitor = await likeAnimal(visitor._id, animalId);
+                await likeAnimal(visitor._id, animalId);
 
                 setSnack('success', `Animal ${animalId} favorite status toggled!`);
             } catch (err) {
