@@ -26,7 +26,11 @@ export default function ProfilePage() {
             {/* Profile Information */}
             <Card sx={{ boxShadow: 3, borderRadius: 2 }}>
                 <CardContent>
+                    <Box display="flex" alignItems="center" mb={3}>
+                        <Avatar
 
+                        />
+                    </Box>
                 </CardContent>
             </Card></Container>
     )
