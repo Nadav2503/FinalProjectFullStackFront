@@ -50,15 +50,18 @@ export default function ExhibitDetailPage() {
 
     const handleFavoriteToggle = async (animalId) => {
         try {
+            console.log(`Toggling favorite status for animal ${animalId}...`);
             if (!visitor || !visitor._id) {
                 throw new Error("Visitor not authenticated.");
             }
             await handleLikeAnimal(animalId);
+            console.log("Refreshing animals after favorite toggle...");
             fetchAnimalsByExhibit(exhibitId); // Ensure animals and isLiked are updated
         } catch (error) {
             console.error("Error toggling favorite status:", error);
         }
     };
+
 
     const confirmDeleteAnimal = (id) => {
         setAnimalToDelete(id);
