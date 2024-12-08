@@ -20,21 +20,15 @@ const useLikeAnimal = () => {
             setError(null);
 
             try {
-                console.log("Toggling favorite status for animal:", animalId);
-
                 // Directly call the API to toggle the "like" status
                 const updatedVisitor = await likeAnimal(visitor._id, animalId);
 
-                console.log("Updated visitor data:", updatedVisitor);
-
                 setSnack('success', `Animal ${animalId} favorite status toggled!`);
             } catch (err) {
-                console.error("Error toggling animal favorite status:", err);
                 setError(err.message);
                 setSnack('error', `Failed to toggle favorite status for animal ${animalId}`);
             } finally {
                 setLoading(false);
-                console.log("Favorite toggle operation completed.");
             }
         },
         [visitor, setSnack]
