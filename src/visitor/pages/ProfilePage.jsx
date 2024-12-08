@@ -28,7 +28,9 @@ export default function ProfilePage() {
                 <CardContent>
                     <Box display="flex" alignItems="center" mb={3}>
                         <Avatar
-
+                            alt={`${visitor.image?.alt}`}
+                            src={visitor.image?.url || "/images/avatar.png"}
+                            sx={{ width: 100, height: 100, mr: 2, borderRadius: '50%' }}
                         />
                     </Box>
                 </CardContent>
