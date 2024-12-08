@@ -20,7 +20,8 @@ export default function ProfilePage() {
     if (!visitor) return <Error errorMessage="Visitor not found." />;
     return (
         <Container><PageHeader
-
+            title={`Welcome to Your Profile, ${visitor.name.first}!`}
+            subtitle={`View and update your personal details`}
         /></Container>
     )
 }
