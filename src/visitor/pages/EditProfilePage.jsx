@@ -11,6 +11,18 @@ export default function EditProfilePage() {
     const { handleUpdateProfile } = useUpdateVisitorProfile();
     const navigate = useNavigate();
 
+    const handleSubmit = useCallback(
+        async (formData) => {
+            try {
+                await handleUpdateProfile(id, formData);
+                navigate("/");
+            } catch (error) {
+                console.error("Failed to update profile:", error);
+            }
+        },
+        [handleUpdateProfile, visitor, navigate]
+    );
+
     return (
         <Container>
             <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
