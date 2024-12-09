@@ -1,4 +1,3 @@
-
 import React, { useCallback, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Box, Container } from "@mui/material";
@@ -9,6 +8,7 @@ import EditProfileForm from "../components/EditProfileForm";
 import initializeEditProfile from "../helpers/initialize/initializeEditProfile";
 import useGetVisitorById from "../hooks/useVisitorDataById";
 import mapEditProfileToModel from "../helpers/normalize/mapEditProfileToModel";
+import ROUTES from "../../routers/routerModel";
 
 export default function EditProfilePage() {
 
@@ -21,7 +21,7 @@ export default function EditProfilePage() {
         async (formData) => {
             try {
                 await handleUpdateProfile(id, formData);
-                navigate("/");
+                navigate(ROUTES.PROFILE);
             } catch (error) {
                 console.error("Failed to update profile:", error);
             }
