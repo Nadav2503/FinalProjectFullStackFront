@@ -4,7 +4,7 @@ import EditProfileForm from "../components/EditProfileForm";
 export default function EditProfilePage() {
     return (
         <Container>
-            <Box >
+            <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
                 <EditProfileForm
                     title="Edit Profile"
                     submitLabel="Save Changes"
