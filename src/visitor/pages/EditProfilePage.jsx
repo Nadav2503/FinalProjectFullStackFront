@@ -30,6 +30,14 @@ export default function EditProfilePage() {
         handleSubmit
     );
 
+    useEffect(() => {
+        if (visitor) {
+            setData(mapEditProfileToModel(visitor));
+        } else {
+            fetchVisitorById(id);
+        }
+    }, [fetchVisitorById, id, visitor, setData]);
+
     return (
         <Container>
             <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
