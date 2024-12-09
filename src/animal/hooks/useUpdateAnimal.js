@@ -14,8 +14,11 @@ const useUpdateAnimal = () => {
         setError(null);
         try {
             const normalizedAnimal = normalizeAnimal(animalFromClient);
+            console.log("Normalized animal being sent to backend:", normalizedAnimal);
+
             const updatedAnimal = await updateAnimal(id, normalizedAnimal);
             setAnimal(updatedAnimal);
+            console.log("Updated animal data received:", updatedAnimal);
             setSnack('success', `Animal ${id} updated successfully!`);
         } catch (err) {
             setError(err.message);

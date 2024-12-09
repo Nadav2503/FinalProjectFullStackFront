@@ -60,7 +60,7 @@ export default function ProfilePage() {
     };
 
     const handleEditProfile = () => {
-        navigate(ROUTES.EDIT_PROFILE);
+        navigate(`${ROUTES.EDIT_PROFILE}/${user._id}`);
     };
 
     if (loading) return <Loader />;

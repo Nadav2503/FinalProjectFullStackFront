@@ -28,7 +28,7 @@ export default function Router() {
             {/* Route for the About page */}
             <Route path={ROUTES.ABOUT} element={<About />} />
             <Route path={ROUTES.PROFILE} element={<ProfilePage />} />
-            <Route path={ROUTES.EDIT_PROFILE} element={<EditProfilePage />} />
+            <Route path={`${ROUTES.EDIT_PROFILE}/:id`} element={<EditProfilePage />} />
 
             {/* Route for the exhibits page */}
             <Route path={ROUTES.EXHIBITS} element={<ExhibitListPage />} />

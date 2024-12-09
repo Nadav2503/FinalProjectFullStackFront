@@ -3,7 +3,7 @@ import { getVisitorById } from '../../services/VisitorServiceApi';
 import { useSnack } from '../../providers/SnackbarProvider';
 
 export default function useGetVisitorById() {
-    const [visitor, setUser] = useState(null);
+    const [visitor, setVisitor] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const setSnack = useSnack();
@@ -13,11 +13,11 @@ export default function useGetVisitorById() {
         setError(null);
         try {
             const data = await getVisitorById(id); // Call your API service to fetch user data by ID
-            setUser(data); // Set the fetched user data
-            setSnack('success', `User ${id} fetched successfully!`); // Optionally show a success message
+            setVisitor(data); // Set the fetched user data
+            setSnack('success', `Visitor ${id} fetched successfully!`); // Optionally show a success message
         } catch (err) {
             setError(err.message); // Set the error if any occurs
-            setSnack('error', `Failed to fetch user ${id}`); // Optionally show an error message
+            setSnack('error', `Failed to fetch visitor ${id}`); // Optionally show an error message
         } finally {
             setLoading(false); // Stop loading
         }
