@@ -23,6 +23,13 @@ export default function EditProfilePage() {
         [handleUpdateProfile, visitor, navigate]
     );
 
+    // Initialize form state
+    const { data, errors, handleChange, validateForm, onSubmit, setData } = useForm(
+        visitor || initializeEditProfile, // Use empty initial state
+        profileSchema,
+        handleSubmit
+    );
+
     return (
         <Container>
             <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
