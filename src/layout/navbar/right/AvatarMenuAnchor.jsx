@@ -4,8 +4,10 @@ import SwitchMode from './SwitchMode'; // Theme toggle switch component
 import NavBarItem from '../middle/NavbarItem'; // Reusable navigation item component
 import useLogout from '../../../visitor/hooks/useLogout';
 import ROUTES from '../../../routers/routerModel';
+import { getUser } from '../../../services/LocalStorageService';
 
 export default function AvatarMenu({ anchorEl, onClose }) {
+    const user = getUser();
     const { handleLogout } = useLogout();
     return (
         <Menu
@@ -29,7 +31,7 @@ export default function AvatarMenu({ anchorEl, onClose }) {
             >
                 {/* Navigation items with close on click */}
                 <NavBarItem label="Profile" variant="vertical" to={ROUTES.PROFILE} onClick={onClose} />
-                <NavBarItem label="Edit Profile" variant="vertical" to={ROUTES.EDIT_PROFILE} onClick={onClose} />
+                <NavBarItem label="Edit Profile" variant="vertical" to={`${ROUTES.EDIT_PROFILE}/${user._id}`} onClick={onClose} />
                 <NavBarItem label="Login" variant="vertical" onClick={onClose} to={ROUTES.LOGIN} />
                 <NavBarItem label="Signup" variant="vertical" onClick={onClose} to={ROUTES.SIGNUP} />
                 <NavBarItem label="Logout" variant="vertical" to={ROUTES.ROOT} onClick={() => { handleLogout(); onClose(); }} />

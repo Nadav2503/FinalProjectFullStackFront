@@ -18,24 +18,19 @@ export default function useUpdateVisitorProfile() {
             // Normalize profile data before sending to the API
             const normalizedProfile = normalizeEditProfile(profileData);
 
-            console.log("Normalized profile being sent to backend:", normalizedProfile);
-
             // Call the update API to update the profile
             const updatedVisitor = await updateVisitorProfile(id, normalizedProfile);
 
-            console.log("Updated visitor data received:", updatedVisitor);  // Check updated data
-
             // Update visitor state after successful update
             setVisitor(updatedVisitor);
-            setSnack('success', 'Profile updated successfully!');
+            setSnack('success', 'Profile updated successfully!');  // Show success message
         } catch (err) {
             setError(err.message);
-            setSnack('error', 'Failed to update profile');
+            setSnack('error', 'Failed to update profile');  // Show error notification
         } finally {
             setIsLoading(false);
         }
     }, [setSnack]);
-
 
     return { visitor, isLoading, error, handleUpdateProfile };
 }
