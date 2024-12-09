@@ -1,11 +1,17 @@
-import React from "react";
+
+import React, { useCallback, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Box, Container } from "@mui/material";
+import profileSchema from "../model/visitorSchema";
 import useUpdateVisitorProfile from "../hooks/useUpdateVisitorProfile";
+import useForm from "../../form/useForm";
 import EditProfileForm from "../components/EditProfileForm";
+import initializeEditProfile from "../helpers/initialize/initializeEditProfile";
 import useGetVisitorById from "../hooks/useVisitorDataById";
+import mapEditProfileToModel from "../helpers/normalize/mapEditProfileToModel";
 
 export default function EditProfilePage() {
+
     const { id } = useParams();
     const { visitor, fetchVisitorById } = useGetVisitorById();
     const { handleUpdateProfile } = useUpdateVisitorProfile();
@@ -29,7 +35,6 @@ export default function EditProfilePage() {
         profileSchema,
         handleSubmit
     );
-
     useEffect(() => {
         if (visitor) {
             setData(mapEditProfileToModel(visitor));
@@ -52,5 +57,5 @@ export default function EditProfilePage() {
                 />
             </Box>
         </Container>
-    )
+    );
 }
