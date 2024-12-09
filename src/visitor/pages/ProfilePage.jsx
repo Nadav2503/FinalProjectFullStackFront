@@ -49,7 +49,6 @@ export default function ProfilePage() {
         }
     }, [visitor, fetchAnimalByIdForProfilePage]);
 
-
     const handleFavoriteToggle = (animalId) => {
         handleLikeAnimal(animalId);
 
@@ -73,14 +72,15 @@ export default function ProfilePage() {
     if (!visitor) return <Error errorMessage="Visitor not found." />;
 
     return (
-        <Container><PageHeader
-            title={`Welcome to Your Profile, ${visitor.name.first}!`}
-            subtitle={`View and update your personal details`}
-        />
+        <Container>
+            <PageHeader
+                title={`Welcome to Your Profile, ${visitor.name.first}!`}
+                subtitle={`View and update your personal details`}
+            />
             {/* Profile Information */}
-            <Card sx={{ boxShadow: 3, borderRadius: 2 }}>
+            <Card sx={{ boxShadow: 3, borderRadius: 2, textAlign: 'center' }}>
                 <CardContent>
-                    <Box display="flex" alignItems="center" mb={3}>
+                    <Box display="flex" justifyContent="center" alignItems="center" mb={3}>
                         <Avatar
                             alt={`${visitor.image?.alt}`}
                             src={visitor.image?.url || "/images/avatar.png"}
@@ -92,7 +92,7 @@ export default function ProfilePage() {
                         </Box>
                     </Box>
 
-                    <Grid container spacing={2}>
+                    <Grid container spacing={2} justifyContent="center">
                         <Grid item xs={12} sm={6}>
                             <Typography variant="body1"><strong>Email:</strong> {visitor.email}</Typography>
                         </Grid>
@@ -120,7 +120,7 @@ export default function ProfilePage() {
             </Card>
             {/* Preferred Animals Section */}
             <Box mt={4}>
-                <Typography variant="h6" mb={2}>
+                <Typography variant="h5" mb={2} align="center">
                     Preferred Animals
                 </Typography>
 
@@ -139,5 +139,5 @@ export default function ProfilePage() {
                 </Container>
             </Box>
         </Container>
-    )
+    );
 }
