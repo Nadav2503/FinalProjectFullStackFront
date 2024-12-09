@@ -6,7 +6,13 @@ export default function EditProfilePage() {
         <Container>
             <Box >
                 <EditProfileForm
-
+                    title="Edit Profile"
+                    submitLabel="Save Changes"
+                    onSubmit={onSubmit}
+                    validateForm={validateForm}
+                    errors={errors}
+                    data={data}
+                    onInputChange={handleChange}
                 />
             </Box>
         </Container>
