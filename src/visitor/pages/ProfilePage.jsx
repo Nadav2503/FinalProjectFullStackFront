@@ -9,6 +9,8 @@ import Error from "../../general/Error";
 import AnimalCard from "../../animal/components/card/AnimalCard";
 import useLikeAnimal from "../hooks/useLikeAnimal";
 import useGetAnimalByIdForProfilePage from "../../animal/hooks/useGetAnimalByIdForProfilePage";
+import { useNavigate } from "react-router-dom";
+import ROUTES from "../../routers/routerModel";
 
 export default function ProfilePage() {
     const user = getUser();
@@ -16,6 +18,7 @@ export default function ProfilePage() {
     const { fetchAnimalByIdForProfilePage } = useGetAnimalByIdForProfilePage();
     const [animalsDetails, setAnimalsDetails] = useState([]);
     const { handleLikeAnimal } = useLikeAnimal();
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (user && !visitor) {
@@ -54,6 +57,10 @@ export default function ProfilePage() {
         setAnimalsDetails((prevAnimals) => {
             return prevAnimals.filter((animal) => animal._id !== animalId);  // Remove the animal from the list
         });
+    };
+
+    const handleEditProfile = () => {
+        navigate(ROUTES.EDIT_PROFILE);
     };
 
     if (loading) return <Loader />;
@@ -104,7 +111,7 @@ export default function ProfilePage() {
                         <CustomButton
                             variant="contained"
                             color="secondary"
-                            onClick={() => window.location.href = "/profile/edit"}
+                            onClick={handleEditProfile}
                         >
                             Edit Profile
                         </CustomButton>
