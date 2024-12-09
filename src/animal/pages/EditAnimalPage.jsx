@@ -20,7 +20,7 @@ export default function EditAnimalPage() {
         async (formData) => {
             try {
                 await handleUpdateAnimal(id, formData); // Submit form
-                navigate(ROUTES.ANIMALS);
+                navigate(ROUTES.EXHIBITS);
             } catch (error) {
                 console.error("Failed to update animal:", error);
             }

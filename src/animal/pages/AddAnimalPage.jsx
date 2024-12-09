@@ -31,7 +31,7 @@ export default function AddAnimalPage() {
                     await handleUpdateAnimals(exhibitId, {
                         addAnimals: [animal._id],
                     });
-                    navigate(ROUTES.animalList);
+                    navigate(ROUTES.EXHIBITS);
                 } catch (error) {
                     console.error("Error adding animal to exhibit:", error);
                 }
