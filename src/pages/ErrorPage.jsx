@@ -4,13 +4,14 @@ import { useNavigate } from 'react-router-dom';
 import PageHeader from '../general/PageHeader'; // Import PageHeader for the title and subtitle
 import Error from '../general/Error'; // Import Error component for the error message
 import CustomButton from '../general/CustomButton'; // Import the CustomButton for navigation
+import ROUTES from '../routers/routerModel';
 
 export default function ErrorPage() {
     const navigate = useNavigate(); // Hook for programmatic navigation.
 
     // Function to navigate back to the Home page.
     const handleGoBack = () => {
-        navigate('/'); // Redirects user to the homepage.
+        navigate(ROUTES.ROOT); // Redirects user to the homepage.
     };
 
     return (
