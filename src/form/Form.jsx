@@ -2,6 +2,7 @@ import React from "react";
 import { Box, Grid, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import CustomButton from "../general/CustomButton";
+import ROUTES from "../routers/routerModel";
 
 const Form = ({
     title = "",
@@ -13,7 +14,7 @@ const Form = ({
     submitLabel = "Submit",
     cancelLabel = "Cancel",
     isSubmitting = false,
-    cancelPath = "/",
+    cancelPath = ROUTES.ROOT,
     styles = {},
 }) => {
     const navigate = useNavigate();
