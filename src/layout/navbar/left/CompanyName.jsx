@@ -2,6 +2,7 @@ import React from 'react';
 import Typography from '@mui/material/Typography';
 import { useNavigate } from 'react-router-dom'; // For programmatic navigation
 import { useTheme } from '@mui/material/styles'; // Import the useTheme hook to access theme
+import ROUTES from '../../../routers/routerModel';
 
 export default function CompanyName() {
     const navigate = useNavigate();
@@ -9,7 +10,7 @@ export default function CompanyName() {
 
     // Handle company name click event to navigate to the home page
     const handleCompanyNameClick = () => {
-        navigate('/'); // Navigate to the home page
+        navigate(ROUTES.ROOT); // Navigate to the home page
     };
 
     return (
