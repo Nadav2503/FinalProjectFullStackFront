@@ -16,7 +16,11 @@ export default function AddReviewPage() {
     return (
         <Container>
             <Box
-
+                sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                }}
             >
                 <ReviewForm
                     title="Add New Review"
