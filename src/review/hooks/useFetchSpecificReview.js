@@ -22,7 +22,7 @@ const useFetchSpecificReview = () => {
         }
     }, [setSnack]);
 
-    return {};
+    return { review, fetchReview, loading, error };
 };
 
 export default useFetchSpecificReview;
