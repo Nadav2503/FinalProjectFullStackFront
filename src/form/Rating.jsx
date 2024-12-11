@@ -16,7 +16,11 @@ const RatingField = ({
                 {label}
             </Typography>
             <Rating
-
+                name={name}
+                value={data[name] || 0}  // Default value is 0 if none provided
+                onChange={(_, newValue) => onChange(name, newValue)}
+                required={required}
+                size="large"
             />
             {error && <Typography variant="body2" color="error">{error}</Typography>}
         </Grid>
