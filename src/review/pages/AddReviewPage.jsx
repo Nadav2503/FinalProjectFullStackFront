@@ -1,7 +1,17 @@
-import React from 'react'
+import React from "react";
+
+import { Box, Container } from "@mui/material";
 
 export default function AddReviewPage() {
+
+
     return (
-        <div>AddReviewPage</div>
-    )
+        <Container>
+            <Box
+
+            >
+
+            </Box>
+        </Container>
+    );
 }
