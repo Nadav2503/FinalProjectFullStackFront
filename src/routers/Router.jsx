@@ -43,7 +43,7 @@ export default function Router() {
             {/* Route for editing an exhibit */}
             <Route path={`${ROUTES.EDIT_EXHIBIT}/:id`} element={<EditExhibitPage />} />
             <Route path={`${ROUTES.EDIT_ANIMAL}/:id`} element={<EditAnimalPage />} />
-            <Route path={`${ROUTES.EDIT_REVIEW}/:id`} element={<EditReviewPage />} />
+            <Route path={`${ROUTES.EDIT_REVIEW}/:reviewId`} element={<EditReviewPage />} />
 
             {/* Route for a specific exhibit details page */}
             <Route path={`${ROUTES.EXHIBIT_INFO}/:exhibitId`} element={<ExhibitDetailsPage />} />

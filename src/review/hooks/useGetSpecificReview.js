@@ -12,8 +12,8 @@ const useFetchSpecificReview = () => {
         setLoading(true);
         setError(null);
         try {
-            const data = await getReviewById(reviewId); // Fetch review by ID
-            setReview(data); // Set the fetched review
+            const data = await getReviewById(reviewId);
+            setReview(data); // Set the fetched review if data exists
         } catch (err) {
             setError(err.message);
             setSnack("error", `Failed to fetch review: ${err.message}`);

@@ -8,13 +8,14 @@ import useFetchSpecificReview from "../hooks/useGetSpecificReview";
 import reviewSchema from "../model/reviewSchema";
 import { Box, Container } from "@mui/material";
 import normalizeReview from "../helpers/normalizeReview";
-
+import { getUser } from "../../services/LocalStorageService";
 
 export default function EditReviewPage() {
     const { reviewId } = useParams(); // Extract review ID from the URL
     const { handleUpdate } = useUpdateReview();
     const { fetchReview, review } = useFetchSpecificReview();
     const navigate = useNavigate();
+    const user = getUser();
 
     const handleSubmit = useCallback(async (formData) => {
         try {
@@ -25,24 +26,24 @@ export default function EditReviewPage() {
         }
     }, [handleUpdate, reviewId, navigate]);
 
-    const { data, errors, handleChange, validateForm, onSubmit, setFormData } = useForm(
-        initializeReview,
+    const { data, errors, handleChangeRating, validateForm, onSubmit, setData } = useForm(
+        review || initializeReview,
         reviewSchema,
         handleSubmit
     );
 
     useEffect(() => {
         if (reviewId) {
-            fetchReview(reviewId); // Fetch the review details
+            fetchReview(reviewId);
         }
     }, [reviewId, fetchReview]);
 
-    // Once the review is fetched, set the form data
     useEffect(() => {
         if (review) {
-            setFormData(normalizeReview(review)); // Normalize data to ensure valid defaults
+            setData(normalizeReview(review, user._id, true))
         }
-    }, [review, setData]);
+    }, [review, user._id, setData]);
+
     return (
         <Container>
             <Box
@@ -59,11 +60,9 @@ export default function EditReviewPage() {
                     validateForm={validateForm}
                     errors={errors}
                     data={data}
-                    onInputChange={handleChange}
+                    onInputChange={handleChangeRating}
                 />
             </Box>
         </Container>
     );
 }
-
-
