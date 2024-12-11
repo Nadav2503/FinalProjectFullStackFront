@@ -24,7 +24,7 @@ const useFetchReviewsForAnimal = () => {
         }
     }, [setSnack]);
 
-    return {};
+    return { reviews, averageRating, fetchReviews, loading, error };
 };
 
 export default useFetchReviewsForAnimal;
