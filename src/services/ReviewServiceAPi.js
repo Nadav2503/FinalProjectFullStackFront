@@ -75,3 +75,16 @@ export const updateReview = async (id, review) => {
         throw new Error(error.message);
     }
 };
+
+// Delete a specific review
+export const deleteReview = async (id) => {
+    try {
+        const { data } = await axios.delete(`${API_URL}/${id}`, {
+            headers: { "x-auth-token": getToken() },
+        });
+        return data;
+    } catch (error) {
+        throw new Error(error.message);
+    }
+};
+
