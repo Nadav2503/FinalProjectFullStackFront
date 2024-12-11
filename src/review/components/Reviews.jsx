@@ -5,7 +5,13 @@ import { Container } from "@mui/material";
 export default function Reviews({ reviews, handleDelete, handleEdit, handleLike }) {
     return (
         <Container
-
+            sx={{
+                display: "flex",
+                flexWrap: "wrap",
+                justifyContent: "center",
+                gap: 2,
+                alignItems: "stretch",
+            }}
         >
             {reviews.map((review) => (
                 <ReviewCard
