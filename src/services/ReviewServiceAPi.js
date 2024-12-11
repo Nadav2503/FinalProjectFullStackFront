@@ -64,3 +64,14 @@ export const createReview = async (review) => {
     }
 };
 
+// Update a specific review
+export const updateReview = async (id, review) => {
+    try {
+        const { data } = await axios.put(`${API_URL}/${id}`, review, {
+            headers: { "x-auth-token": getToken() },
+        });
+        return data;
+    } catch (error) {
+        throw new Error(error.message);
+    }
+};
