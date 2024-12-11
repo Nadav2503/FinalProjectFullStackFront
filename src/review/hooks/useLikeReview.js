@@ -20,7 +20,7 @@ const useLikeReview = () => {
         }
     }, [setSnack]);
 
-    return {};
+    return { handleLike, loading };
 };
 
 export default useLikeReview;
