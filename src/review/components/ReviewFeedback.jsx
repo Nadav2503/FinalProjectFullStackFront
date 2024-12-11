@@ -1,7 +1,13 @@
-import React from 'react'
+import React from "react";
 
-export default function ReviewFeedback() {
-    return (
-        <div>ReviewFeedback</div>
-    )
+
+export default function ReviewFeedback({
+    isLoading,
+    reviews,
+    error,
+
+}) {
+
+
+    return <></>;
 }
