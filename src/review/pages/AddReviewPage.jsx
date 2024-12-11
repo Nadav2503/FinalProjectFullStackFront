@@ -1,4 +1,5 @@
 import React from "react";
+import ReviewForm from "../components/ReviewForm";
 
 import { useNavigate } from "react-router-dom";
 
@@ -17,7 +18,9 @@ export default function AddReviewPage() {
             <Box
 
             >
+                <ReviewForm
 
+                />
             </Box>
         </Container>
     );
