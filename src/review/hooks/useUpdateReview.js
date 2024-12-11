@@ -20,7 +20,7 @@ const useUpdateReview = () => {
         }
     }, [setSnack]);
 
-    return {};
+    return { handleUpdate, loading };
 };
 
 export default useUpdateReview;
