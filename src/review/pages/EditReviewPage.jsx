@@ -16,6 +16,15 @@ export default function EditReviewPage() {
     const { fetchReview, review } = useFetchSpecificReview();
     const navigate = useNavigate();
 
+    const handleSubmit = useCallback(async (formData) => {
+        try {
+            await handleUpdate(reviewId, formData); // Call the update function
+            navigate("/"); // Navigate back to reviews
+        } catch (error) {
+            console.error("Failed to update review:", error);
+        }
+    }, [handleUpdate, reviewId, navigate]);
+
     useEffect(() => {
         if (reviewId) {
             fetchReview(reviewId); // Fetch the review details
