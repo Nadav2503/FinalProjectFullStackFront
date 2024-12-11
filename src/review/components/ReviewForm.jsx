@@ -1,7 +1,19 @@
-import React from 'react'
+import React from 'react';
 
-export default function ReviewForm() {
+
+
+const ReviewForm = ({
+    onSubmit,
+    onInputChange,
+    errors = {},
+    data = {},
+    title,
+    submitLabel,
+    validateForm
+}) => {
     return (
-        <div>ReviewForm</div>
-    )
-}
+        <></>
+    );
+};
+
+export default ReviewForm;
