@@ -51,3 +51,16 @@ export const getReviewsByVisitor = async (visitorId) => {
         throw new Error(error.message);
     }
 };
+
+// Create a new review
+export const createReview = async (review) => {
+    try {
+        const { data } = await axios.post(API_URL, review, {
+            headers: { "x-auth-token": getToken() },
+        });
+        return data;
+    } catch (error) {
+        throw new Error(error.message);
+    }
+};
+
