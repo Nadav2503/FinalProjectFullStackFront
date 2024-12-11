@@ -22,7 +22,7 @@ const useFetchReviewsByVisitor = () => {
         }
     }, [setSnack]);
 
-    return {};
+    return { reviews, fetchReviews, loading, error };
 };
 
 export default useFetchReviewsByVisitor;
