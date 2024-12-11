@@ -12,6 +12,7 @@ import Error from "../../general/Error";
 import useExhibitById from "../hooks/useExhibitDataById";
 import useDeleteAnimal from "../../animal/hooks/useDeleteAnimal";
 import AnimalFeedback from "../../animal/components/AnimalFeedback";
+import ReviewFeedback from "../../review/components/ReviewFeedback";
 import ROUTES from "../../routers/routerModel";
 import AddNewButton from "../../general/AddButton";
 import ConfirmDialog from "../../general/ConfirmDialog";
@@ -19,6 +20,7 @@ import useLikeAnimal from "../../visitor/hooks/useLikeAnimal";
 import { useCurrentVisitor } from "../../providers/VisitorProvider";
 import useUpdateAnimalsInExhibit from "../hooks/useUpdateAnimalsInExhibit";
 import useGetAnimalsByExhibit from "../../animal/hooks/useGetAnimalsByExhibit";
+import useFetchReviewsForExhibit from "../../review/hooks/useGetReviewsForExhibit";
 
 export default function ExhibitDetailPage() {
     const { exhibitId } = useParams();
@@ -27,6 +29,7 @@ export default function ExhibitDetailPage() {
     const { handleUpdateAnimals } = useUpdateAnimalsInExhibit();
     const { handleDeleteAnimal } = useDeleteAnimal();
     const { handleLikeAnimal } = useLikeAnimal();
+    const { reviews, averageRating, fetchReviews } = useFetchReviewsForExhibit();
     const navigate = useNavigate();
     const { visitor } = useCurrentVisitor();
 
@@ -37,8 +40,9 @@ export default function ExhibitDetailPage() {
         if (visitor && visitor._id) {
             fetchExhibitById(exhibitId);
             fetchAnimalsByExhibit(exhibitId);
+            fetchReviews(exhibitId);
         }
-    }, [visitor, exhibitId, fetchExhibitById, fetchAnimalsByExhibit]);
+    }, [visitor, exhibitId, fetchExhibitById, fetchAnimalsByExhibit, fetchReviews]);
 
     const handleAddAnimal = () => {
         navigate(ROUTES.ADD_ANIMAL, { state: { exhibitId: exhibitId } });
@@ -161,6 +165,25 @@ export default function ExhibitDetailPage() {
                 handleEditAnimal={handleEditAnimal}
                 handleFavoriteToggle={handleFavoriteToggle}
                 visitor={visitor}
+            />
+
+            {/* Display average rating if available */}
+            {averageRating && (
+                <Box sx={{ mb: 3, textAlign: "center" }}>
+                    <Typography variant="h6" color="text.secondary">
+                        Average Rating: {averageRating}
+                    </Typography>
+                </Box>
+            )}
+
+            {/* Display reviews */}
+            <ReviewFeedback
+                isLoading={isLoading}
+                reviews={reviews}
+                error={error}
+                handleDelete={() => { }}
+                handleEdit={() => { }}
+                handleLike={() => { }}
             />
 
             <AddNewButton onAdd={handleAddAnimal} />
