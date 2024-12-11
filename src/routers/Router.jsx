@@ -17,6 +17,8 @@ import LoginPage from "../visitor/pages/LoginPage";
 import SignupPage from "../visitor/pages/SignupPage";
 import ProfilePage from "../visitor/pages/ProfilePage";
 import EditProfilePage from "../visitor/pages/EditProfilePage";
+import EditReviewPage from "../review/pages/EditReviewPage";
+import AddReviewPage from "../review/pages/AddReviewPage";
 
 // Main Router component to define application routes
 export default function Router() {
@@ -36,10 +38,12 @@ export default function Router() {
             {/* Route for adding a new exhibit */}
             <Route path={ROUTES.ADD_EXHIBIT} element={<AddExhibitPage />} />
             <Route path={ROUTES.ADD_ANIMAL} element={<AddAnimalPage />} />
+            <Route path={ROUTES.ADD_REVIEW} element={<AddReviewPage />} />
 
             {/* Route for editing an exhibit */}
             <Route path={`${ROUTES.EDIT_EXHIBIT}/:id`} element={<EditExhibitPage />} />
             <Route path={`${ROUTES.EDIT_ANIMAL}/:id`} element={<EditAnimalPage />} />
+            <Route path={`${ROUTES.EDIT_REVIEW}/:id`} element={<EditReviewPage />} />
 
             {/* Route for a specific exhibit details page */}
             <Route path={`${ROUTES.EXHIBIT_INFO}/:exhibitId`} element={<ExhibitDetailsPage />} />
