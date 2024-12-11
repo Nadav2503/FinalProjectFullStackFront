@@ -7,6 +7,7 @@ import useCreateReview from "../hooks/useCreateReview";
 import reviewSchema from "../model/reviewSchema";
 import { Box, Container } from "@mui/material";
 import { getUser } from "../../services/LocalStorageService";
+import ROUTES from "../../routers/routerModel";
 
 export default function AddReviewPage() {
     const navigate = useNavigate();
@@ -15,6 +16,7 @@ export default function AddReviewPage() {
     const animalId = searchParams.get('animalId');
     const exhibitId = searchParams.get('exhibitId');
     const { handleCreate } = useCreateReview();
+
     const handleSubmit = useCallback(async (formData) => {
         try {
             const user = getUser(); // Get the logged-in user's data
@@ -30,7 +32,11 @@ export default function AddReviewPage() {
             };
 
             await handleCreate(reviewData); // Submit the review
-            navigate("/"); // Redirect to the reviews page
+            if (animalId) {
+                navigate(`${ROUTES.ANIMAL_INFO}/${animalId}`);
+            } else {
+                navigate(`${ROUTES.EXHIBIT_INFO}/${exhibitId}`);
+            }
         } catch (error) {
             console.error("Failed to create review:", error);
         }
