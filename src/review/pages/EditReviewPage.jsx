@@ -12,7 +12,7 @@ import normalizeReview from "../helpers/normalizeReview";
 
 export default function EditReviewPage() {
     const { reviewId } = useParams(); // Extract review ID from the URL
-    const { handleUpdate, loading } = useUpdateReview();
+    const { handleUpdate } = useUpdateReview();
     const { fetchReview, review } = useFetchSpecificReview();
     const navigate = useNavigate();
 
@@ -40,7 +40,7 @@ export default function EditReviewPage() {
     // Once the review is fetched, set the form data
     useEffect(() => {
         if (review) {
-            setData(normalizeReview(review)); // Normalize data to ensure valid defaults
+            setFormData(normalizeReview(review)); // Normalize data to ensure valid defaults
         }
     }, [review, setData]);
     return (
