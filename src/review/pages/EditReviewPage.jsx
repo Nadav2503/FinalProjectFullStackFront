@@ -25,6 +25,12 @@ export default function EditReviewPage() {
         }
     }, [handleUpdate, reviewId, navigate]);
 
+    const { data, errors, handleChange, validateForm, onSubmit, setFormData } = useForm(
+        initializeReview,
+        reviewSchema,
+        handleSubmit
+    );
+
     useEffect(() => {
         if (reviewId) {
             fetchReview(reviewId); // Fetch the review details
