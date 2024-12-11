@@ -11,7 +11,15 @@ const RatingField = ({
     ...rest
 }) => {
     return (
-        
+        <Grid item xs={12} sm={6} {...rest}>
+            <Typography>
+
+            </Typography>
+            <Rating
+
+            />
+
+        </Grid>
     );
 };
 
