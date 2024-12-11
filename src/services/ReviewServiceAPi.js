@@ -40,3 +40,14 @@ export const getReviewById = async (id) => {
     }
 };
 
+// Get all reviews by a specific visitor
+export const getReviewsByVisitor = async (visitorId) => {
+    try {
+        const { data } = await axios.get(`${API_URL}/visitor/${visitorId}`, {
+            headers: { "x-auth-token": getToken() },
+        });
+        return data;
+    } catch (error) {
+        throw new Error(error.message);
+    }
+};
