@@ -7,6 +7,7 @@ import useUpdateReview from "../hooks/useUpdateReview";
 import useFetchSpecificReview from "../hooks/useGetSpecificReview";
 import reviewSchema from "../model/reviewSchema";
 import { Box, Container } from "@mui/material";
+import normalizeReview from "../helpers/normalizeReview";
 
 
 export default function EditReviewPage() {
@@ -21,7 +22,12 @@ export default function EditReviewPage() {
         }
     }, [reviewId, fetchReview]);
 
-
+    // Once the review is fetched, set the form data
+    useEffect(() => {
+        if (review) {
+            setData(normalizeReview(review)); // Normalize data to ensure valid defaults
+        }
+    }, [review, setData]);
     return (
         <div>EditReviewPage</div>
     )
