@@ -12,13 +12,13 @@ const RatingField = ({
 }) => {
     return (
         <Grid item xs={12} sm={6} {...rest}>
-            <Typography>
+            <Typography variant="body2" sx={{ color: 'text.primary', mb: 1 }}>
                 {label}
             </Typography>
             <Rating
 
             />
-            {error && <Typography >{error}</Typography>}
+            {error && <Typography variant="body2" color="error">{error}</Typography>}
         </Grid>
     );
 };
