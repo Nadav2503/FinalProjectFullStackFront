@@ -13,8 +13,17 @@ export default function AddReviewPage() {
 
     const handleSubmit = useCallback(async (formData) => {
         try {
+            const user = getUser(); // Get the logged-in user's data
+            if (!user || !user.visitorId) {
+                throw new Error("User is not logged in or visitorId is missing");
+            }
 
-            await handleCreate(formData); // Submit the review
+            const reviewData = {
+                ...formData,
+                visitorId: user.visitorId, // Add the visitorId to the review data
+            };
+
+            await handleCreate(reviewData); // Submit the review
             navigate("/"); // Redirect to the reviews page
         } catch (error) {
             console.error("Failed to create review:", error);
