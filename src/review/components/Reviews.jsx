@@ -8,6 +8,10 @@ export default function Reviews({ reviews, handleDelete, handleEdit, handleLike 
 
         >
 
+            <ReviewCard
+
+            />
+
         </Container>
     );
 }
