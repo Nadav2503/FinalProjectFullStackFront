@@ -20,7 +20,7 @@ const useCreateReview = () => {
         }
     }, [setSnack]);
 
-    return {};
+    return { handleCreate, loading };
 };
 
 export default useCreateReview;
