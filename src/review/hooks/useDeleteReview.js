@@ -20,7 +20,7 @@ const useDeleteReview = () => {
         }
     }, [setSnack]);
 
-    return {};
+    return { handleDelete, loading };
 };
 
 export default useDeleteReview;
