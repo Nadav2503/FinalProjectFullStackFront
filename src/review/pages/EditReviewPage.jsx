@@ -15,6 +15,13 @@ export default function EditReviewPage() {
     const { fetchReview, review } = useFetchSpecificReview();
     const navigate = useNavigate();
 
+    useEffect(() => {
+        if (reviewId) {
+            fetchReview(reviewId); // Fetch the review details
+        }
+    }, [reviewId, fetchReview]);
+
+
     return (
         <div>EditReviewPage</div>
     )
