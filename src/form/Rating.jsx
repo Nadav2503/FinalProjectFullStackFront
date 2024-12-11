@@ -18,7 +18,7 @@ const RatingField = ({
             <Rating
 
             />
-
+            {error && <Typography >{error}</Typography>}
         </Grid>
     );
 };
