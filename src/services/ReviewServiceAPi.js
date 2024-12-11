@@ -15,3 +15,15 @@ export const getReviewsForAnimal = async (animalId) => {
         throw new Error(error.message);
     }
 };
+
+// Get all reviews for a specific exhibit
+export const getReviewsForExhibit = async (exhibitId) => {
+    try {
+        const { data } = await axios.get(`${API_URL}/exhibit/${exhibitId}`, {
+            headers: { "x-auth-token": getToken() },
+        });
+        return data;
+    } catch (error) {
+        throw new Error(error.message);
+    }
+};
