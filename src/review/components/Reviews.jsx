@@ -7,11 +7,11 @@ export default function Reviews({ reviews, handleDelete, handleEdit, handleLike 
         <Container
 
         >
+            {reviews.map((review) => (
+                <ReviewCard
 
-            <ReviewCard
-
-            />
-
+                />
+            ))}
         </Container>
     );
 }
