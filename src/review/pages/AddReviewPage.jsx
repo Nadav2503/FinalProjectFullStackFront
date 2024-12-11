@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import ReviewForm from "../components/ReviewForm";
 import initializeReview from "../helpers/initializeReview";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import useForm from "../../form/useForm";
 import useCreateReview from "../hooks/useCreateReview";
 import reviewSchema from "../model/reviewSchema";
@@ -9,9 +9,12 @@ import { Box, Container } from "@mui/material";
 import { getUser } from "../../services/LocalStorageService";
 
 export default function AddReviewPage() {
-    const { handleCreate } = useCreateReview();
     const navigate = useNavigate();
-
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
+    const animalId = searchParams.get('animalId');
+    const exhibitId = searchParams.get('exhibitId');
+    const { handleCreate } = useCreateReview();
     const handleSubmit = useCallback(async (formData) => {
         try {
             const user = getUser(); // Get the logged-in user's data
@@ -22,6 +25,8 @@ export default function AddReviewPage() {
             const reviewData = {
                 ...formData,
                 visitorId: user._id, // Add the visitorId to the review data
+                animalId: animalId || null,
+                exhibitId: exhibitId || null,
             };
 
             await handleCreate(reviewData); // Submit the review
