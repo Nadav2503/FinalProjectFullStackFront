@@ -31,6 +31,11 @@ export default function AddReviewPage() {
     }, [handleCreate, navigate]);
 
 
+    const { data, errors, handleChange, validateForm, onSubmit } = useForm(
+        initializeReview,
+        reviewSchema,
+        handleSubmit
+    );
 
     return (
         <Container>
