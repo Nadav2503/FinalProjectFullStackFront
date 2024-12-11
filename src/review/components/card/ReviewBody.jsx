@@ -1,4 +1,5 @@
 import React from 'react';
+import CardBody from '../../../general/card/CardBody';
 import { Typography } from '@mui/material';
 
 export default function ReviewBody({ comment, rating, date }) {
@@ -9,7 +10,5 @@ export default function ReviewBody({ comment, rating, date }) {
             <Typography variant="body2">{date}</Typography> {/* Review Date */}
         </>
     )
-    return (
-        content
-    );
+    return <CardBody content={content} />;
 }
