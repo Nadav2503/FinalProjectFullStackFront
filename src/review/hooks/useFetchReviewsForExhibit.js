@@ -24,7 +24,7 @@ const useFetchReviewsForExhibit = () => {
         }
     }, [setSnack]);
 
-    return {};
+    return { reviews, averageRating, fetchReviews, loading, error };
 };
 
 export default useFetchReviewsForExhibit;
