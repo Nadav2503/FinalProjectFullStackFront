@@ -22,38 +22,65 @@ export default function useForm(initialForm, schema, handleSubmit) {
     }, [schema, data]);
 
     const handleChange = useCallback(
-        (e, newValue = null) => {
-            let value;
-            let name;
+        (e) => {
+            let value = e.target.value;
+            let name = e.target.name;
 
-            if (newValue !== null) {
-                // Handle Rating component
-                name = e; // When onChange sends the name directly
-                value = newValue;
+            // Handle checkbox
+            if (e.target.type === "checkbox") {
+                value = e.target.checked;
+                setData((prev) => ({ ...prev, [name]: value }));
             } else {
-                // Handle other input types
-                value = e.target.value;
-                name = e.target.name;
+                // Handle regular inputs
+                const errorMessage = validateProperty(name, value);
 
-                if (e.target.type === "checkbox") {
-                    value = e.target.checked;
+                if (errorMessage) {
+                    setErrors((prev) => ({ ...prev, [name]: errorMessage }));
+                } else {
+                    setErrors((prev) => {
+                        let obj = { ...prev };
+                        delete obj[name];
+                        return obj;
+                    });
                 }
+
+                setData((prev) => ({ ...prev, [name]: value }));
             }
 
-            // Validate the input value
+            // Trigger form validation whenever input changes
+            validateForm();
+        },
+        [validateProperty, validateForm]
+    );
+
+    const handleChangeRating = useCallback(
+        (nameOrEvent, customValue = null) => {
+            let name, value;
+
+            if (customValue !== null) {
+                // Handling custom value
+                name = nameOrEvent;
+                value = customValue;
+            } else {
+                // Handling standard event
+                const event = nameOrEvent;
+                name = event.target.name;
+                value = event.target.value;
+            }
+
+            // Validate the rating value
             const errorMessage = validateProperty(name, value);
 
             if (errorMessage) {
                 setErrors((prev) => ({ ...prev, [name]: errorMessage }));
             } else {
                 setErrors((prev) => {
-                    const obj = { ...prev };
+                    let obj = { ...prev };
                     delete obj[name];
                     return obj;
                 });
             }
 
-            // Update form data
             setData((prev) => ({ ...prev, [name]: value }));
 
             // Trigger form validation
@@ -74,6 +101,7 @@ export default function useForm(initialForm, schema, handleSubmit) {
         errors,
         setData,
         handleChange,
+        handleChangeRating,
         validateForm,
         onSubmit,
     };

@@ -9,13 +9,14 @@ const useCreateReview = () => {
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
     const setSnack = useSnack();
-    const { user } = getUser();
+    const user = getUser();
+
     const handleCreate = useCallback(async (reviewData) => {
         setLoading(true);
         try {
             const normalizedReview = normalizeReview(reviewData, user._id);
             const data = await createReview(normalizedReview); // API call
-            setReview(data)
+            setReview(data);
             setSnack("success", "Review created successfully!");
         } catch (err) {
             setError(err.message);
@@ -23,7 +24,7 @@ const useCreateReview = () => {
         } finally {
             setLoading(false);
         }
-    }, [setSnack]);
+    }, [setSnack, user]);
 
     return { review, handleCreate, loading, error };
 };

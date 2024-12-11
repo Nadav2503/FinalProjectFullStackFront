@@ -40,10 +40,9 @@ export default function AddReviewPage() {
         } catch (error) {
             console.error("Failed to create review:", error);
         }
-    }, [handleCreate, navigate]);
+    }, [handleCreate, navigate, animalId, exhibitId]);
 
-
-    const { data, errors, handleChange, validateForm, onSubmit } = useForm(
+    const { data, errors, handleChangeRating, validateForm, onSubmit } = useForm(
         initializeReview,
         reviewSchema,
         handleSubmit
@@ -65,7 +64,7 @@ export default function AddReviewPage() {
                     validateForm={validateForm}
                     errors={errors}
                     data={data}
-                    onInputChange={handleChange}
+                    onInputChange={handleChangeRating}
                 />
             </Box>
         </Container>

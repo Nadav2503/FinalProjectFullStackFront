@@ -21,6 +21,7 @@ import { useCurrentVisitor } from "../../providers/VisitorProvider";
 import useUpdateAnimalsInExhibit from "../hooks/useUpdateAnimalsInExhibit";
 import useGetAnimalsByExhibit from "../../animal/hooks/useGetAnimalsByExhibit";
 import useFetchReviewsForExhibit from "../../review/hooks/useGetReviewsForExhibit";
+import useDeleteReview from "../../review/hooks/useDeleteReview";
 
 export default function ExhibitDetailPage() {
     const { exhibitId } = useParams();
@@ -30,11 +31,12 @@ export default function ExhibitDetailPage() {
     const { handleDeleteAnimal } = useDeleteAnimal();
     const { handleLikeAnimal } = useLikeAnimal();
     const { reviews, averageRating, fetchReviews } = useFetchReviewsForExhibit();
+    const { handleDelete } = useDeleteReview();
     const navigate = useNavigate();
     const { visitor } = useCurrentVisitor();
 
     const [openConfirmDialog, setOpenConfirmDialog] = useState(false);
-    const [animalToDelete, setAnimalToDelete] = useState(null);
+    const [deleteContext, setDeleteContext] = useState({ type: null, id: null });
 
     useEffect(() => {
         if (visitor && visitor._id) {
@@ -52,6 +54,10 @@ export default function ExhibitDetailPage() {
         navigate(`${ROUTES.EDIT_ANIMAL}/${id}`);
     };
 
+    const handleEditReview = (id) => {
+        navigate(`${ROUTES.EDIT_REVIEW}/${id}`); // Navigate to EditReviewPage
+    };
+
     const handleFavoriteToggle = async (animalId) => {
         try {
             if (!visitor || !visitor._id) {
@@ -64,24 +70,26 @@ export default function ExhibitDetailPage() {
         }
     };
 
-
     const confirmDeleteAnimal = (id) => {
-        setAnimalToDelete(id);
+        setDeleteContext({ type: "animal", id });
         setOpenConfirmDialog(true);
     };
 
-    const handleConfirmDelete = async () => {
-        if (animalToDelete) {
+    const confirmDeleteReview = (reviewId) => {
+        setDeleteContext({ type: "review", id: reviewId });
+        setOpenConfirmDialog(true);
+    };
+
+    const handleConfirmDeleteAnimal = async () => {
+        if (deleteContext.id) {
             try {
-                await handleUpdateAnimals(exhibitId, { removeAnimals: [animalToDelete] });
-                await handleDeleteAnimal(animalToDelete);
-                // Refresh the list of animals in the exhibit
+                await handleUpdateAnimals(exhibitId, { removeAnimals: [deleteContext.id] });
+                await handleDeleteAnimal(deleteContext.id);
                 fetchAnimalsByExhibit(exhibitId);
-                // Reset state and close dialog
                 setOpenConfirmDialog(false);
-                setAnimalToDelete(null);
+                setDeleteContext({ type: null, id: null });
             } catch (error) {
-                console.error("Error during animal deletion or exhibit update:", error);
+                console.error("Error during animal deletion:", error);
             }
         }
     };
@@ -89,6 +97,20 @@ export default function ExhibitDetailPage() {
     const handleCancelDelete = () => {
         setOpenConfirmDialog(false);
         setAnimalToDelete(null);
+    };
+
+
+    const handleConfirmDeleteReview = async () => {
+        if (deleteContext.id) {
+            try {
+                await handleDelete(deleteContext.id);
+                fetchReviews(exhibitId);
+                setOpenConfirmDialog(false);
+                setDeleteContext({ type: null, id: null });
+            } catch (error) {
+                console.error("Error during review deletion:", error);
+            }
+        }
     };
 
     const currentCapacity = animals?.length || 0;
@@ -181,8 +203,8 @@ export default function ExhibitDetailPage() {
                 isLoading={isLoading}
                 reviews={reviews}
                 error={error}
-                handleDelete={() => { }}
-                handleEdit={() => { }}
+                handleDelete={confirmDeleteReview}
+                handleEdit={handleEditReview}
                 handleLike={() => { }}
             />
 
@@ -191,9 +213,9 @@ export default function ExhibitDetailPage() {
             <ConfirmDialog
                 open={openConfirmDialog}
                 onClose={handleCancelDelete}
-                onConfirm={handleConfirmDelete}
-                title="Confirm Animal Deletion"
-                content={`Are you sure you want to delete this animal?`}
+                onConfirm={deleteContext.type === "animal" ? handleConfirmDeleteAnimal : handleConfirmDeleteReview}
+                title={`Confirm ${deleteContext.type === "animal" ? "Animal" : "Review"} Deletion`}
+                content={`Are you sure you want to delete this ${deleteContext.type === "animal" ? "animal" : "review"}?`}
             />
         </Container>
     );
