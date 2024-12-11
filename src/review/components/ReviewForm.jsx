@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Form from '../../form/Form';
 
 
 const ReviewForm = ({
@@ -12,7 +12,12 @@ const ReviewForm = ({
     validateForm
 }) => {
     return (
-        <></>
+        <Form
+
+        >
+
+
+        </Form>
     );
 };
 
