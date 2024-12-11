@@ -55,7 +55,9 @@ export default function ExhibitDetailPage() {
     };
 
     const handleEditReview = (id) => {
-        navigate(`${ROUTES.EDIT_REVIEW}/${id}`); // Navigate to EditReviewPage
+        navigate(`${ROUTES.EDIT_REVIEW}/${id}`, {
+            state: { exhibitId: exhibitId },
+        });
     };
 
     const handleFavoriteToggle = async (animalId) => {

@@ -16,7 +16,6 @@ const useUpdateReview = () => {
         setError(null);
         try {
             const normalizedReview = normalizeReview(updatedData, user._id, true); // Pass true for editing
-            console.log("Normalized Review:", normalizedReview); // Log normalized data
             const updatedReview = await updateReview(id, normalizedReview); // API call
 
             // Return the updated review with necessary properties

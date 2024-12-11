@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect } from "react";
 import ReviewForm from "../components/ReviewForm";
 import initializeReview from "../helpers/initializeReview";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import useForm from "../../form/useForm";
 import useUpdateReview from "../hooks/useUpdateReview";
 import useFetchSpecificReview from "../hooks/useGetSpecificReview";
@@ -9,22 +9,28 @@ import reviewSchema from "../model/reviewSchema";
 import { Box, Container } from "@mui/material";
 import normalizeReview from "../helpers/normalizeReview";
 import { getUser } from "../../services/LocalStorageService";
+import ROUTES from "../../routers/routerModel";
 
 export default function EditReviewPage() {
     const { reviewId } = useParams(); // Extract review ID from the URL
+    const user = getUser();
+    const location = useLocation();
+    const { exhibitId } = location.state || {}; // Retrieve exhibitId from state
+
+    const navigate = useNavigate();
     const { handleUpdate } = useUpdateReview();
     const { fetchReview, review } = useFetchSpecificReview();
-    const navigate = useNavigate();
-    const user = getUser();
 
     const handleSubmit = useCallback(async (formData) => {
         try {
             await handleUpdate(reviewId, formData); // Call the update function
-            navigate("/"); // Navigate back to reviews
+            if (exhibitId) {
+                navigate(`${ROUTES.EXHIBIT_INFO}/${exhibitId}`);
+            }
         } catch (error) {
             console.error("Failed to update review:", error);
         }
-    }, [handleUpdate, reviewId, navigate]);
+    }, [handleUpdate, reviewId, navigate, exhibitId]);
 
     const { data, errors, handleChangeRating, validateForm, onSubmit, setData } = useForm(
         review || initializeReview,
@@ -40,7 +46,7 @@ export default function EditReviewPage() {
 
     useEffect(() => {
         if (review) {
-            setData(normalizeReview(review, user._id, true))
+            setData(normalizeReview(review, user._id, true));
         }
     }, [review, user._id, setData]);
 
