@@ -8,7 +8,19 @@ const useFetchReviewsByVisitor = () => {
     const [error, setError] = useState(null);
     const setSnack = useSnack();
 
-
+    const fetchReviews = useCallback(async (visitorId) => {
+        setLoading(true);
+        setError(null);
+        try {
+            const data = await getReviewsByVisitor(visitorId);
+            setReviews(data);
+        } catch (err) {
+            setError(err.message);
+            setSnack("error", `Failed to fetch reviews for visitor ${visitorId}: ${err.message}`);
+        } finally {
+            setLoading(false);
+        }
+    }, [setSnack]);
 
     return {};
 };
