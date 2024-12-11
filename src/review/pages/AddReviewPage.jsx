@@ -6,6 +6,7 @@ import useForm from "../../form/useForm";
 import useCreateReview from "../hooks/useCreateReview";
 import reviewSchema from "../model/reviewSchema";
 import { Box, Container } from "@mui/material";
+import { getUser } from "../../services/LocalStorageService";
 
 export default function AddReviewPage() {
     const { handleCreate } = useCreateReview();
@@ -14,13 +15,13 @@ export default function AddReviewPage() {
     const handleSubmit = useCallback(async (formData) => {
         try {
             const user = getUser(); // Get the logged-in user's data
-            if (!user || !user.visitorId) {
+            if (!user || !user._id) {
                 throw new Error("User is not logged in or visitorId is missing");
             }
 
             const reviewData = {
                 ...formData,
-                visitorId: user.visitorId, // Add the visitorId to the review data
+                visitorId: user._id, // Add the visitorId to the review data
             };
 
             await handleCreate(reviewData); // Submit the review
