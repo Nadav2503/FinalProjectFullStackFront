@@ -8,6 +8,19 @@ const useFetchSpecificReview = () => {
     const [error, setError] = useState(null);
     const setSnack = useSnack();
 
+    const fetchReview = useCallback(async (reviewId) => {
+        setLoading(true);
+        setError(null);
+        try {
+            const data = await getReviewById(reviewId); // Fetch review by ID
+            setReview(data); // Set the fetched review
+        } catch (err) {
+            setError(err.message);
+            setSnack("error", `Failed to fetch review: ${err.message}`);
+        } finally {
+            setLoading(false);
+        }
+    }, [setSnack]);
 
     return {};
 };
