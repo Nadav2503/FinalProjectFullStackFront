@@ -88,3 +88,14 @@ export const deleteReview = async (id) => {
     }
 };
 
+// Like or unlike a review
+export const likeReview = async (id) => {
+    try {
+        const { data } = await axios.patch(`${API_URL}/${id}/like`, {}, {
+            headers: { "x-auth-token": getToken() },
+        });
+        return data;
+    } catch (error) {
+        throw new Error(error.message);
+    }
+};
