@@ -22,36 +22,46 @@ export default function useForm(initialForm, schema, handleSubmit) {
     }, [schema, data]);
 
     const handleChange = useCallback(
-        (e) => {
-            let value = e.target.value;
-            let name = e.target.name;
+        (e, newValue = null) => {
+            let value;
+            let name;
 
-            // Handle checkbox
-            if (e.target.type === "checkbox") {
-                value = e.target.checked;
-                setData((prev) => ({ ...prev, [name]: value }));
+            if (newValue !== null) {
+                // Handle Rating component
+                name = e; // When onChange sends the name directly
+                value = newValue;
             } else {
-                // Handle regular inputs
-                const errorMessage = validateProperty(name, value);
+                // Handle other input types
+                value = e.target.value;
+                name = e.target.name;
 
-                if (errorMessage) {
-                    setErrors((prev) => ({ ...prev, [name]: errorMessage }));
-                } else {
-                    setErrors((prev) => {
-                        let obj = { ...prev };
-                        delete obj[name];
-                        return obj;
-                    });
+                if (e.target.type === "checkbox") {
+                    value = e.target.checked;
                 }
-
-                setData((prev) => ({ ...prev, [name]: value }));
             }
 
-            // Trigger form validation whenever input changes
+            // Validate the input value
+            const errorMessage = validateProperty(name, value);
+
+            if (errorMessage) {
+                setErrors((prev) => ({ ...prev, [name]: errorMessage }));
+            } else {
+                setErrors((prev) => {
+                    const obj = { ...prev };
+                    delete obj[name];
+                    return obj;
+                });
+            }
+
+            // Update form data
+            setData((prev) => ({ ...prev, [name]: value }));
+
+            // Trigger form validation
             validateForm();
         },
         [validateProperty, validateForm]
     );
+
 
     const onSubmit = useCallback(() => {
         if (validateForm()) {
