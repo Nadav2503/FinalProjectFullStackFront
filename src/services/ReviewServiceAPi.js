@@ -27,3 +27,16 @@ export const getReviewsForExhibit = async (exhibitId) => {
         throw new Error(error.message);
     }
 };
+
+// Get a specific review by ID
+export const getReviewById = async (id) => {
+    try {
+        const { data } = await axios.get(`${API_URL}/${id}`, {
+            headers: { "x-auth-token": getToken() },
+        });
+        return data;
+    } catch (error) {
+        throw new Error(error.message);
+    }
+};
+
