@@ -49,7 +49,13 @@ export default function EditReviewPage() {
 
             >
                 <ReviewForm
-
+                    title="Edit Review"
+                    submitLabel={"Save Changes"}
+                    onSubmit={onSubmit}
+                    validateForm={validateForm}
+                    errors={errors}
+                    data={data}
+                    onInputChange={handleChange}
                 />
             </Box>
         </Container>
