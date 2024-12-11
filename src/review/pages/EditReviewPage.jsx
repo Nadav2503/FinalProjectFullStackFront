@@ -46,7 +46,11 @@ export default function EditReviewPage() {
     return (
         <Container>
             <Box
-
+                sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                }}
             >
                 <ReviewForm
                     title="Edit Review"
