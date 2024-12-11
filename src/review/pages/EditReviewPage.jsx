@@ -44,6 +44,16 @@ export default function EditReviewPage() {
         }
     }, [review, setData]);
     return (
-        <div>EditReviewPage</div>
-    )
+        <Container>
+            <Box
+
+            >
+                <ReviewForm
+
+                />
+            </Box>
+        </Container>
+    );
 }
+
+
