@@ -9,7 +9,11 @@ export default function Reviews({ reviews, handleDelete, handleEdit, handleLike 
         >
             {reviews.map((review) => (
                 <ReviewCard
-
+                    review={review}
+                    key={review._id}
+                    handleDelete={handleDelete}
+                    handleEdit={handleEdit}
+                    handleLike={handleLike}
                 />
             ))}
         </Container>
