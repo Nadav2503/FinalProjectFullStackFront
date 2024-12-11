@@ -17,11 +17,9 @@ const useUpdateReview = () => {
             const updatedReview = await updateReview(id, normalizedReview); // API call
             setReview(updatedReview);
             setSnack("success", "Review updated successfully!");
-
         } catch (err) {
             setError(err.message);
             setSnack("error", `Failed to update review: ${err.message}`);
-
         } finally {
             setLoading(false);
         }
