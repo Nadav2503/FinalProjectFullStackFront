@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import { getReviewsByVisitor } from "../../services/ReviewServiceAPi";
+import { getReviewsByVisitor } from "../../services/ReviewServiceApi";
 import { useSnack } from "../../providers/SnackbarProvider";
 
 const useFetchReviewsByVisitor = () => {
