@@ -19,7 +19,13 @@ export default function AddReviewPage() {
 
             >
                 <ReviewForm
-
+                    title="Add New Review"
+                    submitLabel={"Create Review"}
+                    onSubmit={onSubmit}
+                    validateForm={validateForm}
+                    errors={errors}
+                    data={data}
+                    onInputChange={handleChange}
                 />
             </Box>
         </Container>
