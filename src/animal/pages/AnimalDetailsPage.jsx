@@ -26,24 +26,22 @@ export default function AnimalDetailPage() {
     const [openConfirmDialog, setOpenConfirmDialog] = useState(false);
     const [reviewToDelete, setReviewToDelete] = useState(null);
 
-
+    // Fetch data on mount
+    useEffect(() => {
+        fetchAnimalById(animalId);
+        fetchReviews(animalId);
+    }, [animalId, fetchAnimalById, fetchReviews]);
 
     useEffect(() => {
-        fetchAnimalById(animalId); // Pass animalId here
-    }, [animalId, fetchAnimalById]);
-
-    useEffect(() => {
-        setEndangeredStatus(animal?.isEndangered || false); // Update state when animal data changes
+        setEndangeredStatus(animal?.isEndangered || false);
     }, [animal]);
 
     const handleEndangeredToggle = async (event) => {
         const newStatus = event.target.checked;
-        setEndangeredStatus(newStatus); // Update the local state first
-
+        setEndangeredStatus(newStatus);
         try {
-            await updateStatus(animalId, newStatus); // Call the API to update the status
+            await updateStatus(animalId, newStatus);
         } catch (err) {
-            // Handle error here if needed (e.g., revert to the previous status)
             setEndangeredStatus(!newStatus); // Revert if update fails
         }
     };
