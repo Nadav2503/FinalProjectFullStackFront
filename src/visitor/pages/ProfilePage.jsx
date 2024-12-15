@@ -11,14 +11,23 @@ import useLikeAnimal from "../hooks/useLikeAnimal";
 import useGetAnimalByIdForProfilePage from "../../animal/hooks/useGetAnimalByIdForProfilePage";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../../routers/routerModel";
+import useFetchReviewsByVisitor from "../../review/hooks/useGetReviewsByVisitor";
+import useDeleteReview from "../../review/hooks/useDeleteReview";
 
 export default function ProfilePage() {
     const user = getUser();
+    const navigate = useNavigate();
     const { visitor, loading, error, fetchVisitorById } = useGetVisitorById();
     const { fetchAnimalByIdForProfilePage } = useGetAnimalByIdForProfilePage();
     const [animalsDetails, setAnimalsDetails] = useState([]);
     const { handleLikeAnimal } = useLikeAnimal();
-    const navigate = useNavigate();
+    const { reviews, fetchReviews } = useFetchReviewsByVisitor();
+    const { handleDelete } = useDeleteReview();
+    const [likedReviews, setLikedReviews] = useState([]);
+
+    const [openConfirmDialog, setOpenConfirmDialog] = useState(false);
+    const [reviewToDelete, setReviewToDelete] = useState(null);
+
 
     useEffect(() => {
         if (user && !visitor) {
