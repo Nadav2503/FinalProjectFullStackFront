@@ -23,9 +23,9 @@ const useLikeReview = () => {
         } finally {
             setLoading(false);
         }
-    }, [setSnack]);
+    }, [likedReviews, setSnack]);
 
-    return { handleLike, loading };
+    return { handleLike, likedReviews, loading };
 };
 
 export default useLikeReview;
