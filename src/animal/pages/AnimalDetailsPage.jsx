@@ -8,6 +8,7 @@ import PageHeader from "../../general/PageHeader";
 import useUpdateEndangeredStatus from "../hooks/useUpdateEndangeredStatus";
 import useDeleteReview from "../../review/hooks/useDeleteReview";
 import useFetchReviewsForAnimal from "../../review/hooks/useGetReviewsForAnimal";
+import ROUTES from "../../routers/routerModel";
 
 export default function AnimalDetailPage() {
     const { animalId } = useParams();
@@ -44,6 +45,10 @@ export default function AnimalDetailPage() {
         } catch (err) {
             setEndangeredStatus(!newStatus); // Revert if update fails
         }
+    };
+
+    const handleEditReview = (reviewId) => {
+        navigate(`${ROUTES.EDIT_REVIEW}/${reviewId}`, { state: { animalId } });
     };
 
     if (isLoading) return <Loader />;
