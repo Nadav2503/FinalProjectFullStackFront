@@ -4,6 +4,7 @@ import { useSnack } from "../../providers/SnackbarProvider";
 
 const useLikeReview = () => {
     const [loading, setLoading] = useState(false);
+    const [likedReviews, setLikedReviews] = useState([]);
     const setSnack = useSnack();
 
     const handleLike = useCallback(async (id) => {
