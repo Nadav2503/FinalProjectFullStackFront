@@ -191,6 +191,7 @@ export default function ExhibitDetailPage() {
                 visitor={visitor}
             />
 
+            <Divider sx={{ my: 3 }} />
 
             {/* Average Rating Section */}
             {averageRating && (
