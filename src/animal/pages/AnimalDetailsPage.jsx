@@ -160,7 +160,7 @@ export default function AnimalDetailPage() {
                                 <Switch
                                     checked={endangeredStatus}
                                     onChange={handleEndangeredToggle}
-                                    disabled={loading}
+                                    disabled={isLoading}
                                 />
                             }
                             label={endangeredStatus ? "Yes" : "No"}
@@ -175,6 +175,7 @@ export default function AnimalDetailPage() {
                     </Box>
                 </Box>
             </Box>
+            <Divider sx={{ my: 3 }} />
         </Container>
     );
 }
