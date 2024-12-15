@@ -31,13 +31,16 @@ export default function EditReviewPage() {
                     navigate(`${ROUTES.EXHIBIT_INFO}/${exhibitId}`);
                 } else if (animalId) {
                     navigate(`${ROUTES.ANIMAL_INFO}/${animalId}`);
+                } else if (location.state?.fromProfile) {
+                    navigate(ROUTES.PROFILE); // Navigate back to the Profile Page
                 }
             } catch (error) {
                 console.error("EditReviewPage: Failed to update review", error);
             }
         },
-        [handleUpdate, reviewId, navigate, exhibitId, animalId]
+        [handleUpdate, reviewId, navigate, exhibitId, animalId, location.state]
     );
+
 
     const { data, errors, handleChangeRating, validateForm, onSubmit, setData } = useForm(
         review || initializeReview,
