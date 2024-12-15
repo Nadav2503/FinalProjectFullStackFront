@@ -56,6 +56,18 @@ export default function AnimalDetailPage() {
         setOpenConfirmDialog(true);
     };
 
+    const handleConfirmDeleteReview = async () => {
+        try {
+            await handleDelete(reviewToDelete);
+            fetchReviews(animalId);
+        } catch (err) {
+            console.error("Error deleting review:", err);
+        } finally {
+            setOpenConfirmDialog(false);
+            setReviewToDelete(null);
+        }
+    };
+
     if (isLoading) return <Loader />;
     if (error) {
         const errorMessage = typeof error === "string" ? error : error.message || "An unknown error occurred.";
