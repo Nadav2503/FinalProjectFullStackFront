@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import ROUTES from "../../routers/routerModel";
 import useFetchReviewsByVisitor from "../../review/hooks/useGetReviewsByVisitor";
 import useDeleteReview from "../../review/hooks/useDeleteReview";
+import ReviewFeedback from "../../review/components/ReviewFeedback";
 
 export default function ProfilePage() {
     const user = getUser();
@@ -187,6 +188,16 @@ export default function ProfilePage() {
                 </Container>
             </Box>
             <Divider sx={{ my: 3 }} />
+            <Box>
+                <Typography variant="h5" align="center" mb={2}>
+                    Your Reviews
+                </Typography>
+                <ReviewFeedback
+                    reviews={reviews}
+                    handleEdit={handleEditReview}
+                    handleDelete={confirmDeleteReview}
+                />
+            </Box>
         </Container>
     );
 }
