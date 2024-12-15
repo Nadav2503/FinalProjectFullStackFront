@@ -10,6 +10,7 @@ import useDeleteReview from "../../review/hooks/useDeleteReview";
 import useFetchReviewsForAnimal from "../../review/hooks/useGetReviewsForAnimal";
 import ROUTES from "../../routers/routerModel";
 import ReviewFeedback from "../../review/components/ReviewFeedback";
+import ConfirmDialog from "../../general/ConfirmDialog";
 
 export default function AnimalDetailPage() {
     const { animalId } = useParams();
@@ -200,7 +201,7 @@ export default function AnimalDetailPage() {
                     </Typography>
                 </Box>
             )}
-            {/* Reviews */}
+
             <ReviewFeedback
                 isLoading={isLoading}
                 reviews={reviews}
@@ -208,6 +209,13 @@ export default function AnimalDetailPage() {
                 handleDelete={confirmDeleteReview}
                 handleEdit={handleEditReview}
                 handleLike={() => { }}
+            />
+            <ConfirmDialog
+                open={openConfirmDialog}
+                onClose={handleCancelDelete}
+                onConfirm={handleConfirmDeleteReview}
+                title="Confirm Review Deletion"
+                content="Are you sure you want to delete this review?"
             />
         </Container>
     );
