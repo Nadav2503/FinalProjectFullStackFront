@@ -42,6 +42,16 @@ export default function ProfilePage() {
     }, [visitor, fetchReviews]);
 
     useEffect(() => {
+        if (reviews) {
+            // Filter reviews liked by the visitor
+            const liked = reviews.filter((review) =>
+                review.likes.includes(user._id)
+            );
+            setLikedReviews(liked);
+        }
+    }, [reviews, user._id]);
+
+    useEffect(() => {
         if (visitor && visitor.preferredAnimals) {
             const fetchAnimals = async () => {
                 try {
