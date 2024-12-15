@@ -76,10 +76,7 @@ export default function AnimalDetailPage() {
     };
 
     if (isLoading) return <Loader />;
-    if (error) {
-        const errorMessage = typeof error === "string" ? error : error.message || "An unknown error occurred.";
-        return <Error errorMessage={errorMessage} />;
-    }
+    if (error) return <Error errorMessage={error.message || "An unknown error occurred."} />;
     if (!animal) return <Error errorMessage="Animal not found." />;
 
     return (

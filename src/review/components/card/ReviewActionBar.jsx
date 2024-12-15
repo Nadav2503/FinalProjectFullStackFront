@@ -4,7 +4,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import CardActionBar from '../../../general/card/CardActionBar';
 
-export default function ReviewActionBar({ reviewId, handleEdit, handleDelete, handleLike, isLiked }) {
+export default function ReviewActionBar({ reviewId, handleEdit, handleDelete, handleLike, liked }) {
     const actions = [];
 
     if (handleEdit) {
@@ -22,9 +22,7 @@ export default function ReviewActionBar({ reviewId, handleEdit, handleDelete, ha
     }
 
     actions.push({
-        onClick: () => handleLike(reviewId),
-        icon: <FavoriteIcon style={{ color: isLiked ? 'red' : 'gray' }} />
-        ,
+        onClick: handleLike, icon: <FavoriteIcon sx={{ color: liked ? "red" : "grey" }} />
     });
 
     return <CardActionBar actions={actions} />;

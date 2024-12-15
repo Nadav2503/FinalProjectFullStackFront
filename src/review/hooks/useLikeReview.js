@@ -11,7 +11,7 @@ const useLikeReview = () => {
         setLoading(true);
         setError(null);
         try {
-            await likeReview(id); // API call
+            await likeReview(id);
             setSnack("success", "Review like/unlike successful!");
         } catch (err) {
             setError(err.message);
