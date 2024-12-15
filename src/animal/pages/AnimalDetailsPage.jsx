@@ -176,6 +176,21 @@ export default function AnimalDetailPage() {
                 </Box>
             </Box>
             <Divider sx={{ my: 3 }} />
+
+            {/* Average Rating Section */}
+            {averageRating && (
+                <Box sx={{ my: 4, textAlign: "center" }}>
+                    <Typography variant="h5" sx={{ mb: 1 }}>
+                        Average Rating
+                    </Typography>
+                    <Typography
+
+                    >
+                        {averageRating}
+                    </Typography>
+                </Box>
+            )}
+
         </Container>
     );
 }
