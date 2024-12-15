@@ -133,25 +133,25 @@ export default function AnimalDetailPage() {
             </Box>
             <Divider sx={{ my: 3 }} />
             {/* Average Rating Section */}
-            {averageRating && (
-                <Box sx={{ my: 4, textAlign: "center" }}>
-                    <Typography variant="h5" sx={{ mb: 1 }}>Average Rating</Typography>
-                    <Typography
-                        variant="h6"
-                        color="text.secondary"
-                        sx={{
-                            py: 2,
-                            px: 4,
-                            display: "inline-block",
-                            border: "1px solid",
-                            borderRadius: "8px",
-                            borderColor: "text.secondary",
-                        }}
-                    >
-                        {averageRating}
-                    </Typography>
-                </Box>
-            )}
+
+            <Box sx={{ my: 4, textAlign: "center" }}>
+                <Typography variant="h5" sx={{ mb: 1 }}>Average Rating</Typography>
+                <Typography
+                    variant="h6"
+                    color="text.secondary"
+                    sx={{
+                        py: 2,
+                        px: 4,
+                        display: "inline-block",
+                        border: "1px solid",
+                        borderRadius: "8px",
+                        borderColor: "text.secondary",
+                    }}
+                >
+                    {averageRating}
+                </Typography>
+            </Box>
+
             <ReviewFeedback
                 isLoading={isLoading}
                 reviews={reviews}

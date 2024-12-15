@@ -22,6 +22,7 @@ import useUpdateAnimalsInExhibit from "../hooks/useUpdateAnimalsInExhibit";
 import useGetAnimalsByExhibit from "../../animal/hooks/useGetAnimalsByExhibit";
 import useFetchReviewsForExhibit from "../../review/hooks/useGetReviewsForExhibit";
 import useDeleteReview from "../../review/hooks/useDeleteReview";
+import useLikeReview from "../../review/hooks/useLikeReview";
 
 export default function ExhibitDetailPage() {
     const { exhibitId } = useParams();
@@ -32,6 +33,7 @@ export default function ExhibitDetailPage() {
     const { handleLikeAnimal } = useLikeAnimal();
     const { reviews, averageRating, fetchReviews } = useFetchReviewsForExhibit();
     const { handleDelete } = useDeleteReview();
+    const { handleLike } = useLikeReview();
     const navigate = useNavigate();
     const { visitor } = useCurrentVisitor();
 
@@ -194,27 +196,27 @@ export default function ExhibitDetailPage() {
             <Divider sx={{ my: 3 }} />
 
             {/* Average Rating Section */}
-            {averageRating && (
-                <Box sx={{ my: 4, textAlign: "center" }}>
-                    <Typography variant="h5" sx={{ mb: 1 }}>
-                        Average Rating
-                    </Typography>
-                    <Typography
-                        variant="h6"
-                        color="text.secondary"
-                        sx={{
-                            py: 2,
-                            px: 4,
-                            display: "inline-block",
-                            border: "1px solid",
-                            borderRadius: "8px",
-                            borderColor: "text.secondary",
-                        }}
-                    >
-                        {averageRating}
-                    </Typography>
-                </Box>
-            )}
+
+            <Box sx={{ my: 4, textAlign: "center" }}>
+                <Typography variant="h5" sx={{ mb: 1 }}>
+                    Average Rating
+                </Typography>
+                <Typography
+                    variant="h6"
+                    color="text.secondary"
+                    sx={{
+                        py: 2,
+                        px: 4,
+                        display: "inline-block",
+                        border: "1px solid",
+                        borderRadius: "8px",
+                        borderColor: "text.secondary",
+                    }}
+                >
+                    {averageRating}
+                </Typography>
+            </Box>
+
 
             {/* Display reviews */}
             <ReviewFeedback
@@ -223,7 +225,7 @@ export default function ExhibitDetailPage() {
                 error={error}
                 handleDelete={confirmDeleteReview}
                 handleEdit={handleEditReview}
-                handleLike={() => { }}
+                handleLike={handleLike}
             />
 
             <AddNewButton onAdd={handleAddAnimal} />
