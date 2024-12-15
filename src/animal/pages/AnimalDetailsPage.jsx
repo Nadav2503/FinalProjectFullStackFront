@@ -9,6 +9,7 @@ import useUpdateEndangeredStatus from "../hooks/useUpdateEndangeredStatus";
 import useDeleteReview from "../../review/hooks/useDeleteReview";
 import useFetchReviewsForAnimal from "../../review/hooks/useGetReviewsForAnimal";
 import ROUTES from "../../routers/routerModel";
+import ReviewFeedback from "../../review/components/ReviewFeedback";
 
 export default function AnimalDetailPage() {
     const { animalId } = useParams();
@@ -199,7 +200,15 @@ export default function AnimalDetailPage() {
                     </Typography>
                 </Box>
             )}
-
+            {/* Reviews */}
+            <ReviewFeedback
+                isLoading={isLoading}
+                reviews={reviews}
+                error={error}
+                handleDelete={confirmDeleteReview}
+                handleEdit={handleEditReview}
+                handleLike={() => { }}
+            />
         </Container>
     );
 }
