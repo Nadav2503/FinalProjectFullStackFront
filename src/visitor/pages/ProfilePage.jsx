@@ -105,6 +105,10 @@ export default function ProfilePage() {
             setReviewToDelete(null);
         }
     };
+    const handleCancelDelete = () => {
+        setOpenConfirmDialog(false);
+        setReviewToDelete(null);
+    };
     if (loading) return <Loader />;
 
     if (error) {
