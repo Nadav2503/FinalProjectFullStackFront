@@ -51,6 +51,11 @@ export default function AnimalDetailPage() {
         navigate(`${ROUTES.EDIT_REVIEW}/${reviewId}`, { state: { animalId } });
     };
 
+    const confirmDeleteReview = (reviewId) => {
+        setReviewToDelete(reviewId);
+        setOpenConfirmDialog(true);
+    };
+
     if (isLoading) return <Loader />;
     if (error) {
         const errorMessage = typeof error === "string" ? error : error.message || "An unknown error occurred.";
