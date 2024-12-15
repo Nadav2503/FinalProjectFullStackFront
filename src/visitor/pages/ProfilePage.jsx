@@ -14,6 +14,7 @@ import ROUTES from "../../routers/routerModel";
 import useFetchReviewsByVisitor from "../../review/hooks/useGetReviewsByVisitor";
 import useDeleteReview from "../../review/hooks/useDeleteReview";
 import ReviewFeedback from "../../review/components/ReviewFeedback";
+import ConfirmDialog from "../../general/ConfirmDialog";
 
 export default function ProfilePage() {
     const user = getUser();
@@ -209,6 +210,13 @@ export default function ProfilePage() {
                     handleDelete={confirmDeleteReview}
                 />
             </Box>
+            <ConfirmDialog
+                open={openConfirmDialog}
+                onClose={handleCancelDelete}
+                onConfirm={handleConfirmDeleteReview}
+                title="Confirm Review Deletion"
+                content="Are you sure you want to delete this review?"
+            />
         </Container>
     );
 }
