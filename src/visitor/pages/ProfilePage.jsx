@@ -36,6 +36,12 @@ export default function ProfilePage() {
     }, [user, visitor, fetchVisitorById]);
 
     useEffect(() => {
+        if (visitor) {
+            fetchReviews(visitor._id);
+        }
+    }, [visitor, fetchReviews]);
+
+    useEffect(() => {
         if (visitor && visitor.preferredAnimals) {
             const fetchAnimals = async () => {
                 try {
