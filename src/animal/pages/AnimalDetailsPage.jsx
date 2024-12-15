@@ -11,6 +11,7 @@ import useFetchReviewsForAnimal from "../../review/hooks/useGetReviewsForAnimal"
 import ROUTES from "../../routers/routerModel";
 import ReviewFeedback from "../../review/components/ReviewFeedback";
 import ConfirmDialog from "../../general/ConfirmDialog";
+import useLikeReview from "../../review/hooks/useLikeReview";
 
 export default function AnimalDetailPage() {
     const { animalId } = useParams();
@@ -21,10 +22,9 @@ export default function AnimalDetailPage() {
     const { updateStatus } = useUpdateEndangeredStatus();
 
     // Hooks for fetching and managing reviews
-    const { reviews, averageRating, fetchReviews } =
-        useFetchReviewsForAnimal();
+    const { reviews, averageRating, fetchReviews } = useFetchReviewsForAnimal();
     const { handleDelete } = useDeleteReview();
-
+    const { handleLike } = useLikeReview();
     const [endangeredStatus, setEndangeredStatus] = useState(false);
     const [openConfirmDialog, setOpenConfirmDialog] = useState(false);
     const [reviewToDelete, setReviewToDelete] = useState(null);
@@ -63,7 +63,7 @@ export default function AnimalDetailPage() {
             await handleDelete(reviewToDelete);
             fetchReviews(animalId);
         } catch (err) {
-            console.error("Error deleting review:", err);
+            console.error("Error deleting review:", err); // Log error during deletion
         } finally {
             setOpenConfirmDialog(false);
             setReviewToDelete(null);
@@ -84,12 +84,8 @@ export default function AnimalDetailPage() {
 
     return (
         <Container>
-
             {/* Page Header */}
-            <PageHeader sx={{ textAlign: "center", mb: 4 }}
-                title={animal.name}
-                subtitle={animal.description}>
-            </PageHeader>
+            <PageHeader sx={{ textAlign: "center", mb: 4 }} title={animal.name} subtitle={animal.description} />
             {/* Animal Image */}
             <Box sx={{ textAlign: "center", mt: 4 }}>
                 <img
@@ -100,91 +96,49 @@ export default function AnimalDetailPage() {
             </Box>
             <Divider sx={{ mt: 2, mb: 4 }} />
             {/* Animal Details */}
-            <Box
-                sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    gap: 4,
-                }}
-            >
+            <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 4 }}>
                 {/* First Column */}
                 <Box sx={{ flex: 1, display: "flex", flexDirection: "column", gap: 2 }}>
                     <Box>
-                        <Typography variant="body1" color="text.secondary">
-                            Type:
-                        </Typography>
+                        <Typography variant="body1" color="text.secondary">Type:</Typography>
                         <Typography variant="h6">{animal.type}</Typography>
                     </Box>
-
                     <Box>
-                        <Typography variant="body1" color="text.secondary">
-                            Age:
-                        </Typography>
+                        <Typography variant="body1" color="text.secondary">Age:</Typography>
                         <Typography variant="h6">{animal.age} years</Typography>
                     </Box>
-
                     <Box>
-                        <Typography variant="body1" color="text.secondary">
-                            Gender:
-                        </Typography>
+                        <Typography variant="body1" color="text.secondary">Gender:</Typography>
                         <Typography variant="h6">{animal.gender}</Typography>
                     </Box>
                 </Box>
-
                 {/* Vertical Divider */}
-                <Divider
-                    orientation="vertical"
-                    flexItem
-                    sx={{
-                        borderRightWidth: 2,
-                        height: "auto",
-                    }}
-                />
-
+                <Divider orientation="vertical" flexItem sx={{ borderRightWidth: 2, height: "auto" }} />
                 {/* Second Column */}
                 <Box sx={{ flex: 1, display: "flex", flexDirection: "column", gap: 2 }}>
                     <Box>
-                        <Typography variant="body1" color="text.secondary">
-                            Diet:
-                        </Typography>
+                        <Typography variant="body1" color="text.secondary">Diet:</Typography>
                         <Typography variant="h6">{animal.diet}</Typography>
                     </Box>
-
                     {/* Endangered Status with Toggle */}
                     <Box>
-                        <Typography variant="body1" color="text.secondary">
-                            Endangered Status:
-                        </Typography>
+                        <Typography variant="body1" color="text.secondary">Endangered Status:</Typography>
                         <FormControlLabel
-                            control={
-                                <Switch
-                                    checked={endangeredStatus}
-                                    onChange={handleEndangeredToggle}
-                                    disabled={isLoading}
-                                />
-                            }
+                            control={<Switch checked={endangeredStatus} onChange={handleEndangeredToggle} disabled={isLoading} />}
                             label={endangeredStatus ? "Yes" : "No"}
                         />
                     </Box>
-
                     <Box>
-                        <Typography variant="body1" color="text.secondary">
-                            Health Status:
-                        </Typography>
+                        <Typography variant="body1" color="text.secondary">Health Status:</Typography>
                         <Typography variant="h6">{animal.healthStatus}</Typography>
                     </Box>
                 </Box>
             </Box>
             <Divider sx={{ my: 3 }} />
-
             {/* Average Rating Section */}
             {averageRating && (
                 <Box sx={{ my: 4, textAlign: "center" }}>
-                    <Typography variant="h5" sx={{ mb: 1 }}>
-                        Average Rating
-                    </Typography>
+                    <Typography variant="h5" sx={{ mb: 1 }}>Average Rating</Typography>
                     <Typography
                         variant="h6"
                         color="text.secondary"
@@ -201,14 +155,13 @@ export default function AnimalDetailPage() {
                     </Typography>
                 </Box>
             )}
-
             <ReviewFeedback
                 isLoading={isLoading}
                 reviews={reviews}
                 error={error}
                 handleDelete={confirmDeleteReview}
                 handleEdit={handleEditReview}
-                handleLike={() => { }}
+                handleLike={handleLike}
             />
             <ConfirmDialog
                 open={openConfirmDialog}

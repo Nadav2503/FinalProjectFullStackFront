@@ -9,9 +9,8 @@ const useLikeReview = () => {
     const handleLike = useCallback(async (id) => {
         setLoading(true);
         try {
-            const response = await likeReview(id); // API call
+            await likeReview(id); // API call
             setSnack("success", "Review like/unlike successful!");
-            return response;
         } catch (err) {
             setSnack("error", `Failed to like/unlike review: ${err.message}`);
             throw err;

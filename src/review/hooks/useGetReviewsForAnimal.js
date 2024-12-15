@@ -2,7 +2,6 @@ import { useState, useCallback } from "react";
 import { getReviewsForAnimal } from "../../services/ReviewServiceApi";
 import { useSnack } from "../../providers/SnackbarProvider";
 
-
 const useFetchReviewsForAnimal = () => {
     const [reviews, setReviews] = useState([]);
     const [averageRating, setAverageRating] = useState(null);
