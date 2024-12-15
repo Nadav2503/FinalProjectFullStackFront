@@ -12,25 +12,32 @@ import { getUser } from "../../services/LocalStorageService";
 import ROUTES from "../../routers/routerModel";
 
 export default function EditReviewPage() {
-    const { reviewId } = useParams(); // Extract review ID from the URL
+    const { reviewId } = useParams();
     const user = getUser();
     const location = useLocation();
-    const { exhibitId } = location.state || {}; // Retrieve exhibitId from state
+    const { exhibitId } = location.state || {};
+    const { animalId } = location.state || {};
 
     const navigate = useNavigate();
     const { handleUpdate } = useUpdateReview();
     const { fetchReview, review } = useFetchSpecificReview();
 
-    const handleSubmit = useCallback(async (formData) => {
-        try {
-            await handleUpdate(reviewId, formData); // Call the update function
-            if (exhibitId) {
-                navigate(`${ROUTES.EXHIBIT_INFO}/${exhibitId}`);
+    const handleSubmit = useCallback(
+        async (formData) => {
+            try {
+                await handleUpdate(reviewId, formData);
+
+                if (exhibitId) {
+                    navigate(`${ROUTES.EXHIBIT_INFO}/${exhibitId}`);
+                } else if (animalId) {
+                    navigate(`${ROUTES.ANIMAL_INFO}/${animalId}`);
+                }
+            } catch (error) {
+                console.error("EditReviewPage: Failed to update review", error);
             }
-        } catch (error) {
-            console.error("Failed to update review:", error);
-        }
-    }, [handleUpdate, reviewId, navigate, exhibitId]);
+        },
+        [handleUpdate, reviewId, navigate, exhibitId, animalId]
+    );
 
     const { data, errors, handleChangeRating, validateForm, onSubmit, setData } = useForm(
         review || initializeReview,
