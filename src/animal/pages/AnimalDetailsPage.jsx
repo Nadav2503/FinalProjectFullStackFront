@@ -68,6 +68,11 @@ export default function AnimalDetailPage() {
         }
     };
 
+    const handleCancelDelete = () => {
+        setOpenConfirmDialog(false);
+        setReviewToDelete(null);
+    };
+
     if (isLoading) return <Loader />;
     if (error) {
         const errorMessage = typeof error === "string" ? error : error.message || "An unknown error occurred.";
