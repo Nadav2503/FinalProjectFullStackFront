@@ -89,6 +89,10 @@ export default function ProfilePage() {
         navigate(`${ROUTES.EDIT_REVIEW}/${reviewId}`, { state: { fromProfile: true } });
     };
 
+    const confirmDeleteReview = (reviewId) => {
+        setReviewToDelete(reviewId);
+        setOpenConfirmDialog(true);
+    };
     if (loading) return <Loader />;
 
     if (error) {
