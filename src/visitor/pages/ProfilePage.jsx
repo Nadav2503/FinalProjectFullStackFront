@@ -76,15 +76,17 @@ export default function ProfilePage() {
 
     const handleFavoriteToggle = (animalId) => {
         handleLikeAnimal(animalId);
-
-        // Filter out the disliked animal if it's unliked
-        setAnimalsDetails((prevAnimals) => {
-            return prevAnimals.filter((animal) => animal._id !== animalId);  // Remove the animal from the list
-        });
+        setAnimalsDetails((prevAnimals) =>
+            prevAnimals.filter((animal) => animal._id !== animalId)
+        );
     };
 
     const handleEditProfile = () => {
         navigate(`${ROUTES.EDIT_PROFILE}/${user._id}`);
+    };
+
+    const handleEditReview = (reviewId) => {
+        navigate(`${ROUTES.EDIT_REVIEW}/${reviewId}`, { state: { fromProfile: true } });
     };
 
     if (loading) return <Loader />;
