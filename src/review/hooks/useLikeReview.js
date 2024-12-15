@@ -11,6 +11,11 @@ const useLikeReview = () => {
         setLoading(true);
         try {
             await likeReview(id); // API call
+            const newLikedReviews = likedReviews.includes(reviewId)
+                ? likedReviews.filter((id) => id !== reviewId)
+                : [...likedReviews, reviewId];
+
+            setLikedReviews(newLikedReviews);
             setSnack("success", "Review like/unlike successful!");
         } catch (err) {
             setSnack("error", `Failed to like/unlike review: ${err.message}`);
