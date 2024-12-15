@@ -199,6 +199,16 @@ export default function ProfilePage() {
                 />
             </Box>
             <Divider sx={{ my: 3 }} />
+            <Box>
+                <Typography variant="h5" align="center" mb={2}>
+                    Liked Reviews
+                </Typography>
+                <ReviewFeedback
+                    reviews={likedReviews}
+                    handleEdit={handleEditReview}
+                    handleDelete={confirmDeleteReview}
+                />
+            </Box>
         </Container>
     );
 }
