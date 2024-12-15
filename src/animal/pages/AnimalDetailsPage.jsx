@@ -24,7 +24,7 @@ export default function AnimalDetailPage() {
     // Hooks for fetching and managing reviews
     const { reviews, averageRating, fetchReviews } = useFetchReviewsForAnimal();
     const { handleDelete } = useDeleteReview();
-    const { handleLike, likedReviews } = useLikeReview();
+    const { handleLike } = useLikeReview();
     const [endangeredStatus, setEndangeredStatus] = useState(false);
     const [openConfirmDialog, setOpenConfirmDialog] = useState(false);
     const [reviewToDelete, setReviewToDelete] = useState(null);
@@ -162,7 +162,6 @@ export default function AnimalDetailPage() {
                 handleDelete={confirmDeleteReview}
                 handleEdit={handleEditReview}
                 handleLike={handleLike}
-                likedReviews={likedReviews}
             />
             <ConfirmDialog
                 open={openConfirmDialog}

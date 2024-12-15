@@ -4,28 +4,24 @@ import { useSnack } from "../../providers/SnackbarProvider";
 
 const useLikeReview = () => {
     const [loading, setLoading] = useState(false);
-    const [likedReviews, setLikedReviews] = useState([]);
+    const [error, setError] = useState(null);
     const setSnack = useSnack();
 
     const handleLike = useCallback(async (id) => {
         setLoading(true);
+        setError(null);
         try {
             await likeReview(id); // API call
-            const newLikedReviews = likedReviews.includes(reviewId)
-                ? likedReviews.filter((id) => id !== reviewId)
-                : [...likedReviews, reviewId];
-
-            setLikedReviews(newLikedReviews);
             setSnack("success", "Review like/unlike successful!");
         } catch (err) {
+            setError(err.message);
             setSnack("error", `Failed to like/unlike review: ${err.message}`);
-            throw err;
         } finally {
             setLoading(false);
         }
-    }, [likedReviews, setSnack]);
+    }, [setSnack]);
 
-    return { handleLike, likedReviews, loading };
+    return { handleLike, loading, error };
 };
 
 export default useLikeReview;
