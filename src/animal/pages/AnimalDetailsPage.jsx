@@ -1,18 +1,32 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Container, Typography, Box, Divider, Switch, FormControlLabel } from "@mui/material";
 import Loader from "../../general/Loader";
 import Error from "../../general/Error";
 import useGetAnimalById from "../hooks/useGetAnimalById";
 import PageHeader from "../../general/PageHeader";
 import useUpdateEndangeredStatus from "../hooks/useUpdateEndangeredStatus";
+import useDeleteReview from "../../review/hooks/useDeleteReview";
+import useFetchReviewsForAnimal from "../../review/hooks/useGetReviewsForAnimal";
 
 export default function AnimalDetailPage() {
-    const { animalId } = useParams(); // Get animal ID from the URL
-    const { animal, isLoading, error, fetchAnimalById } = useGetAnimalById(); // Hook to fetch animal data
-    const { updateStatus, loading } = useUpdateEndangeredStatus(); // Use update status hook
+    const { animalId } = useParams();
+    const navigate = useNavigate();
 
-    const [endangeredStatus, setEndangeredStatus] = useState(animal?.isEndangered || false);
+    // Hooks for animal data and endangered status
+    const { animal, isLoading, error, fetchAnimalById } = useGetAnimalById();
+    const { updateStatus } = useUpdateEndangeredStatus();
+
+    // Hooks for fetching and managing reviews
+    const { reviews, averageRating, fetchReviews } =
+        useFetchReviewsForAnimal();
+    const { handleDelete } = useDeleteReview();
+
+    const [endangeredStatus, setEndangeredStatus] = useState(false);
+    const [openConfirmDialog, setOpenConfirmDialog] = useState(false);
+    const [reviewToDelete, setReviewToDelete] = useState(null);
+
+
 
     useEffect(() => {
         fetchAnimalById(animalId); // Pass animalId here
