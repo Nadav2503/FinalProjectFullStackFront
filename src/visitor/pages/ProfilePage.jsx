@@ -198,6 +198,7 @@ export default function ProfilePage() {
                     handleDelete={confirmDeleteReview}
                 />
             </Box>
+            <Divider sx={{ my: 3 }} />
         </Container>
     );
 }
