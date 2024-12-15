@@ -93,6 +93,18 @@ export default function ProfilePage() {
         setReviewToDelete(reviewId);
         setOpenConfirmDialog(true);
     };
+
+    const handleConfirmDeleteReview = async () => {
+        try {
+            await handleDelete(reviewToDelete);
+            fetchReviews(visitor._id);
+        } catch (err) {
+            console.error("Error deleting review:", err);
+        } finally {
+            setOpenConfirmDialog(false);
+            setReviewToDelete(null);
+        }
+    };
     if (loading) return <Loader />;
 
     if (error) {
