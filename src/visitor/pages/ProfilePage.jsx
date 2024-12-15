@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Typography, Container, Card, CardContent, Avatar, Grid, Box } from "@mui/material";
+import { Typography, Container, Card, CardContent, Avatar, Grid, Box, Divider } from "@mui/material";
 import { getUser } from "../../services/LocalStorageService";
 import useGetVisitorById from "../hooks/useVisitorDataById";
 import Loader from "../../general/Loader";
@@ -105,6 +105,7 @@ export default function ProfilePage() {
             setReviewToDelete(null);
         }
     };
+
     const handleCancelDelete = () => {
         setOpenConfirmDialog(false);
         setReviewToDelete(null);
@@ -185,6 +186,7 @@ export default function ProfilePage() {
                     ))}
                 </Container>
             </Box>
+            <Divider sx={{ my: 3 }} />
         </Container>
     );
 }
