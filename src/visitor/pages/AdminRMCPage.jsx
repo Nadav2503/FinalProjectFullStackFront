@@ -60,7 +60,8 @@ export default function AdminRMCPage() {
                         boxShadow: 1,
                     }}
 
-                ></Box>
+                > <Typography variant="h6" sx={{ fontWeight: 'bold', marginBottom: 1 }}>
+                        {visitor.username}</Typography></Box>
             </Box>
 
         </Container>
