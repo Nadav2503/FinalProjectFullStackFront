@@ -47,7 +47,12 @@ export default function AdminRMCPage() {
                     gap: 2,
                     justifyContent: "center",
                 }}
-            ></Box>
+            >
+                <Box
+
+
+                ></Box>
+            </Box>
 
         </Container>
     )
