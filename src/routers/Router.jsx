@@ -19,6 +19,7 @@ import ProfilePage from "../visitor/pages/ProfilePage";
 import EditProfilePage from "../visitor/pages/EditProfilePage";
 import EditReviewPage from "../review/pages/EditReviewPage";
 import AddReviewPage from "../review/pages/AddReviewPage";
+import AdminRMCPage from "../visitor/pages/AdminRMCPage";
 
 // Main Router component to define application routes
 export default function Router() {
@@ -26,6 +27,7 @@ export default function Router() {
         <Routes>
             {/* Route for the homepage */}
             <Route path={ROUTES.ROOT} element={<Home />} />
+            <Route path={ROUTES.ADMIN} element={<AdminRMCPage />} />
 
             {/* Route for the About page */}
             <Route path={ROUTES.ABOUT} element={<About />} />
