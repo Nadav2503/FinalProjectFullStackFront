@@ -49,7 +49,16 @@ export default function AdminRMCPage() {
                 }}
             >
                 <Box
-
+                    sx={{
+                        border: 1,
+                        borderRadius: 2,
+                        padding: 2,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'space-between',
+                        backgroundColor: 'background.paper',
+                        boxShadow: 1,
+                    }}
 
                 ></Box>
             </Box>
