@@ -40,6 +40,10 @@ export default function AdminRMCPage() {
             <PageHeader title={"Admin RMC Page"} />
 
 
+            <Box
+
+            ></Box>
+
         </Container>
     )
 }
