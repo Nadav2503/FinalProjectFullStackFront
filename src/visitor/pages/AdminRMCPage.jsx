@@ -121,7 +121,14 @@ export default function AdminRMCPage() {
                 </>
             )
             }
-
+            {/* Confirmation Dialog */}
+            <ConfirmDialog
+                open={openDialog}
+                onClose={cancelDelete}
+                onConfirm={confirmDelete}
+                title="Confirm Deletion"
+                message="Are you sure you want to delete this visitor? This action cannot be undone."
+            />
         </Container>
     )
 }
