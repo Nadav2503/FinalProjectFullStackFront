@@ -32,7 +32,9 @@ export default function AdminRMCPage() {
         }
     };
 
-
+    const cancelDelete = () => {
+        setOpenDialog(false); // Close the dialog without doing anything
+    };
     return (
         <div>AdminRMCPage</div>
     )
