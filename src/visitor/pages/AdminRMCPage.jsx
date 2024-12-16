@@ -41,7 +41,12 @@ export default function AdminRMCPage() {
 
 
             <Box
-
+                sx={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(1, 1fr)', // Single column on mobile
+                    gap: 2,
+                    justifyContent: "center",
+                }}
             ></Box>
 
         </Container>
