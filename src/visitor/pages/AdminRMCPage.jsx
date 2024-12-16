@@ -40,39 +40,51 @@ export default function AdminRMCPage() {
             <PageHeader title={"Admin RMC Page"} />
 
 
-            <Box
-                sx={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(1, 1fr)', // Single column on mobile
-                    gap: 2,
-                    justifyContent: "center",
-                }}
-            >
+            {isMobile ? (
+                // Grid Layout for mobile and smaller screens
                 <Box
                     sx={{
-                        border: 1,
-                        borderRadius: 2,
-                        padding: 2,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        justifyContent: 'space-between',
-                        backgroundColor: 'background.paper',
-                        boxShadow: 1,
+                        display: 'grid',
+                        gridTemplateColumns: 'repeat(1, 1fr)', // Single column on mobile
+                        gap: 2,
+                        justifyContent: "center",
                     }}
-
-                > <Typography variant="h6" sx={{ fontWeight: 'bold', marginBottom: 1 }}>
-                        {visitor.username}</Typography> <Typography variant="body1">ID: {visitor._id}</Typography><Typography variant="body1">Membership Tier: {visitor.membershipTier}</Typography> <Typography variant="body1">Is Admin: {visitor.isAdmin ? 'Yes' : 'No'}</Typography><Typography variant="body1">Email: {visitor.email}</Typography>
-                    <Box sx={{ display: 'flex', gap: 1, marginTop: 2 }}>
-                        <CustomButton
-                            onClick={() => handleDelete(visitor._id)}
-                            color="secondary"
-                            disabled={deleteLoading}
+                >
+                    {visitors.map((visitor) => (
+                        <Box
+                            key={visitor._id}
+                            sx={{
+                                border: 1,
+                                borderRadius: 2,
+                                padding: 2,
+                                display: 'flex',
+                                flexDirection: 'column',
+                                justifyContent: 'space-between',
+                                backgroundColor: 'background.paper',
+                                boxShadow: 1,
+                            }}
                         >
-                            {deleteLoading ? 'Deleting...' : 'Delete'}
-                        </CustomButton>
-                    </Box>
+                            <Typography variant="h6" sx={{ fontWeight: 'bold', marginBottom: 1 }}>
+                                {visitor.username}
+                            </Typography>
+                            <Typography variant="body1">ID: {visitor._id}</Typography>
+                            <Typography variant="body1">Membership Tier: {visitor.membershipTier}</Typography>
+                            <Typography variant="body1">Is Admin: {visitor.isAdmin ? 'Yes' : 'No'}</Typography>
+                            <Typography variant="body1">Email: {visitor.email}</Typography>
+
+                            <Box sx={{ display: 'flex', gap: 1, marginTop: 2 }}>
+                                <CustomButton
+                                    onClick={() => handleDelete(visitor._id)}
+                                    color="secondary"
+                                    disabled={deleteLoading}
+                                >
+                                    {deleteLoading ? 'Deleting...' : 'Delete'}
+                                </CustomButton>
+                            </Box>
+                        </Box>
+                    ))}
                 </Box>
-            </Box>
+            )
 
         </Container>
     )
