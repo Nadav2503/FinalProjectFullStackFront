@@ -1,4 +1,10 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
+import { Container, Box, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
+import useDeleteVisitor from '../hooks/useDeleteVisitor';
+import useGetAllVisitors from '../hooks/useVisitorData';
+import CustomButton from '../../general/CustomButton';
+import PageHeader from '../../general/PageHeader';
+import ConfirmDialog from '../../general/ConfirmDialog';
 
 export default function AdminRMCPage() {
     const [isMobile, setIsMobile] = useState(false);
@@ -9,6 +15,7 @@ export default function AdminRMCPage() {
     // State to handle the confirmation dialog
     const [openDialog, setOpenDialog] = useState(false);
     const [selectedVisitorId, setSelectedVisitorId] = useState(null);
+
     useEffect(() => {
         fetchVisitors();
         const handleResize = () => {
@@ -18,6 +25,7 @@ export default function AdminRMCPage() {
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
     }, [fetchVisitors]);
+
 
     const handleDelete = (id) => {
         setSelectedVisitorId(id); // Set the ID of the visitor to delete
@@ -32,13 +40,15 @@ export default function AdminRMCPage() {
         }
     };
 
+
+
     const cancelDelete = () => {
         setOpenDialog(false); // Close the dialog without doing anything
     };
+
     return (
         <Container>
             <PageHeader title={"Admin RMC Page"} />
-
 
             {isMobile ? (
                 // Grid Layout for mobile and smaller screens
@@ -84,8 +94,9 @@ export default function AdminRMCPage() {
                         </Box>
                     ))}
                 </Box>
-            ) : ( // Table Layout for larger screens (responsive)
-                < TableContainer component={Paper} sx={{ overflowX: 'auto', border: 1, borderRadius: 2 }}>
+            ) : (
+                // Table Layout for larger screens (responsive)
+                <TableContainer component={Paper} sx={{ overflowX: 'auto', border: 1, borderRadius: 2 }}>
                     <Table sx={{ minWidth: 650 }}>
                         <TableHead>
                             <TableRow>
@@ -118,9 +129,9 @@ export default function AdminRMCPage() {
                             ))}
                         </TableBody>
                     </Table>
-                </>
-            )
-            }
+                </TableContainer>
+            )}
+
             {/* Confirmation Dialog */}
             <ConfirmDialog
                 open={openDialog}
@@ -130,5 +141,5 @@ export default function AdminRMCPage() {
                 message="Are you sure you want to delete this visitor? This action cannot be undone."
             />
         </Container>
-    )
+    );
 }
