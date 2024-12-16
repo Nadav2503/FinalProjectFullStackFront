@@ -24,6 +24,14 @@ export default function AdminRMCPage() {
         setOpenDialog(true); // Open the confirmation dialog
     };
 
+    const confirmDelete = () => {
+        if (selectedVisitorId) {
+            handleDeleteVisitor(selectedVisitorId); // Proceed with deleting the visitor
+            fetchVisitors();  // Refetch the visitors list to update the table
+            setOpenDialog(false); // Close the dialog after deletion
+        }
+    };
+
 
     return (
         <div>AdminRMCPage</div>
