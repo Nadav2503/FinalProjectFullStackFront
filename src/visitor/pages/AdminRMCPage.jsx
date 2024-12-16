@@ -18,6 +18,13 @@ export default function AdminRMCPage() {
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
     }, [fetchVisitors]);
+
+    const handleDelete = (id) => {
+        setSelectedVisitorId(id); // Set the ID of the visitor to delete
+        setOpenDialog(true); // Open the confirmation dialog
+    };
+
+
     return (
         <div>AdminRMCPage</div>
     )
