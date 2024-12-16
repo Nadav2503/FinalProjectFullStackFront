@@ -12,9 +12,11 @@ import ROUTES from "../../routers/routerModel";
 import ReviewFeedback from "../../review/components/ReviewFeedback";
 import ConfirmDialog from "../../general/ConfirmDialog";
 import useLikeReview from "../../review/hooks/useLikeReview";
+import { getUser } from "../../services/LocalStorageService";
 
 export default function AnimalDetailPage() {
     const { animalId } = useParams();
+    const user = getUser();
     const navigate = useNavigate();
 
     // Hooks for animal data and endangered status
@@ -159,6 +161,7 @@ export default function AnimalDetailPage() {
                 handleDelete={confirmDeleteReview}
                 handleEdit={handleEditReview}
                 handleLike={handleLike}
+                currentUserId={user._id}
             />
             <ConfirmDialog
                 open={openConfirmDialog}

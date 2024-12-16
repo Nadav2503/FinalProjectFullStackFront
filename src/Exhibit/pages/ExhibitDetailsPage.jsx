@@ -217,8 +217,6 @@ export default function ExhibitDetailPage() {
                 </Typography>
             </Box>
 
-
-            {/* Display reviews */}
             <ReviewFeedback
                 isLoading={isLoading}
                 reviews={reviews}
@@ -226,6 +224,7 @@ export default function ExhibitDetailPage() {
                 handleDelete={confirmDeleteReview}
                 handleEdit={handleEditReview}
                 handleLike={handleLike}
+                currentUserId={visitor._id}
             />
 
             <AddNewButton onAdd={handleAddAnimal} />

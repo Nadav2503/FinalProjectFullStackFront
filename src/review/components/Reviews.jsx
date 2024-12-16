@@ -2,7 +2,7 @@ import React from "react";
 import ReviewCard from "./card/ReviewCard";
 import { Container } from "@mui/material";
 
-export default function Reviews({ reviews, handleDelete, handleEdit, handleLike }) {
+export default function Reviews({ reviews, handleDelete, handleEdit, handleLike, currentUserId }) {
     return (
         <Container
             sx={{
@@ -20,6 +20,7 @@ export default function Reviews({ reviews, handleDelete, handleEdit, handleLike 
                     handleDelete={handleDelete}
                     handleEdit={handleEdit}
                     handleLike={handleLike}
+                    currentUserId={currentUserId}
                 />
             ))}
         </Container>

@@ -5,31 +5,31 @@ import useGetVisitorById from "../hooks/useVisitorDataById";
 import Loader from "../../general/Loader";
 import PageHeader from "../../general/PageHeader";
 import CustomButton from "../../general/CustomButton";
-import Error from "../../general/Error";
 import AnimalCard from "../../animal/components/card/AnimalCard";
 import useLikeAnimal from "../hooks/useLikeAnimal";
 import useGetAnimalByIdForProfilePage from "../../animal/hooks/useGetAnimalByIdForProfilePage";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../../routers/routerModel";
-import useFetchReviewsByVisitor from "../../review/hooks/useGetReviewsByVisitor";
-import useDeleteReview from "../../review/hooks/useDeleteReview";
 import ReviewFeedback from "../../review/components/ReviewFeedback";
 import ConfirmDialog from "../../general/ConfirmDialog";
+import useFetchReviewsByVisitor from "../../review/hooks/useGetReviewsByVisitor";
+import useCombinedReviews from "../../review/hooks/useCombineReviews";
+import useLikeReview from "../../review/hooks/useLikeReview";
 
 export default function ProfilePage() {
     const user = getUser();
     const navigate = useNavigate();
     const { visitor, loading, error, fetchVisitorById } = useGetVisitorById();
     const { fetchAnimalByIdForProfilePage } = useGetAnimalByIdForProfilePage();
-    const [animalsDetails, setAnimalsDetails] = useState([]);
     const { handleLikeAnimal } = useLikeAnimal();
+    const { handleLike } = useLikeReview();
     const { reviews, fetchReviews } = useFetchReviewsByVisitor();
-    const { handleDelete } = useDeleteReview();
-    const [likedReviews, setLikedReviews] = useState([]);
+    const { combinedReviews, updateReview } = useCombinedReviews();
 
+    const [animalsDetails, setAnimalsDetails] = useState([]);
+    const [favoriteReviews, setFavoriteReviews] = useState([]);
     const [openConfirmDialog, setOpenConfirmDialog] = useState(false);
     const [reviewToDelete, setReviewToDelete] = useState(null);
-
 
     useEffect(() => {
         if (user && !visitor) {
@@ -42,17 +42,6 @@ export default function ProfilePage() {
             fetchReviews(visitor._id);
         }
     }, [visitor, fetchReviews]);
-
-    useEffect(() => {
-        if (reviews) {
-            // Filter reviews liked by the visitor
-            const liked = reviews.filter((review) =>
-                review.likes.includes(user._id)
-            );
-            setLikedReviews(liked);
-        }
-    }, [reviews, user._id]);
-
     useEffect(() => {
         if (visitor && visitor.preferredAnimals) {
             const fetchAnimals = async () => {
@@ -99,7 +88,7 @@ export default function ProfilePage() {
     const handleConfirmDeleteReview = async () => {
         try {
             await handleDelete(reviewToDelete);
-            fetchReviews(visitor._id);
+            // Fetch updated reviews after deletion
         } catch (err) {
             console.error("Error deleting review:", err);
         } finally {
@@ -112,6 +101,62 @@ export default function ProfilePage() {
         setOpenConfirmDialog(false);
         setReviewToDelete(null);
     };
+
+    useEffect(() => {
+        setFavoriteReviews(
+            combinedReviews.filter(
+                (review) => review.visitorId !== user._id && review.likes?.includes(user._id)
+            )
+        );
+    }, [combinedReviews, user._id]);
+
+
+    const userReviews = reviews.filter((review) => review.visitorId === user._id);
+
+    const handleLikeReview = async (reviewId) => {
+        try {
+            // Perform the like/unlike action
+            await handleLike(reviewId);
+
+            // Find the updated review from the combined list
+            const updatedReview = combinedReviews.find((review) => review._id === reviewId);
+
+            if (updatedReview) {
+                // Check if the review is liked by the user
+                const isLiked = updatedReview.likes?.includes(user._id);
+
+                // Update the review with the new likes list
+                const updatedLikes = isLiked
+                    ? updatedReview.likes.filter((id) => id !== user._id) // Remove user ID if already liked
+                    : [...updatedReview.likes, user._id]; // Add user ID if not liked
+
+                // Update the review state locally
+                updateReview({
+                    ...updatedReview,
+                    likes: updatedLikes,
+                });
+
+                // Update the favoriteReviews state based on the like/unlike action
+                if (isLiked) {
+                    // If the review was liked and is now unliked, remove it from the favorite reviews
+                    setFavoriteReviews((prev) =>
+                        prev.filter((review) => review._id !== reviewId)
+                    );
+                } else {
+                    // If the review was unliked and is now liked, add it to the favorite reviews
+                    setFavoriteReviews((prev) => [
+                        ...prev,
+                        { ...updatedReview, type: "favorite" },
+                    ]);
+                }
+            }
+        } catch (err) {
+            console.error("Error liking/unliking the review:", err);
+        }
+    };
+
+
+
     if (loading) return <Loader />;
 
     if (error) {
@@ -174,7 +219,6 @@ export default function ProfilePage() {
                     Preferred Animals
                 </Typography>
 
-                {/* Display Animal Cards */}
                 <Container sx={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 2, alignItems: "stretch" }}>
                     {animalsDetails.map((animal) => (
                         <AnimalCard
@@ -194,20 +238,24 @@ export default function ProfilePage() {
                     Your Reviews
                 </Typography>
                 <ReviewFeedback
-                    reviews={reviews}
+                    reviews={userReviews}
                     handleEdit={handleEditReview}
                     handleDelete={confirmDeleteReview}
+                    handleLike={handleLike}
+                    currentUserId={user._id}
                 />
             </Box>
             <Divider sx={{ my: 3 }} />
             <Box>
                 <Typography variant="h5" align="center" mb={2}>
-                    Liked Reviews
+                    Favorite Reviews
                 </Typography>
                 <ReviewFeedback
-                    reviews={likedReviews}
-                    handleEdit={handleEditReview}
-                    handleDelete={confirmDeleteReview}
+                    reviews={favoriteReviews}
+                    handleEdit={null}
+                    handleDelete={null}
+                    handleLike={handleLikeReview}
+                    currentUserId={user._id}
                 />
             </Box>
             <ConfirmDialog

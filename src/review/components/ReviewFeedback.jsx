@@ -10,6 +10,7 @@ export default function ReviewFeedback({
     handleDelete,
     handleEdit,
     handleLike,
+    currentUserId,
 }) {
     if (isLoading) return <Loader />;
     if (error) return <Error errorMessage={error} />;
@@ -21,6 +22,7 @@ export default function ReviewFeedback({
             handleDelete={handleDelete}
             handleEdit={handleEdit}
             handleLike={handleLike}
+            currentUserId={currentUserId}
         />
     );
 }
