@@ -42,7 +42,7 @@ export default function HamburgerMenu({ isOpen, toggleHamburgerMenu }) {
                         <NavBarItem to="*" label="Error" variant="vertical" />
                     </ListItem>
                     <ListItem onClick={toggleDrawer}>
-                        <NavBarItem to="/exhibits" label="add exhibit" variant="vertical" />
+                        <NavBarItem to="/admin" label="add exhibit" variant="vertical" />
                     </ListItem>
                 </List>
             </Drawer>
