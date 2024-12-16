@@ -36,6 +36,10 @@ export default function AdminRMCPage() {
         setOpenDialog(false); // Close the dialog without doing anything
     };
     return (
-        <div>AdminRMCPage</div>
+        <Container>
+            <PageHeader title={"Admin RMC Page"} />
+
+
+        </Container>
     )
 }
