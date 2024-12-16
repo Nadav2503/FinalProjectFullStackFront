@@ -61,7 +61,7 @@ export default function AdminRMCPage() {
                     }}
 
                 > <Typography variant="h6" sx={{ fontWeight: 'bold', marginBottom: 1 }}>
-                        {visitor.username}</Typography></Box>
+                        {visitor.username}</Typography> <Typography variant="body1">ID: {visitor._id}</Typography></Box>
             </Box>
 
         </Container>
