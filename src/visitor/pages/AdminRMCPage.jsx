@@ -84,7 +84,43 @@ export default function AdminRMCPage() {
                         </Box>
                     ))}
                 </Box>
+            ) : ( // Table Layout for larger screens (responsive)
+                < TableContainer component={Paper} sx={{ overflowX: 'auto', border: 1, borderRadius: 2 }}>
+                    <Table sx={{ minWidth: 650 }}>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell align="center" sx={{ fontWeight: 'bold', fontSize: '1.1rem', border: 1 }}>ID</TableCell>
+                                <TableCell align="center" sx={{ fontWeight: 'bold', fontSize: '1.1rem', border: 1 }}>Username</TableCell>
+                                <TableCell align="center" sx={{ fontWeight: 'bold', fontSize: '1.1rem', border: 1 }}>Email</TableCell>
+                                <TableCell align="center" sx={{ fontWeight: 'bold', fontSize: '1.1rem', border: 1 }}>Membership Tier</TableCell>
+                                <TableCell align="center" sx={{ fontWeight: 'bold', fontSize: '1.1rem', border: 1 }}>Is Admin</TableCell>
+                                <TableCell align="center" sx={{ fontWeight: 'bold', fontSize: '1.1rem', border: 1 }}>Actions</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {visitors.map((visitor) => (
+                                <TableRow key={visitor._id}>
+                                    <TableCell sx={{ border: 1 }}>{visitor._id}</TableCell>
+                                    <TableCell sx={{ border: 1 }}>{visitor.username}</TableCell>
+                                    <TableCell sx={{ border: 1 }}>{visitor.email}</TableCell>
+                                    <TableCell sx={{ border: 1 }}>{visitor.membershipTier}</TableCell>
+                                    <TableCell sx={{ border: 1 }}>{visitor.isAdmin ? 'Yes' : 'No'}</TableCell>
+                                    <TableCell sx={{ border: 1 }}>
+                                        <CustomButton
+                                            onClick={() => handleDelete(visitor._id)}
+                                            color="secondary"
+                                            disabled={deleteLoading}
+                                        >
+                                            {deleteLoading ? 'Deleting...' : 'Delete'}
+                                        </CustomButton>
+                                    </TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </>
             )
+            }
 
         </Container>
     )
