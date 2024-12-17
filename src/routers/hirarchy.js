@@ -22,6 +22,9 @@ const navigationHierarchy = {
     [ROUTES.EXHIBITS]: {
         backRoute: ROUTES.MAP, // Always goes back to Map page
     },
+    [ROUTES.ADD_REVIEW]: {
+        canGoBackTo: ['previousPage'], // Goes back to the page it was before (Exhibit List/Exhibit Details)
+    },
 
 };
 
