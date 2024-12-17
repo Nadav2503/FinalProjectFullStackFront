@@ -31,6 +31,9 @@ const navigationHierarchy = {
     [ROUTES.ADD_EXHIBIT]: {
         backRoute: ROUTES.EXHIBITS, // Always goes back to Exhibit List page
     },
+    [ROUTES.EDIT_EXHIBIT]: {
+        backRoute: ROUTES.EXHIBITS, // Always goes back to Exhibit List page
+    },
 
 };
 
