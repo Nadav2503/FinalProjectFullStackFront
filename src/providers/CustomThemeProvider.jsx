@@ -1,66 +1,66 @@
-// Importing React, necessary hooks, and MUI utilities
 import React, { createContext, useState, useCallback, useContext } from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 // Context for managing and accessing theme data.
 const ThemeContext = createContext();
 
-// CustomThemeProvider: Manages the dark and light themes for the application.
 export default function CustomThemeProvider({ children }) {
-    // State to track the theme mode (dark or light).
-    const [isDark, setIsDark] = useState(false);
+    // Retrieve the saved theme from localStorage, defaulting to 'light' if not found
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    const [isDark, setIsDark] = useState(savedTheme === 'dark');
 
-    // Toggles between dark and light modes when called.
+    // Toggle function for changing the theme
     const toggleDarkMode = useCallback(() => {
-        setIsDark((prevMode) => !prevMode);
-    }, []);
+        const newMode = isDark ? 'light' : 'dark';
+        setIsDark(!isDark);
 
-    // Creates a custom Material-UI theme based on the current mode.
+        // Save the new theme to localStorage
+        localStorage.setItem('theme', newMode);
+    }, [isDark]);
+
+    // Create a custom Material-UI theme based on the current mode
     const theme = createTheme({
         palette: {
-            mode: isDark ? 'dark' : 'light', // Dynamically sets the mode to either 'dark' or 'light'.
+            mode: isDark ? 'dark' : 'light',
             ...(isDark
-                // Theme settings for dark mode
+                // Dark mode theme settings
                 ? {
-                    primary: { main: '#3D5300' }, // Deep olive green for primary color
+                    primary: { main: '#3D5300' },
                     background: {
-                        default: '#1F4529', // Dark green background
-                        paper: '#47663B', // Dark green paper background
+                        default: '#1F4529',
+                        paper: '#47663B',
                     },
                     text: {
-                        primary: '#E8ECD7', // Light beige text for readability
-                        secondary: '#B0BEC5', // Softer secondary text
+                        primary: '#E8ECD7',
+                        secondary: '#B0BEC5',
                     },
                 }
-                // Theme settings for light mode
+                // Light mode theme settings
                 : {
-                    primary: { main: '#FFE31A' }, // Bright yellow for primary color
+                    primary: { main: '#FFE31A' },
                     background: {
-                        default: '#C2FFC7', // Pale green background
-                        paper: '#EED3B1', // Soft yellowish paper
+                        default: '#C2FFC7',
+                        paper: '#EED3B1',
                     },
                     text: {
-                        primary: '#62825D', // Muted green text for primary text
-                        secondary: '#616161', // Lighter text for secondary elements
+                        primary: '#62825D',
+                        secondary: '#616161',
                     },
                 }),
         },
-        // Adjustments for responsiveness: We will adjust the typography and spacing dynamically based on screen size.
         typography: {
             h5: {
                 fontSize: '2rem',
                 '@media (max-width:600px)': {
-                    fontSize: '1.5rem', // Smaller font size for mobile screens
+                    fontSize: '1.5rem',
                 },
             },
         },
-        spacing: 8, // Default spacing unit for the theme, can be adjusted based on screen size
+        spacing: 8,
     });
 
     return (
-        // Wrapping the app in ThemeProvider to apply the custom theme
         <ThemeProvider theme={theme}>
-            {/* Provides theme context values to all children for accessing theme mode and toggle function */}
             <ThemeContext.Provider value={{ isDark, toggleDarkMode }}>
                 {children}
             </ThemeContext.Provider>
@@ -68,7 +68,7 @@ export default function CustomThemeProvider({ children }) {
     );
 }
 
-// Custom hook to access theme context.
+// Custom hook to access the theme context
 export const useTheme = () => {
     const context = useContext(ThemeContext);
     if (!context) {
