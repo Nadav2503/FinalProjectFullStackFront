@@ -2,6 +2,7 @@ import React from 'react';
 import { IconButton, Drawer, List, ListItem, useTheme } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu'; // Hamburger menu icon
 import NavBarItem from './NavbarItem'; // Navigation items for the menu
+import ROUTES from '../../../routers/routerModel';
 
 export default function HamburgerMenu({ isOpen, toggleHamburgerMenu }) {
     const theme = useTheme(); // Access the current theme for styling.
@@ -33,16 +34,16 @@ export default function HamburgerMenu({ isOpen, toggleHamburgerMenu }) {
                 {/* List of navigation items inside the drawer */}
                 <List>
                     <ListItem onClick={toggleDrawer}> {/* Closes the drawer when an item is clicked */}
-                        <NavBarItem to="/" label="Home" variant="vertical" />
+                        <NavBarItem to={ROUTES.ROOT} label="Home" variant="vertical" />
                     </ListItem>
                     <ListItem onClick={toggleDrawer}>
-                        <NavBarItem to="/about" label="About" variant="vertical" />
+                        <NavBarItem to={ROUTES.ABOUT} label="About" variant="vertical" />
                     </ListItem>
                     <ListItem onClick={toggleDrawer}>
-                        <NavBarItem to="*" label="Error" variant="vertical" />
+                        <NavBarItem to={ROUTES.MAP} label="MAP" variant="vertical" />
                     </ListItem>
                     <ListItem onClick={toggleDrawer}>
-                        <NavBarItem to="/admin" label="add exhibit" variant="vertical" />
+                        <NavBarItem to={ROUTES.ADMIN} label="Admin rmc" variant="vertical" />
                     </ListItem>
                 </List>
             </Drawer>
