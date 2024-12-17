@@ -2,12 +2,24 @@ import React from 'react';
 import { Box, Container, Typography, Stack } from '@mui/material';
 import { LocalOffer, Map, Pets, Public } from '@mui/icons-material'; // Added additional icons
 import { useTheme } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import Logo from '/images/zooLogo.png';
 import CustomButton from '../general/CustomButton';
 
 export default function Home() {
     // Access the theme to apply consistent styling based on light or dark mode
     const theme = useTheme();
+    const navigate = useNavigate(); // Initialize useNavigate hook
+
+    // Function to handle Buy Ticket button click
+    const handleBuyTicketClick = () => {
+        navigate('/signup'); // Navigate to the signup page
+    };
+
+    // Function to handle Enter Zoo button click
+    const handleEnterZooClick = () => {
+        navigate('/map'); // Navigate to the map page
+    };
 
     return (
         <Box
@@ -75,6 +87,7 @@ export default function Home() {
                     size="large" // Set the button size to large
                     startIcon={<LocalOffer />} // Add an icon to the button
                     sx={{ width: '200px' }} // Fixed width for the button to maintain alignment
+                    onClick={handleBuyTicketClick} // Add click handler for Buy Ticket button
                 >
                     Buy Ticket
                 </CustomButton>
@@ -85,6 +98,7 @@ export default function Home() {
                     size="large" // Set the button size to large
                     startIcon={<Map />} // Add an icon to the button
                     sx={{ width: '200px' }} // Fixed width for the button to maintain alignment
+                    onClick={handleEnterZooClick} // Add click handler for Enter Zoo button
                 >
                     Enter Zoo
                 </CustomButton>
