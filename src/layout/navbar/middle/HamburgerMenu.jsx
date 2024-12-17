@@ -1,47 +1,43 @@
 import React from 'react';
 import { IconButton, Drawer, List, ListItem, useTheme } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu'; // Hamburger menu icon
-import NavBarItem from './NavbarItem'; // Navigation items for the menu
+import MenuIcon from '@mui/icons-material/Menu';
+import NavBarItem from './NavbarItem';
 import ROUTES from '../../../routers/routerModel';
+import { isAuthenticated } from '../../../services/LocalStorageService';
 
 export default function HamburgerMenu({ isOpen, toggleHamburgerMenu }) {
-    const theme = useTheme(); // Access the current theme for styling.
-
-    // Function to toggle the drawer state.
-    const toggleDrawer = () => {
-        toggleHamburgerMenu(); // Toggle the hamburger menu open/close state.
-    };
+    const theme = useTheme();
+    const toggleDrawer = () => toggleHamburgerMenu();
+    const isLoggedIn = isAuthenticated();
 
     return (
         <>
-            {/* Icon button to open the hamburger menu */}
             <IconButton onClick={toggleDrawer} color="inherit">
-                <MenuIcon /> {/* Displays the hamburger menu icon */}
+                <MenuIcon />
             </IconButton>
-
-            {/* Drawer component representing the side menu */}
             <Drawer
-                anchor="left" // The drawer slides in from the left.
-                open={isOpen} // Controlled by the parent component.
-                onClose={toggleDrawer} // Closes the drawer when clicked outside.
+                anchor="left"
+                open={isOpen}
+                onClose={toggleDrawer}
                 PaperProps={{
                     sx: {
-                        backgroundColor: theme.palette.background.paper, // Theme background color.
-                        color: theme.palette.text.primary, // Theme text color.
+                        backgroundColor: theme.palette.background.paper,
+                        color: theme.palette.text.primary,
                     },
                 }}
             >
-                {/* List of navigation items inside the drawer */}
                 <List>
-                    <ListItem onClick={toggleDrawer}> {/* Closes the drawer when an item is clicked */}
+                    <ListItem onClick={toggleDrawer}>
                         <NavBarItem to={ROUTES.ROOT} label="Home" variant="vertical" />
                     </ListItem>
                     <ListItem onClick={toggleDrawer}>
                         <NavBarItem to={ROUTES.ABOUT} label="About" variant="vertical" />
                     </ListItem>
-                    <ListItem onClick={toggleDrawer}>
-                        <NavBarItem to={ROUTES.MAP} label="MAP" variant="vertical" />
-                    </ListItem>
+                    {isLoggedIn && (
+                        <ListItem onClick={toggleDrawer}>
+                            <NavBarItem to={ROUTES.MAP} label="Map" variant="vertical" />
+                        </ListItem>
+                    )}
                 </List>
             </Drawer>
         </>
