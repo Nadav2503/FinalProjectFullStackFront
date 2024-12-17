@@ -12,7 +12,7 @@ export default function ReviewCard({
     handleLike,
     currentUserId
 }) {
-    const { visitor, fetchVisitorById } = useGetVisitorById();
+    const { visitor, fetchVisitorById, loading, error } = useGetVisitorById();
     const [isLiked, setIsLiked] = useState(false);
     const [username, setUsername] = useState("Anonymous"); // Default to "Anonymous"
 
@@ -20,21 +20,33 @@ export default function ReviewCard({
     const isLikedByUser = review.likes.includes(currentUserId);
 
     useEffect(() => {
-        const fetchVisitor = async () => {
-            try {
-                await fetchVisitorById(review.visitorId);
-                if (visitor?.username) {
-                    setUsername(visitor.username); // Set the username if found
+        if (currentUserId) { // Only fetch visitor if currentUserId is provided
+            const fetchVisitor = async () => {
+                // Check if visitor data is already available or loading
+                if (!visitor && !loading && !error) {
+                    try {
+                        await fetchVisitorById(review.visitorId);
+                    } catch (err) {
+                        console.error('Failed to fetch visitor data', err);
+                    }
                 }
-            } catch (error) {
-                console.error('Failed to fetch visitor data', error);
-                setUsername("Anonymous"); // Set to "Anonymous" if there's an error
-            }
-        };
+            };
 
-        fetchVisitor();
+            fetchVisitor();
+        } else {
+            setUsername("Anonymous"); // Fallback to "Anonymous" if not authorized
+        }
+
+        // Set the like state
         setIsLiked(isLikedByUser); // Set the initial like state based on the review data
-    }, [fetchVisitorById, review.visitorId, isLikedByUser, visitor]);
+
+        // Set username when visitor is fetched or error occurs
+        if (visitor?.username) {
+            setUsername(visitor.username);
+        } else if (error) {
+            setUsername("Anonymous"); // Fallback to "Anonymous" if there's an error
+        }
+    }, [fetchVisitorById, review.visitorId, isLikedByUser, visitor, currentUserId, loading, error]);
 
     const handleLikeClick = () => {
         handleLike(review._id); // Trigger the parent's handleLike function
