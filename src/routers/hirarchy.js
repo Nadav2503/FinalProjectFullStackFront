@@ -28,6 +28,9 @@ const navigationHierarchy = {
     [ROUTES.EDIT_REVIEW]: {
         canGoBackTo: ['previousPage'], // Goes back to the page it was before (Exhibit List/Exhibit Details)
     },
+    [ROUTES.ADD_EXHIBIT]: {
+        backRoute: ROUTES.EXHIBITS, // Always goes back to Exhibit List page
+    },
 
 };
 
