@@ -26,7 +26,7 @@ const SignupPage = () => {
         [handleSignup, navigate]
     );
     const handleLoginRedirect = () => {
-        navigate('/login'); // Navigate to the signup page
+        navigate(ROUTES.LOGIN, { state: { from: location.pathname } });
     };
     const {
         data,
