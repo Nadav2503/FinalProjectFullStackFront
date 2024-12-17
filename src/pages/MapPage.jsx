@@ -1,6 +1,6 @@
 import React from 'react'
 import PageHeader from '../general/PageHeader'
-import { Container } from '@mui/material'
+import { Box, Container, Grid, Typography } from '@mui/material'
 
 export default function MapPage() {
     const zones = [
@@ -33,7 +33,12 @@ export default function MapPage() {
                             }}
 
                         >
-
+                            <Typography
+                                variant="h5"
+                                sx={{ color: "white", fontWeight: "bold" }}
+                            >
+                                {zone.name}
+                            </Typography>
                         </Box>
                     </Grid>
                 ))}
