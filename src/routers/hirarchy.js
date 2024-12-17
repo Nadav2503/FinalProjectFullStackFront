@@ -4,6 +4,9 @@ const navigationHierarchy = {
     [ROUTES.ROOT]: {
         noBackButtonRoutes: [ROUTES.ROOT, ROUTES.ERROR], // Pages with no back button
     },
+    [ROUTES.ABOUT]: {
+        backRoute: ROUTES.ROOT, // Always goes back to Home page
+    },
 
 };
 
