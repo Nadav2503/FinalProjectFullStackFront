@@ -9,10 +9,9 @@ export default function Main({ children, hideBackButton }) {
     const navigate = useNavigate(); // For navigation
     const location = useLocation(); // To check the current route
 
-    // Define routes where the back button should not appear
-    const noBackButtonRoutes = [ROUTES.ROOT]; // Add routes where the back button is unnecessary
-
-    const shouldHideBackButton = hideBackButton || noBackButtonRoutes.includes(location.pathname);
+    const shouldHideBackButton = hideBackButton ||
+        navigationHierarchy[ROUTES.ROOT].noBackButtonRoutes.includes(location.pathname) ||
+        !Object.values(ROUTES).includes(location.pathname);
 
     return (
         <Box
