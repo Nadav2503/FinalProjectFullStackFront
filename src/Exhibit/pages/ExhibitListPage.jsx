@@ -3,7 +3,7 @@ import { Container } from "@mui/material";
 import PageHeader from "../../general/PageHeader";
 import ExhibitFeedback from "../components/ExhibitFeedback";
 import AddNewButton from "../../general/AddButton";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import useDeleteExhibit from "../hooks/useDeleteExhibit"; // Import the custom hook
 import ConfirmDialog from "../../general/ConfirmDialog"; // Import ConfirmDialog
 import useExhibitData from "../hooks/useExhibitData";
@@ -14,7 +14,7 @@ export default function ExhibitListPage() {
     const { exhibits, isLoading, error, fetchExhibits } = useExhibitData();
     const navigate = useNavigate(); // Hook for navigation
     const [filteredExhibits, setFilteredExhibits] = useState([]);
-
+    const location = useLocation(); // React Router hook to get query params
     const setSnack = useSnack();
 
     const { handleDeleteExhibit } = useDeleteExhibit();
