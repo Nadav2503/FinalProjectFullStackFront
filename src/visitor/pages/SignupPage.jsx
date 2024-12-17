@@ -3,10 +3,11 @@ import SignupForm from "../components/SignupForm";
 import useForm from "../../form/useForm";
 import initializeSignup from "../helpers/initialize/initializeSignup";
 import signupSchema from "../model/signupSchema";
-import { Box, Container } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../../routers/routerModel";
 import useSignupVisitor from "../hooks/useSignupVisitor";
+import CustomButton from "../../general/CustomButton";
 
 const SignupPage = () => {
     const { handleSignup } = useSignupVisitor();
@@ -24,7 +25,9 @@ const SignupPage = () => {
         },
         [handleSignup, navigate]
     );
-
+    const handleLoginRedirect = () => {
+        navigate('/login'); // Navigate to the signup page
+    };
     const {
         data,
         errors,
@@ -40,6 +43,7 @@ const SignupPage = () => {
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
+                    flexDirection: "column",
                 }}
             >
                 <SignupForm
@@ -51,6 +55,16 @@ const SignupPage = () => {
                     data={data}
                     onInputChange={handleChange}
                 />
+                <Box sx={{ marginTop: 2 }}>
+                    <Typography variant="body1">
+                        Already have an account?{" "}
+                        <CustomButton
+                            onClick={handleLoginRedirect}
+                        >
+                            Login
+                        </CustomButton>
+                    </Typography>
+                </Box>
             </Box>
         </Container>
     );
