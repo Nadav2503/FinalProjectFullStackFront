@@ -23,7 +23,7 @@ export default function Navbar() {
                 {/* Individual navigation items */}
                 <NavBarItem to="/" label="Home" />
                 <NavBarItem to="/about" label="About" />
-                <NavBarItem to="*" label="Contact" />
+                <NavBarItem to="/map" label="map" />
                 <NavBarItem to="/admin" label="add exhibit" />
             </Box>
         </Box>
