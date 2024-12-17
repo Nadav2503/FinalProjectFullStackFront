@@ -4,6 +4,16 @@ import PageHeader from "../general/PageHeader";
 import ROUTES from "../routers/routerModel";
 import { useNavigate } from "react-router-dom";
 
+const ZONES = [
+    { name: "Africa", x: 100, y: 200, width: 150, height: 100, fill: "#FFCC00" },
+    { name: "Asia", x: 300, y: 150, width: 200, height: 100, fill: "#FF7043" },
+    { name: "Europe", x: 550, y: 100, width: 150, height: 75, fill: "#4DB6AC" },
+    { name: "North America", x: 100, y: 50, width: 150, height: 75, fill: "#29B6F6" },
+    { name: "South America", x: 100, y: 350, width: 150, height: 100, fill: "#81C784" },
+    { name: "Australia", x: 500, y: 400, width: 150, height: 100, fill: "#FFD54F" },
+    { name: "Antarctica", x: 300, y: 500, width: 200, height: 75, fill: "#B3E5FC" },
+];
+
 export default function CustomMapPage() {
     const navigate = useNavigate();
 
@@ -36,162 +46,38 @@ export default function CustomMapPage() {
                         width: "100%",
                         height: "auto",
                         maxWidth: "800px",
-
                     }}
                 >
-                    {/* Africa Zone */}
-                    <rect
-                        x="100"
-                        y="200"
-                        width="150"
-                        height="100"
-                        fill="#FFCC00"
-                        onClick={() => handleZoneClick("Africa")}
-                        style={{ cursor: "pointer" }}
-                    />
-                    <text
-                        x="175"
-                        y="250"
-                        textAnchor="middle"
-                        fill="white"
-                        fontSize="16px"
-                        fontWeight="bold"
-                        style={{ pointerEvents: "none" }}
-                    >
-                        Africa
-                    </text>
-
-                    {/* Asia Zone */}
-                    <rect
-                        x="300"
-                        y="150"
-                        width="200"
-                        height="100"
-                        fill="#FF7043"
-                        onClick={() => handleZoneClick("Asia")}
-                        style={{ cursor: "pointer" }}
-                    />
-                    <text
-                        x="400"
-                        y="200"
-                        textAnchor="middle"
-                        fill="white"
-                        fontSize="16px"
-                        fontWeight="bold"
-                        style={{ pointerEvents: "none" }}
-                    >
-                        Asia
-                    </text>
-
-                    {/* Europe Zone */}
-                    <rect
-                        x="550"
-                        y="100"
-                        width="150"
-                        height="75"
-                        fill="#4DB6AC"
-                        onClick={() => handleZoneClick("Europe")}
-                        style={{ cursor: "pointer" }}
-                    />
-                    <text
-                        x="625"
-                        y="140"
-                        textAnchor="middle"
-                        fill="white"
-                        fontSize="16px"
-                        fontWeight="bold"
-                        style={{ pointerEvents: "none" }}
-                    >
-                        Europe
-                    </text>
-
-                    {/* North America Zone */}
-                    <rect
-                        x="100"
-                        y="50"
-                        width="150"
-                        height="75"
-                        fill="#29B6F6"
-                        onClick={() => handleZoneClick("North America")}
-                        style={{ cursor: "pointer" }}
-                    />
-                    <text
-                        x="175"
-                        y="90"
-                        textAnchor="middle"
-                        fill="white"
-                        fontSize="16px"
-                        fontWeight="bold"
-                        style={{ pointerEvents: "none" }}
-                    >
-                        North America
-                    </text>
-
-                    {/* South America Zone */}
-                    <rect
-                        x="100"
-                        y="350"
-                        width="150"
-                        height="100"
-                        fill="#81C784"
-                        onClick={() => handleZoneClick("South America")}
-                        style={{ cursor: "pointer" }}
-                    />
-                    <text
-                        x="175"
-                        y="400"
-                        textAnchor="middle"
-                        fill="white"
-                        fontSize="16px"
-                        fontWeight="bold"
-                        style={{ pointerEvents: "none" }}
-                    >
-                        South America
-                    </text>
-
-                    {/* Australia Zone */}
-                    <rect
-                        x="500"
-                        y="400"
-                        width="150"
-                        height="100"
-                        fill="#FFD54F"
-                        onClick={() => handleZoneClick("Australia")}
-                        style={{ cursor: "pointer" }}
-                    />
-                    <text
-                        x="575"
-                        y="450"
-                        textAnchor="middle"
-                        fill="white"
-                        fontSize="16px"
-                        fontWeight="bold"
-                        style={{ pointerEvents: "none" }}
-                    >
-                        Australia
-                    </text>
-
-                    {/* Antarctica Zone */}
-                    <rect
-                        x="300"
-                        y="500"
-                        width="200"
-                        height="75"
-                        fill="#B3E5FC"
-                        onClick={() => handleZoneClick("Antarctica")}
-                        style={{ cursor: "pointer" }}
-                    />
-                    <text
-                        x="400"
-                        y="540"
-                        textAnchor="middle"
-                        fill="white"
-                        fontSize="16px"
-                        fontWeight="bold"
-                        style={{ pointerEvents: "none" }}
-                    >
-                        Antarctica
-                    </text>
+                    {ZONES.map((zone) => (
+                        <React.Fragment key={zone.name}>
+                            <rect
+                                x={zone.x}
+                                y={zone.y}
+                                width={zone.width}
+                                height={zone.height}
+                                fill={zone.fill}
+                                onClick={() => handleZoneClick(zone.name)}
+                                style={{
+                                    cursor: "pointer",
+                                    transition: "all 0.3s ease",
+                                }}
+                                onMouseOver={(e) => (e.target.style.opacity = 0.8)}
+                                onMouseOut={(e) => (e.target.style.opacity = 1)}
+                            />
+                            <text
+                                x={zone.x + zone.width / 2}
+                                y={zone.y + zone.height / 2}
+                                textAnchor="middle"
+                                dominantBaseline="middle"
+                                fill="white"
+                                fontSize="16px"
+                                fontWeight="bold"
+                                style={{ pointerEvents: "none" }}
+                            >
+                                {zone.name}
+                            </text>
+                        </React.Fragment>
+                    ))}
                 </svg>
             </Box>
             <Typography align="center" variant="body2" color="textSecondary">
