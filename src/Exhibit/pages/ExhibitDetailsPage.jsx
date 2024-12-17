@@ -125,7 +125,7 @@ export default function ExhibitDetailPage() {
         return <Error errorMessage={errorMessage} />;
     }
     if (!exhibit) return <Error errorMessage="Exhibit not found." />;
-
+    const canAddAnimal = visitor?.isAdmin || visitor?.membershipTier === 4;
     return (
         <Container>
             <PageHeader title={exhibit.name} subtitle={exhibit.description} />
@@ -227,7 +227,7 @@ export default function ExhibitDetailPage() {
                 currentUserId={visitor._id}
             />
 
-            <AddNewButton onAdd={handleAddAnimal} />
+            {canAddAnimal && <AddNewButton onAdd={handleAddAnimal} />}
 
             <ConfirmDialog
                 open={openConfirmDialog}
