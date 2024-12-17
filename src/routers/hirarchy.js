@@ -49,7 +49,9 @@ const navigationHierarchy = {
     [ROUTES.EDIT_PROFILE]: {
         backRoute: ROUTES.PROFILE, // Always goes back to Profile page
     },
-
+    [ROUTES.PROFILE]: {
+        canGoBackTo: ['previousPage'], // Goes back to the last visited page
+    },
 };
 
 export default navigationHierarchy;
