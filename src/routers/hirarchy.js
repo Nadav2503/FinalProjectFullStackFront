@@ -10,6 +10,9 @@ const navigationHierarchy = {
     [ROUTES.MAP]: {
         backRoute: ROUTES.ROOT, // Always goes back to Home page
     },
+    [ROUTES.ADMIN]: {
+        backRoute: ROUTES.ROOT, // Always goes back to Home page
+    },
 
 };
 
