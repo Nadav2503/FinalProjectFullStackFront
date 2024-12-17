@@ -4,6 +4,7 @@ import CustomButton from '../general/CustomButton';
 import { ArrowBack } from '@mui/icons-material';
 import { useNavigate, useLocation } from 'react-router-dom';
 import ROUTES from '../routers/routerModel';
+import navigationHierarchy from '../routers/hirarchy';
 
 export default function Main({ children, hideBackButton }) {
     const navigate = useNavigate(); // For navigation
@@ -13,6 +14,15 @@ export default function Main({ children, hideBackButton }) {
         navigationHierarchy[ROUTES.ROOT].noBackButtonRoutes.includes(location.pathname) ||
         !Object.values(ROUTES).includes(location.pathname);
 
+    // Function to get the back route
+    const getBackRoute = () => {
+        const currentRoute = location.pathname;
+
+
+
+        // Fallback to error page if route is undefined or not found
+        return ROUTES.ERROR; // Default to error page
+    };
     return (
         <Box
             component="main"
