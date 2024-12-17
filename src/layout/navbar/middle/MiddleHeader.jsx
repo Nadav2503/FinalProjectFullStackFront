@@ -16,7 +16,7 @@ export default function MiddleHeader() {
     // Detect screen size and adjust layout accordingly.
     useEffect(() => {
         const handleResize = () => {
-            setIsCompact(window.innerWidth <= 960); // Compact layout for screens ≤ 960px.
+            setIsCompact(window.innerWidth <= 768); // Compact layout for screens ≤ 960px.
         };
 
         window.addEventListener('resize', handleResize); // Add resize listener.
