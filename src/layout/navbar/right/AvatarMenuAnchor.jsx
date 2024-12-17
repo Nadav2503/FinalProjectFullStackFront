@@ -34,6 +34,7 @@ export default function AvatarMenu({ anchorEl, onClose }) {
                 <NavBarItem label="Edit Profile" variant="vertical" to={`${ROUTES.EDIT_PROFILE}/${user._id}`} onClick={onClose} />
                 <NavBarItem label="Login" variant="vertical" onClick={onClose} to={ROUTES.LOGIN} />
                 <NavBarItem label="Signup" variant="vertical" onClick={onClose} to={ROUTES.SIGNUP} />
+                <NavBarItem label="AdminRMC" variant="vertical" onClick={onClose} to={ROUTES.ADMIN} />
                 <NavBarItem label="Logout" variant="vertical" to={ROUTES.ROOT} onClick={() => { handleLogout(); onClose(); }} />
 
                 {/* Theme toggle switch centered within a menu item */}

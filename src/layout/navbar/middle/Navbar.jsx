@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box } from '@mui/material';
 import NavBarItem from './NavbarItem';
+import ROUTES from '../../../routers/routerModel';
 
 export default function Navbar() {
     return (
@@ -21,10 +22,9 @@ export default function Navbar() {
                 }}
             >
                 {/* Individual navigation items */}
-                <NavBarItem to="/" label="Home" />
-                <NavBarItem to="/about" label="About" />
-                <NavBarItem to="/map" label="map" />
-                <NavBarItem to="/admin" label="add exhibit" />
+                <NavBarItem to={ROUTES.ROOT} label="Home" />
+                <NavBarItem to={ROUTES.ABOUT} label="About" />
+                <NavBarItem to={ROUTES.MAP} label="Map" />
             </Box>
         </Box>
     );

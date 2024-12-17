@@ -42,9 +42,6 @@ export default function HamburgerMenu({ isOpen, toggleHamburgerMenu }) {
                     <ListItem onClick={toggleDrawer}>
                         <NavBarItem to={ROUTES.MAP} label="MAP" variant="vertical" />
                     </ListItem>
-                    <ListItem onClick={toggleDrawer}>
-                        <NavBarItem to={ROUTES.ADMIN} label="Admin rmc" variant="vertical" />
-                    </ListItem>
                 </List>
             </Drawer>
         </>
