@@ -16,6 +16,9 @@ const navigationHierarchy = {
     [ROUTES.LOGIN]: {
         canGoBackTo: [ROUTES.ROOT, ROUTES.SIGNUP], // Can only go back to Home or Signup pages
     },
+    [ROUTES.SIGNUP]: {
+        canGoBackTo: [ROUTES.ROOT, ROUTES.LOGIN], // Can only go back to Home or Login pages
+    },
 
 };
 
