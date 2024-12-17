@@ -122,10 +122,12 @@ export default function AnimalDetailPage() {
                     {/* Endangered Status with Toggle */}
                     <Box>
                         <Typography variant="body1" color="text.secondary">Endangered Status:</Typography>
-                        <FormControlLabel
-                            control={<Switch checked={endangeredStatus} onChange={handleEndangeredToggle} disabled={isLoading} />}
-                            label={endangeredStatus ? "Yes" : "No"}
-                        />
+                        {user?.isAdmin && (
+                            <FormControlLabel
+                                control={<Switch checked={endangeredStatus} onChange={handleEndangeredToggle} disabled={isLoading} />}
+                                label={endangeredStatus ? "Yes" : "No"}
+                            />
+                        )}
                     </Box>
                     <Box>
                         <Typography variant="body1" color="text.secondary">Health Status:</Typography>
