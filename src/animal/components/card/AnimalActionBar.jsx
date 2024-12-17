@@ -7,39 +7,59 @@ import ROUTES from '../../../routers/routerModel';
 import CommentIcon from '@mui/icons-material/Comment';
 import { useNavigate } from 'react-router-dom';
 
-export default function AnimalActionBar({ animalId, handleDelete, handleEditAnimal, handleFavoriteToggle, isLiked }) {
+export default function AnimalActionBar({
+    animalId,
+    handleDelete,
+    handleEditAnimal,
+    handleFavoriteToggle,
+    isLiked,
+    visitor,
+}) {
     const actions = [];
     const navigate = useNavigate();
 
-    if (handleEditAnimal) {
+    // Check if the current visitor has the necessary permissions
+    const canEditOrDelete = visitor?.isAdmin; // Admin can edit and delete
+    const canWriteReview = visitor?.membershipTier === 3 || visitor?.membershipTier === 4 || visitor?.isAdmin; // Tiers 3, 4, or admin can write a review
+    const canLike = visitor?.membershipTier !== 1 || visitor?.isAdmin; // Tiers 2, 3, 4, or admin can like animals
+
+    // Add edit action if the user is admin
+    if (canEditOrDelete) {
         actions.push({
             onClick: () => handleEditAnimal(animalId),
             icon: <EditIcon />,
         });
     }
 
-    if (handleDelete) {
+    // Add delete action if the user is admin
+    if (canEditOrDelete) {
         actions.push({
             onClick: () => handleDelete(animalId),
             icon: <DeleteIcon />,
         });
     }
 
-    actions.push({
-        onClick: () => handleFavoriteToggle(animalId),
-        icon: (
-            <FavoriteIcon
-                sx={{
-                    color: isLiked ? 'red' : 'gray',
-                }}
-            />
-        ),
-    });
+    // Add like action for tier 2 or higher or admin
+    if (canLike) {
+        actions.push({
+            onClick: () => handleFavoriteToggle(animalId),
+            icon: (
+                <FavoriteIcon
+                    sx={{
+                        color: isLiked ? 'red' : 'gray',
+                    }}
+                />
+            ),
+        });
+    }
 
-    actions.push({
-        onClick: () => navigate(`${ROUTES.ADD_REVIEW}?animalId=${animalId}`),
-        icon: <CommentIcon />,
-    });
+    // Add write review action for tier 3 or higher or admin
+    if (canWriteReview) {
+        actions.push({
+            onClick: () => navigate(`${ROUTES.ADD_REVIEW}?animalId=${animalId}`),
+            icon: <CommentIcon />,
+        });
+    }
 
     return <CardActionBar actions={actions} />;
 }
