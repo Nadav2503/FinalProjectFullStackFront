@@ -10,7 +10,7 @@ const ZONES = [
     { name: "Europe", x: 550, y: 100, width: 150, height: 75, fill: "#4DB6AC" },
     { name: "North America", x: 100, y: 50, width: 150, height: 75, fill: "#29B6F6" },
     { name: "South America", x: 100, y: 350, width: 150, height: 100, fill: "#81C784" },
-    { name: "Australia", x: 500, y: 400, width: 150, height: 100, fill: "#FFD54F" },
+    { name: "Australia", x: 520, y: 400, width: 150, height: 100, fill: "#FFD54F" },
     { name: "Antarctica", x: 300, y: 500, width: 200, height: 75, fill: "#B3E5FC" },
 ];
 
@@ -59,10 +59,7 @@ export default function CustomMapPage() {
                                 onClick={() => handleZoneClick(zone.name)}
                                 style={{
                                     cursor: "pointer",
-                                    transition: "all 0.3s ease",
                                 }}
-                                onMouseOver={(e) => (e.target.style.opacity = 0.8)}
-                                onMouseOut={(e) => (e.target.style.opacity = 1)}
                             />
                             <text
                                 x={zone.x + zone.width / 2}
