@@ -17,7 +17,16 @@ export default function MapPage() {
             <PageHeader title="Zoo Map">
             </PageHeader>
             <Grid container spacing={3} justifyContent="center">
+                {zones.map((zone) => (
+                    <Grid item xs={12} sm={6} md={4} key={zone.location}>
+                        <Box
 
+
+                        >
+
+                        </Box>
+                    </Grid>
+                ))}
             </Grid>
         </Container>
     )
