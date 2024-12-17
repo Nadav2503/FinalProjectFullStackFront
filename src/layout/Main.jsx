@@ -18,7 +18,27 @@ export default function Main({ children, hideBackButton }) {
     const getBackRoute = () => {
         const currentRoute = location.pathname;
 
+        // Check if there's a configuration for the current route
+        if (navigationHierarchy[currentRoute]) {
+            const routeConfig = navigationHierarchy[currentRoute];
+            if (routeConfig.backRoute) {
+                // If the back route is defined as a static route
+                if (typeof routeConfig.backRoute === 'string') {
+                    return routeConfig.backRoute;
+                }
 
+                // If the back route is a dynamic function (like for AddAnimal or EditAnimal)
+                if (typeof routeConfig.backRoute === 'function') {
+                    const exhibitId = new URLSearchParams(location.search).get('exhibitId');
+                    return routeConfig.backRoute(exhibitId); // Get the dynamic back route
+                }
+            }
+            if (routeConfig.canGoBackTo) {
+                // Handle pages where back navigation is dynamic (can go back to multiple pages)
+                const previousPage = location.state?.from || ROUTES.ROOT; // Default to home page if no previous page
+                return previousPage;
+            }
+        }
 
         // Fallback to error page if route is undefined or not found
         return ROUTES.ERROR; // Default to error page
