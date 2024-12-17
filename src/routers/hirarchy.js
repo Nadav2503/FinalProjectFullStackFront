@@ -46,6 +46,9 @@ const navigationHierarchy = {
     [ROUTES.ANIMAL_INFO]: {
         backRoute: (exhibitId) => `${ROUTES.EXHIBIT_INFO}/${exhibitId}`, // Always goes back to Exhibit Details page
     },
+    [ROUTES.EDIT_PROFILE]: {
+        backRoute: ROUTES.PROFILE, // Always goes back to Profile page
+    },
 
 };
 
