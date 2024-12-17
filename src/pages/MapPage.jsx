@@ -1,6 +1,7 @@
 import React from 'react'
 import PageHeader from '../general/PageHeader'
 import { Box, Container, Grid, Typography } from '@mui/material'
+import ROUTES from '../routers/routerModel';
 
 export default function MapPage() {
     const zones = [
@@ -35,7 +36,7 @@ export default function MapPage() {
                                 boxShadow: 3,
                                 "&:hover": { boxShadow: 6, opacity: 0.9 },
                             }}
-
+                            onClick={() => handleZoneClick(zone.location)}
                         >
                             <Typography
                                 variant="h5"
