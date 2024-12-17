@@ -14,14 +14,27 @@ export default function ReviewCard({
 }) {
     const { visitor, fetchVisitorById } = useGetVisitorById();
     const [isLiked, setIsLiked] = useState(false);
+    const [username, setUsername] = useState("Anonymous"); // Default to "Anonymous"
 
     // Check if the current user has liked this review
     const isLikedByUser = review.likes.includes(currentUserId);
 
     useEffect(() => {
-        fetchVisitorById(review.visitorId);
+        const fetchVisitor = async () => {
+            try {
+                await fetchVisitorById(review.visitorId);
+                if (visitor?.username) {
+                    setUsername(visitor.username); // Set the username if found
+                }
+            } catch (error) {
+                console.error('Failed to fetch visitor data', error);
+                setUsername("Anonymous"); // Set to "Anonymous" if there's an error
+            }
+        };
+
+        fetchVisitor();
         setIsLiked(isLikedByUser); // Set the initial like state based on the review data
-    }, [fetchVisitorById, review.visitorId, isLikedByUser]);
+    }, [fetchVisitorById, review.visitorId, isLikedByUser, visitor]);
 
     const handleLikeClick = () => {
         handleLike(review._id); // Trigger the parent's handleLike function
@@ -30,7 +43,7 @@ export default function ReviewCard({
 
     return (
         <Card>
-            <ReviewHeader visitorId={visitor?.username} />
+            <ReviewHeader visitorId={username} /> {/* Display username or "Anonymous" */}
 
             <ReviewBody comment={review.comment} rating={review.rating} date={review.date} />
 
