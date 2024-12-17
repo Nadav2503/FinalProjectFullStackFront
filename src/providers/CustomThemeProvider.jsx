@@ -1,12 +1,15 @@
 import React, { createContext, useState, useCallback, useContext } from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { isAuthenticated } from '../services/LocalStorageService';
 
 // Context for managing and accessing theme data.
 const ThemeContext = createContext();
 
 export default function CustomThemeProvider({ children }) {
-    // Retrieve the saved theme from localStorage, defaulting to 'light' if not found
-    const savedTheme = localStorage.getItem('theme') || 'light';
+    const isLoggedIn = isAuthenticated(); // Check if the user is logged in
+
+    // Retrieve the saved theme from localStorage if logged in, otherwise default to 'light'
+    const savedTheme = isLoggedIn ? localStorage.getItem('theme') || 'light' : 'light';
     const [isDark, setIsDark] = useState(savedTheme === 'dark');
 
     // Toggle function for changing the theme
@@ -14,16 +17,17 @@ export default function CustomThemeProvider({ children }) {
         const newMode = isDark ? 'light' : 'dark';
         setIsDark(!isDark);
 
-        // Save the new theme to localStorage
-        localStorage.setItem('theme', newMode);
-    }, [isDark]);
+        // Save the new theme only if the user is logged in
+        if (isLoggedIn) {
+            localStorage.setItem('theme', newMode);
+        }
+    }, [isDark, isLoggedIn]);
 
     // Create a custom Material-UI theme based on the current mode
     const theme = createTheme({
         palette: {
             mode: isDark ? 'dark' : 'light',
             ...(isDark
-                // Dark mode theme settings
                 ? {
                     primary: { main: '#3D5300' },
                     background: {
@@ -35,7 +39,6 @@ export default function CustomThemeProvider({ children }) {
                         secondary: '#B0BEC5',
                     },
                 }
-                // Light mode theme settings
                 : {
                     primary: { main: '#FFE31A' },
                     background: {
