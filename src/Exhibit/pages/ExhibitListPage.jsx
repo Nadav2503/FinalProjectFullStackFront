@@ -10,10 +10,12 @@ import useExhibitData from "../hooks/useExhibitData";
 import ROUTES from "../../routers/routerModel";
 import { useSnack } from "../../providers/SnackbarProvider";
 import { filterExhibitsByLocation } from "../helpers/filterExhibit";
+import { useCurrentVisitor } from "../../providers/VisitorProvider";
 
 export default function ExhibitListPage() {
     const { exhibits, isLoading, error, fetchExhibits } = useExhibitData();
     const navigate = useNavigate(); // Hook for navigation
+    const { visitor } = useCurrentVisitor();
     const [filteredExhibits, setFilteredExhibits] = useState([]);
     const location = useLocation(); // React Router hook to get query params
     const setSnack = useSnack();
@@ -68,7 +70,7 @@ export default function ExhibitListPage() {
     const handleEditExhibit = (id) => {
         navigate(`${ROUTES.EDIT_EXHIBIT}/${id}`); // Navigate to EditExhibitPage
     };
-
+    const canAddExhibit = visitor?.isAdmin;
     return (
         <Container>
             <PageHeader
@@ -88,7 +90,7 @@ export default function ExhibitListPage() {
                 handleEditExhibit={handleEditExhibit} // Pass the handleEditExhibit function
             />
             {/* Add New Exhibit Button */}
-            <AddNewButton onAdd={handleAddExhibit} />
+            {canAddExhibit && <AddNewButton onAdd={handleAddExhibit} />}
 
             {/* Confirmation Dialog for Deleting an Exhibit */}
             <ConfirmDialog
