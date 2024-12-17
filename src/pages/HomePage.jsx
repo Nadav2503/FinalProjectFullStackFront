@@ -1,105 +1,117 @@
 import React from 'react';
 import { Box, Container, Typography, Stack } from '@mui/material';
-import { LocalOffer, Map, Pets, Public } from '@mui/icons-material'; // Added additional icons
+import { LocalOffer, Map, Pets, Public } from '@mui/icons-material';
 import { useTheme } from '@mui/material/styles';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom';
 import Logo from '/images/zooLogo.png';
 import CustomButton from '../general/CustomButton';
 import ROUTES from '../routers/routerModel';
+import { useCurrentVisitor } from '../providers/VisitorProvider';
+import { useSnack } from '../providers/SnackbarProvider';
 
 export default function Home() {
     // Access the theme to apply consistent styling based on light or dark mode
     const theme = useTheme();
-    const navigate = useNavigate(); // Initialize useNavigate hook
+    const navigate = useNavigate();
+    const { authStatus } = useCurrentVisitor(); // Access authStatus from context
+    const setSnack = useSnack(); // Snackbar hook for showing messages
 
-    // Function to handle Buy Ticket button click
+    // Function to handle Buy Ticket button click (only shown when user is not logged in)
     const handleBuyTicketClick = () => {
         navigate(ROUTES.SIGNUP); // Navigate to the signup page
     };
 
-    // Function to handle Enter Zoo button click
+    // Function to handle Enter Zoo button click (check if logged in)
     const handleEnterZooClick = () => {
-        navigate(ROUTES.MAP); // Navigate to the map page
+        if (!authStatus) {
+            // If the user is not logged in, show a Snackbar message
+            setSnack('error', 'You must be logged in to enter the zoo');
+
+            // Delay the navigation to the login page so the user can see the message
+            setTimeout(() => {
+                navigate(ROUTES.LOGIN); // Navigate to the login page after a brief delay
+            }, 3000);
+        } else {
+            // If logged in, navigate to the map page
+            navigate(ROUTES.MAP);
+        }
     };
 
     return (
         <Box
             sx={{
-                background: theme.palette.mode === 'dark' ? '#1F4529' : '#C2FFC7', // Set background color based on the theme mode
-                minHeight: '100vh', // Ensure the box takes up the full height of the screen
-                display: 'flex', // Use flexbox layout for centering the content
-                flexDirection: 'column', // Stack elements vertically
-                alignItems: 'center', // Center elements horizontally
-                padding: 4, // Add padding to the box
+                background: theme.palette.mode === 'dark' ? '#1F4529' : '#C2FFC7',
+                minHeight: '100vh',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                padding: 4,
             }}
         >
             {/* Logo Section */}
             <Box sx={{ textAlign: 'center', marginBottom: 2 }}>
-                {/* Icon above the logo */}
                 <img
-                    src={Logo} // Image source for the logo
-                    alt="Virtual Zoo Logo" // Alt text for the image
+                    src={Logo}
+                    alt="Virtual Zoo Logo"
                     style={{
-                        width: '250px', // Set the logo width
-                        marginBottom: '30px', // Add space below the logo
+                        width: '250px',
+                        marginBottom: '30px',
                     }}
                 />
             </Box>
 
             {/* Title Section */}
-            <Pets sx={{ fontSize: '3rem' }} /> {/* Paw print icon below the logo */}
+            <Pets sx={{ fontSize: '3rem' }} />
             <Typography
-                variant="h1" // Use h1 for the title
+                variant="h1"
                 sx={{
-                    color: theme.palette.text.primary, // Set title color based on the theme
-                    fontWeight: 'bold', // Make the title bold
-                    fontSize: { xs: '2.5rem', sm: '3rem' }, // Set font size for responsiveness
-                    textAlign: 'center', // Center the title horizontally
-                    marginBottom: 3, // Add space below the title
-                    textShadow: `3px 3px 6px ${theme.palette.mode === 'dark' ? '#000' : '#aaa'}`, // Add text shadow for better visibility in different modes
+                    color: theme.palette.text.primary,
+                    fontWeight: 'bold',
+                    fontSize: { xs: '2.5rem', sm: '3rem' },
+                    textAlign: 'center',
+                    marginBottom: 3,
+                    textShadow: `3px 3px 6px ${theme.palette.mode === 'dark' ? '#000' : '#aaa'}`,
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
                 }}
             >
-                {/* Left icon */}
-                <Public sx={{ marginRight: '8px', fontSize: '2rem' }} /> {/* Globe print icon on the left */}
-
+                <Public sx={{ marginRight: '8px', fontSize: '2rem' }} />
                 Welcome to the Virtual Zoo
-
-                {/* Right icon */}
-                <Public sx={{ marginLeft: '8px', fontSize: '2rem' }} /> {/* Globe icon on the right */}
+                <Public sx={{ marginLeft: '8px', fontSize: '2rem' }} />
             </Typography>
 
             {/* Action Buttons Section */}
             <Stack
-                direction={{ xs: 'column', sm: 'row' }} // Stack buttons vertically on small screens and horizontally on larger ones
-                spacing={3} // Set spacing between buttons
+                direction={{ xs: 'column', sm: 'row' }}
+                spacing={3}
                 sx={{
-                    justifyContent: 'center', // Center buttons horizontally
-                    alignItems: 'center', // Center buttons vertically
-                    flexWrap: 'wrap', // Allow buttons to wrap on smaller screens
-                    marginTop: 4, // Add space above the buttons
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    flexWrap: 'wrap',
+                    marginTop: 4,
                 }}
             >
-                {/* Button for buying tickets */}
-                <CustomButton
-                    color="primary" // Primary button color
-                    size="large" // Set the button size to large
-                    startIcon={<LocalOffer />} // Add an icon to the button
-                    sx={{ width: '200px' }} // Fixed width for the button to maintain alignment
-                    onClick={handleBuyTicketClick} // Add click handler for Buy Ticket button
-                >
-                    Buy Ticket
-                </CustomButton>
+                {/* Conditionally render the Buy Ticket button */}
+                {!authStatus && (
+                    <CustomButton
+                        color="primary"
+                        size="large"
+                        startIcon={<LocalOffer />}
+                        sx={{ width: '200px' }}
+                        onClick={handleBuyTicketClick}
+                    >
+                        Buy Ticket
+                    </CustomButton>
+                )}
 
-                {/* Button for entering the zoo */}
+                {/* Show Enter Zoo button for all users, but handle navigation based on authStatus */}
                 <CustomButton
-                    color="secondary" // Secondary button color
-                    size="large" // Set the button size to large
-                    startIcon={<Map />} // Add an icon to the button
-                    sx={{ width: '200px' }} // Fixed width for the button to maintain alignment
-                    onClick={handleEnterZooClick} // Add click handler for Enter Zoo button
+                    color="secondary"
+                    size="large"
+                    startIcon={<Map />}
+                    sx={{ width: '200px' }}
+                    onClick={handleEnterZooClick}
                 >
                     Enter Zoo
                 </CustomButton>
@@ -108,20 +120,20 @@ export default function Home() {
             {/* Description Section */}
             <Container maxWidth="md" sx={{ textAlign: 'center', marginTop: 5 }}>
                 <Typography
-                    variant="h4" // Use h4 for the subtitle
+                    variant="h4"
                     sx={{
-                        color: theme.palette.text.primary, // Set text color based on theme
-                        fontWeight: 500, // Use semi-bold for the subtitle
-                        marginBottom: 3, // Add space below the subtitle
+                        color: theme.palette.text.primary,
+                        fontWeight: 500,
+                        marginBottom: 3,
                     }}
                 >
                     Discover the wonders of the animal kingdom from your home!
                 </Typography>
                 <Typography
-                    variant="body1" // Use body1 for the description
+                    variant="body1"
                     sx={{
-                        color: theme.palette.text.secondary, // Set text color based on theme
-                        lineHeight: 1.6, // Increase line height for better readability
+                        color: theme.palette.text.secondary,
+                        lineHeight: 1.6,
                     }}
                 >
                     Experience the zoo like never before with interactive exhibits, animal facts,
