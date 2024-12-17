@@ -14,6 +14,7 @@ const ROUTES = {
     PROFILE: "/profile",
     EDIT_PROFILE: "/edit-profile",
     SIGNUP: "/signup",
+    MAP: "/map",
     ADMIN: "/admin",
     ERROR: "*", // Fallback route for non-existent paths
 };
