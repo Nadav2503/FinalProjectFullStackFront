@@ -72,7 +72,11 @@ export default function ExhibitListPage() {
     return (
         <Container>
             <PageHeader
-                title="Exhibits at Our Zoo"
+                title={
+                    filterLocation
+                        ? `Exhibits in ${filterLocation}`
+                        : "All Zoo Exhibits"
+                }
                 subtitle="Browse the various exhibits and discover the incredible wildlife that calls our zoo home."
             />
 

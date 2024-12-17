@@ -46,7 +46,7 @@ export default function AdminRMCPage() {
 
     return (
         <Container>
-            <PageHeader title={"Admin RMC Page"} />
+            <PageHeader title="Admin RMC Page" />
 
             {isMobile ? (
                 // Grid Layout for mobile and smaller screens
