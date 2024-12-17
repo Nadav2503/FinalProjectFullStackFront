@@ -13,6 +13,8 @@ import { useSnack } from "../../providers/SnackbarProvider";
 export default function ExhibitListPage() {
     const { exhibits, isLoading, error, fetchExhibits } = useExhibitData();
     const navigate = useNavigate(); // Hook for navigation
+    const [filteredExhibits, setFilteredExhibits] = useState([]);
+
     const setSnack = useSnack();
 
     const { handleDeleteExhibit } = useDeleteExhibit();
