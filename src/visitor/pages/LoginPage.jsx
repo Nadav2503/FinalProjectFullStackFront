@@ -34,7 +34,7 @@ const LoginPage = () => {
     } = useForm(initializeLogin, loginSchema, handleSubmit);
 
     const handleSignUp = () => {
-        navigate(ROUTES.SIGNUP);
+        navigate(ROUTES.SIGNUP, { state: { from: location.pathname } });
     };
 
     return (
