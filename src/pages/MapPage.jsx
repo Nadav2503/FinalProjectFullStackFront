@@ -12,6 +12,10 @@ export default function MapPage() {
         { name: "Australia", location: "Australia", color: "#FFD54F" },
         { name: "Antarctica", location: "Antarctica", color: "#B3E5FC" },
     ];
+    const handleZoneClick = (location) => {
+        navigate(`${ROUTES.EXHIBITS}?location=${location}`);
+    };
+
     return (
         <Container>
             <PageHeader title="Zoo Map">
