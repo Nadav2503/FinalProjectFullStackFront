@@ -55,11 +55,11 @@ export default function Main({ children, hideBackButton }) {
             }}
         >
             {/* Conditional Back Button */}
-            {!shouldHideBackButton && (
+            {!shouldHideBackButton && location.pathname !== ROUTES.ERROR && (
                 <Box sx={{ mb: 2 }}>
                     <CustomButton
                         startIcon={<ArrowBack />}
-                        onClick={() => navigate(-1)} // Go back to the previous page
+                        onClick={() => navigate(getBackRoute())}
                     >
                         Back
                     </CustomButton>
