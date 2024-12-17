@@ -1,48 +1,68 @@
 import React from 'react';
-import { Menu, Box, MenuItem } from '@mui/material';
-import SwitchMode from './SwitchMode'; // Theme toggle switch component
-import NavBarItem from '../middle/NavbarItem'; // Reusable navigation item component
+import { Menu, Box, MenuItem, Typography } from '@mui/material';
+import SwitchMode from './SwitchMode';
+import NavBarItem from '../middle/NavbarItem';
 import useLogout from '../../../visitor/hooks/useLogout';
 import ROUTES from '../../../routers/routerModel';
-import { getUser } from '../../../services/LocalStorageService';
+import { getUser, isAuthenticated } from '../../../services/LocalStorageService';
 
 export default function AvatarMenu({ anchorEl, onClose }) {
     const user = getUser();
+    const isLoggedIn = isAuthenticated();
     const { handleLogout } = useLogout();
+
     return (
         <Menu
-            anchorEl={anchorEl} // Element to anchor the menu
-            open={Boolean(anchorEl)} // Open menu if anchor element exists
-            onClose={onClose} // Handle menu close event
+            anchorEl={anchorEl}
+            open={Boolean(anchorEl)}
+            onClose={onClose}
             PaperProps={{
                 sx: {
-                    padding: 2, // Adds padding to the menu container
-                    backgroundColor: 'background.paper', // Theme-based background color
-                    minWidth: { xs: '200px', sm: '250px' }, // Responsive width for small and larger screens
+                    padding: 2,
+                    backgroundColor: 'background.paper',
+                    minWidth: { xs: '200px', sm: '250px' },
                 },
             }}
         >
             <Box
                 sx={{
                     display: 'flex',
-                    flexDirection: 'column', // Vertical layout for menu items
-                    gap: 1, // Space between items
+                    flexDirection: 'column',
+                    gap: 1,
                 }}
             >
-                {/* Navigation items with close on click */}
-                <NavBarItem label="Profile" variant="vertical" to={ROUTES.PROFILE} onClick={onClose} />
-                <NavBarItem label="Edit Profile" variant="vertical" to={`${ROUTES.EDIT_PROFILE}/${user._id}`} onClick={onClose} />
-                <NavBarItem label="Login" variant="vertical" onClick={onClose} to={ROUTES.LOGIN} />
-                <NavBarItem label="Signup" variant="vertical" onClick={onClose} to={ROUTES.SIGNUP} />
-                <NavBarItem label="AdminRMC" variant="vertical" onClick={onClose} to={ROUTES.ADMIN} />
-                <NavBarItem label="Logout" variant="vertical" to={ROUTES.ROOT} onClick={() => { handleLogout(); onClose(); }} />
-
-                {/* Theme toggle switch centered within a menu item */}
+                {isLoggedIn && (
+                    <>
+                        <NavBarItem label="Profile" variant="vertical" to={ROUTES.PROFILE} onClick={onClose} />
+                        <NavBarItem
+                            label="Edit Profile" variant="vertical" to={`${ROUTES.EDIT_PROFILE}/${user._id}`} onClick={onClose}
+                        />
+                        {user?.isAdmin && (
+                            <NavBarItem label="Admin" variant="vertical" to={ROUTES.ADMIN} onClick={onClose}
+                            />
+                        )}
+                        <NavBarItem label="Logout" variant="vertical" to={ROUTES.ROOT} onClick={() => {
+                            handleLogout(); onClose();
+                        }}
+                        />
+                        <MenuItem>
+                            <Typography sx={{ textAlign: 'center', width: '100%' }}>
+                                {user.username}
+                            </Typography>
+                        </MenuItem>
+                    </>
+                )}
+                {!isLoggedIn && (
+                    <>
+                        <NavBarItem label="Login" variant="vertical" onClick={onClose} to={ROUTES.LOGIN} />
+                        <NavBarItem label="Signup" variant="vertical" onClick={onClose} to={ROUTES.SIGNUP} />
+                    </>
+                )}
                 <MenuItem onClick={onClose}>
                     <Box
                         sx={{
                             display: 'flex',
-                            justifyContent: 'center', // Center the switch horizontally
+                            justifyContent: 'center',
                             width: '100%',
                         }}
                     >
