@@ -20,7 +20,17 @@ export default function MapPage() {
                 {zones.map((zone) => (
                     <Grid item xs={12} sm={6} md={4} key={zone.location}>
                         <Box
-
+                            sx={{
+                                backgroundColor: zone.color,
+                                borderRadius: 2,
+                                height: 150,
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                cursor: "pointer",
+                                boxShadow: 3,
+                                "&:hover": { boxShadow: 6, opacity: 0.9 },
+                            }}
 
                         >
 
