@@ -10,9 +10,10 @@ export default function ReviewCard({
     handleEdit,
     handleDelete,
     handleLike,
-    currentUserId
+    currentUserId,
+    visitor // Assuming you pass the visitor data here (current logged-in user)
 }) {
-    const { visitor, fetchVisitorById, loading, error } = useGetVisitorById();
+    const { fetchVisitorById, loading, error } = useGetVisitorById();
     const [isLiked, setIsLiked] = useState(false);
     const [username, setUsername] = useState("Anonymous"); // Default to "Anonymous"
 
@@ -23,7 +24,7 @@ export default function ReviewCard({
         if (currentUserId) { // Only fetch visitor if currentUserId is provided
             const fetchVisitor = async () => {
                 // Check if visitor data is already available or loading
-                if (!visitor && !loading && !error) {
+                if (!loading && !error) {
                     try {
                         await fetchVisitorById(review.visitorId);
                     } catch (err) {
@@ -53,19 +54,33 @@ export default function ReviewCard({
         setIsLiked(!isLiked); // Toggle like state
     };
 
+    // Check if the visitor is Tier 1 (Explorer)
+    const isTier1 = visitor?.membershipTier === 1;
+
+    // Check if the current user can edit or delete the review
+    const canEditOrDelete = visitor?.isAdmin || review.visitorId === currentUserId;
+
+    // Check if the current user can like the review (Tier 2 or above)
+    const canLike = visitor?.membershipTier !== 1 || visitor?.isAdmin; // 
+
     return (
         <Card>
             <ReviewHeader visitorId={username} /> {/* Display username or "Anonymous" */}
 
             <ReviewBody comment={review.comment} rating={review.rating} date={review.date} />
 
-            <ReviewActionBar
-                reviewId={review._id}
-                handleEdit={handleEdit}
-                handleDelete={handleDelete}
-                handleLike={handleLikeClick}
-                isLiked={isLiked} // Pass the dynamically computed liked status
-            />
+            {/* Only show the action bar if the user is not Tier 1 */}
+            {!isTier1 && (
+                <ReviewActionBar
+                    reviewId={review._id}
+                    handleEdit={handleEdit}
+                    handleDelete={handleDelete}
+                    handleLike={handleLikeClick}
+                    isLiked={isLiked}
+                    canEditOrDelete={canEditOrDelete} // Pass the condition to allow edit or delete
+                    canLike={canLike} // Pass the condition to allow like
+                />
+            )}
         </Card>
     );
 }
