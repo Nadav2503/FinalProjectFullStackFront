@@ -9,6 +9,7 @@ import ConfirmDialog from "../../general/ConfirmDialog"; // Import ConfirmDialog
 import useExhibitData from "../hooks/useExhibitData";
 import ROUTES from "../../routers/routerModel";
 import { useSnack } from "../../providers/SnackbarProvider";
+import { filterExhibitsByLocation } from "../helpers/filterExhibit";
 
 export default function ExhibitListPage() {
     const { exhibits, isLoading, error, fetchExhibits } = useExhibitData();
@@ -78,7 +79,7 @@ export default function ExhibitListPage() {
             <ExhibitFeedback
                 isLoading={isLoading} // Show loading if exhibits or deletion is loading
                 error={error} // Show any errors from fetching or deletion
-                exhibits={exhibits}
+                exhibits={filteredExhibits}
                 handleDelete={handleDelete} // Pass the handleDelete function
                 handleEditExhibit={handleEditExhibit} // Pass the handleEditExhibit function
             />
