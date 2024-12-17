@@ -7,7 +7,9 @@ export default function MapPage() {
         <Container>
             <PageHeader title="Zoo Map">
             </PageHeader>
+            <Grid container spacing={3} justifyContent="center">
 
+            </Grid>
         </Container>
     )
 }
