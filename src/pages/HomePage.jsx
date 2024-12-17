@@ -5,6 +5,7 @@ import { useTheme } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import Logo from '/images/zooLogo.png';
 import CustomButton from '../general/CustomButton';
+import ROUTES from '../routers/routerModel';
 
 export default function Home() {
     // Access the theme to apply consistent styling based on light or dark mode
@@ -13,12 +14,12 @@ export default function Home() {
 
     // Function to handle Buy Ticket button click
     const handleBuyTicketClick = () => {
-        navigate('/signup'); // Navigate to the signup page
+        navigate(ROUTES.SIGNUP); // Navigate to the signup page
     };
 
     // Function to handle Enter Zoo button click
     const handleEnterZooClick = () => {
-        navigate('/map'); // Navigate to the map page
+        navigate(ROUTES.MAP); // Navigate to the map page
     };
 
     return (
