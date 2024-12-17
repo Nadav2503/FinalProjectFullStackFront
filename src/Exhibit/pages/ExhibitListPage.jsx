@@ -28,6 +28,15 @@ export default function ExhibitListPage() {
         fetchExhibits();
     }, [fetchExhibits]);
 
+    useEffect(() => {
+        if (filterLocation) {
+            const filtered = filterExhibitsByLocation(exhibits, filterLocation);
+            setFilteredExhibits(filtered);
+        } else {
+            setFilteredExhibits(exhibits);
+        }
+    }, [exhibits, filterLocation]);
+
     const handleAddExhibit = () => {
         navigate(ROUTES.ADD_EXHIBIT); // Navigate to AddExhibitPage
     };
