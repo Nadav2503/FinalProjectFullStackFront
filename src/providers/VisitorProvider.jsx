@@ -19,7 +19,7 @@ export default function VisitorProvider({ children }) {
     }, [token]);
 
     return (
-        <VisitorContext.Provider value={{ visitor, setVisitor, token, setToken, authStatus }}>
+        <VisitorContext.Provider value={{ visitor, setVisitor, token, setToken, authStatus, setAuthStatus }}>
             {children}
         </VisitorContext.Provider>
     );

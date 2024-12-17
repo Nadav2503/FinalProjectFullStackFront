@@ -2,10 +2,10 @@ import React from 'react';
 import { Box } from '@mui/material';
 import NavBarItem from './NavbarItem';
 import ROUTES from '../../../routers/routerModel';
-import { isAuthenticated } from '../../../services/LocalStorageService';
+import { useCurrentVisitor } from '../../../providers/VisitorProvider';  // Using the context
 
 export default function Navbar() {
-    const isLoggedIn = isAuthenticated();
+    const { authStatus } = useCurrentVisitor(); // Get authStatus from context
 
     return (
         <Box
@@ -24,7 +24,7 @@ export default function Navbar() {
             >
                 <NavBarItem to={ROUTES.ROOT} label="Home" />
                 <NavBarItem to={ROUTES.ABOUT} label="About" />
-                {isLoggedIn && <NavBarItem to={ROUTES.MAP} label="Map" />}
+                {authStatus && <NavBarItem to={ROUTES.MAP} label="Map" />}
             </Box>
         </Box>
     );

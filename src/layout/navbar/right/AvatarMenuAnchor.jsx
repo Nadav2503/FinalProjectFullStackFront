@@ -4,12 +4,16 @@ import SwitchMode from './SwitchMode';
 import NavBarItem from '../middle/NavbarItem';
 import useLogout from '../../../visitor/hooks/useLogout';
 import ROUTES from '../../../routers/routerModel';
-import { getUser, isAuthenticated } from '../../../services/LocalStorageService';
+import { useCurrentVisitor } from '../../../providers/VisitorProvider';  // Using context
+import { getUser } from '../../../services/LocalStorageService';
 
 export default function AvatarMenu({ anchorEl, onClose }) {
-    const user = getUser();
-    const isLoggedIn = isAuthenticated();
+    const user = getUser();  // Get the current user from localStorage
+    const { authStatus } = useCurrentVisitor();  // Get visitor and authStatus from context
     const { handleLogout } = useLogout();
+
+    // Conditionally check for user existence before accessing _id
+    const userId = user ? user._id : null;
 
     return (
         <Menu
@@ -31,28 +35,26 @@ export default function AvatarMenu({ anchorEl, onClose }) {
                     gap: 1,
                 }}
             >
-                {isLoggedIn && (
+                {authStatus ? (
                     <>
                         <NavBarItem label="Profile" variant="vertical" to={ROUTES.PROFILE} onClick={onClose} />
-                        <NavBarItem
-                            label="Edit Profile" variant="vertical" to={`${ROUTES.EDIT_PROFILE}/${user._id}`} onClick={onClose}
-                        />
-                        {user?.isAdmin && (
-                            <NavBarItem label="Admin" variant="vertical" to={ROUTES.ADMIN} onClick={onClose}
+                        {/* Make sure userId exists before passing it */}
+                        {userId && (
+                            <NavBarItem
+                                label="Edit Profile"
+                                variant="vertical"
+                                to={`${ROUTES.EDIT_PROFILE}/${userId}`}
+                                onClick={onClose}
                             />
+                        )}
+                        {user?.isAdmin && (
+                            <NavBarItem label="Admin" variant="vertical" to={ROUTES.ADMIN} onClick={onClose} />
                         )}
                         <NavBarItem label="Logout" variant="vertical" to={ROUTES.ROOT} onClick={() => {
                             handleLogout(); onClose();
-                        }}
-                        />
-                        <MenuItem>
-                            <Typography sx={{ textAlign: 'center', width: '100%' }}>
-                                {user.username}
-                            </Typography>
-                        </MenuItem>
+                        }} />
                     </>
-                )}
-                {!isLoggedIn && (
+                ) : (
                     <>
                         <NavBarItem label="Login" variant="vertical" onClick={onClose} to={ROUTES.LOGIN} />
                         <NavBarItem label="Signup" variant="vertical" onClick={onClose} to={ROUTES.SIGNUP} />
