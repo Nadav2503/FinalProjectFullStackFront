@@ -17,6 +17,9 @@ export default function ExhibitListPage() {
     const location = useLocation(); // React Router hook to get query params
     const setSnack = useSnack();
 
+    const query = new URLSearchParams(location.search);
+    const filterLocation = query.get("location");
+
     const { handleDeleteExhibit } = useDeleteExhibit();
     const [openConfirmDialog, setOpenConfirmDialog] = useState(false); // State for the confirmation dialog
     const [exhibitToDelete, setExhibitToDelete] = useState(null); // State to track which exhibit to delete
