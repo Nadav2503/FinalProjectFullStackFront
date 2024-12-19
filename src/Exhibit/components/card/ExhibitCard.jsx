@@ -18,7 +18,9 @@ export default function ExhibitCard({ exhibit, handleDelete, handleEditExhibit }
 
     // Check if the visitor has permission to see the action bar (not Tier 1 or 2)
     const canShowActionBar = visitor?.membershipTier > 2 || visitor?.isAdmin;
-
+    // Check if the current visitor has the necessary permissions
+    const canEditOrDelete = visitor?.isAdmin; // Admin can edit and delete
+    const canWriteReview = visitor?.membershipTier === 3 || visitor?.membershipTier === 4 || visitor?.isAdmin; // Tiers 3, 4, or admin can write a review
     return (
         <Card>
             <ExhibitHeader title={exhibit.name} />
@@ -35,6 +37,8 @@ export default function ExhibitCard({ exhibit, handleDelete, handleEditExhibit }
                     exhibitId={exhibit._id}
                     handleDelete={(id) => handleDelete(id, exhibit.animals)}
                     handleEditExhibit={handleEditExhibit}
+                    canEditOrDelete={canEditOrDelete}
+                    canWriteReview={canWriteReview}
                 />
             )}
         </Card>
