@@ -6,13 +6,12 @@ import Error from "../../general/Error";
 import useGetAnimalById from "../hooks/useGetAnimalById";
 import PageHeader from "../../general/PageHeader";
 import useUpdateEndangeredStatus from "../hooks/useUpdateEndangeredStatus";
-import useDeleteReview from "../../review/hooks/useDeleteReview";
 import useFetchReviewsForAnimal from "../../review/hooks/useGetReviewsForAnimal";
-import ROUTES from "../../routers/routerModel";
 import ReviewFeedback from "../../review/components/ReviewFeedback";
 import ConfirmDialog from "../../general/ConfirmDialog";
 import useLikeReview from "../../review/hooks/useLikeReview";
 import { getUser } from "../../services/LocalStorageService";
+import { confirmDeleteReview, handleCancelDelete, handleConfirmDeleteReview, handleEditReview, handleEndangeredToggle } from "../hooks/helpersHooks/useDetailsAnimal";
 
 export default function AnimalDetailPage() {
     const { animalId } = useParams();
@@ -25,11 +24,10 @@ export default function AnimalDetailPage() {
 
     // Hooks for fetching and managing reviews
     const { reviews, averageRating, fetchReviews } = useFetchReviewsForAnimal();
-    const { handleDelete } = useDeleteReview();
     const { handleLike } = useLikeReview();
     const [endangeredStatus, setEndangeredStatus] = useState(false);
     const [openConfirmDialog, setOpenConfirmDialog] = useState(false);
-    const [reviewToDelete, setReviewToDelete] = useState(null);
+    const [reviewToDelete, setReviewToDelete] = useState(null); // Add this line
 
     // Fetch data on mount
     useEffect(() => {
@@ -40,42 +38,6 @@ export default function AnimalDetailPage() {
     useEffect(() => {
         setEndangeredStatus(animal?.isEndangered || false);
     }, [animal]);
-
-    const handleEndangeredToggle = async (event) => {
-        const newStatus = event.target.checked;
-        setEndangeredStatus(newStatus);
-        try {
-            await updateStatus(animalId, newStatus);
-        } catch (err) {
-            setEndangeredStatus(!newStatus); // Revert if update fails
-        }
-    };
-
-    const handleEditReview = (reviewId) => {
-        navigate(`${ROUTES.EDIT_REVIEW}/${reviewId}`, { state: { animalId } });
-    };
-
-    const confirmDeleteReview = (reviewId) => {
-        setReviewToDelete(reviewId);
-        setOpenConfirmDialog(true);
-    };
-
-    const handleConfirmDeleteReview = async () => {
-        try {
-            await handleDelete(reviewToDelete);
-            fetchReviews(animalId);
-        } catch (err) {
-            console.error("Error deleting review:", err); // Log error during deletion
-        } finally {
-            setOpenConfirmDialog(false);
-            setReviewToDelete(null);
-        }
-    };
-
-    const handleCancelDelete = () => {
-        setOpenConfirmDialog(false);
-        setReviewToDelete(null);
-    };
 
     if (isLoading) return <Loader />;
     if (error) return <Error errorMessage={error.message || "An unknown error occurred."} />;
@@ -124,7 +86,7 @@ export default function AnimalDetailPage() {
                         <Typography variant="body1" color="text.secondary">Endangered Status:</Typography>
                         {user?.isAdmin && (
                             <FormControlLabel
-                                control={<Switch checked={endangeredStatus} onChange={handleEndangeredToggle} disabled={isLoading} />}
+                                control={<Switch checked={endangeredStatus} onChange={(event) => handleEndangeredToggle(event, animalId, setEndangeredStatus, updateStatus)} disabled={isLoading} />}
                                 label={endangeredStatus ? "Yes" : "No"}
                             />
                         )}
@@ -160,15 +122,15 @@ export default function AnimalDetailPage() {
                 isLoading={isLoading}
                 reviews={reviews}
                 error={error}
-                handleDelete={confirmDeleteReview}
-                handleEdit={handleEditReview}
+                handleDelete={(reviewId) => confirmDeleteReview(reviewId, setReviewToDelete, setOpenConfirmDialog)}
+                handleEdit={(reviewId) => handleEditReview(reviewId, navigate, animalId)}
                 handleLike={handleLike}
                 currentUserId={user._id}
             />
             <ConfirmDialog
                 open={openConfirmDialog}
-                onClose={handleCancelDelete}
-                onConfirm={handleConfirmDeleteReview}
+                onClose={() => handleCancelDelete(setOpenConfirmDialog, setReviewToDelete)}
+                onConfirm={() => handleConfirmDeleteReview(reviewToDelete, handleDelete, fetchReviews, animalId, setOpenConfirmDialog, setReviewToDelete)}
                 title="Confirm Review Deletion"
                 content="Are you sure you want to delete this review?"
             />
