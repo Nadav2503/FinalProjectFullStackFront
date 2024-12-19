@@ -1,26 +1,27 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
-import { CardActionArea } from '@mui/material';
-import Card from '../../../general/card/Card';
-import ExhibitHeader from './ExhibitHeader';
-import ExhibitBody from './ExhibitBody';
-import ExhibitActionBar from './ExhibitActionBar';
-import ROUTES from '../../../routers/routerModel';
-import { useCurrentVisitor } from '../../../providers/VisitorProvider';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { CardActionArea } from "@mui/material";
+import Card from "../../../general/card/Card";
+import ExhibitHeader from "./ExhibitHeader";
+import ExhibitBody from "./ExhibitBody";
+import ExhibitActionBar from "./ExhibitActionBar";
+import ROUTES from "../../../routers/routerModel";
+import { useCurrentVisitor } from "../../../providers/VisitorProvider";
+import { canEditOrDelete, canShowActionBar, canWriteReview } from "../../../general/helpers/permission";
+
 
 export default function ExhibitCard({ exhibit, handleDelete, handleEditExhibit }) {
-    const navigate = useNavigate(); // Initialize useNavigate hook
-    const { visitor } = useCurrentVisitor(); // Accessing the visitor data from the context
+    const navigate = useNavigate();
+    const { visitor } = useCurrentVisitor();
 
     const handleCardClick = () => {
         navigate(`${ROUTES.EXHIBIT_INFO}/${exhibit._id}`);
     };
 
-    // Check if the visitor has permission to see the action bar (not Tier 1 or 2)
-    const canShowActionBar = visitor?.membershipTier > 2 || visitor?.isAdmin;
-    // Check if the current visitor has the necessary permissions
-    const canEditOrDelete = visitor?.isAdmin; // Admin can edit and delete
-    const canWriteReview = visitor?.membershipTier === 3 || visitor?.membershipTier === 4 || visitor?.isAdmin; // Tiers 3, 4, or admin can write a review
+    const showActionBar = canShowActionBar(visitor);
+    const editOrDeletePermission = canEditOrDelete(visitor, exhibit.visitorId);
+    const writeReviewPermission = canWriteReview(visitor);
+
     return (
         <Card>
             <ExhibitHeader title={exhibit.name} />
@@ -32,13 +33,13 @@ export default function ExhibitCard({ exhibit, handleDelete, handleEditExhibit }
                     status={exhibit.status}
                 />
             </CardActionArea>
-            {canShowActionBar && (
+            {showActionBar && (
                 <ExhibitActionBar
                     exhibitId={exhibit._id}
                     handleDelete={(id) => handleDelete(id, exhibit.animals)}
                     handleEditExhibit={handleEditExhibit}
-                    canEditOrDelete={canEditOrDelete}
-                    canWriteReview={canWriteReview}
+                    canEditOrDelete={editOrDeletePermission}
+                    canWriteReview={writeReviewPermission}
                 />
             )}
         </Card>
