@@ -1,12 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Container } from "@mui/material";
 import PageHeader from "../../general/PageHeader";
 import ExhibitFeedback from "../components/ExhibitFeedback";
 import AddNewButton from "../../general/AddButton";
 import ConfirmDialog from "../../general/ConfirmDialog";
 import { useExhibitList } from "../hooks/helpersHooks/useExhibitList";
+import { searchExhibitsByName } from "../helpers/filterExhibit";
+import { useLocation } from "react-router-dom";
+
+function useQuery() {
+    return new URLSearchParams(useLocation().search);
+}
 
 export default function ExhibitListPage() {
+    const query = useQuery();
+    const searchQuery = query.get("search") || "";
     const {
         exhibits,
         isLoading,
@@ -20,6 +28,17 @@ export default function ExhibitListPage() {
         canAddExhibit,
     } = useExhibitList();
 
+    const [filteredExhibits, setFilteredExhibits] = useState([]); // State for filtered exhibits
+
+    // Filter exhibits using the helper function
+    useEffect(() => {
+        if (exhibits) {
+            const filtered = searchExhibitsByName(exhibits, searchQuery); // Use helper function
+            setFilteredExhibits(filtered);
+        }
+    }, [exhibits, searchQuery]);
+
+
     return (
         <Container>
             <PageHeader
@@ -30,7 +49,7 @@ export default function ExhibitListPage() {
             <ExhibitFeedback
                 isLoading={isLoading}
                 error={error}
-                exhibits={exhibits}
+                exhibits={filteredExhibits}
                 handleDelete={handleDelete}
                 handleEditExhibit={handleEditExhibit}
             />
