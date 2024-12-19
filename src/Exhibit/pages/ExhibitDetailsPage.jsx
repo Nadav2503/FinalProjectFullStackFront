@@ -18,6 +18,7 @@ import useAnimalFunctions from "../hooks/helpersHooks/useAnimalFunctions";
 import useReviewFunctions from "../hooks/helpersHooks/useReviewFunctions";
 import AnimalFeedback from "../../animal/components/AnimalFeedback";
 import ReviewFeedback from "../../review/components/ReviewFeedback";
+import Search from "../../layout/navbar/middle/Search";
 
 export default function ExhibitDetailPage() {
     const { exhibitId } = useParams();
@@ -30,7 +31,9 @@ export default function ExhibitDetailPage() {
     const { exhibit, animals, reviews, averageRating, error, isLoading, fetchAnimalsByExhibit, fetchReviews } = useExhibitDetail(visitor, exhibitId);
     const { handleFavoriteToggle, handleDelete, handleEditAnimal } = useAnimalFunctions(exhibitId, fetchAnimalsByExhibit);
     const { handleDeleteReview, handleLike, handleEditReview } = useReviewFunctions(exhibitId, fetchReviews);
+    const [isSearchOpen, setIsSearchOpen] = useState(false);
 
+    const toggleSearch = () => setIsSearchOpen((prev) => !prev);
     const confirmDeleteAnimal = (id) => {
         setDeleteContext({ type: "animal", id });
         setOpenConfirmDialog(true);
@@ -81,6 +84,9 @@ export default function ExhibitDetailPage() {
                 </Box>
 
                 <Divider sx={{ my: 2, width: "100%", maxWidth: "600px" }} />
+            </Box>
+            <Box sx={{ mb: 2, display: 'flex', justifyContent: 'flex-end' }}>
+                <Search isOpen={isSearchOpen} toggleSearch={toggleSearch} />
             </Box>
 
             <AnimalFeedback
