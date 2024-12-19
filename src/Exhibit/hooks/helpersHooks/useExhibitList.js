@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import useExhibitData from "../useExhibitData";
 import useDeleteExhibit from "../useDeleteExhibit";
 import { useSnack } from "../../../providers/SnackbarProvider";
-import { filterExhibitsByLocation } from "../../helpers/filterExhibit";
+import { filterExhibitsByLocation, searchExhibitsByName } from "../../helpers/filterExhibit";
 import ROUTES from "../../../routers/routerModel";
 import { useCurrentVisitor } from "../../../providers/VisitorProvider";
 import { canAddExhibit } from "../../../general/helpers/permission";
@@ -17,7 +17,8 @@ export const useExhibitList = () => {
     const location = useLocation();
     const setSnack = useSnack();
     const query = new URLSearchParams(location.search);
-    const filterLocation = query.get("location");
+    const searchQuery = query.get("search") || "";
+    const filterLocation = query.get("location") || "";
     const { handleDeleteExhibit } = useDeleteExhibit();
     const [openConfirmDialog, setOpenConfirmDialog] = useState(false);
     const [exhibitToDelete, setExhibitToDelete] = useState(null);
@@ -26,14 +27,28 @@ export const useExhibitList = () => {
         fetchExhibits();
     }, [fetchExhibits]);
 
+    // Filter the exhibits based on search query or location
     useEffect(() => {
+        let filtered = exhibits;
+
         if (filterLocation) {
-            const filtered = filterExhibitsByLocation(exhibits, filterLocation);
-            setFilteredExhibits(filtered);
-        } else {
-            setFilteredExhibits(exhibits);
+            filtered = filterExhibitsByLocation(exhibits, filterLocation);
         }
-    }, [exhibits, filterLocation]);
+
+        if (searchQuery) {
+            filtered = searchExhibitsByName(filtered, searchQuery);
+        }
+
+        setFilteredExhibits(filtered);
+    }, [exhibits, searchQuery, filterLocation]);
+
+    // Get the title based on the location filter
+    const getTitle = () => {
+        if (filterLocation) {
+            return `Exhibits in ${filterLocation} Zone`; // Exhibits filtered by location
+        }
+        return "All Zoo Exhibits"; // Default title when no location filter
+    };
 
     const handleAddExhibit = () => {
         navigate(ROUTES.ADD_EXHIBIT);
@@ -78,6 +93,7 @@ export const useExhibitList = () => {
         handleCancelDelete,
         handleEditExhibit,
         openConfirmDialog,
-        canAddExhibit: canAdd, // Return the permission status for adding an exhibit
+        canAddExhibit: canAdd,
+        getTitle, // Expose the getTitle function
     };
 };
