@@ -8,7 +8,8 @@ export default function Main({ children }) {
         <Box
             component="main"
             sx={{
-                minHeight: "85vh",
+                minHeight: "100%",
+                padding: '2rem',
                 backgroundColor: theme.palette.background.default, // Footer background color
                 color: theme.palette.text.primary, // Text color based on theme
                 transition: 'background-color 0.3s, color 0.3s'
