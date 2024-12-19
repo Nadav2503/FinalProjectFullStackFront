@@ -20,7 +20,10 @@ export default function AnimalCard({ animal, handleDelete, handleEditAnimal, han
 
     // Check if the visitor is Tier 1
     const isTier1 = visitor?.membershipTier === 1;
-
+    // Check if the current visitor has the necessary permissions
+    const canEditOrDelete = visitor?.isAdmin; // Admin can edit and delete
+    const canWriteReview = visitor?.membershipTier === 3 || visitor?.membershipTier === 4 || visitor?.isAdmin; // Tiers 3, 4, or admin can write a review
+    const canLike = visitor?.membershipTier !== 1 || visitor?.isAdmin; // Tiers 2, 3, 4, or admin can like animals
     return (
         <Card>
             <AnimalHeader title={animal.name} image={animal.image} />
@@ -36,6 +39,9 @@ export default function AnimalCard({ animal, handleDelete, handleEditAnimal, han
                     handleFavoriteToggle={handleFavoriteClick}
                     isLiked={isLiked}
                     visitor={visitor}
+                    canEditOrDelete={canEditOrDelete} // Pass the condition to allow edit or delete
+                    canWriteReview={canWriteReview} // Pass the condition to allow edit or delete
+                    canLike={canLike} // Pass the condition to allow like
                 />
             )}
         </Card>

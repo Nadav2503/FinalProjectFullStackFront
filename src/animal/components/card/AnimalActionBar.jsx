@@ -13,15 +13,13 @@ export default function AnimalActionBar({
     handleEditAnimal,
     handleFavoriteToggle,
     isLiked,
-    visitor,
+    canEditOrDelete,
+    canWriteReview,
+    canLike
 }) {
     const actions = [];
     const navigate = useNavigate();
 
-    // Check if the current visitor has the necessary permissions
-    const canEditOrDelete = visitor?.isAdmin; // Admin can edit and delete
-    const canWriteReview = visitor?.membershipTier === 3 || visitor?.membershipTier === 4 || visitor?.isAdmin; // Tiers 3, 4, or admin can write a review
-    const canLike = visitor?.membershipTier !== 1 || visitor?.isAdmin; // Tiers 2, 3, 4, or admin can like animals
 
     // Add edit action if the user is admin
     if (canEditOrDelete) {
