@@ -2,9 +2,24 @@ import React from 'react';
 import { IconButton, Box, TextField, InputAdornment, useTheme } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search'; // Search icon
 import CloseIcon from '@mui/icons-material/Close'; // Close icon to close the search bar
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 export default function Search({ isOpen, toggleSearch }) {
     const theme = useTheme(); // Access current theme for styling.
+    const navigate = useNavigate();
+    const [searchParams, setSearchParams] = useSearchParams();
+    const searchQuery = searchParams.get('search') || '';
+
+    const handleSearchChange = (event) => {
+        const query = event.target.value;
+        if (query) {
+            setSearchParams({ search: query });
+            navigate(`/exhibits?search=${encodeURIComponent(query)}`);
+        } else {
+            setSearchParams({});
+            navigate('/exhibits');
+        }
+    };
 
     return (
         <Box sx={{ display: 'flex', alignItems: 'center', width: '100%' }}>
@@ -21,6 +36,8 @@ export default function Search({ isOpen, toggleSearch }) {
                     variant="outlined"
                     size="small"
                     placeholder="Search..."
+                    value={searchQuery}
+                    onChange={handleSearchChange}
                     sx={{
                         position: 'relative', // To position the close icon inside the input field
                         flex: 1,
