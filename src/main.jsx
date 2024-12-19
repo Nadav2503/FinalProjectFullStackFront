@@ -16,7 +16,7 @@ import '@fontsource/roboto/700.css';
 // Rendering the App component inside the root element of the HTML page
 // Using StrictMode for development to identify potential problems with the app
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
+  // <StrictMode>
+  <App />
+  // </StrictMode>,
 )

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Box, Typography, Divider, Container } from "@mui/material";
 import {
@@ -9,70 +9,27 @@ import {
 import PageHeader from "../../general/PageHeader";
 import Loader from "../../general/Loader";
 import Error from "../../general/Error";
-import useExhibitById from "../hooks/useExhibitDataById";
-import useDeleteAnimal from "../../animal/hooks/useDeleteAnimal";
-import AnimalFeedback from "../../animal/components/AnimalFeedback";
-import ReviewFeedback from "../../review/components/ReviewFeedback";
 import ROUTES from "../../routers/routerModel";
 import AddNewButton from "../../general/AddButton";
 import ConfirmDialog from "../../general/ConfirmDialog";
-import useLikeAnimal from "../../visitor/hooks/useLikeAnimal";
 import { useCurrentVisitor } from "../../providers/VisitorProvider";
-import useUpdateAnimalsInExhibit from "../hooks/useUpdateAnimalsInExhibit";
-import useGetAnimalsByExhibit from "../../animal/hooks/useGetAnimalsByExhibit";
-import useFetchReviewsForExhibit from "../../review/hooks/useGetReviewsForExhibit";
-import useDeleteReview from "../../review/hooks/useDeleteReview";
-import useLikeReview from "../../review/hooks/useLikeReview";
+import useExhibitDetail from "../hooks/helpersHooks/useExhibitDetail";
+import useAnimalFunctions from "../hooks/helpersHooks/useAnimalFunctions";
+import useReviewFunctions from "../hooks/helpersHooks/useReviewFunctions";
+import AnimalFeedback from "../../animal/components/AnimalFeedback";
+import ReviewFeedback from "../../review/components/ReviewFeedback";
 
 export default function ExhibitDetailPage() {
     const { exhibitId } = useParams();
-    const { exhibit, error, isLoading, fetchExhibitById } = useExhibitById();
-    const { animals, fetchAnimalsByExhibit } = useGetAnimalsByExhibit();
-    const { handleUpdateAnimals } = useUpdateAnimalsInExhibit();
-    const { handleDeleteAnimal } = useDeleteAnimal();
-    const { handleLikeAnimal } = useLikeAnimal();
-    const { reviews, averageRating, fetchReviews } = useFetchReviewsForExhibit();
-    const { handleDelete } = useDeleteReview();
-    const { handleLike } = useLikeReview();
-    const navigate = useNavigate();
     const { visitor } = useCurrentVisitor();
+    const navigate = useNavigate();
 
     const [openConfirmDialog, setOpenConfirmDialog] = useState(false);
     const [deleteContext, setDeleteContext] = useState({ type: null, id: null });
 
-    useEffect(() => {
-        if (visitor && visitor._id) {
-            fetchExhibitById(exhibitId);
-            fetchAnimalsByExhibit(exhibitId);
-            fetchReviews(exhibitId);
-        }
-    }, [visitor, exhibitId, fetchExhibitById, fetchAnimalsByExhibit, fetchReviews]);
-
-    const handleAddAnimal = () => {
-        navigate(ROUTES.ADD_ANIMAL, { state: { exhibitId: exhibitId } });
-    };
-
-    const handleEditAnimal = (id) => {
-        navigate(`${ROUTES.EDIT_ANIMAL}/${id}`);
-    };
-
-    const handleEditReview = (id) => {
-        navigate(`${ROUTES.EDIT_REVIEW}/${id}`, {
-            state: { exhibitId: exhibitId },
-        });
-    };
-
-    const handleFavoriteToggle = async (animalId) => {
-        try {
-            if (!visitor || !visitor._id) {
-                throw new Error("Visitor not authenticated.");
-            }
-            await handleLikeAnimal(animalId);
-            fetchAnimalsByExhibit(exhibitId); // Ensure animals and isLiked are updated
-        } catch (error) {
-            console.error("Error toggling favorite status:", error);
-        }
-    };
+    const { exhibit, animals, reviews, averageRating, error, isLoading, fetchAnimalsByExhibit, fetchReviews } = useExhibitDetail(visitor, exhibitId);
+    const { handleFavoriteToggle, handleDelete, handleEditAnimal } = useAnimalFunctions(exhibitId, fetchAnimalsByExhibit);
+    const { handleDeleteReview, handleLike, handleEditReview } = useReviewFunctions(exhibitId, fetchReviews);
 
     const confirmDeleteAnimal = (id) => {
         setDeleteContext({ type: "animal", id });
@@ -84,40 +41,11 @@ export default function ExhibitDetailPage() {
         setOpenConfirmDialog(true);
     };
 
-    const handleConfirmDeleteAnimal = async () => {
-        if (deleteContext.id) {
-            try {
-                await handleUpdateAnimals(exhibitId, { removeAnimals: [deleteContext.id] });
-                await handleDeleteAnimal(deleteContext.id);
-                fetchAnimalsByExhibit(exhibitId);
-                setOpenConfirmDialog(false);
-                setDeleteContext({ type: null, id: null });
-            } catch (error) {
-                console.error("Error during animal deletion:", error);
-            }
-        }
+    const handleAddAnimal = () => {
+        navigate(ROUTES.ADD_ANIMAL, { state: { exhibitId: exhibitId } });
     };
 
-    const handleCancelDelete = () => {
-        setOpenConfirmDialog(false);
-        setAnimalToDelete(null);
-    };
-
-
-    const handleConfirmDeleteReview = async () => {
-        if (deleteContext.id) {
-            try {
-                await handleDelete(deleteContext.id);
-                fetchReviews(exhibitId);
-                setOpenConfirmDialog(false);
-                setDeleteContext({ type: null, id: null });
-            } catch (error) {
-                console.error("Error during review deletion:", error);
-            }
-        }
-    };
-
-    const currentCapacity = animals?.length || 0;
+    const canAddAnimal = visitor?.isAdmin || visitor?.membershipTier === 4;
 
     if (isLoading) return <Loader />;
     if (error) {
@@ -125,24 +53,15 @@ export default function ExhibitDetailPage() {
         return <Error errorMessage={errorMessage} />;
     }
     if (!exhibit) return <Error errorMessage="Exhibit not found." />;
-    const canAddAnimal = visitor?.isAdmin || visitor?.membershipTier === 4;
+
     return (
         <Container>
             <PageHeader title={exhibit.name} subtitle={exhibit.description} />
 
-            <Box
-                sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    textAlign: "center",
-                    mt: 4,
-                    mb: 4,
-                }}
-            >
+            <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", mt: 4, mb: 4 }}>
                 <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", mb: 2 }}>
                     <PetsIcon sx={{ marginRight: 1 }} />
-                    <Typography variant="h6">Current Animals: {currentCapacity}</Typography>
+                    <Typography variant="h6">Current Animals: {animals?.length || 0}</Typography>
                 </Box>
 
                 <Typography variant="h6" color="text.secondary" sx={{ mb: 2 }}>
@@ -155,27 +74,8 @@ export default function ExhibitDetailPage() {
                 </Box>
 
                 <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", mb: 2 }}>
-                    <StatusIcon
-                        sx={{
-                            marginRight: 1,
-                            color:
-                                exhibit.status === "open"
-                                    ? "green"
-                                    : exhibit.status === "closed"
-                                        ? "red"
-                                        : "#F09319",
-                        }}
-                    />
-                    <Typography
-                        variant="h6"
-                        color={
-                            exhibit.status === "open"
-                                ? "green"
-                                : exhibit.status === "closed"
-                                    ? "red"
-                                    : "#F09319"
-                        }
-                    >
+                    <StatusIcon sx={{ marginRight: 1, color: exhibit.status === "open" ? "green" : exhibit.status === "closed" ? "red" : "#F09319" }} />
+                    <Typography variant="h6" color={exhibit.status === "open" ? "green" : exhibit.status === "closed" ? "red" : "#F09319"}>
                         {exhibit.status}
                     </Typography>
                 </Box>
@@ -195,24 +95,11 @@ export default function ExhibitDetailPage() {
 
             <Divider sx={{ my: 3 }} />
 
-            {/* Average Rating Section */}
-
             <Box sx={{ my: 4, textAlign: "center" }}>
                 <Typography variant="h5" sx={{ mb: 1 }}>
                     Average Rating
                 </Typography>
-                <Typography
-                    variant="h6"
-                    color="text.secondary"
-                    sx={{
-                        py: 2,
-                        px: 4,
-                        display: "inline-block",
-                        border: "1px solid",
-                        borderRadius: "8px",
-                        borderColor: "text.secondary",
-                    }}
-                >
+                <Typography variant="h6" color="text.secondary" sx={{ py: 2, px: 4, display: "inline-block", border: "1px solid", borderRadius: "8px", borderColor: "text.secondary" }}>
                     {averageRating}
                 </Typography>
             </Box>
@@ -231,8 +118,8 @@ export default function ExhibitDetailPage() {
 
             <ConfirmDialog
                 open={openConfirmDialog}
-                onClose={handleCancelDelete}
-                onConfirm={deleteContext.type === "animal" ? handleConfirmDeleteAnimal : handleConfirmDeleteReview}
+                onClose={() => setOpenConfirmDialog(false)}
+                onConfirm={deleteContext.type === "animal" ? handleDelete : handleDeleteReview}
                 title={`Confirm ${deleteContext.type === "animal" ? "Animal" : "Review"} Deletion`}
                 content={`Are you sure you want to delete this ${deleteContext.type === "animal" ? "animal" : "review"}?`}
             />

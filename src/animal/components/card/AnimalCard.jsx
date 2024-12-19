@@ -7,6 +7,7 @@ import AnimalActionBar from "./AnimalActionBar";
 import ROUTES from "../../../routers/routerModel";
 import { useNavigate } from "react-router-dom";
 import { canEditOrDelete, canWriteReview, canLike, isTier1 } from "../../../general/helpers/permission";
+import { useCurrentVisitor } from "../../../providers/VisitorProvider";
 
 export default function AnimalCard({
     animal,
@@ -14,8 +15,9 @@ export default function AnimalCard({
     handleEditAnimal,
     handleFavoriteToggle,
     isLiked,
-    visitor,
+
 }) {
+    const { visitor } = useCurrentVisitor();
     const navigate = useNavigate();
 
     const handleFavoriteClick = () => {
