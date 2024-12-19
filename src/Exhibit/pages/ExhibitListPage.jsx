@@ -15,6 +15,7 @@ function useQuery() {
 export default function ExhibitListPage() {
     const query = useQuery();
     const searchQuery = query.get("search") || "";
+    const locationQuery = query.get("location") || "";
     const {
         exhibits,
         isLoading,
@@ -49,7 +50,7 @@ export default function ExhibitListPage() {
     return (
         <Container>
             <PageHeader
-                title="All Zoo Exhibits"
+                title={getTitle()}
                 subtitle="Browse the various exhibits and discover the incredible wildlife that calls our zoo home."
             />
 
