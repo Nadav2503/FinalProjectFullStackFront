@@ -38,6 +38,13 @@ export default function ExhibitListPage() {
         }
     }, [exhibits, searchQuery]);
 
+    // Dynamically set the title based on the query parameters
+    const getTitle = () => {
+        if (locationQuery) {
+            return `Exhibits in ${locationQuery} Zone`;  // Title when filtering by location
+        }
+        return "All Zoo Exhibits";  // Default title when no location filter is applied
+    };
 
     return (
         <Container>
