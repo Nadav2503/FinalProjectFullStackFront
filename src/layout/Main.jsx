@@ -1,17 +1,17 @@
 import React from 'react';
-import { Box } from '@mui/material';
+import { Box, useTheme } from '@mui/material';
 
 export default function Main({ children }) {
+    const theme = useTheme();
 
     return (
         <Box
             component="main"
             sx={{
-                height: '100%', // Inherits height from the parent (85vh)
-                padding: '2rem', // Standard padding for content
-                backgroundColor: 'background.default', // Dynamic theme-based background
-                color: 'text.primary', // Theme-based text color
-                overflow: 'auto', // Scrollable if content overflows
+                minHeight: "85vh",
+                backgroundColor: theme.palette.background.default, // Footer background color
+                color: theme.palette.text.primary, // Text color based on theme
+                transition: 'background-color 0.3s, color 0.3s'
             }}
         >
             {children}
