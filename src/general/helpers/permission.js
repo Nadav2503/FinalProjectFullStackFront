@@ -22,3 +22,8 @@ export const canShowActionBar = (visitor) => {
 export const isTier1 = (visitor) => {
     return visitor?.membershipTier === 1;
 };
+
+// Function to check if a visitor can add an exhibit
+export const canAddExhibit = (visitor) => {
+    return visitor?.isAdmin;
+};
