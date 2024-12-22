@@ -12,6 +12,7 @@ import ConfirmDialog from "../../general/ConfirmDialog";
 import useLikeReview from "../../review/hooks/useLikeReview";
 import { getUser } from "../../services/LocalStorageService";
 import { confirmDeleteReview, handleCancelDelete, handleConfirmDeleteReview, handleEditReview, handleEndangeredToggle } from "../hooks/helpersHooks/useDetailsAnimal";
+import useDeleteReview from "../../review/hooks/useDeleteReview";
 
 export default function AnimalDetailPage() {
     const { animalId } = useParams();
@@ -22,6 +23,7 @@ export default function AnimalDetailPage() {
     const { animal, isLoading, error, fetchAnimalById } = useGetAnimalById();
     const { updateStatus } = useUpdateEndangeredStatus();
 
+    const { handleDelete } = useDeleteReview();
     // Hooks for fetching and managing reviews
     const { reviews, averageRating, fetchReviews } = useFetchReviewsForAnimal();
     const { handleLike } = useLikeReview();

@@ -5,7 +5,7 @@ import AnimalHeader from "./AnimalHeader";
 import AnimalBody from "./AnimalBody";
 import AnimalActionBar from "./AnimalActionBar";
 import ROUTES from "../../../routers/routerModel";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { canEditOrDelete, canWriteReview, canLike, isTier1 } from "../../../general/helpers/permission";
 import { useCurrentVisitor } from "../../../providers/VisitorProvider";
 
@@ -19,7 +19,7 @@ export default function AnimalCard({
 }) {
     const { visitor } = useCurrentVisitor();
     const navigate = useNavigate();
-
+    const location = useLocation();
     const handleFavoriteClick = () => {
         handleFavoriteToggle(animal._id);
     };
@@ -31,7 +31,7 @@ export default function AnimalCard({
     const editOrDeletePermission = canEditOrDelete(visitor, animal.visitorId);
     const writeReviewPermission = canWriteReview(visitor);
     const likePermission = canLike(visitor);
-
+    const isProfilePage = location.pathname.includes(ROUTES.PROFILE)
     return (
         <Card>
             <AnimalHeader title={animal.name} image={animal.image} />
@@ -41,7 +41,7 @@ export default function AnimalCard({
             {!isTier1(visitor) && (
                 <AnimalActionBar
                     animalId={animal._id}
-                    handleDelete={handleDelete}
+                    handleDelete={handleDelete} // This is where the confirmDeleteAnimal function is passed
                     handleEditAnimal={handleEditAnimal}
                     handleFavoriteToggle={handleFavoriteClick}
                     isLiked={isLiked}
@@ -49,6 +49,7 @@ export default function AnimalCard({
                     canEditOrDelete={editOrDeletePermission}
                     canWriteReview={writeReviewPermission}
                     canLike={likePermission}
+                    isProfilePage={isProfilePage}
                 />
             )}
         </Card>

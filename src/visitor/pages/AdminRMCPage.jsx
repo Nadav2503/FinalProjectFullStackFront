@@ -5,60 +5,37 @@ import useGetAllVisitors from '../hooks/useVisitorData';
 import CustomButton from '../../general/CustomButton';
 import PageHeader from '../../general/PageHeader';
 import ConfirmDialog from '../../general/ConfirmDialog';
+import { cancelDelete, confirmDelete, handleDelete, useAdminRmcLogic } from '../helpers/adminRmcHandlers';
 
 export default function AdminRMCPage() {
-    const [isMobile, setIsMobile] = useState(false);
     const { visitors, fetchVisitors } = useGetAllVisitors();
     const { handleDeleteVisitor, loading: deleteLoading } = useDeleteVisitor();
 
+    const { isMobile } = useAdminRmcLogic(fetchVisitors); // Use custom hook for logic
 
-    // State to handle the confirmation dialog
-    const [openDialog, setOpenDialog] = useState(false);
-    const [selectedVisitorId, setSelectedVisitorId] = useState(null);
+    const [openDialog, setOpenDialog] = useState(false); // Confirmation dialog state
+    const [selectedVisitorId, setSelectedVisitorId] = useState(null); // Selected visitor ID
+    const [localVisitors, setVisitors] = useState(visitors); // Manage local visitors state
 
+    // Sync initial visitors state when fetched
     useEffect(() => {
-        fetchVisitors();
-        const handleResize = () => {
-            setIsMobile(window.innerWidth < 900); // Set the threshold for mobile/tablet
-        };
-        handleResize(); // Check initial screen size
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, [fetchVisitors]);
-
-
-    const handleDelete = (id) => {
-        setSelectedVisitorId(id); // Set the ID of the visitor to delete
-        setOpenDialog(true); // Open the confirmation dialog
-    };
-
-    const confirmDelete = () => {
-        if (selectedVisitorId) {
-            handleDeleteVisitor(selectedVisitorId); // Proceed with deleting the visitor
-            fetchVisitors();  // Refetch the visitors list to update the table
-            setOpenDialog(false); // Close the dialog after deletion
-        }
-    };
-
-    const cancelDelete = () => {
-        setOpenDialog(false); // Close the dialog without doing anything
-    };
+        setVisitors(visitors);
+    }, [visitors]);
 
     return (
         <Container>
             <PageHeader title="Admin RMC Page" />
 
             {isMobile ? (
-                // Grid Layout for mobile and smaller screens
                 <Box
                     sx={{
                         display: 'grid',
                         gridTemplateColumns: 'repeat(1, 1fr)', // Single column on mobile
                         gap: 2,
-                        justifyContent: "center",
+                        justifyContent: 'center',
                     }}
                 >
-                    {visitors.map((visitor) => (
+                    {localVisitors.map((visitor) => (
                         <Box
                             key={visitor._id}
                             sx={{
@@ -82,7 +59,7 @@ export default function AdminRMCPage() {
 
                             <Box sx={{ display: 'flex', gap: 1, marginTop: 2 }}>
                                 <CustomButton
-                                    onClick={() => handleDelete(visitor._id)}
+                                    onClick={() => handleDelete(visitor._id, setSelectedVisitorId, setOpenDialog)}
                                     color="secondary"
                                     disabled={deleteLoading}
                                 >
@@ -93,7 +70,6 @@ export default function AdminRMCPage() {
                     ))}
                 </Box>
             ) : (
-                // Table Layout for larger screens (responsive)
                 <TableContainer component={Paper} sx={{ overflowX: 'auto', border: 1, borderRadius: 2 }}>
                     <Table sx={{ minWidth: 650 }}>
                         <TableHead>
@@ -107,7 +83,7 @@ export default function AdminRMCPage() {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {visitors.map((visitor) => (
+                            {localVisitors.map((visitor) => (
                                 <TableRow key={visitor._id}>
                                     <TableCell sx={{ border: 1 }}>{visitor._id}</TableCell>
                                     <TableCell sx={{ border: 1 }}>{visitor.username}</TableCell>
@@ -116,7 +92,7 @@ export default function AdminRMCPage() {
                                     <TableCell sx={{ border: 1 }}>{visitor.isAdmin ? 'Yes' : 'No'}</TableCell>
                                     <TableCell sx={{ border: 1 }}>
                                         <CustomButton
-                                            onClick={() => handleDelete(visitor._id)}
+                                            onClick={() => handleDelete(visitor._id, setSelectedVisitorId, setOpenDialog)}
                                             color="secondary"
                                             disabled={deleteLoading}
                                         >
@@ -133,8 +109,8 @@ export default function AdminRMCPage() {
             {/* Confirmation Dialog */}
             <ConfirmDialog
                 open={openDialog}
-                onClose={cancelDelete}
-                onConfirm={confirmDelete}
+                onClose={() => cancelDelete(setOpenDialog)}
+                onConfirm={() => confirmDelete(selectedVisitorId, handleDeleteVisitor, setVisitors, setOpenDialog)}
                 title="Confirm Deletion"
                 message="Are you sure you want to delete this visitor? This action cannot be undone."
             />

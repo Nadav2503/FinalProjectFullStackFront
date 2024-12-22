@@ -70,6 +70,7 @@ export const updateEndangeredStatus = async (id, status) => {
 // Delete an animal (Admin only)
 export const deleteAnimal = async (id) => {
     try {
+        console.log("Deleting animal with ID:", id); // Log here to check the value
         const { data } = await axios.delete(`${API_URL}/${id}`, {
             headers: {
                 "x-auth-token": getToken(),

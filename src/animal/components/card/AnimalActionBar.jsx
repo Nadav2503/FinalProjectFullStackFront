@@ -15,14 +15,15 @@ export default function AnimalActionBar({
     isLiked,
     canEditOrDelete,
     canWriteReview,
-    canLike
+    canLike,
+    isProfilePage
 }) {
     const actions = [];
     const navigate = useNavigate();
 
 
     // Add edit action if the user is admin
-    if (canEditOrDelete) {
+    if (canEditOrDelete && handleEditAnimal) {
         actions.push({
             onClick: () => handleEditAnimal(animalId),
             icon: <EditIcon />,
@@ -30,7 +31,7 @@ export default function AnimalActionBar({
     }
 
     // Add delete action if the user is admin
-    if (canEditOrDelete) {
+    if (canEditOrDelete && handleDelete) {
         actions.push({
             onClick: () => handleDelete(animalId),
             icon: <DeleteIcon />,
@@ -52,7 +53,7 @@ export default function AnimalActionBar({
     }
 
     // Add write review action for tier 3 or higher or admin
-    if (canWriteReview) {
+    if (canWriteReview && !isProfilePage) {
         actions.push({
             onClick: () => navigate(`${ROUTES.ADD_REVIEW}?animalId=${animalId}`),
             icon: <CommentIcon />,
