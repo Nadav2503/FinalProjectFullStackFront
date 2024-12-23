@@ -1,5 +1,9 @@
 import Joi from "joi";
 
+const passwordPattern = new RegExp(
+    /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d{4,})(?=.*[!@#$%^&*\-_])[A-Za-z\d!@#$%^&*\-_]{8,}$/
+);
+
 const loginSchema = {
     username_or_email: Joi.string()
         .required()
@@ -8,9 +12,7 @@ const loginSchema = {
         }),
     password: Joi.string()
         .pattern(
-            new RegExp(
-                /((?=.*\d{1})(?=.*[A-Z]{1})(?=.*[a-z]{1})(?=.*[!@#$%^&*-]{1}).{7,20})/
-            )
+            passwordPattern
         )
         .required()
         .messages({
