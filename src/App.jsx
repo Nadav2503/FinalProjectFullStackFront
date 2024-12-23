@@ -19,6 +19,7 @@ import Layout from "./layout/Layout";
 import VisitorProvider from "./providers/VisitorProvider";
 //import reset setting
 import './styles/Global.css'
+import AutoLogout from "./providers/AutoLogout";
 
 // Main application entry point.
 export default function App() {
@@ -30,6 +31,7 @@ export default function App() {
         {/* Wrapping the app with SnackbarProvider for handling snackbars */}
         <SnackbarProvider>
           <VisitorProvider>
+            <AutoLogout />
             {/* Wrapping all components with Layout to apply common layout elements */}
             <Layout>
               {/* Main Router component that handles navigation and page rendering */}
